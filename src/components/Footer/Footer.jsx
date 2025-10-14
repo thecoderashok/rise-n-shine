@@ -224,9 +224,9 @@ const Footer = () => {
                             to={'/'}
                             className='text-PrimaryColor'
                         >
-                            advisar
+                            Rise N Shine
                         </Link>{' '}
-                        . Designed & Developed by Dream-IT
+                        . All Rights Reserved
                     </p>
                     <div>
                         <ul className='flex gap-7'>

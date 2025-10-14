@@ -89,7 +89,7 @@ const Service = () => {
                     </h2>
                 </div>
             </div>
-            <div className="ml-0 lg:ml-7 xl:ml-[46px] 2xl:ml-[314px]">
+            <div className="ml-0 lg:ml-7 xl:ml-[46px] 2xl:ml-[250px]">
                 <Swiper {...settings}>
                     {ServiceData.map(
                         ({
