@@ -35,6 +35,7 @@ const Footer = () => {
                                 <img
                                     src={footerLogo}
                                     draggable='false'
+                                    className='invert brightness-0'
                                 />
                             </Link>
                         </div>
