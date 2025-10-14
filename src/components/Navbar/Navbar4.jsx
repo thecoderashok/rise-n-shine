@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import './navbar.css';
 import { Link } from 'react-router';
-import Logo from '/images/Logo.png';
+import Logo from '/images/logo.png';
 import {
 	FaChevronDown,
 	FaEnvelope,
