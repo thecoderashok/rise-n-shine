@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import './navbar.css';
 import { Link } from 'react-router';
-import Logo from '/images/logo.png';
+import Logo from '/images/Logo.png';
 import {
 	FaChevronDown,
 	FaEnvelope,
@@ -182,6 +182,7 @@ const Navbar4 = () => {
 							<img
 								src={Logo}
 								draggable='false'
+								className='invert brightness-0'
 							/>
 						</Link>
 					</div>
@@ -262,7 +263,7 @@ const Navbar4 = () => {
 				<div className='Container'>
 					<div className='flex items-center justify-between lg:grid lg:grid-cols-12'>
 						<div className='col-span-2'>
-							<div className='header-logo'>
+							<div className='header-logo invert brightness-0'>
 								<Link to={'/'}>
 									<img
 										src={Logo}
@@ -465,19 +466,19 @@ const Navbar4 = () => {
 						<div className='col-span-2'>
 							<div className='header-right-box flex items-center gap-10 lg:gap-4 2xl:gap-8 justify-end'>
 								<div className='header-btn hidden lg:block'>
-									<Link to={'/contact'}>
+									<Link to={'/'}>
 										get a quote<span></span>
 										<LuMoveRight />
 									</Link>
 								</div>
-								<div className='hidden xl:block relative before:absolute before:top-1/2 before:-translate-y-1/2 before:-right-[27px] before:h-20 before:w-[1px] before:bg-HeadingColor-0 before:opacity-10'>
+								{/* <div className='hidden xl:block relative before:absolute before:top-1/2 before:-translate-y-1/2 before:-right-[27px] before:h-20 before:w-[1px] before:bg-HeadingColor-0 before:opacity-10'>
 									<Link
 										to={'/home5'}
 										className='text-white flex items-center justify-center size-9 rounded-full bg-white bg-opacity-15'
 									>
 										<MdLightMode size={'20'} />
 									</Link>
-								</div>
+								</div> */}
 								<div className='header-bar lg:hidden'>
 									<button
 										ref={menuBarRef}

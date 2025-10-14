@@ -95,6 +95,14 @@ main {
          @apply relative top-0 left-0 w-full z-[99999] shadow-lg bg-HeadingColor backdrop-blur-md animate-headerSlideDown;
       }
    }
+
+   .is-sticky {
+      @apply !fixed top-0 left-0 w-full z-50 shadow-shade bg-white backdrop-blur-md animate-headerSlideDown;
+   }
+
+   .header-creative.is-sticky {
+      @apply !fixed top-0 left-0 w-full z-50 shadow-shade bg-white backdrop-blur-md animate-headerSlideDown;
+   }
 }
 
 

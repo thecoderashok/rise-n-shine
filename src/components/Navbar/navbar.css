@@ -344,13 +344,6 @@
 }
 
 /* Header Sticky */
-/* .is-sticky {
-  @apply !fixed top-0 left-0 w-full z-50 shadow-shade bg-white backdrop-blur-md animate-headerSlideDown;
-}
-
-.header-creative.is-sticky {
-  @apply !fixed top-0 left-0 w-full z-50 shadow-shade bg-white backdrop-blur-md animate-headerSlideDown;
-} */
 
 
 .header-creative.is-sticky .header-logo {
@@ -395,8 +388,8 @@ nav.main-menu-content > ul > li > a {
   font-family: var(--primary-font);
   text-transform: capitalize;
   transition: 0.5s;
-  padding: 18px 28px 28px;
-  color: #063232;
+  /* padding: 18px 28px 28px; */
+  color: #ffffff;
   position: relative;
   display: flex;
   gap: 4px;
@@ -871,9 +864,9 @@ li.has-dropdown a button span {
 }
 
 @media only screen and (min-width: 1200px) and (max-width: 1399px) {
-  nav.main-menu-content > ul > li > a {
+  /* nav.main-menu-content > ul > li > a {
     padding: 18px 12px 28px;
-  }
+  } */
 
   nav.main-menu-content > ul > li > a > span {
     top: 24px;
@@ -882,9 +875,9 @@ li.has-dropdown a button span {
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
-  nav.main-menu-content > ul > li > a {
+  /* nav.main-menu-content > ul > li > a {
     padding: 18px 12px 28px;
-  }
+  } */
 
   nav.main-menu-content > ul > li > a > span {
     top: 24px;
@@ -899,12 +892,13 @@ li.has-dropdown a button span {
 }
 
 .header-area.header-classic.is-sticky {
-  background: #063232;
+  background: #4C1C4D;
   padding: 8px;
 }
 
 .header-area.header-classic .header-logo {
   margin: 0;
+  max-width: 200px;
 }
 
 .header-area.header-classic nav.main-menu-content > ul > li > a {
