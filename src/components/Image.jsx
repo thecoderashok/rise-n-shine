@@ -1,0 +1,35 @@
+import React from "react";
+
+const Image = ({
+    src,
+    alt = "",
+    width,
+    height,
+    loading = "lazy",
+    priority = false,
+    ...rest
+}) => {
+    const fetchPriority = priority ? "high" : "auto";
+
+    const optimizeImagePath = (imageUrl) => {
+        if (import.meta.env.MODE === "production") {
+            return imageUrl.replace(/\.(jpg|jpeg)$/i, ".avif");
+        }
+        return imageUrl;
+    };
+
+    return (
+        <img
+            src={optimizeImagePath(src)}
+            alt={alt}
+            width={width}
+            height={height}
+            loading={priority ? "eager" : loading}
+            fetchPriority={fetchPriority}
+            decoding="async"
+            {...rest}
+        />
+    );
+};
+
+export default Image;

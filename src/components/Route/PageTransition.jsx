@@ -1,0 +1,384 @@
+import React, {
+    useCallback,
+    useEffect,
+    useLayoutEffect,
+    useRef,
+    useState,
+} from "react";
+import imagesLoaded from "imagesloaded";
+import { useLenis } from "../../context/Lenis/LenisContext";
+import { useLoader } from "../../context/Loader/LoaderContext";
+import useLinkClick from "../../hook/useLinkClick";
+import { gsap } from "../../gsapInit";
+import { useCustomRouter } from "../../context/CustomRouter/CustomRouterContext";
+import Image from "../Image";
+import { useLocation } from "react-router";
+
+const animateLogo = {
+    initial: {
+        opacity: 0,
+    },
+    enter: {
+        opacity: 1,
+        duration: 2,
+    },
+    exit: {
+        opacity: 0,
+    },
+};
+
+const animateLoaderTitle = {
+    initial: {
+        y: 50,
+        z: 0,
+        opacity: 0,
+    },
+    enter: {
+        y: 0,
+        z: 0,
+        opacity: 1,
+        ease: "power4.out",
+    },
+    exit: {
+        y: -150,
+        z: 0,
+        opacity: 0,
+        ease: "power4.in",
+    },
+};
+
+const animatePanel = {
+    initial: {
+        z: 0,
+        scaleY: 0,
+        transformOrigin: "bottom",
+    },
+    enter: {
+        z: 0,
+        scaleY: 1,
+        transformOrigin: "bottom",
+        ease: "power4.inOut",
+    },
+    exit: {
+        z: 0,
+        scaleY: 0,
+        transformOrigin: "top",
+        ease: "power4.inOut",
+    },
+};
+
+const animateOverlay = {
+    initial: {
+        opacity: 0,
+        display: "block",
+    },
+    enter: {
+        opacity: 1,
+    },
+    exit: {
+        opacity: 0,
+        ease: "power4.inOut",
+    },
+};
+
+const PageTransition = ({ title }) => {
+    const { isLoading, setMounted, pageComponentReady } = useLoader();
+    const { linkClicked, routingPathname, resetLinkClick } = useLinkClick();
+    const { setRoute } = useCustomRouter();
+    const { pathname } = useLocation();
+    const lenis = useLenis();
+
+    const isFirstLoading = useRef(true);
+
+    const containerRef = useRef(null);
+    const loaderLogoRef = useRef(null);
+    const loaderPanelRef = useRef(null);
+    const titleRef = useRef(null);
+    const overlayRef = useRef(null);
+    const onLoadTimelineRef = useRef(null);
+    const routeTimelineRef = useRef(null);
+    const [tlPaused, setTlPaused] = useState(false);
+    const [routeTimelinePaused, setRouteTimelinePaused] = useState(false);
+
+    const resetScroll = useCallback(() => {
+        if (lenis?.scrollTo) lenis.scrollTo(0, { immediate: true });
+        else window.scrollTo(0, 0);
+    }, [lenis]);
+
+    const setInitialStyles = () => {
+        if (!containerRef.current) return;
+
+        gsap.set(containerRef.current, {
+            display: "flex",
+        });
+        gsap.set(loaderPanelRef.current, {
+            ...animatePanel.initial,
+        });
+        gsap.set(loaderLogoRef.current, {
+            ...animateLogo.initial,
+        });
+        gsap.set(titleRef.current, {
+            ...animateLoaderTitle.initial,
+        });
+        gsap.set(overlayRef.current, {
+            ...animateOverlay.initial,
+        });
+    };
+
+    useEffect(() => {
+        const container = containerRef?.current;
+        const overlay = overlayRef?.current;
+        const logo = loaderLogoRef?.current;
+        const loaderTitle = titleRef?.current;
+        const panel = loaderPanelRef?.current;
+
+        if (!container || !overlay || !logo || !loaderTitle || !panel) return;
+
+        const timeLine = gsap.timeline({
+            defaults: { duration: 1, ease: "power3.inOut" },
+        });
+        onLoadTimelineRef.current = timeLine;
+
+        const ctx = gsap.context(() => {
+            const transitionOnLoad = () => {
+                setInitialStyles();
+
+                timeLine
+                    .set(
+                        overlay,
+                        {
+                            ...animateOverlay.enter,
+                        },
+                        0
+                    )
+                    .set(
+                        panel,
+                        {
+                            ...animatePanel.enter,
+                        },
+                        0
+                    )
+                    .to(logo, {
+                        ...animateLogo.enter,
+                    })
+                    .addPause("waitTillLoading")
+                    .call(() => setTlPaused(true))
+                    .to(logo, {
+                        ...animateLogo.exit,
+                    })
+                    .to(loaderTitle, {
+                        ...animateLoaderTitle.enter,
+                    })
+                    .to(loaderTitle, {
+                        ...animateLoaderTitle.exit,
+                    })
+                    .to(
+                        panel,
+                        {
+                            ...animatePanel.exit,
+                        },
+                        "-=0.5"
+                    )
+                    .to(
+                        overlay,
+                        {
+                            ...animateOverlay.exit,
+                        },
+                        "<"
+                    )
+                    .call(
+                        () => {
+                            setMounted(true);
+                            isFirstLoading.current = false;
+                        },
+                        [],
+                        "-=0.2"
+                    );
+            };
+
+            transitionOnLoad();
+        }, panel);
+
+        return () => ctx.revert();
+    }, [setMounted]);
+
+    useLayoutEffect(() => {
+        if (isFirstLoading.current || !linkClicked) return;
+        const container = containerRef?.current;
+        const overlay = overlayRef?.current;
+        const logo = loaderLogoRef?.current;
+        const loaderTitle = titleRef?.current;
+        const panel = loaderPanelRef?.current;
+
+        if (!container || !overlay || !logo || !loaderTitle || !panel) return;
+
+        setInitialStyles();
+
+        const timeLine = gsap.timeline({
+            defaults: { duration: 1, ease: "power3.inOut" },
+            onStart: () => {
+                lenis?.stop();
+            }
+        });
+
+        routeTimelineRef.current = timeLine;
+
+        const ctx = gsap.context(() => {
+            const transitionPathChange = () => {
+                timeLine
+                    .to(
+                        overlay,
+                        {
+                            ...animateOverlay.enter,
+                        },
+                        0
+                    )
+                    .to(
+                        panel,
+                        {
+                            ...animatePanel.enter,
+                        },
+                        0
+                    )
+                    .to(loaderTitle, {
+                        ...animateLoaderTitle.enter,
+                    }, "-=0.2")
+                    .call(() => {
+                        if (routingPathname) {
+                            setRoute(routingPathname);
+                        }
+                    })
+                    .addPause("wait")
+                    .call(() => setRouteTimelinePaused(true))
+                    .call(() => resetScroll())
+                    .to(loaderTitle, {
+                        ...animateLoaderTitle.exit,
+                    })
+                    .to(
+                        panel,
+                        {
+                            ...animatePanel.exit,
+                        },
+                        "-=0.5"
+                    )
+                    .to(
+                        overlay,
+                        {
+                            ...animateOverlay.exit,
+                        },
+                        "<"
+                    )
+                    .call(() => {
+                        lenis?.start();
+                        setMounted(true);
+                    }, [], "-=0.5");
+            };
+
+            transitionPathChange();
+        }, panel);
+
+        return () => ctx.revert();
+    }, [linkClicked, setMounted, routingPathname, lenis, setRoute, resetScroll]);
+
+    useEffect(() => {
+        if (!routeTimelineRef.current) return;
+        if (routeTimelinePaused && pageComponentReady) {
+            imagesLoaded(document.body, () => {
+                routeTimelineRef.current.play("wait");
+            });
+        }
+        routeTimelineRef?.current?.eventCallback("onComplete", () => {
+            resetLinkClick();
+        });
+
+    }, [pageComponentReady, routeTimelinePaused, resetLinkClick]);
+
+    useEffect(() => {
+        if (!isLoading && tlPaused) {
+            imagesLoaded(document.body, () => {
+                onLoadTimelineRef.current.play("waitTillLoading");
+            });
+        }
+    }, [isLoading, tlPaused]);
+
+    useEffect(() => {
+        if (isFirstLoading.current || linkClicked) return;
+
+        setRoute(pathname);
+        const raf = requestAnimationFrame(() => {
+            resetScroll();
+            setMounted(true);
+        })
+
+        return () => cancelAnimationFrame(raf);
+    }, [pathname, setRoute, resetScroll, setMounted, linkClicked]);
+
+
+    // useEffect(() => {
+    //     if ("scrollRestoration" in window.history) {
+    //         window.history.scrollRestoration = "manual";
+    //     }
+
+    //     Object.keys(localStorage)
+    //         .filter((key) => key.startsWith("scroll:"))
+    //         .forEach((key) => localStorage.removeItem(key));
+    // }, []);
+
+    // useEffect(() => {
+    //     if (isFirstLoading.current) return;
+
+    //     const saveScroll = () => {
+    //         localStorage.setItem(`scroll:${currentPathname}`, window.scrollY);
+    //     };
+
+    //     if (linkClicked) {
+    //         saveScroll();
+    //     }
+
+    //     if (!linkClicked) {
+    //         const raf = requestAnimationFrame(() => {
+    //             resetLinkClick();
+    //             setMounted(true);
+    //         })
+
+    //         return () => cancelAnimationFrame(raf);
+    //     }
+
+    // }, [linkClicked, currentPathname, setMounted, lenis, resetLinkClick]);
+
+
+    return (
+        <>
+            <div className="page-loader-overlay" ref={overlayRef}></div>
+            <div className="page-loader-container" ref={containerRef}>
+                <div className="page-loader-panel" ref={loaderPanelRef}></div>
+                <div className="loader" ref={loaderLogoRef}>
+                    <Image
+                        src={"/images/logo/logo.png"}
+                        alt=""
+                        title=""
+                        priority
+                        width={200}
+                        height={200}
+                    />
+                </div>
+                <div className="loader-title">
+                    <span ref={titleRef}>{title ||
+                        <div className="loader">
+                            <Image
+                                src={"/images/logo/logo.png"}
+                                alt=""
+                                title=""
+                                priority
+                                width={200}
+                                height={200}
+                            />
+                        </div>
+                    }</span>
+                </div>
+            </div>
+        </>
+    );
+};
+
+export default PageTransition;

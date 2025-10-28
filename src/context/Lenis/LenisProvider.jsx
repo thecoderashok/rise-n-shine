@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { LenisContext } from "./LenisContext";
-import gsap from "gsap";
+import { gsap, ScrollTrigger } from "../../gsapInit";
 import Lenis from "lenis";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const LenisProvider = ({ children }) => {
     const [lenisInstance, setLenisInstance] = useState(null);
