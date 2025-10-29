@@ -51,6 +51,7 @@ const LeftImageRightContent = ({ content, customClasses, props, children, titleR
                             <Button
                                 textLable={content.button.label}
                                 type="button"
+                                customClass={"style-2"}
                                 link={content.button.link}
                                 revealDelay={0.6}
                                 revealAnimation={true}

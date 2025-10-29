@@ -1,13 +1,14 @@
 import React, { Suspense, lazy } from 'react';
-import { Route, Routes } from 'react-router';
-import { useCustomRouter } from './context/CustomRouter/CustomRouterContext';
+import { Route, Routes, useLocation } from 'react-router';
+// import { useCustomRouter } from './context/CustomRouter/CustomRouterContext';
 import PageWrapper from './components/Route/PageWrapper';
 import Layout from './Layout';
 const Home = lazy(() => import('./Pages/Home/Home'));
 const AboutUs = lazy(() => import('./Pages/AboutUs/AboutUs'));
 
 const AppRoutes = () => {
-    const { customPathname } = useCustomRouter();
+    // const { customPathname } = useCustomRouter();
+    const { pathname } = useLocation();
 
     const AllRoutes = [
         {
@@ -23,13 +24,13 @@ const AppRoutes = () => {
     return (
         <div className="main-wrapper">
             <Suspense fallback={<div className="loader"></div>}>
-                <Routes location={{ pathname: customPathname }}>
+                <Routes location={{ pathname: pathname }}>
                     <Route element={<Layout />}>
                         {AllRoutes.map((page, index) => (
                             <Route
                                 path={page.path}
                                 element={
-                                    <PageWrapper key={customPathname}>
+                                    <PageWrapper key={pathname}>
                                         {page.component}
                                     </PageWrapper>
                                 }

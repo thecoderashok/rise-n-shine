@@ -315,8 +315,13 @@ const PageTransition = ({ title }) => {
 
 
     useEffect(() => {
-        setMounted(true);
-    }, [setMounted])
+        setRoute(pathname);
+        const raf = requestAnimationFrame(() => {
+            resetScroll();
+            setMounted(true);
+        })
+        return () => cancelAnimationFrame(raf);
+    }, [setMounted, pathname, setRoute, resetScroll])
 
     return (
         <>

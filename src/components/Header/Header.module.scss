@@ -47,7 +47,7 @@
         .header_logo_wrapper {
             position: relative;
             padding: 12px 12px;
-            padding-left: 8px !important;
+            padding-left: 0 !important;
         }
     }
 
@@ -442,6 +442,10 @@
     .main_header {
         .header_container {
             padding: 0 6px;
+
+            .header_logo_wrapper{
+                padding-left: 8px !important;
+            }
         }
 
         .header_logo {

@@ -58,9 +58,8 @@ const MissionVisionSec = () => {
                                     <ScrollReveal
                                         key={index}
                                         direction="fade-up"
-                                        duration={2}
                                         triggerRef={containerRef}
-                                        delay={index * 0.04 + 0.4}
+                                        delay={index * 0.1 + 0.4}
                                     >
                                         <div className="card-item">
                                             <div className="icon-wrapper">
