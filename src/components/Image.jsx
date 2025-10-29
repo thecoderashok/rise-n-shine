@@ -13,7 +13,7 @@ const Image = ({
 
     const optimizeImagePath = (imageUrl) => {
         if (import.meta.env.MODE === "production") {
-            return imageUrl.replace(/\.(jpg|jpeg)$/i, ".avif");
+            return imageUrl.replace(/\.(jpg|jpeg)$/i, ".jpg");
         }
         return imageUrl;
     };
