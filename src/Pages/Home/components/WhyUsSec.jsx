@@ -30,12 +30,12 @@ const WhyUsSec = () => {
                     <div className="col-lg-6 left-side">
                         <SecTitle
                             subTitle={"Why us"}
-                            mainTitle={"Why Rise and Shine?"}
+                            mainTitle={"Why Rise N Shine?"}
                             revealLetters={true}
                         />
                         <ScrollReveal direction="fade-in" delay={0.4}>
                             <div className="content-wrapper">
-                                <p>Because we prepare you for tomorrow, not yesterday.</p>
+                                <p>Because we prepare you for tomorrow, not yesterday. At Rise N Shine, your education is the launchpad for your success.</p>
 
                                 <div className="why-us-list">
                                     {data.map((item, index) => (
@@ -63,7 +63,6 @@ const WhyUsSec = () => {
                                         </ScrollReveal>
                                     ))}
                                 </div>
-                                <p>At Rise N Shine, your education is the launchpad for your success.</p>
                             </div>
                         </ScrollReveal>
                     </div>
