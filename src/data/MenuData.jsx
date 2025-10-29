@@ -10,16 +10,16 @@ export const GetHeaderMenu = () => {
             path: "/about-us",
         },
         {
-            label: "Our Services",
-            path: "/our-services",
+            label: "Programs",
+            path: "#",
         },
         {
-            label: "Our Projects",
-            path: "/our-projects",
+            label: "Admissions",
+            path: "#",
         },
         {
-            label: "Our Clients",
-            path: "/our-clients",
+            label: "News & Events",
+            path: "#",
         },
         // {
         //     label: "Contact Us",
@@ -53,75 +53,38 @@ export const GetHeaderMenu = () => {
         },
     ];
 
-
-    const ServicesOffered = [
-        {
-            label: "Feasibility Study Services",
-            path: "/#news_sec",
-        },
-        {
-            label: "Design / Proof Checking Consultancy Services",
-            path: "#",
-        },
-        {
-            label: "Rehabilitation Works",
-            path: "#",
-        },
-        {
-            label: "Quality Assurance Services",
-            path: "#",
-        },
-        {
-            label: "Project Management Services",
-            path: "#",
-        },
-        {
-            label: "Advisory",
-            path: "#",
-        },
-        {
-            label: "Pre - Feasibility",
-            path: "#",
-        },
-        {
-            label: "Design / Proof Consultancy",
-            path: "#",
-        },
-        {
-            label: "Bot & Techno Economic Services",
-            path: "#",
-        },
-    ];
-
     const FooterMenuGroup = [
         {
-            heading: "Discover",
+            heading: "About",
             menu: [
-                { label: "Home", path: "/" },
-                { label: "About us", path: "/about-us" },
-                { label: "Our Clients", path: "/our-clients" },
+                { label: "About Us", path: "#" },
+                { label: "Vision & Mission", path: "#" },
+                { label: "Founder’s Message", path: "#" },
             ],
         },
         {
-            heading: "What we do",
+            heading: "Academics",
             menu: [
-                { label: "Our Services", path: "/our-services" },
-                { label: "Our Projects", path: "/our-projects" },
+                { label: "Programs", path: "#" },
+                { label: "Admissions", path: "#" },
+                { label: "Research", path: "#" },
             ],
         },
         {
             heading: "Connect",
             menu: [
-                { label: "Contact Us", path: "/contact-us" },
+                { label: "Campus Life", path: "#" },
+                { label: "News & Events", path: "#" },
+                { label: "Contact Us", path: "#" },
             ],
         },
     ];
+
 
     return {
         HeaderMenu: HeaderMenu,
         footerQuickLinks: HeaderMenu,
         FooterMenuGroup: FooterMenuGroup,
-        footerServicesMenu: ServicesOffered,
     };
 };
 

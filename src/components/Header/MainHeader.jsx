@@ -256,8 +256,8 @@ const MainHeader = ({ isTransparent }) => {
                                 src="/images/logo/logo.png"
                                 width={200}
                                 height={64}
-                                alt="Header Logo - Inchem Enterprises"
-                                title="Inchem Enterprises"
+                                alt="Header Logo"
+                                title=""
                                 loading="eager"
                                 decoding="async"
                             />

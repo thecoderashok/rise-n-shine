@@ -5,7 +5,7 @@ import LoaderProvider from "./context/Loader/LoaderProvider";
 import FormLoaderProvider from "./context/FormLoader/FormLoaderProvider";
 import ScrollProvider from "./context/Scroll/ScrollProvider";
 import ResizeProvider from "./context/Resize/ResizeProvider";
-// import TransitionWrapper from "./components/Route/TransitionWrapper";
+import TransitionWrapper from "./components/Route/TransitionWrapper";
 import ToastProvider from "./context/Toast/ToastProvider";
 import LenisProvider from "./context/Lenis/LenisProvider";
 import useHashScroll from "./hook/useHashScroll";
@@ -24,7 +24,7 @@ function App() {
                             <ScrollProvider>
                                 <FormLoaderProvider>
                                     <ToastProvider>
-                                        {/* <TransitionWrapper /> */}
+                                        <TransitionWrapper />
                                         <AppRoutes />
                                     </ToastProvider>
                                 </FormLoaderProvider>

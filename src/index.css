@@ -5,19 +5,23 @@
 }
 
 :root {
-   --primary-font: "Nunito Sans", sans-serif;
-    --alt-font: "Nunito", sans-serif;
-    --alt-font-2: "Comfortaa", sans-serif;
+   --primary-font: "Quicksand", sans-serif;
+   --alt-font: "Quicksand", sans-serif;
 
    --color-primary: #642165;
    --color-secondary: #D4A850;
 
    --color-grey: #a9a9a9;
    --color-green: #4caf50;
-   --color-red: #c62828;
+   --color-red: #ca3434;
    --color-blue-grey: #607d8b;
-   --color-white: #ffffff;
-   --color-black: #000000;
+
+
+   --content-padding-x: 60px;
+   --content-padding-y: 90px;
+
+   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+   --ease-in-expo: cubic-bezier(0.7, 0, 0.84, 0);
 }
 
 
@@ -44,6 +48,7 @@ body {
    color: #535353;
    font-weight: 400;
    line-height: 1.6;
+   overflow-x: hidden;
    background-color: rgb(255, 255, 255);
 }
 
@@ -80,7 +85,7 @@ h6 {
    letter-spacing: -0.02em;
    font-weight: 700;
    font-family: var(--alt-font);
-   color: var(--theme-color-two);
+   color: #3d2d3d;
 }
 
 h1 {
@@ -200,7 +205,7 @@ section {
 }
 
 section.sec-gray {
-   background-color: #f3f6f8;
+   background-color: #F5F2EC;
 }
 
 section.sec-offwhite {
@@ -397,5 +402,166 @@ section.sec-offwhite {
 
    .slide-btn:after {
       font-size: 1rem;
+   }
+}
+
+
+/* Preloader  */
+.page-loader-container {
+   position: fixed;
+   left: 0;
+   top: 0;
+   width: 100vw;
+   height: 100dvh;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   z-index: 9999;
+   pointer-events: none;
+   user-select: none;
+}
+
+.page-loader-panel {
+   position: absolute;
+   left: 0;
+   right: 0;
+   top: 0;
+   bottom: 0;
+   width: 100%;
+   height: 100%;
+   display: inline-block;
+   background-color: #f5f5f5;
+   transform: scaleY(1);
+   transform-origin: top;
+   will-change: transform;
+}
+
+.page-loader-overlay {
+   position: fixed;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100dvh;
+   background: rgba(0, 0, 0, 0.5);
+   z-index: 9998;
+   pointer-events: none;
+   will-change: opacity;
+   /* visibility: hidden; */
+}
+
+.loader-title {
+   width: 100%;
+   padding: 0 14px;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   color: var(--theme-color-two);
+   font-size: clamp(1.6rem, 3vw, 2.5rem);
+   font-weight: 600;
+   line-height: 1.2;
+   max-width: 1000px;
+   text-align: center;
+   text-transform: uppercase;
+   font-family: var(--alt-font);
+   z-index: 999;
+}
+
+.loader-title span {
+   position: relative;
+   display: inline-block;
+   opacity: 0;
+   transform: translateZ(0);
+   will-change: transform, opacity;
+}
+
+.loading-label {
+   position: absolute;
+   margin: 0;
+   padding: 20px 25px;
+   left: 0;
+   bottom: 0;
+   font-size: 1.1rem;
+   font-weight: 500;
+   color: #3a3a3a;
+}
+
+.loading-label span {
+   display: inline-block;
+   width: 4px;
+   height: 4px;
+   margin-left: 4px;
+   border-radius: 50%;
+   background-color: var(--theme-color-one);
+   animation: pulseDot 1.2s infinite ease-in-out;
+}
+
+.loading-label span:nth-child(2) {
+   animation-delay: 0.2s;
+}
+
+.loading-label span:nth-child(3) {
+   animation-delay: 0.4s;
+}
+
+.loading-label span:nth-child(4) {
+   animation-delay: 0.6s;
+}
+
+@keyframes pulseDot {
+
+   0%,
+   80%,
+   100% {
+      transform: scale(0.6);
+      opacity: 0.3;
+   }
+
+   40% {
+      transform: scale(1.2);
+      opacity: 1;
+   }
+}
+
+.loader {
+   position: relative;
+   width: 80px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   background-position: center;
+   background-repeat: no-repeat;
+   background-size: contain;
+   overflow: hidden;
+   transform: translateZ(0);
+   opacity: 1;
+   will-change: transform, opacity;
+   z-index: 9;
+}
+
+.loader img {
+   width: 100%;
+   height: 100%;
+   object-fit: contain;
+   object-position: center;
+}
+
+
+@media screen and (max-width: 992px) {
+   .loading-label {
+      padding: 20px 25px;
+      font-size: 1rem;
+   }
+
+   .loading-label span {
+      width: 3px;
+      height: 3px;
+      margin-left: 3px;
+   }
+}
+
+@media screen and (max-width: 575px) {
+   .loader {
+      width: 60px;
    }
 }

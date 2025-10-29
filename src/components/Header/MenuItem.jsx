@@ -1,103 +1,141 @@
-import React, { useEffect, useState, useRef, useMemo, useCallback } from "react";
-import { NavLink } from "react-router";
+import React, { useEffect, useState, useRef } from "react";
 import SubMenu from "./SubMenu";
 import styles from "./Header.module.scss";
 import { useClassNames } from "../../hook/useClassNames";
+import { useLocation } from "react-router";
+import { gsap } from "../../gsapInit";
+import useMobile from "../../hook/useMobile";
+import TransitionLink from "../TransitionLink";
 
 const MenuItem = ({ menuItem, menuItemIndex, isMenuClosed, ...props }) => {
+    const isMobile = useMobile();
     const [liHoverIndex, setLIHoverIndex] = useState(null);
 
     const [isSubMenuOpen, setIsSubMenuOpen] = useState(false);
+    const menuItemRef = useRef(null);
     const subMenuRef = useRef(null);
-    const parentLI = useRef(null);
 
+    const { pathname } = useLocation();
     const classes = useClassNames();
 
-    const toggleSubmenu = useCallback((e) => {
-        if (window.innerWidth <= 992) {
-            e.preventDefault();
-            e.stopPropagation();
-            setIsSubMenuOpen((prev) => !prev);
-        }
-    }, []);
-
     useEffect(() => {
-        const handleSubMenuElementHeight = () => {
-            const submenu = subMenuRef.current;
-            const parent = parentLI.current?.closest(`.${styles.header_sub_menu} ul`);
+        const submenu = subMenuRef.current;
+        if (!submenu || !isMobile) return;
 
-            if (!submenu) return;
-
+        const ctx = gsap.context(() => {
+            gsap.killTweensOf(submenu);
+            gsap.set(submenu, { height: 0 });
             if (isSubMenuOpen) {
-                submenu.style.height = `${submenu.scrollHeight}px`;
+                gsap.to(submenu, {
+                    height: submenu.scrollHeight,
+                    duration: 0.6,
+                    ease: "power2.inOut",
+                    onComplete: () => {
+                        gsap.set(submenu, { height: "auto" })
+                    }
+                });
             } else {
-                submenu.style.height = `${submenu.scrollHeight}px`;
-                requestAnimationFrame(() => {
-                    submenu.style.height = `0px`;
+                gsap.set(submenu, { height: submenu.scrollHeight });
+                gsap.to(submenu, {
+                    height: 0,
+                    duration: 0.6,
+                    ease: "power2.inOut",
+                    onComplete: () => {
+                        gsap.set(submenu, { height: 0 })
+                    }
                 });
             }
+        })
 
-            if (parent) {
-                parent.style.height = `${parent.scrollHeight}px`;
-                requestAnimationFrame(() => {
-                    parent.style.height = `auto`;
-                });
-            }
-        };
+        return () => ctx.revert();
 
-        if (window.innerWidth <= 992) {
-            requestAnimationFrame(handleSubMenuElementHeight);
-        }
-    }, [isSubMenuOpen]);
-
+    }, [isSubMenuOpen, isMobile])
 
     useEffect(() => {
         if (isMenuClosed) {
             setIsSubMenuOpen(false);
 
-            const parent = parentLI.current;
-            if (!parent) return;
+            const submenu = subMenuRef.current;
+            if (!submenu || !isMobile) return;
 
-            const nestedULs = parent.querySelectorAll("ul");
-
-            nestedULs.forEach((ul) => {
-                requestAnimationFrame(() => {
-                    ul.style.height = "";
-                });
-            });
+            gsap.killTweensOf(submenu);
+            gsap.set(submenu, { height: 0 });
         }
-    }, [isMenuClosed]);
+    }, [isMenuClosed, isMobile]);
 
 
-    const computedClass = useMemo(() => {
-        return classes(
-            liHoverIndex === menuItemIndex && styles.hovered,
-            menuItem?.sub_menu && styles.has_children,
-            menuItem?.multi_level_sub_menu && styles.multi_level,
-            isSubMenuOpen && styles.open
-        );
-    }, [liHoverIndex, menuItem, isSubMenuOpen, menuItemIndex, classes]);
+    const handleMouseEnter = () => {
+        if (isMobile) return;
+        setLIHoverIndex(menuItemIndex);
+        setIsSubMenuOpen(true);
+    };
+    const handleMouseLeave = () => {
+        if (isMobile) return;
+        setLIHoverIndex(null);
+        setIsSubMenuOpen(false);
+    };
+
+    const handleClick = (e) => {
+        if (!isMobile) return;
+        setLIHoverIndex(menuItemIndex);
+        e.preventDefault();
+        e.stopPropagation();
+
+        if (menuItem?.sub_menu) {
+            setIsSubMenuOpen((prev) => !prev);
+        } else {
+            setIsSubMenuOpen(false);
+        }
+    };
+
+    useEffect(() => {
+        const handleClickOutside = (e) => {
+            if (menuItemRef.current && !menuItemRef.current.contains(e.target)) {
+                setLIHoverIndex(null);
+                setIsSubMenuOpen(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [menuItemRef, isMobile]);
+
+    // const isActive = (() => {
+    //     if (!menuItem?.path) return false;
+    //     if (menuItem.path.startsWith("#")) {
+    //         if (typeof window !== "undefined") {
+    //             return window.location.hash === menuItem.path;
+    //         }
+    //         return false;
+    //     }
+    //     return pathname === menuItem.path;
+    // })();
 
     return (
         <li
-            className={computedClass}
-            onMouseEnter={() => setLIHoverIndex(menuItemIndex)}
-            onMouseLeave={() => setLIHoverIndex(null)}
-            onClick={toggleSubmenu}
-            ref={parentLI}
+            className={
+                classes(
+                    liHoverIndex === menuItemIndex && styles.hovered,
+                    menuItem?.sub_menu && styles.has_children,
+                    menuItem?.multi_level_sub_menu && styles.multi_level,
+                    isSubMenuOpen && styles.open
+                )
+            }
+            id={menuItem?.id}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            onClick={handleClick}
+            ref={menuItemRef}
             {...props}
         >
-            <NavLink
-                to={menuItem?.path}
-                className={({ isActive }) => {
-                    if (menuItem.path.startsWith("#")) {
-                        return classes(window.location.hash === menuItem.path && styles.active)
-                    }
-                    return classes(isActive && styles.active);
-                }}
+            <TransitionLink
+                href={menuItem?.path || "#"}
+                className={classes(pathname === menuItem.path && styles.active)}
             >
                 {menuItem?.label}
-            </NavLink>
+            </TransitionLink>
 
             {menuItem?.sub_menu ? (
                 <SubMenu

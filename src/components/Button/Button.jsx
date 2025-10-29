@@ -1,18 +1,18 @@
 import React from 'react'
-import "./Styles.css";
+import "./styles.scss";
 import { useClassNames } from '../../hook/useClassNames';
 import ScrollReveal from '../ScrollReveal/ScrollReveal';
-import TransitionLink from '../TransitionLink';
+import { Link } from 'react-router';
+// import TransitionLink from '../TransitionLink';
 
 const Button = ({ textLable, link = null, customClass, revealDelay = 0, direction = "fade-up", revealAnimation = false, ...props }) => {
-
     const classes = useClassNames();
 
     const className = classes("standard-btn", customClass);
 
     const BaseButton = link ? (
         <span className={className} role="button">
-            <TransitionLink href={link} {...props} />
+            <Link href={link} {...props} />
             <span className="text-label">
                 <span data-text={textLable}>{textLable}</span>
             </span>

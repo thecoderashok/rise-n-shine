@@ -1,5 +1,5 @@
 import React from 'react'
-import "./Styles.css";
+import "./styles.scss";
 import { useClassNames } from '../../hook/useClassNames';
 import TransitionLink from '../TransitionLink';
 import ScrollReveal from '../ScrollReveal/ScrollReveal';

@@ -15,4 +15,4 @@ const SubMenu = ({ menus, subMenuRef, customClass, ...props }) => {
     )
 }
 
-export default React.memo(SubMenu);
+export default SubMenu;

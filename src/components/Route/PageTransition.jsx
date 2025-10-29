@@ -314,42 +314,13 @@ const PageTransition = ({ title }) => {
     }, [pathname, setRoute, resetScroll, setMounted, linkClicked]);
 
 
-    // useEffect(() => {
-    //     if ("scrollRestoration" in window.history) {
-    //         window.history.scrollRestoration = "manual";
-    //     }
-
-    //     Object.keys(localStorage)
-    //         .filter((key) => key.startsWith("scroll:"))
-    //         .forEach((key) => localStorage.removeItem(key));
-    // }, []);
-
-    // useEffect(() => {
-    //     if (isFirstLoading.current) return;
-
-    //     const saveScroll = () => {
-    //         localStorage.setItem(`scroll:${currentPathname}`, window.scrollY);
-    //     };
-
-    //     if (linkClicked) {
-    //         saveScroll();
-    //     }
-
-    //     if (!linkClicked) {
-    //         const raf = requestAnimationFrame(() => {
-    //             resetLinkClick();
-    //             setMounted(true);
-    //         })
-
-    //         return () => cancelAnimationFrame(raf);
-    //     }
-
-    // }, [linkClicked, currentPathname, setMounted, lenis, resetLinkClick]);
-
+    useEffect(() => {
+        setMounted(true);
+    }, [setMounted])
 
     return (
         <>
-            <div className="page-loader-overlay" ref={overlayRef}></div>
+            {/* <div className="page-loader-overlay" ref={overlayRef}></div>
             <div className="page-loader-container" ref={containerRef}>
                 <div className="page-loader-panel" ref={loaderPanelRef}></div>
                 <div className="loader" ref={loaderLogoRef}>
@@ -376,7 +347,7 @@ const PageTransition = ({ title }) => {
                         </div>
                     }</span>
                 </div>
-            </div>
+            </div> */}
         </>
     );
 };
