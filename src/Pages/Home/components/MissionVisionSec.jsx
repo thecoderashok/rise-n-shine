@@ -24,7 +24,7 @@ const MissionVisionSec = () => {
     return (
         <section className="mission-and-vision-sec">
             <div className="top-sec">
-                <ParallaxWrapper offset={20}>
+                <ParallaxWrapper offset={15}>
                     <div className="image-wrapper">
                         <Image
                             src={`/images/mission-bg.jpg`}

@@ -1,5 +1,5 @@
 export const headerConfig = {
-    nonTransparentRoutes: ["/about-us", "/contact-us", "/404"],
+    nonTransparentRoutes: [ "/contact-us", "/404"],
 };
 
 export const pageTransitionConfig = [
@@ -9,7 +9,7 @@ export const pageTransitionConfig = [
     },
     {
         path: "/about-us",
-        routeTitle: "Who we are",
+        routeTitle: "About us",
     },
     {
         path: "*",

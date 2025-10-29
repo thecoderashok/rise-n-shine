@@ -2,16 +2,9 @@ import React, { Suspense, lazy } from 'react';
 import { Route, Routes } from 'react-router';
 import { useCustomRouter } from './context/CustomRouter/CustomRouterContext';
 import PageWrapper from './components/Route/PageWrapper';
-
-const Layout = lazy(() => import('./Layout'));
+import Layout from './Layout';
 const Home = lazy(() => import('./Pages/Home/Home'));
-// const AboutUs = lazy(() => import('./pages/AboutUs'));
-// const ServicesOffered = lazy(() => import('./pages/ServicesOffered'));
-// const ProjectsExecuted = lazy(() => import('./pages/Projects/ProjectsExecuted'));
-// const ProjectDetails = lazy(() => import('./pages/Projects/ProjectDetails'));
-// const OurClients = lazy(() => import('./pages/OurClients'));
-// const ContactUs = lazy(() => import('./pages/ContactUs'));
-// const PageNotFound = lazy(() => import('./pages/PageNotFound'));
+const AboutUs = lazy(() => import('./Pages/AboutUs/AboutUs'));
 
 const AppRoutes = () => {
     const { customPathname } = useCustomRouter();
@@ -20,6 +13,10 @@ const AppRoutes = () => {
         {
             path: "/",
             component: <Home />,
+        },
+        {
+            path: "/about-us",
+            component: <AboutUs />,
         },
     ];
 

@@ -14,7 +14,7 @@ export default function TransitionLink({ target, children, href = "#", ...props 
     }
 
     return (
-        <Link href={href} {...props} data-transition>
+        <Link to={href} {...props} data-transition>
             {children}
         </Link>
     );

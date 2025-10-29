@@ -3,7 +3,6 @@ import { matchPath, useLocation } from "react-router";
 import PageTransition from "./PageTransition";
 import { useLoader } from "../../context/Loader/LoaderContext";
 import { pageTransitionConfig } from "../../lib/routeConfig";
-import { GetProjectsDataBySlug } from "../../lib/projects";
 
 const TransitionWrapper = () => {
     const { isFirstLoad } = useLoader();
@@ -25,13 +24,13 @@ const TransitionWrapper = () => {
             )
         );
 
-        const matchProjectDetailsPage = matchPath(
-            {
-                path: "/our-projects/:slug",
-                end: true,
-            },
-            pathname
-        );
+        // const matchProjectDetailsPage = matchPath(
+        //     {
+        //         path: "/our-projects/:slug",
+        //         end: true,
+        //     },
+        //     pathname
+        // );
 
         if (matchedPage) {
             if (matchedPage.path === "/") {
@@ -39,13 +38,6 @@ const TransitionWrapper = () => {
                     ? matchedPage.routeTitle
                     : null;
                 pageRoutMeta.current.parentTitle = null;
-            } else if (matchProjectDetailsPage) {
-                const data = GetProjectsDataBySlug(
-                    matchProjectDetailsPage?.params?.slug
-                );
-
-                pageRoutMeta.current.title = data?.title || null;
-                pageRoutMeta.current.parentTitle = matchedPage.routeSubTitle || null;
             } else {
                 pageRoutMeta.current.title = matchedPage.routeTitle || null;
                 pageRoutMeta.current.parentTitle = matchedPage.routeSubTitle || null;

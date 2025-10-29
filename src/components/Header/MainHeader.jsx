@@ -294,8 +294,8 @@ const MainHeader = ({ isTransparent }) => {
                         </div>
                     </div>
 
-                    <div className="col-auto d-flex d-lg-none pe-0">
-                        <div className={styles.header_menu_btn} data-menu-active={menuOpen}>
+                    <div className={classes("col-auto pe-0", styles.menu_btn_wrapper)} data-state={menuOpen ? "opened" : "closed"}>
+                        <div className={classes(styles.header_menu_btn)}>
                             <Hamburger
                                 size={26}
                                 toggled={menuOpen}
