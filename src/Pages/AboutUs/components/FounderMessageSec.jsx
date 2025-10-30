@@ -52,30 +52,30 @@ const data = [
             </>
         )
     },
-    {
-        title: <><b>Dr. Amol A Gawande</b></>,
-        desc: "General Manager",
-        image: "Dr-Amol-Gawande.jpg",
-        content: (
-            <>
-                <p>
-                    At Rise and Shine Institute of Learning, we believe that the future of management education exists at the intersection of innovation, global exposure, and real-world impact. With immense pride and strategic foresight, our international campus in Dubai stands as a testament to this vision, located in a global centre of enterprise, technology, and cultural convergence.
-                </p>
-                <p>
-                    Our presence in Dubai reflects our dedication to developing globally competent professionals who are both industry ready and future ready. The city&rsquo;s dynamic economy, progressive governance, and strategic importance as a global business hub provide students with unmatched access to world-class opportunities.
-                </p>
-                <p>
-                    Through an immersive academic experience, students engage directly with multinational companies, secure valuable certifications, and acquire hands-on exposure that accelerates both their learning and career growth.
-                </p>
-                <p>
-                    This initiative promotes international collaboration, academic excellence, and learner mobility. Students cultivate a global mindset by working with international peers, collaborating with industry leaders, and navigating contemporary business challenges.
-                </p>
-                <p>
-                    At Rise and Shine Institute of Learning, our mission is to shape agile, innovative, and ethical leaders who are prepared to create meaningful impact in every market across the world. We welcome aspiring professionals who are ready to embrace change, think boldly, and contribute to the future of global business.
-                </p>
-            </>
-        )
-    }
+    // {
+    //     title: <><b>Dr. Amol A Gawande</b></>,
+    //     desc: "General Manager",
+    //     image: "Dr-Amol-Gawande.jpg",
+    //     content: (
+    //         <>
+    //             <p>
+    //                 At Rise and Shine Institute of Learning, we believe that the future of management education exists at the intersection of innovation, global exposure, and real-world impact. With immense pride and strategic foresight, our international campus in Dubai stands as a testament to this vision, located in a global centre of enterprise, technology, and cultural convergence.
+    //             </p>
+    //             <p>
+    //                 Our presence in Dubai reflects our dedication to developing globally competent professionals who are both industry ready and future ready. The city&rsquo;s dynamic economy, progressive governance, and strategic importance as a global business hub provide students with unmatched access to world-class opportunities.
+    //             </p>
+    //             <p>
+    //                 Through an immersive academic experience, students engage directly with multinational companies, secure valuable certifications, and acquire hands-on exposure that accelerates both their learning and career growth.
+    //             </p>
+    //             <p>
+    //                 This initiative promotes international collaboration, academic excellence, and learner mobility. Students cultivate a global mindset by working with international peers, collaborating with industry leaders, and navigating contemporary business challenges.
+    //             </p>
+    //             <p>
+    //                 At Rise and Shine Institute of Learning, our mission is to shape agile, innovative, and ethical leaders who are prepared to create meaningful impact in every market across the world. We welcome aspiring professionals who are ready to embrace change, think boldly, and contribute to the future of global business.
+    //             </p>
+    //         </>
+    //     )
+    // }
 ]
 
 const FounderMessageSec = () => {
