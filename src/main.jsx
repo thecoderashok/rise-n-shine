@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import "swiper/css/effect-fade";
 import 'lenis/dist/lenis.css'
 import './index.css'
 import "./components/ScrollReveal/ScrollReveal.css"

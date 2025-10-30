@@ -7,12 +7,23 @@ import ParallaxWrapper from '../../../components/Parallax/ParallaxWrapper';
 const data = [
     {
         title: "Our Mission",
-        desc: "To empower learners with future-ready skills through industry-focused education that blends academic excellence with hands-on experience. Based in Dubai’s global hub, we offer dynamic certification programmes, expert mentorship, and real-world exposure, shaping bold thinkers and agile professionals prepared to lead in a fast-changing world. We don't just teach. We transform potential into performance.",
+        desc: (
+            <>
+                <p>To empower learners with future-ready skills through industry-focused education that blends academic excellence with hands-on experience.</p>
+                <p>Based in Dubai's global hub, we offer dynamic certification programmes, expert mentorship, and real-world exposure, shaping bold thinkers and agile professionals prepared to lead in a fast-changing world. We don't just teach. We transform potential into performance.</p>
+            </>
+        ),
         icon: "/icons/mission.png",
     },
     {
         title: "Our Vision",
-        desc: "To be a globally recognised institute that redefines professional education by shaping bold thinkers, agile leaders, and future-ready professionals who rise to shine in every corner of the world.",
+        desc: (
+            <>
+                <p>
+                    To be a globally recognised institute that redefines professional education by shaping bold thinkers, agile leaders, and future-ready professionals who rise to shine in every corner of the world.
+                </p>
+            </>
+        ),
         icon: "/icons/vision.png",
     },
 ];
@@ -74,7 +85,7 @@ const MissionVisionSec = () => {
 
                                             <div className="text-content">
                                                 <h3 className="title-text">{item.title}</h3>
-                                                <p>{item.desc}</p>
+                                                {item.desc}
                                             </div>
                                         </div>
                                     </ScrollReveal>

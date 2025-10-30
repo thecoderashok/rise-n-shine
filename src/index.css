@@ -33,7 +33,7 @@
 
 html {
    scrollbar-width: thin;
-   scrollbar-color: var(--theme-color-one);
+   scrollbar-color: var(--color-primary);
    text-rendering: optimizeLegibility;
    -webkit-font-smoothing: antialiased;
    -moz-osx-font-smoothing: grayscale;
@@ -301,7 +301,7 @@ section.sec-offwhite {
    width: 12px;
    height: 12px;
    border-radius: 0;
-   background-color: var(--theme-color-one);
+   background-color: var(--color-primary);
    opacity: 1;
    margin: 0 !important;
    transition: background-color 0.3s ease-in-out;
@@ -339,8 +339,8 @@ section.sec-offwhite {
    right: auto;
    bottom: auto;
    --default-border-color: rgba(255, 255, 255, 0.507);
-   --hover-bg-color: var(--theme-color-one);
-   --active-bg-color: var(--theme-color-one);
+   --hover-bg-color: var(--color-primary);
+   --active-bg-color: var(--color-primary);
    --default-color: white;
    --hover-color: white;
    --active-color: white;
@@ -349,8 +349,12 @@ section.sec-offwhite {
    line-height: 40px;
    pointer-events: all !important;
    margin: 0 !important;
-   background-color: var(--theme-color-one);
+   background-color: var(--color-primary);
    transition: all 0.3s ease-in-out;
+}
+
+.slider-nav-wrapper .slide-btn svg{
+   display: none;
 }
 
 .slide-btn:hover {
@@ -368,7 +372,7 @@ section.sec-offwhite {
 .slide-btn:after {
    position: absolute;
    content: "\f105";
-   font-family: "Font Awesome 6 Sharp";
+   font-family: "Font Awesome 6 Pro";
    font-weight: 400;
    left: 50%;
    top: 50%;
@@ -492,7 +496,7 @@ section.sec-offwhite {
    height: 4px;
    margin-left: 4px;
    border-radius: 50%;
-   background-color: var(--theme-color-one);
+   background-color: var(--color-primary);
    animation: pulseDot 1.2s infinite ease-in-out;
 }
 

@@ -8,17 +8,17 @@ const data = [
     {
         title: "Marketing and Sales Management Professional Development Programme",
         desc: "",
-        image: "1.jpg",
+        image: "marketing.jpg",
     },
     {
         title: "Finance Management Professional Development Programme",
         desc: "",
-        image: "2.jpg",
+        image: "finance-management.jpg",
     },
     {
         title: "Digital Storytelling Programme",
         desc: "",
-        image: "2.jpg",
+        image: "story-telling.jpg",
     },
 ];
 
@@ -32,8 +32,8 @@ const OurProgramsSec = () => {
                 <div className="row">
                     <div className="col-12">
                         <SecTitle
-                            mainTitle="Programs we offer"
-                            subTitle={"Programs"}
+                            mainTitle="Programmes"
+                            subTitle={"What we offers"}
                             revealLetters={true}
                         />
                     </div>

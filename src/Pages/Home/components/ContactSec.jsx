@@ -10,7 +10,8 @@ const ContactSec = () => {
                 <div className="row justify-content-center">
                     <div className="col-12 text-center">
                         <SecTitle
-                            mainTitle={"Contact Us"}
+                            subTitle={"Contact Us"}
+                            mainTitle={"Connect With Us"}
                             revealLetters={true}
                         />
                     </div>

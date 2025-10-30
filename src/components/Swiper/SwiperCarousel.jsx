@@ -1,8 +1,7 @@
 import React, { useEffect, useMemo, useRef } from "react";
 import { Swiper } from "swiper/react";
-import { Navigation, Autoplay, Pagination, EffectFade } from "swiper/modules";
-import { SwiperSlide } from "swiper/react";
-import { useLoader } from "../../context/Loader/LoaderContext";
+import { Navigation, Autoplay, Pagination, EffectFade, Controller, Parallax } from "swiper/modules";
+import { SwiperSlide } from 'swiper/react';
 
 const SwiperCarousel = ({
     slidesPerView = 1,
@@ -16,15 +15,14 @@ const SwiperCarousel = ({
     navigationBtns,
     showPagination,
     reverseDir = false,
+    fadeEffect,
     loop = true,
-    fadeEffect = false,
+    parallax = false,
     ...props
 }) => {
     const swiperRef = useRef(null);
     const prevRef = useRef(null);
     const nextRef = useRef(null);
-
-    const { isMounted } = useLoader();
 
     const slideCount = useMemo(() => {
         return React.Children.toArray(children).filter(child =>
@@ -55,24 +53,30 @@ const SwiperCarousel = ({
     const shouldLoop = slideCount > effectiveSlidesPerView;
 
     useEffect(() => {
-        if (swiperRef.current && prevRef.current && nextRef.current) {
-            swiperRef.current.params.navigation.prevEl = prevRef.current;
-            swiperRef.current.params.navigation.nextEl = nextRef.current;
-            swiperRef.current.navigation.destroy();
-            swiperRef.current.navigation.init();
-            swiperRef.current.navigation.update();
-        }
+        const swiper = swiperRef.current;
+        if (!swiper || !prevRef.current || !nextRef.current) return;
+
+        swiper.params.navigation.prevEl = prevRef.current;
+        swiper.params.navigation.nextEl = nextRef.current;
+
+        // Re-initialize navigation
+        swiper.navigation.destroy();
+        swiper.navigation.init();
+        swiper.navigation.update();
     }, []);
 
-    useEffect(() => {
-        if (swiperRef.current?.autoplay) {
-            if (isMounted && autoplay) {
-                swiperRef.current.autoplay.start();
-            } else {
-                swiperRef.current.autoplay.stop();
-            }
+    const handleSlideChange = (swiper) => {
+        const wrapper = document.querySelector(".swiper-pagination-horizontal");
+        if (!wrapper) return;
+
+        wrapper.classList.remove("scroll-next", "scroll-prev");
+
+        if (!swiper.previousIndex || swiper.previousIndex < swiper.activeIndex) {
+            wrapper.classList.add("scroll-next");
+        } else {
+            wrapper.classList.add("scroll-prev");
         }
-    }, [isMounted, autoplay]);
+    };
 
     useEffect(() => {
         if (!swiperRef.current) return;
@@ -96,21 +100,52 @@ const SwiperCarousel = ({
         };
     }, []);
 
+    // new feature 
+    const navBtnWrapperRef = useRef(null);
+
+    useEffect(() => {
+        if (!swiperRef.current) return;
+
+        const updateNavPosition = (swiper) => {
+            const navWrapper = navBtnWrapperRef.current;
+            if (!navWrapper) return;
+
+            const activeSlide = swiper.slides[swiper.activeIndex];
+            if (!activeSlide) return;
+
+            const dependedElement = activeSlide.querySelector("[data-nav-height]");
+            if (!dependedElement) {
+                navWrapper.style.top = "";
+                return;
+            }
+
+            const elementHeight = dependedElement.offsetHeight;
+            const offset = elementHeight / 2;
+
+            const originalTop = parseFloat(navWrapper.dataset.originalTop || 0);
+            navWrapper.style.top = `${originalTop + offset}px`;
+        };
+
+        updateNavPosition(swiperRef?.current);
+
+        const handleResize = () => updateNavPosition(swiperRef?.current);
+
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    });
+
     return (
         <div className="carousel-wrapper">
             <Swiper
-                modules={[Navigation, Autoplay, Pagination, EffectFade]}
+                modules={[Navigation, Autoplay, Pagination, EffectFade, Controller, Parallax]}
+                parallax={parallax}
                 spaceBetween={spaceBetween}
-                slidesPerView={effectiveSlidesPerView}
+                slidesPerView={slidesPerView}
                 speed={speed}
-                navigation={
-                    navigationBtns
-                        ? {
-                            prevEl: prevRef.current,
-                            nextEl: nextRef.current,
-                        }
-                        : false
-                }
+                navigation={navigationBtns ? {
+                    prevEl: prevRef.current,
+                    nextEl: nextRef.current,
+                } : false}
                 loop={loop ? shouldLoop : false}
                 pagination={
                     showPagination
@@ -120,48 +155,28 @@ const SwiperCarousel = ({
                         }
                         : false
                 }
-                autoplay={
-                    autoplay
-                        ? {
-                            delay: autoplayDelay,
-                            disableOnInteraction: false,
-                            reverseDirection: reverseDir,
-                        }
-                        : false
-                }
+                autoplay={autoplay ? { delay: autoplayDelay, disableOnInteraction: false, reverseDirection: reverseDir } : false}
                 onInit={(swiper) => {
                     swiperRef.current = swiper;
-                    if (swiper.autoplay) swiper.autoplay.stop();
+                    handleSlideChange(swiper);
                 }}
                 effect={fadeEffect ? "fade" : "slide"}
                 fadeEffect={fadeEffect ? { crossFade: true } : undefined}
                 breakpoints={dynamicBreakpoints ? adjustedBreakpoints : breakpoints}
+                onSlideChange={handleSlideChange}
                 {...props}
             >
                 {children}
             </Swiper>
-            {navigationBtns ? (
-                <div className="slider-nav-wrapper">
-                    <span
-                        ref={prevRef}
-                        className="slide-btn swiper-button-prev"
-                        role="button"
-                        aria-label="Previous Slide"
-                        tabIndex={0}
-                    ></span>
-                    <span
-                        ref={nextRef}
-                        className="slide-btn swiper-button-next"
-                        role="button"
-                        aria-label="Next Slide"
-                        tabIndex={0}
-                    ></span>
-                </div>
-            ) : (
-                <></>
-            )}
+            {navigationBtns ?
+                <div className="slider-nav-wrapper" ref={navBtnWrapperRef}>
+                    <span ref={prevRef} className="slide-btn swiper-button-prev" role="button" aria-label="Previous Slide"></span>
+                    <span ref={nextRef} className="slide-btn swiper-button-next" role="button" aria-label="Next Slide" ></span>
+                </div> : <></>
+            }
         </div>
     );
 };
 
-export default React.memo(SwiperCarousel);
+export default SwiperCarousel;
+
