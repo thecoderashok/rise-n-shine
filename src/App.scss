@@ -1,3 +1,12 @@
+header {
+    .standard-btn {
+        margin-top: 0 !important;
+        --bg-color: var(--color-red) !important;
+        --hover-bg-color: var(--color-primary) !important;
+        --hover-color: rgb(255, 255, 255);
+    }
+}
+
 .text-center {
     > .sec--title-wrapper {
         align-items: center;
@@ -52,7 +61,7 @@
 .sec--main-title {
     display: inline-block;
     font-size: 1em;
-    font-weight: 700;
+    font-weight: 600;
     line-height: 1;
     margin-bottom: 0.4em;
 }
@@ -433,7 +442,7 @@ ul li::marker {
             top: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.573);
+            background: rgba(0, 0, 0, 0.3);
         }
     }
 
@@ -471,16 +480,16 @@ ul li::marker {
         z-index: 1;
         display: flex;
         flex-direction: column;
-        align-items: center;
 
         .title-text {
-            font-size: 5rem;
-            font-weight: 500;
-            line-height: 1.2;
-            letter-spacing: -0.04em;
+            font-size: 3.2rem;
+            font-weight: 600;
+            line-height: 1;
             color: white;
             margin-bottom: 0;
-            text-align: center;
+            text-transform: uppercase;
+            font-family: var(--alt-font);
+            word-spacing: -0.2em;
 
             .uppercase {
                 text-transform: uppercase;
@@ -491,7 +500,30 @@ ul li::marker {
             }
 
             b {
-                font-weight: 700;
+                font-weight: 600;
+                font-size: 2.5em;
+                margin-left: -0.04em;
+                display: block;
+                // letter-spacing: -0.04em;
+            }
+        }
+    }
+
+    .swiper-slide {
+        &[data-swiper-slide-index="0"] {
+            .content-wrapper {
+                align-items: flex-start;
+                .title-text {
+                    text-align: center;
+                }
+            }
+        }
+        &[data-swiper-slide-index="1"] {
+            .content-wrapper {
+                align-items: flex-end;
+                .title-text {
+                    text-align: left;
+                }
             }
         }
     }
@@ -516,6 +548,106 @@ ul li::marker {
 
     .hero-sec .content-wrapper .title-text {
         font-size: 1.4rem;
+    }
+}
+
+.home-about-sec {
+    background-color: #421542;
+
+    .left-side {
+        position: relative;
+        padding-right: 12px;
+    }
+
+    .title-wraper {
+        position: absolute;
+        max-width: fit-content;
+        padding: 40px;
+        left: 40px;
+        padding-left: 10rem;
+        background-color: var(--color-secondary);
+        border-radius: 8px;
+        top: 50px;
+        z-index: 2;
+
+        .main-title {
+            font-size: 2.5rem;
+            text-align: end;
+            font-weight: 500;
+            color: #ffffff;
+            margin: 0;
+
+            b {
+                font-size: 1.2em;
+                font-weight: 600;
+                color: #ffffff;
+            }
+        }
+    }
+
+    .images-pres {
+        width: 100%;
+        position: relative;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+
+        .img-wrapper {
+            position: relative;
+            width: 48%;
+            overflow: hidden;
+            border-radius: 8px;
+
+            img {
+                display: block;
+                width: 100%;
+                object-fit: cover;
+                object-position: center;
+            }
+
+            &.large {
+                margin-bottom: 80px;
+                aspect-ratio: 1/1.5;
+            }
+            &.small {
+                aspect-ratio: 1/1.5;
+            }
+        }
+    }
+
+    .right-side {
+        padding-left: 40px;
+    }
+
+    .title-text {
+        font-size: 2.2rem;
+        word-spacing: normal;
+        color: white;
+        font-family: var(--primary-font);
+        font-weight: 700;
+
+        .line {
+            line-height: 1;
+        }
+
+        .colored {
+            color: var(--color-secondary);
+            text-transform: uppercase;
+        }
+    }
+
+    .text-wrapper {
+        padding: 40px 0;
+        p {
+            max-width: 500px;
+            color: white;
+        }
+    }
+
+    .standard-btn {
+        --bg-color: var(--color-secondary) !important;
+        --color: rgb(27, 27, 27) !important;
+        --hover-bg-color: var(--color-primary) !important;
     }
 }
 
@@ -769,7 +901,7 @@ ul li::marker {
                     border-radius: 50%;
                     color: white;
                     overflow: hidden;
-                    background-color: var(--color-green);
+                    background-color: var(--color-primary);
                     clip-path: circle(50% at 50% 50%);
                     transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 0.95);
 

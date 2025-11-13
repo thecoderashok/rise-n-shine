@@ -13,6 +13,7 @@ import { GetHeaderMenu } from "../../data/MenuData";
 import { useClassNames } from "../../hook/useClassNames";
 import { useLenis } from "lenis/react";
 import gsap from "gsap";
+import Button from "../Button/Button";
 
 const MainHeader = ({ isTransparent }) => {
     const menuData = useMemo(() => GetHeaderMenu(), []);
@@ -241,8 +242,9 @@ const MainHeader = ({ isTransparent }) => {
             className={computedClassName}
             ref={headerRef}
             data-hidden={isHidden}
+            data-sticky={isSticky}
         >
-            <div className={`container ${styles.header_container}`}>
+            <div className={`container-fluid ${styles.header_container}`}>
                 <div
                     className={`${styles.header_inner} row justify-content-between align-items-center`}
                 >
@@ -292,6 +294,10 @@ const MainHeader = ({ isTransparent }) => {
                                 </ul>
                             </nav>
                         </div>
+                    </div>
+
+                    <div className="col-auto pe-0">
+                        <Button textLable={"Apply Now"}/>
                     </div>
 
                     <div className={classes("col-auto pe-0", styles.menu_btn_wrapper)} data-state={menuOpen ? "opened" : "closed"}>

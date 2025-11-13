@@ -3,34 +3,36 @@ import ParallaxWrapper from '../../../components/Parallax/ParallaxWrapper';
 import Image from '../../../components/Image';
 import SwiperCarousel from '../../../components/Swiper/SwiperCarousel';
 import { SwiperSlide } from 'swiper/react';
+import { useClassNames } from '../../../hook/useClassNames';
 
 const data = [
     {
-        title: "Global Vibes Only!",
+        title: <>World-Class <b>Learning,</b> Limitless You.</>,
         image: "hero-1.jpg"
     },
     {
-        title: "Learning Levelled Up",
+        title: <><b>Skill Up.</b> Stand Out.</>,
         image: "hero-2.jpg"
     },
     {
-        title: "Lead, Don't Follow!",
+        title: <>Turn Your Drive Into <b>Direction.</b></>,
         image: "hero-3.jpg"
     }
 ];
 
 const HeroSec = () => {
+    const classes = useClassNames()
     return (
         <section className="hero-sec">
             <SwiperCarousel
                 slidesPerView={1}
                 spaceBetween={0}
                 speed={1000}
-                autoplay={true}
+                autoplay={false}
                 autoplayDelay={5000}
                 navigationBtns={false}
                 showPagination={false}
-                fadeEffect={true}
+                parallax={true}
                 loop={true}
             >
                 {data.map((slide, index) => (
@@ -50,8 +52,8 @@ const HeroSec = () => {
 
                         <div className="inner-sec">
                             <div className="container">
-                                <div className="content-wrapper">
-                                    <h2 className="title-text">
+                                <div className={classes("content-wrapper")}>
+                                    <h2 className="title-text" data-swiper-parallax="-300">
                                         {slide.title}
                                     </h2>
                                 </div>
