@@ -693,6 +693,10 @@ ul li::marker {
             &.large {
                 margin-bottom: 80px;
                 aspect-ratio: 1/1.5;
+
+                img{
+                    object-position: auto 50%;
+                }
             }
             &.small {
                 aspect-ratio: 1/1.5;

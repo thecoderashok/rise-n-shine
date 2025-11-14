@@ -35,8 +35,8 @@ const HeroSec = () => {
                 slidesPerView={1}
                 spaceBetween={0}
                 speed={1000}
-                autoplay={false}
-                autoplayDelay={5000}
+                autoplay={true}
+                autoplayDelay={3000}
                 navigationBtns={false}
                 showPagination={false}
                 fadeEffect={true}
