@@ -77,6 +77,13 @@ const OurProgramsSec = () => {
                                         <TransitionLink href={`#`} className="img-wrapper">
                                             <Image src={`/images/programmes/${item.image}`} alt={item.title} width={519} height={389} />
                                         </TransitionLink>
+                                        <div className="overlay-wrapper">
+                                            <ul className="modules">
+                                                {item.modules.map((mItem, mIndex) => (
+                                                    <li key={mIndex} style={{"--delay": `${mIndex * 40}ms`}}>{mItem}</li>
+                                                ))}
+                                            </ul>
+                                        </div>
                                         <div className="text-wrapper">
                                             <TransitionLink href={`#`}>
                                                 <h3 className="title-text">{item.title}</h3>

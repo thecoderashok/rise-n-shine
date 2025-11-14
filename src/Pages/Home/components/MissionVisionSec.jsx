@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import SecTitle from '../../../components/SecTitle'
 import Image from '../../../components/Image';
-import gsap from 'gsap';
 
 const MissionVisionSec = () => {
 
@@ -12,43 +11,21 @@ const MissionVisionSec = () => {
 
         const colItems = containerRef.current.querySelectorAll(".col-item");
 
-        colItems.forEach(col => {
-            const para = col.querySelector(".para");
-            if (!para) return;
-
-            para.dataset.fullHeight = para.scrollHeight;
-
-            gsap.set(para, { height: 0 });
-
-            col.addEventListener("mouseenter", () => {
-                gsap.to(para, {
-                    height: para.dataset.fullHeight,
-                    duration: 0.8,
-                    ease: "power3.out",
-                });
-            });
-
-            col.addEventListener("mouseleave", () => {
-                gsap.to(para, {
-                    height: 0,
-                    duration: 0.8,
-                    ease: "power3.out",
-                });
-            });
-        });
-
         const handleResize = () => {
             colItems.forEach(col => {
                 const para = col.querySelector(".para");
-                if (!para) return;
+                const textWrapper = col.querySelector(".text-wrapper");
+                if (!para && !textWrapper) return;
 
-                para.dataset.fullHeight = para.scrollHeight;
+                const paraHeight = para.scrollHeight;
+                const fullHeight = textWrapper.scrollHeight;
 
-                if (parseFloat(para.style.height) > 0) {
-                    gsap.set(para, { height: para.dataset.fullHeight });
-                }
+                textWrapper.style.setProperty("--height", `${paraHeight}px`);
+                textWrapper.style.setProperty("--full-height", `${fullHeight}px`);
             });
         };
+
+        handleResize();
 
         window.addEventListener("resize", handleResize);
 
@@ -88,12 +65,9 @@ const MissionVisionSec = () => {
                         preload="metadata"
                     />
                 </div>
-                {/* <div className="img-wrapper">
-                    <Image src={`/images/hero-banner.jpg`} alt={""} width={1920} height={1080} />
-                </div> */}
                 <div className="col-item">
-
                     <div className="text-wrapper">
+
                         <SecTitle mainTitle={<>Vision</>} reveal={false} />
                         <div className="para">
                             <p>
