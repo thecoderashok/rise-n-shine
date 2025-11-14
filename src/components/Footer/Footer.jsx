@@ -38,7 +38,7 @@ function Footer() {
                                 <div className="footer-logo">
                                     <TransitionLink to={"/"} aria-label="Go to Home Page">
                                         <Image
-                                            src={`/images/logo/logo.png`}
+                                            src={`/images/logo/logo-white.png`}
                                             alt="Footer Logo"
                                             width={60}
                                             height={60}
