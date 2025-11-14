@@ -1,96 +1,97 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import SecTitle from '../../../components/SecTitle'
-import ScrollReveal from '../../../components/ScrollReveal/ScrollReveal';
 import Image from '../../../components/Image';
-import ParallaxWrapper from '../../../components/Parallax/ParallaxWrapper';
+import gsap from 'gsap';
 
-const data = [
-    {
-        title: "Our Mission",
-        desc: (
-            <>
-                <p>To empower learners with future-ready skills through industry-focused education that blends academic excellence with hands-on experience.</p>
-                <p>Based in Dubai's global hub, we offer dynamic certification programmes, expert mentorship, and real-world exposure, shaping bold thinkers and agile professionals prepared to lead in a fast-changing world. We don't just teach. We transform potential into performance.</p>
-            </>
-        ),
-        icon: "/icons/mission.png",
-    },
-    {
-        title: "Our Vision",
-        desc: (
-            <>
-                <p>
-                    To be a globally recognised institute that redefines professional education by shaping bold thinkers, agile leaders, and future-ready professionals who rise to shine in every corner of the world.
-                </p>
-            </>
-        ),
-        icon: "/icons/vision.png",
-    },
-];
 
 const MissionVisionSec = () => {
 
     const containerRef = useRef(null);
 
+    useEffect(() => {
+        if (!containerRef.current) return;
+
+        const colItems = containerRef.current.querySelectorAll(".col-item");
+
+        colItems.forEach(col => {
+            const para = col.querySelector(".para");
+            if (!para) return;
+
+            para.dataset.fullHeight = para.scrollHeight;
+
+            gsap.set(para, { height: 0 });
+
+            col.addEventListener("mouseenter", () => {
+                gsap.to(para, {
+                    height: para.dataset.fullHeight,
+                    duration: 0.8,
+                    ease: "power3.out",
+                });
+            });
+
+            col.addEventListener("mouseleave", () => {
+                gsap.to(para, {
+                    height: 0,
+                    duration: 0.8,
+                    ease: "power3.out",
+                });
+            });
+        });
+
+        const handleResize = () => {
+            colItems.forEach(col => {
+                const para = col.querySelector(".para");
+                if (!para) return;
+
+                para.dataset.fullHeight = para.scrollHeight;
+
+                if (parseFloat(para.style.height) > 0) {
+                    gsap.set(para, { height: para.dataset.fullHeight });
+                }
+            });
+        };
+
+        window.addEventListener("resize", handleResize);
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+
+    }, []);
+
+
     return (
         <section className="mission-and-vision-sec">
-            <div className="top-sec">
-                <ParallaxWrapper offset={15}>
-                    <div className="image-wrapper">
-                        <Image
-                            src={`/images/mission-bg.jpg`}
-                            alt={""}
-                            title={""}
-                            width={1920}
-                            height={1080}
-                            priority={true}
-                        />
+            <div className="cols" ref={containerRef}>
+                <div className="col-item">
+                    <div className="img-wrapper">
+                        <Image src={`/images/hero-banner.jpg`} alt={""} width={1920} height={1080} />
                     </div>
-                </ParallaxWrapper>
 
-                <div className="container">
-                    <div className="row">
-                        <div className="col-12 text-center">
-                            <SecTitle
-                                mainTitle={<>Vision That Inspires, <br /> Mission That Empowers</>}
-                                revealLetters={true}
-                            />
+                    <div className="text-wrapper">
+                        <SecTitle mainTitle={"Our Vision"} reveal={false} />
+                        <div className="para">
+                            <p>
+                                To be a globally recognised institute that redefines professional education by shaping bold thinkers, agile leaders, and future-ready professionals who rise to shine in every corner of the world.
+                            </p>
                         </div>
                     </div>
                 </div>
-            </div>
+                <div className="center-logo">
+                    <Image src={"/images/logo/rise-n-shine-icon.png"} width={400} height={400} alt='logo' />
 
-            <div className="inner-sec">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-12">
-                            <div className="our-mission-grid" ref={containerRef}>
-                                {data.map((item, index) => (
-                                    <ScrollReveal
-                                        key={index}
-                                        direction="fade-up"
-                                        triggerRef={containerRef}
-                                        delay={index * 0.1 + 0.4}
-                                    >
-                                        <div className="card-item">
-                                            <div className="icon-wrapper">
-                                                <div
-                                                    className="icon"
-                                                    style={{
-                                                        maskImage: `url(${item.icon})`,
-                                                        WebkitMaskImage: `url(${item.icon})`,
-                                                    }}
-                                                ></div>
-                                            </div>
+                </div>
+                <div className="col-item">
+                    <div className="img-wrapper">
+                        <Image src={`/images/hero-banner.jpg`} alt={""} width={1920} height={1080} />
+                    </div>
 
-                                            <div className="text-content">
-                                                <h3 className="title-text">{item.title}</h3>
-                                                {item.desc}
-                                            </div>
-                                        </div>
-                                    </ScrollReveal>
-                                ))}
-                            </div>
+                    <div className="text-wrapper">
+                        <SecTitle mainTitle={"Our Mission"} reveal={false} />
+
+                        <div className="para">
+                            <p>To empower learners with future-ready skills through industry-focused education that blends academic excellence with hands-on experience.</p>
+                            <p>Based in Dubai's global hub, we offer dynamic certification programmes, expert mentorship, and real-world exposure, shaping bold thinkers and agile professionals prepared to lead in a fast-changing world. We don't just teach. We transform potential into performance.</p>
                         </div>
                     </div>
                 </div>

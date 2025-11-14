@@ -1,0 +1,122 @@
+.mission-and-vision-sec {
+    padding: 0;
+
+    .top-sec {
+        position: relative;
+        width: 100%;
+        height: 60vh;
+        max-height: 600px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        .parallax-container {
+            position: absolute;
+        }
+    }
+
+    .sec--main-title {
+        z-index: 4;
+        font-weight: 600;
+        color: white;
+    }
+
+    .inner-sec {
+        position: relative;
+        margin-top: -150px;
+        padding: 0 var(--content-padding-x);
+        padding-bottom: 100px;
+    }
+
+    .our-mission-grid {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        --grid-view: 2;
+        --col-gap: 20px;
+        gap: var(--col-gap);
+
+        .card-item {
+            width: calc(calc(100% - (var(--grid-view) - 1) * var(--col-gap)) / var(--grid-view));
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 40px;
+            background-color: #f0e5f0;
+            border-radius: 14px;
+
+            .icon-wrapper {
+                position: relative;
+                flex-shrink: 0;
+                width: 80px;
+                height: 80px;
+                background-color: transparent;
+                border-radius: 50%;
+                margin-bottom: 20px;
+                transition: background-color 0.3s ease;
+
+                .icon {
+                    position: absolute;
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    background: var(--color-primary);
+                    left: 50%;
+                    top: 50%;
+                    transform: translate3d(-50%, -50%, 0);
+                    mask-size: contain;
+                    mask-repeat: no-repeat;
+                    mask-position: center;
+                }
+            }
+
+            .text-content {
+                .title-text {
+                    font-size: 1.6rem;
+                    font-weight: 700;
+                    font-family: var(--primary-font);
+                    margin-bottom: 15px;
+                    color: var(--color-primary);
+                }
+
+                p {
+                    font-size: 0.95rem;
+                    font-weight: 400;
+                    color: black;
+
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+                }
+            }
+
+            &:last-child {
+                background-color: #642165;
+
+                .icon-wrapper {
+                    .icon {
+                        background-color: white;
+                    }
+                }
+                .text-content {
+                    .title-text {
+                        color: white;
+                    }
+                    p {
+                        color: rgb(241, 241, 241);
+                    }
+                }
+            }
+        }
+    }
+}
