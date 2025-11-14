@@ -9,16 +9,43 @@ const data = [
         title: <>Marketing and Sales Management Professional Development Programme</>,
         desc: "",
         image: "marketing.jpg",
+        modules: [
+            "Principals of Marketing",
+            "Digital Marketing",
+            "Sales & Marketing",
+            "Key Account Management",
+            "Banking",
+            "Real Estate Marketing",
+            "FMCG",
+            "Market Research"
+        ]
     },
     {
-        title: <>Finance Management Professional Development Programme</>,
+        title: <>Professional Marketing Management Development Program - Advanced Level 1</>,
         desc: "",
         image: "finance-management.jpg",
+        modules: [
+            "Sales & Distribution Management",
+            "Marketing of Financial Services",
+            "AI - Driven Digital Marketing",
+            "MarTech & Marketing Automation Tools",
+            "Retail Management & Digital Commerce",
+            "Organisational Marketing",
+            "Digital Storytelling"
+        ]
     },
     {
-        title: <>Digital Storytelling Programme</>,
+        title: <>Professional Marketing Management Development Program - Advanced Level 2 </>,
         desc: "",
         image: "story-telling.jpg",
+        modules: [
+            "Marketing Management",
+            "Phygital Consumer Behavior",
+            "Technology & AI",
+            "Services Marketing",
+            "Growth Hacking and Performance Marketing",
+            "Market Research and Analytics"
+        ]
     },
 ];
 

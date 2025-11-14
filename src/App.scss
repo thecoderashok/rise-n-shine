@@ -481,7 +481,7 @@ ul li::marker {
         position: absolute;
         right: 8%;
         bottom: 0;
-        width: 68vh;
+        width: 65vh;
         max-width: 1200px;
         transform: translateX(120px) translateZ(0);
         opacity: 0;
@@ -571,7 +571,7 @@ ul li::marker {
             .object-wrapper {
                 right: auto;
                 left: 8%;
-                width: 85vh;
+                width: 82vh;
                 transform: translateX(-120px) translateZ(0);
             }
             .content-wrapper {
@@ -1107,7 +1107,7 @@ ul li::marker {
         .col-item {
             position: relative;
             width: calc(100% / 4);
-            height: 80vh;
+            min-height: 80vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -1148,7 +1148,8 @@ ul li::marker {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                margin-top: 25rem;
+                padding-top: 30rem;
+                padding-bottom: 6rem;
             }
 
             .icon-wrapper {
