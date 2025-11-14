@@ -3,7 +3,6 @@ import SecTitle from '../../../components/SecTitle'
 import Image from '../../../components/Image';
 import gsap from 'gsap';
 
-
 const MissionVisionSec = () => {
 
     const containerRef = useRef(null);
@@ -59,17 +58,12 @@ const MissionVisionSec = () => {
 
     }, []);
 
-
     return (
-        <section className="mission-and-vision-sec">
-            <div className="cols" ref={containerRef}>
+        <section className="mission-and-vision-sec" ref={containerRef}>
+            <div className="cols">
                 <div className="col-item">
-                    <div className="img-wrapper">
-                        <Image src={`/images/hero-banner.jpg`} alt={""} width={1920} height={1080} />
-                    </div>
-
                     <div className="text-wrapper">
-                        <SecTitle mainTitle={"Our Vision"} reveal={false} />
+                        <SecTitle mainTitle={<>Our <br /> Vision</>} reveal={false} />
                         <div className="para">
                             <p>
                                 To be a globally recognised institute that redefines professional education by shaping bold thinkers, agile leaders, and future-ready professionals who rise to shine in every corner of the world.
@@ -79,12 +73,24 @@ const MissionVisionSec = () => {
                 </div>
                 <div className="center-logo">
                     <Image src={"/images/logo/rise-n-shine-icon.png"} width={400} height={400} alt='logo' />
-
                 </div>
+                <div className="video-wrapper">
+                    <video
+                        src={"/video/video-bg-1.mp4"}
+                        controls={false}
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        className="video"
+                        loading="eager"
+                        preload="metadata"
+                    />
+                </div>
+                {/* <div className="img-wrapper">
+                    <Image src={`/images/hero-banner.jpg`} alt={""} width={1920} height={1080} />
+                </div> */}
                 <div className="col-item">
-                    <div className="img-wrapper">
-                        <Image src={`/images/hero-banner.jpg`} alt={""} width={1920} height={1080} />
-                    </div>
 
                     <div className="text-wrapper">
                         <SecTitle mainTitle={"Our Mission"} reveal={false} />
