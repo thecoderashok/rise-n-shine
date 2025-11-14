@@ -25,18 +25,17 @@ header {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    font-size: 3.2rem;
+    font-size: 3.5rem;
     line-height: normal;
 }
 
 .sec--sub-title {
     position: relative;
     display: inline-block;
-    font-size: 0.35em;
-    font-weight: 700;
+    font-size: 0.6em;
+    font-weight: 600;
     vertical-align: middle;
-    margin-bottom: 0.1em;
-    text-transform: uppercase;
+    margin-bottom: 0;
     // color: var(--color-primary);
     color: var(--color-secondary);
     max-width: fit-content;
@@ -64,6 +63,10 @@ header {
     font-weight: 700;
     line-height: 1;
     margin-bottom: 0.4em;
+
+    .line {
+        line-height: 0.9;
+    }
 }
 
 // .sec--main-title>.line.last-line .char:last-child {
@@ -652,13 +655,15 @@ ul li::marker {
 
         .main-title {
             font-size: 2.5rem;
-            font-weight: 500;
+            font-weight: 600;
+            letter-spacing: -0.03em;
             color: rgba(255, 255, 255, 0.5);
             margin: 0;
 
             b {
+                letter-spacing: normal;
                 font-size: 1.2em;
-                font-weight: 600;
+                font-weight: 700;
                 color: #ffffff;
             }
         }
@@ -741,7 +746,8 @@ ul li::marker {
         top: 50%;
         transform: translate(-50%, -50%);
         z-index: 9;
-        width: 380px;
+        width: 300px;
+        pointer-events: none !important;
 
         img {
             width: 100%;
@@ -753,6 +759,7 @@ ul li::marker {
         position: relative;
         height: 100%;
         display: flex;
+        align-items: center;
 
         .img-wrapper {
             position: absolute;
@@ -832,11 +839,14 @@ ul li::marker {
 
                 .text-wrapper {
                     padding: 0 0 0 5rem;
+                }
+            }
 
-                    .sec--title-wrapper {
-                        align-items: flex-end;
+            &:hover {
+                .text-wrapper {
+                    .sec--main-title {
+                        transform: translateZ(0) scale(1);
                     }
-                    --text-align: right;
                 }
             }
 
@@ -845,23 +855,28 @@ ul li::marker {
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
-                padding: 0  5rem 0 0;
+                padding: 0 5rem 0 0;
                 width: 60%;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 --text-align: left;
-                gap: 40px;
                 z-index: 2;
+
+                .sec--title-wrapper {
+                    align-items: center;
+                }
 
                 .sec--main-title {
                     position: relative;
                     text-transform: uppercase;
                     color: white;
-                    font-size: 5rem;
-                    text-align: var(--text-align);
+                    font-size: 3.8rem;
+                    letter-spacing: -0.045em;
+                    text-align: center;
                     margin: 0;
-                    transform: translateZ(0);
+                    transform: translateZ(0) scale(1.2);
+                    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 
                     .line {
                         line-height: 0.9;
@@ -878,9 +893,13 @@ ul li::marker {
 
                 p {
                     color: white;
-                    font-size: 1.25rem;
+                    font-size: 1.2rem;
                     font-weight: 500;
-                    text-align: var(--text-align);
+                    text-align: justify;
+
+                    &:first-child {
+                        margin-top: 40px;
+                    }
                 }
             }
         }
@@ -907,6 +926,7 @@ ul li::marker {
             border-radius: 12px;
             background-color: white;
             overflow: hidden;
+            cursor: pointer;
 
             &::after {
                 content: "";
@@ -916,7 +936,8 @@ ul li::marker {
                 width: 100%;
                 height: 100%;
                 pointer-events: none;
-                background: linear-gradient(179deg, rgba(0, 0, 0, 0) 30%, #220822 100%);
+                background: #2208228e;
+                // background: linear-gradient(179deg, rgba(0, 0, 0, 0) 30%, #220822 100%);
                 // background: linear-gradient(179deg, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0.925) 100%);
             }
 
@@ -947,6 +968,7 @@ ul li::marker {
             }
 
             .text-wrapper {
+                height: 100%;
                 position: absolute;
                 width: 100%;
                 display: flex;
@@ -955,9 +977,9 @@ ul li::marker {
                 z-index: 2;
 
                 .title-text {
-                    width: 100%;
-                    font-size: 1.2rem;
-                    font-weight: 700;
+                    width: 80%;
+                    font-size: 2rem;
+                    font-weight: 500;
                     margin-bottom: 0;
                     transition: color 0.5s ease;
                     color: white;
@@ -996,7 +1018,7 @@ ul li::marker {
                 font-size: 0.82rem;
                 font-weight: 600;
                 text-transform: uppercase;
-                margin-top: 20px;
+                margin-top: auto;
                 border-radius: 100px;
                 background-color: transparent;
                 color: #363636;
@@ -1057,16 +1079,100 @@ ul li::marker {
 }
 
 .home-whyus-sec {
-    // .page-text-content {
-    //     .img-wrapper {
-    //         img {
-    //             aspect-ratio: 1/1;
-    //         }
-    //     }
-    // }
+    padding: 0;
+
+    .cols-row {
+        display: flex;
+        margin-top: 40px;
+
+        .col-item {
+            position: relative;
+            width: calc(100% / 4);
+            height: 50vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            &::after {
+                content: "";
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+                background-color: rgba(0, 0, 0, 0.527);
+                transition: background-color 0.5s ease;
+            }
+
+            img {
+                position: absolute;
+                left: 0;
+                top: 0;
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+                object-position: center;
+            }
+
+            .icon-wrapper {
+                position: relative;
+                flex-shrink: 0;
+                width: 90px;
+                height: 90px;
+                border-radius: 50%;
+                transition: background-color 0.3s ease;
+                z-index: 2;
+                // display: none;
+
+                .icon {
+                    position: absolute;
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    background: white;
+                    left: 50%;
+                    top: 50%;
+                    transform: translate3d(-50%, -50%, 0);
+                    mask-size: contain;
+                    -webkit-mask-size: contain;
+                    mask-repeat: no-repeat;
+                    -webkit-mask-repeat: no-repeat;
+                    mask-position: center;
+                    -webkit-mask-position: center;
+                    /* transition: transform 0.8s cubic-bezier(0.33, 1, 0.68, 1); */
+                }
+            }
+
+            .text-content {
+                position: relative;
+                margin-top: 30px;
+                z-index: 2;
+
+                .title-text {
+                    font-size: 1.5rem;
+                    font-weight: 600;
+                    font-family: var(--primary-font);
+                    margin-bottom: 0;
+                    text-align: center;
+                    color: #ffffff;
+                }
+
+                p {
+                    font-size: 0.95rem;
+                    font-weight: 400;
+                    color: black;
+                    margin: 0;
+                }
+            }
+        }
+    }
+
     .content-wrapper {
         margin-top: 20px;
     }
+
     .why-us-list {
         position: relative;
         display: flex;

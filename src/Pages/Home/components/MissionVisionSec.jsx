@@ -63,13 +63,14 @@ const MissionVisionSec = () => {
             <div className="cols">
                 <div className="col-item">
                     <div className="text-wrapper">
-                        <SecTitle mainTitle={<>Our <br /> Vision</>} reveal={false} />
+                        <SecTitle mainTitle={"Mission"} reveal={false} />
+
                         <div className="para">
-                            <p>
-                                To be a globally recognised institute that redefines professional education by shaping bold thinkers, agile leaders, and future-ready professionals who rise to shine in every corner of the world.
-                            </p>
+                            <p>To empower learners with future-ready skills through industry-focused education that blends academic excellence with hands-on experience.</p>
+                            <p>Based in Dubai's global hub, we offer dynamic certification programmes, expert mentorship, and real-world exposure, shaping bold thinkers and agile professionals prepared to lead in a fast-changing world. We don't just teach. We transform potential into performance.</p>
                         </div>
                     </div>
+
                 </div>
                 <div className="center-logo">
                     <Image src={"/images/logo/rise-n-shine-icon.png"} width={400} height={400} alt='logo' />
@@ -93,11 +94,11 @@ const MissionVisionSec = () => {
                 <div className="col-item">
 
                     <div className="text-wrapper">
-                        <SecTitle mainTitle={"Our Mission"} reveal={false} />
-
+                        <SecTitle mainTitle={<>Vision</>} reveal={false} />
                         <div className="para">
-                            <p>To empower learners with future-ready skills through industry-focused education that blends academic excellence with hands-on experience.</p>
-                            <p>Based in Dubai's global hub, we offer dynamic certification programmes, expert mentorship, and real-world exposure, shaping bold thinkers and agile professionals prepared to lead in a fast-changing world. We don't just teach. We transform potential into performance.</p>
+                            <p>
+                                To be a globally recognised institute that redefines professional education by shaping bold thinkers, agile leaders, and future-ready professionals who rise to shine in every corner of the world.
+                            </p>
                         </div>
                     </div>
                 </div>

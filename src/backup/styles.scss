@@ -120,3 +120,101 @@
         }
     }
 }
+
+
+.home-whyus-sec {
+    // .page-text-content {
+    //     .img-wrapper {
+    //         img {
+    //             aspect-ratio: 1/1;
+    //         }
+    //     }
+    // }
+    .content-wrapper {
+        margin-top: 20px;
+    }
+    .why-us-list {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 20px;
+        --grid-view: 2;
+        --col-gap: 12px;
+        gap: var(--col-gap);
+
+        .card-item {
+            width: calc(calc(100% - (var(--grid-view) - 1) * var(--col-gap)) / var(--grid-view));
+            display: flex;
+            align-items: flex-start;
+            align-items: center;
+            gap: 10px;
+            border-radius: 10px;
+            padding: 10px;
+            background-color: #f0e5f0;
+
+            .icon-wrapper {
+                position: relative;
+                flex-shrink: 0;
+                width: 80px;
+                height: 80px;
+                border-radius: 50%;
+                transition: background-color 0.3s ease;
+
+                .icon {
+                    position: absolute;
+                    display: block;
+                    width: 80%;
+                    height: 80%;
+                    background: var(--color-primary);
+                    left: 50%;
+                    top: 50%;
+                    transform: translate3d(-50%, -50%, 0);
+                    mask-size: contain;
+                    -webkit-mask-size: contain;
+                    mask-repeat: no-repeat;
+                    -webkit-mask-repeat: no-repeat;
+                    mask-position: center;
+                    -webkit-mask-position: center;
+                    /* transition: transform 0.8s cubic-bezier(0.33, 1, 0.68, 1); */
+                }
+            }
+
+            .text-content {
+                .title-text {
+                    font-size: 1rem;
+                    font-weight: 600;
+                    font-family: var(--primary-font);
+                    margin-bottom: 0;
+                    color: #642165;
+                }
+
+                p {
+                    font-size: 0.95rem;
+                    font-weight: 400;
+                    color: black;
+                    margin: 0;
+                }
+            }
+
+            &:nth-child(1),
+            &:nth-child(4) {
+                background-color: #642165;
+
+                .icon-wrapper {
+                    .icon {
+                        background-color: white;
+                    }
+                }
+                .text-content {
+                    .title-text {
+                        color: white;
+                    }
+                    p {
+                        color: rgb(241, 241, 241);
+                    }
+                }
+            }
+        }
+    }
+}
