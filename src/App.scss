@@ -862,19 +862,19 @@ ul li::marker {
                 overflow: hidden;
 
                 .sec--title-wrapper {
+                    position: relative;
                     align-items: center;
+                    transform: translateY(calc(var(--full-height) / 2 - 50%)) translateZ(0) scale(1.2);
+                    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
                 }
 
                 .sec--main-title {
-                    position: relative;
                     text-transform: uppercase;
                     color: white;
                     font-size: 3.8rem;
                     letter-spacing: -0.045em;
                     text-align: center;
                     margin: 0;
-                    transform: translateY(calc(var(--full-height) / 2)) translateZ(0) scale(1.2);
-                    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 
                     .line {
                         line-height: 0.9;
@@ -907,7 +907,7 @@ ul li::marker {
 
             &:hover {
                 .text-wrapper {
-                    .sec--main-title {
+                    .sec--title-wrapper {
                         transform: translateZ(0) scale(1);
                     }
                     .para {
@@ -926,7 +926,7 @@ ul li::marker {
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
-        margin: 30px 0;
+        margin-top: 50px;
         --grid-view: 3;
         --col-gap: 20px;
         gap: var(--col-gap);
@@ -953,8 +953,6 @@ ul li::marker {
                 background-color: #2208228e;
                 backdrop-filter: blur(0);
                 transition: all 0.8s ease 0.4s;
-                // background: linear-gradient(179deg, rgba(0, 0, 0, 0) 30%, #220822 100%);
-                // background: linear-gradient(179deg, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0.925) 100%);
             }
 
             .img-wrapper {
@@ -1287,12 +1285,20 @@ ul li::marker {
 }
 
 .admission-sec {
+    background: #270A27;
+    color: #f6edf8;
+
+    .sec--main-title {
+        color: #fdf7ff;
+    }
+
     .sec-desc {
         font-size: 1rem;
         line-height: 1.7;
+        color: #e9d7ef;
     }
 
-    .left-side{
+    .left-side {
         padding-right: 40px;
     }
 
@@ -1304,9 +1310,9 @@ ul li::marker {
     }
 
     .admission-action-btn {
-        border: 1px solid #e6d3a4;
-        background: #fff8eb;
-        color: #3d2d3d;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        background: rgba(255, 255, 255, 0.08);
+        color: #f9f2fb;
         border-radius: 999px;
         padding: 12px 30px;
         font-weight: 700;
@@ -1318,9 +1324,10 @@ ul li::marker {
         gap: 10px;
 
         &:hover {
-            background: var(--color-primary);
-            border-color: var(--color-primary);
-            color: #ffffff;
+            background: var(--color-secondary);
+            border-color: var(--color-secondary);
+            color: #1c061c;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
         }
 
         .icon {
@@ -1338,15 +1345,14 @@ ul li::marker {
 
         &:hover {
             .icon {
-                color: #ffffff;
+                color: #1c061c;
             }
         }
     }
 
     .admission-form-card {
-        background: #ffffff;
         border-radius: 14px;
-        border: 1px solid #efe6f3;
+        border: 1px solid rgba(255, 255, 255, 0.08);
         overflow: hidden;
     }
 
@@ -1372,34 +1378,36 @@ ul li::marker {
                 height: 10px;
                 border-radius: 50%;
                 background-color: var(--color-secondary);
-                box-shadow: 0 0 0 6px rgba(212, 168, 80, 0.2);
+                box-shadow: 0 0 0 6px rgba(212, 168, 80, 0.24);
             }
         }
     }
 
     .admission-form {
-        padding: clamp(22px, 3vw, 32px);
+        position: relative;
+        padding: 32px;
         background: #ffffff;
+        color: #2f1a33;
 
         .form-label {
             font-size: 0.9rem;
             font-weight: 600;
-            color: #3d2d3d;
+            color: #3b1f3e;
         }
 
         .form-control,
         .form-select {
             min-height: 52px;
             border-radius: 10px;
-            border: 1.4px solid #e6dde8;
-            background: #ffffff;
-            font-size: 0.95rem;
+            border: 1px solid #d4c4df;
+            font-size: 0.9rem;
             transition: all 0.2s ease;
-            color: #3d2d3d;
+            color: #2f1a33;
+            box-shadow: none !important;
 
             &:focus {
-                border-color: var(--color-primary);
-                box-shadow: 0 0 0 3px rgba(100, 33, 101, 0.13);
+                border-color: var(--color-secondary);
+                background: #fffdf8;
             }
         }
 
@@ -1412,8 +1420,8 @@ ul li::marker {
         }
 
         .iti__flag-container {
-            border-right: 1px solid #e6dde8;
-            background-color: #f9f6fc;
+            border-right: 1px solid #d4c4df;
+            background-color: #f3ecfa;
             border-radius: 10px 0 0 10px;
         }
 
@@ -1426,7 +1434,7 @@ ul li::marker {
             --bg-color: var(--color-red);
             --color: #ffffff;
             --hover-bg-color: var(--color-primary);
-            --hover-color: #ffffff;
+            --hover-color: white;
         }
     }
 
@@ -1456,23 +1464,15 @@ ul li::marker {
 .gallery-sec {
     position: relative;
     padding: var(--content-padding-y) 0;
-    // background: #0f0611;
-    background: #270A27;
+    background: #f5f2ec;
 
     .gallery-header {
         padding: 0 var(--content-padding-x);
         margin-bottom: 50px;
-
-        .sec--main-title{
-            color: #ffffff;
-        }
-        .sec--sub-title{
-            color: rgba(255, 255, 255, 0.4);
-        }
     }
 
     .slide-buttons {
-        display: inline-flex;
+        display: flex;
         align-items: center;
         gap: 12px;
 
@@ -1483,11 +1483,11 @@ ul li::marker {
             border-radius: 50%;
             border: none;
             font-size: 1.2rem;
-            background: rgba(255, 255, 255, 0.08);
+            background: var(--color-primary);
             backdrop-filter: blur(8px);
             transition: all 0.3s ease;
             overflow: hidden;
-            
+
             &::before {
                 content: "";
                 position: absolute;
@@ -1512,8 +1512,8 @@ ul li::marker {
             }
 
             &:hover {
-                background: rgba(212, 168, 80, 0.2);
-                
+                background: var(--color-secondary);
+
                 &::before {
                     transform: scale(1);
                 }
@@ -1545,9 +1545,8 @@ ul li::marker {
         position: relative;
         overflow: hidden;
         border-radius: 14px;
-        background: #120612;
+        background: #ffffff;
         height: 100%;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
         transform: translateZ(0);
 
         .img-wrapper {
@@ -1571,29 +1570,21 @@ ul li::marker {
             display: flex;
             align-items: flex-end;
             padding: 26px;
-            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.65) 100%);
+            background: linear-gradient(180deg, rgba(12, 6, 17, 0) 35%, rgba(12, 6, 17, 0.55) 100%);
 
             .label {
                 display: inline-flex;
                 align-items: center;
+                font-size: 0.9rem;
                 gap: 10px;
-                padding: 10px 16px;
+                padding: 8px 20px;
                 border-radius: 999px;
-                background: rgba(255, 255, 255, 0.14);
+                background: rgba(0, 0, 0, 0.363);
                 color: #ffffff;
                 font-weight: 600;
                 letter-spacing: -0.01em;
-                border: 1px solid rgba(255, 255, 255, 0.25);
-                backdrop-filter: blur(6px);
-
-                &::after {
-                    content: "";
-                    width: 8px;
-                    height: 8px;
-                    border-radius: 50%;
-                    background: var(--color-secondary);
-                    box-shadow: 0 0 0 6px rgba(212, 168, 80, 0.25);
-                }
+                border: 1px solid rgba(255, 255, 255, 0.288);
+                backdrop-filter: blur(4px);
             }
         }
 

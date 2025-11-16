@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useLayoutEffect, useRef } from 'react'
 import SecTitle from '../../../components/SecTitle'
 import Image from '../../../components/Image';
 
@@ -6,31 +6,48 @@ const MissionVisionSec = () => {
 
     const containerRef = useRef(null);
 
-    useEffect(() => {
-        if (!containerRef.current) return;
+    useLayoutEffect(() => {
+        const containerEl = containerRef.current;
+        if (!containerEl) return undefined;
 
-        const colItems = containerRef.current.querySelectorAll(".col-item");
-
-        const handleResize = () => {
+        const measureHeights = () => {
+            const colItems = containerEl.querySelectorAll(".col-item");
             colItems.forEach(col => {
                 const para = col.querySelector(".para");
                 const textWrapper = col.querySelector(".text-wrapper");
-                if (!para && !textWrapper) return;
+                if (!para || !textWrapper) return;
 
-                const paraHeight = para.scrollHeight;
-                const fullHeight = textWrapper.scrollHeight;
+                const paraHeight = para.offsetHeight;
+                const fullHeight = textWrapper.offsetHeight;
 
                 textWrapper.style.setProperty("--height", `${paraHeight}px`);
                 textWrapper.style.setProperty("--full-height", `${fullHeight}px`);
             });
         };
 
+        const handleResize = () => {
+            window.requestAnimationFrame(measureHeights);
+        };
+
         handleResize();
 
         window.addEventListener("resize", handleResize);
 
+        const resizeObserver = typeof ResizeObserver !== "undefined" ? new ResizeObserver(handleResize) : null;
+        if (resizeObserver) {
+            resizeObserver.observe(containerEl);
+            containerEl.querySelectorAll(".text-wrapper, .para").forEach(el => resizeObserver.observe(el));
+        }
+
+        if (document.fonts?.ready) {
+            document.fonts.ready.then(handleResize).catch(() => { });
+        }
+
         return () => {
             window.removeEventListener("resize", handleResize);
+            if (resizeObserver) {
+                resizeObserver.disconnect();
+            }
         };
 
     }, []);
