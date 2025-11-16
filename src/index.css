@@ -18,7 +18,7 @@
 
 
    --content-padding-x: 60px;
-   --content-padding-y: 90px;
+   --content-padding-y: 110px;
 
    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
    --ease-in-expo: cubic-bezier(0.7, 0, 0.84, 0);
@@ -224,21 +224,21 @@ section.sec-offwhite {
 @media screen and (max-width: 1580px) {
    :root {
       --content-padding-x: 60px;
-      --content-padding-y: 80px;
+      --content-padding-y: 100px;
    }
 }
 
 @media screen and (max-width: 1200px) {
    :root {
       --content-padding-x: 15px;
-      --content-padding-y: 80px;
+      --content-padding-y: 90px;
    }
 }
 
 @media screen and (max-width: 992px) {
    :root {
       --content-padding-x: 8px;
-      --content-padding-y: 50px;
+      --content-padding-y: 70px;
    }
 }
 

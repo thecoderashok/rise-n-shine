@@ -25,7 +25,7 @@ const GallerySec = () => {
                     <div className="row align-items-center">
                         <div className="col-lg-6">
                             <SecTitle
-                                subTitle={"Gallery"}
+                                subTitle={"Campus Life"}
                                 mainTitle={<>Inside Rise N Shine</>}
                                 revealLetters={true}
                             />
