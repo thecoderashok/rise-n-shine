@@ -71,9 +71,9 @@ const AdmissionSec = () => {
                             <div className="admission-form-card">
                                 <div className="admission-form-head">
                                     <span className="eyebrow">Enquire now</span>
-                                    <span className="indicator" aria-hidden="true">
+                                    {/* <span className="indicator" aria-hidden="true">
                                         <span className="dot" />
-                                    </span>
+                                    </span> */}
                                 </div>
 
                                 <form className="admission-form needs-validation" onSubmit={handleSubmit} noValidate>

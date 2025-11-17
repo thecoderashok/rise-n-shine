@@ -23,14 +23,14 @@ const GallerySec = () => {
             <div className="gallery-header">
                 <div className="container">
                     <div className="row align-items-center">
-                        <div className="col-lg-6">
+                        <div className="col-md-6">
                             <SecTitle
                                 subTitle={"Campus Life"}
                                 mainTitle={<>Inside Rise N Shine</>}
                                 revealLetters={true}
                             />
                         </div>
-                        <div className="col-lg-6 text-lg-end d-flex justify-content-lg-end justify-content-start">
+                        <div className="col-md-6 text-md-end d-flex justify-content-md-end justify-content-start">
                             <div className="slide-buttons">
                                 <button type="button" ref={navPrevRef} className="gallery-nav prev" aria-label="Previous slide" />
                                 <button type="button" ref={navNextRef} className="gallery-nav next" aria-label="Next slide" />
@@ -49,8 +49,9 @@ const GallerySec = () => {
                     navigationBtns={false}
                     pagination={false}
                     breakpoints={{
-                        576: { slidesPerView: 1.6 },
-                        768: { slidesPerView: 3 },
+                        0: { slidesPerView: 1.6 },
+                        576: { slidesPerView: 2 },
+                        991: { slidesPerView: 3 },
                         1200: { slidesPerView: 4 },
                     }}
                     onBeforeInit={(swiper) => {

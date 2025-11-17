@@ -1,8 +1,9 @@
-import React, { useRef } from 'react'
-import SecTitle from '../../../components/SecTitle'
-import ScrollReveal from '../../../components/ScrollReveal/ScrollReveal';
+import React from 'react';
+import SecTitle from '../../../components/SecTitle';
 import TransitionLink from '../../../components/TransitionLink';
 import Image from '../../../components/Image';
+import SwiperCarousel from '../../../components/Swiper/SwiperCarousel';
+import { SwiperSlide } from 'swiper/react';
 
 const data = [
     {
@@ -50,9 +51,6 @@ const data = [
 ];
 
 const OurProgramsSec = () => {
-
-    const containerRef = useRef(null);
-
     return (
         <section className="programs-sec sec-gray">
             <div className="container-fluid">
@@ -65,46 +63,52 @@ const OurProgramsSec = () => {
                         />
                     </div>
                     <div className="col-12">
-                        <div className="programs-list" ref={containerRef}>
-                            {data.map((item, index) => (
-                                <ScrollReveal
-                                    key={index}
-                                    direction="fade-up"
-                                    triggerRef={containerRef}
-                                    delay={(index * 0.1) + 0.4}
-                                >
-                                    <div className="program-card">
-                                        <TransitionLink href={`#`} className="img-wrapper">
-                                            <Image src={`/images/programmes/${item.image}`} alt={item.title} width={519} height={389} />
-                                        </TransitionLink>
-                                        <div className="overlay-wrapper">
-                                            <ul className="modules">
-                                                {item.modules.map((mItem, mIndex) => (
-                                                    <li key={mIndex} style={{"--delay": `${mIndex * 40}ms`}}>{mItem}</li>
-                                                ))}
-                                            </ul>
-                                        </div>
-                                        <div className="text-wrapper">
-                                            <TransitionLink href={`#`}>
-                                                <h3 className="title-text">{item.title}</h3>
+                        <div className="programs-list">
+                            <SwiperCarousel
+                                slidesPerView={1}
+                                spaceBetween={20}
+                                navigationBtns
+                                breakpoints={{
+                                    575: { slidesPerView: 1 },
+                                    768: { slidesPerView: 2 },
+                                    1200: { slidesPerView: 3 },
+                                }}
+                            >
+                                {data.map((item, index) => (
+                                    <SwiperSlide key={index}>
+                                        <div className="program-card">
+                                            <TransitionLink href={`#`} className="img-wrapper">
+                                                <Image src={`/images/programmes/${item.image}`} alt={item.title} width={519} height={389} />
                                             </TransitionLink>
+                                            <div className="overlay-wrapper">
+                                                <ul className="modules">
+                                                    {item.modules.map((mItem, mIndex) => (
+                                                        <li key={mIndex} style={{ "--delay": `${mIndex * 40}ms` }}>{mItem}</li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                            <div className="text-wrapper">
+                                                <TransitionLink href={`#`}>
+                                                    <h3 className="title-text">{item.title}</h3>
+                                                </TransitionLink>
 
-                                            <TransitionLink href={`#`} className={"view-more-btn"}>
-                                                <span className="text-label">
-                                                    View Details
-                                                </span>
-                                                <span className="icon"></span>
-                                            </TransitionLink>
+                                                <TransitionLink href={`#`} className={"view-more-btn"}>
+                                                    <span className="text-label">
+                                                        View Details
+                                                    </span>
+                                                    <span className="icon"></span>
+                                                </TransitionLink>
+                                            </div>
                                         </div>
-                                    </div>
-                                </ScrollReveal>
-                            ))}
+                                    </SwiperSlide>
+                                ))}
+                            </SwiperCarousel>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-    )
-}
+    );
+};
 
 export default OurProgramsSec
