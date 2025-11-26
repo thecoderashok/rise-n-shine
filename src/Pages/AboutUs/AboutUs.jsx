@@ -4,6 +4,7 @@ import AboutIntroSec from "./components/AboutIntroSec";
 import MissionVisionSec from "./components/MissionVisionSec";
 import ContactSec from "../Home/components/ContactSec";
 import FounderMessageSec from "./components/FounderMessageSec";
+import AboutMarqueeSec from "./components/AboutMarqueeSec";
 
 const AboutUs = () => {
     return (
@@ -15,12 +16,16 @@ const AboutUs = () => {
                         A Vision of Excellence, <br /> A Journey Towards Success
                     </>
                 }
+                breadcrumbs={[
+                    { label: "Home", href: "/" },
+                    { label: "About Us" },
+                ]}
                 imageSrc={`/images/hero-banner.jpg`}
             />
             <AboutIntroSec />
-
+            <AboutMarqueeSec />
             <MissionVisionSec />
-            <FounderMessageSec />
+            {/* <FounderMessageSec /> */}
             <ContactSec />
         </>
     );
