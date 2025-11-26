@@ -29,21 +29,9 @@ const data = [
 const WhyUsSec = () => {
     return (
         <>
-            {/* <section className='pb-0'>
-                <div className="container">
-                    <div className="row">
-                        <div className="col-12">
-                            <SecTitle
-                                mainTitle={<>Why <b className='colored'>Rise N Shine</b></>}
-                                revealLetters={true}
-                            />
-                        </div>
-                    </div>
-                </div>
-            </section> */}
             <section className="home-whyus-sec">
                 <div className="top-sec">
-                    <div className="container">
+                    <div className="container-fluid">
                         <div className="row">
                             <div className="col-12 text-center">
                                 <SecTitle

@@ -31,7 +31,7 @@ function Footer() {
     return (
         <footer className="main-footer">
             <div className="footer-top">
-                <div className="container">
+                <div className="container-fluid">
                     <div className="row justify-content-between">
                         <div className="col-lg-4">
                             <div className="footer-col">
@@ -72,7 +72,7 @@ function Footer() {
                 </div>
             </div>
             <div className="footer-bottom">
-                <div className="inner container">
+                <div className="inner container-fluid">
                     <p className="copyright-text">
                         <span>
                             © 2025 <b>Rise N Shine</b>

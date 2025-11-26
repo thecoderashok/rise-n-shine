@@ -34,7 +34,7 @@ const AdmissionSec = () => {
 
     return (
         <section className="admission-sec" id="admissions">
-            <div className="container">
+            <div className="container-fluid">
                 <div className="row align-items-center">
                     <div className="col-lg-5 left-side">
                         <div className="admission-copy">
@@ -68,12 +68,9 @@ const AdmissionSec = () => {
 
                     <div className="col-lg-7">
                         <ScrollReveal direction="fade-right" delay={0.4}>
-                            <div className="admission-form-card">
-                                <div className="admission-form-head">
-                                    <span className="eyebrow">Enquire now</span>
-                                    {/* <span className="indicator" aria-hidden="true">
-                                        <span className="dot" />
-                                    </span> */}
+                            <div className="form-card">
+                                <div className="form-head">
+                                    <h3 className="heading-text">Enquire now</h3>
                                 </div>
 
                                 <form className="admission-form needs-validation" onSubmit={handleSubmit} noValidate>
@@ -145,8 +142,10 @@ const AdmissionSec = () => {
                                             <textarea className="form-control" rows="3" placeholder="Tell us anything else we should know." />
                                         </div>
 
-                                        <div className="col-12 d-flex justify-content-end">
-                                            <Button textLable={"Submit"} type="submit" />
+                                        <div className="col-12">
+                                            <div className="button-wrapper justify-content-end">
+                                                <Button textLable={"Submit"} type="submit" />
+                                            </div>
                                         </div>
                                     </div>
                                 </form>

@@ -1,6 +1,7 @@
 import React, { useLayoutEffect, useRef } from 'react'
 import SecTitle from '../../../components/SecTitle'
 import Image from '../../../components/Image';
+import ParallaxWrapper from '../../../components/Parallax/ParallaxWrapper';
 
 const MissionVisionSec = () => {
 
@@ -70,17 +71,19 @@ const MissionVisionSec = () => {
                     <Image src={"/images/logo/rise-n-shine-icon.png"} width={400} height={400} alt='logo' />
                 </div>
                 <div className="video-wrapper">
-                    <video
-                        src={"/video/video-bg-1.mp4"}
-                        controls={false}
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
-                        className="video"
-                        loading="eager"
-                        preload="metadata"
-                    />
+                    <ParallaxWrapper offset={20}>
+                        <video
+                            src={"/video/video-bg-1.mp4"}
+                            controls={false}
+                            autoPlay
+                            muted
+                            loop
+                            playsInline
+                            className="video"
+                            loading="eager"
+                            preload="metadata"
+                        />
+                    </ParallaxWrapper>
                 </div>
                 <div className="col-item">
                     <div className="text-wrapper">

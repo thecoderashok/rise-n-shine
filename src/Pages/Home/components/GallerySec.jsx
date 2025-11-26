@@ -21,7 +21,7 @@ const GallerySec = () => {
     return (
         <section className="gallery-sec">
             <div className="gallery-header">
-                <div className="container">
+                <div className="container-fluid">
                     <div className="row align-items-center">
                         <div className="col-md-6">
                             <SecTitle
@@ -32,49 +32,57 @@ const GallerySec = () => {
                         </div>
                         <div className="col-md-6 text-md-end d-flex justify-content-md-end justify-content-start">
                             <div className="slide-buttons">
-                                <button type="button" ref={navPrevRef} className="gallery-nav prev" aria-label="Previous slide" />
-                                <button type="button" ref={navNextRef} className="gallery-nav next" aria-label="Next slide" />
+                                <button type="button" ref={navPrevRef} className="slide-btn prev" aria-label="Previous slide" />
+                                <button type="button" ref={navNextRef} className="slide-btn next" aria-label="Next slide" />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div className="gallery-carousel">
-                <SwiperCarousel
-                    slidesPerView={1.2}
-                    spaceBetween={14}
-                    loop={true}
-                    speed={800}
-                    navigationBtns={false}
-                    pagination={false}
-                    breakpoints={{
-                        0: { slidesPerView: 1.6 },
-                        576: { slidesPerView: 2 },
-                        991: { slidesPerView: 3 },
-                        1200: { slidesPerView: 4 },
-                    }}
-                    onBeforeInit={(swiper) => {
-                        swiper.params.navigation.prevEl = navPrevRef.current;
-                        swiper.params.navigation.nextEl = navNextRef.current;
-                    }}
-                    showPagination={false}
-                >
-                    {galleryItems.map((item, index) => (
-                        <SwiperSlide key={index}>
-                            <ScrollReveal direction="fade-up" delay={0.2 + index * 0.05}>
-                                <div className="gallery-card">
-                                    <div className="img-wrapper">
-                                        <Image src={item.src} alt={item.title} width={1200} height={900} loading="lazy" />
-                                    </div>
-                                    <div className="overlay">
-                                        <span className="label">{item.title}</span>
-                                    </div>
-                                </div>
-                            </ScrollReveal>
-                        </SwiperSlide>
-                    ))}
-                </SwiperCarousel>
+            <div className="carousel-sec">
+                <div className="container-fluid">
+                    <div className="row">
+                        <div className="col-12">
+                            <div className="gallery-carousel">
+                                <SwiperCarousel
+                                    slidesPerView={1.2}
+                                    spaceBetween={14}
+                                    loop={true}
+                                    speed={800}
+                                    navigationBtns={false}
+                                    pagination={false}
+                                    breakpoints={{
+                                        0: { slidesPerView: 1.15 },
+                                        576: { slidesPerView: 2 },
+                                        991: { slidesPerView: 3 },
+                                        1200: { slidesPerView: 4 },
+                                    }}
+                                    onBeforeInit={(swiper) => {
+                                        swiper.params.navigation.prevEl = navPrevRef.current;
+                                        swiper.params.navigation.nextEl = navNextRef.current;
+                                    }}
+                                    showPagination={false}
+                                >
+                                    {galleryItems.map((item, index) => (
+                                        <SwiperSlide key={index}>
+                                            <ScrollReveal direction="fade-up" delay={0.2 + index * 0.05}>
+                                                <div className="gallery-card">
+                                                    <div className="img-wrapper">
+                                                        <Image src={item.src} alt={item.title} width={1200} height={900} loading="lazy" />
+                                                    </div>
+                                                    <div className="overlay">
+                                                        <span className="label">{item.title}</span>
+                                                    </div>
+                                                </div>
+                                            </ScrollReveal>
+                                        </SwiperSlide>
+                                    ))}
+                                </SwiperCarousel>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     );
