@@ -3,6 +3,7 @@ import { useClassNames } from '../../hook/useClassNames';
 import SecTitle from '../../components/SecTitle';
 import ScrollReveal from '../../components/ScrollReveal/ScrollReveal';
 import Image from '../../components/Image';
+import Button from '../../components/Button/Button';
 
 const RightImageLeftContent = ({ content, customClasses, props, children, titleReavealType = "letter" }) => {
     const classes = useClassNames();
@@ -39,9 +40,10 @@ const RightImageLeftContent = ({ content, customClasses, props, children, titleR
 
                         {content?.button && (
                             <Button
-                                textLable={content.button.label}
+                                textLabel={content.button.label}
                                 type="button"
                                 link={content.button.link}
+                                iconClass={content.button.iconClass || "fa-solid fa-arrow-right"}
                                 revealDelay={0.6}
                                 revealAnimation={true}
                             />

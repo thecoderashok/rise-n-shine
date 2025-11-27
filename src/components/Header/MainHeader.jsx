@@ -297,7 +297,7 @@ const MainHeader = ({ isTransparent }) => {
                     </div>
 
                     <div className="col-auto pe-0">
-                        <Button textLable={"Apply Now"}/>
+                        <Button textLabel={"Apply Now"} iconClass="fa-solid fa-arrow-right-to-bracket" />
                     </div>
 
                     <div className={classes("col-auto pe-0", styles.menu_btn_wrapper)} data-state={menuOpen ? "opened" : "closed"}>

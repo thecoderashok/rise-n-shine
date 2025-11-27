@@ -5,7 +5,16 @@ import ScrollReveal from '../ScrollReveal/ScrollReveal';
 import { Link } from 'react-router';
 // import TransitionLink from '../TransitionLink';
 
-const Button = ({ textLable, link = null, customClass, revealDelay = 0, direction = "fade-up", revealAnimation = false, ...props }) => {
+const Button = ({
+    textLabel,
+    link = null,
+    customClass,
+    iconClass = "fa-solid fa-arrow-right",
+    revealDelay = 0,
+    direction = "fade-up",
+    revealAnimation = false,
+    ...props
+}) => {
     const classes = useClassNames();
 
     const className = classes("standard-btn", customClass);
@@ -14,16 +23,20 @@ const Button = ({ textLable, link = null, customClass, revealDelay = 0, directio
         <span className={className} role="button">
             <Link href={link} {...props} />
             <span className="text-label">
-                <span data-text={textLable}>{textLable}</span>
+                <span data-text={textLabel}>{textLabel}</span>
             </span>
-            <span className="icon"></span>
+            <span className="icon">
+                <i className={iconClass} aria-hidden="true"></i>
+            </span>
         </span>
     ) : (
         <button className={className} {...props}>
             <span className="text-label">
-                <span data-text={textLable}>{textLable}</span>
+                <span data-text={textLabel}>{textLabel}</span>
             </span>
-            <span className="icon"></span>
+            <span className="icon">
+                <i className={iconClass} aria-hidden="true"></i>
+            </span>
         </button>
     );
 

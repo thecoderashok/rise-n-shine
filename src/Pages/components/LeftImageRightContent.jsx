@@ -49,10 +49,11 @@ const LeftImageRightContent = ({ content, customClasses, props, children, titleR
 
                         {content?.button && (
                             <Button
-                                textLable={content.button.label}
+                                textLabel={content.button.label}
                                 type="button"
                                 customClass={"style-2"}
                                 link={content.button.link}
+                                iconClass={content.button.iconClass || "fa-solid fa-arrow-right"}
                                 revealDelay={0.6}
                                 revealAnimation={true}
                             />

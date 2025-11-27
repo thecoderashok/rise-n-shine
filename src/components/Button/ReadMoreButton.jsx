@@ -4,7 +4,7 @@ import { useClassNames } from '../../hook/useClassNames';
 import TransitionLink from '../TransitionLink';
 import ScrollReveal from '../ScrollReveal/ScrollReveal';
 
-const ReadMoreButton = ({ textLable, link = "#", customClass, revealDelay = 0, revealAnimation = false, direction = "fade-up", ...props }) => {
+const ReadMoreButton = ({ textLabel, link = "#", customClass, revealDelay = 0, revealAnimation = false, direction = "fade-up", ...props }) => {
 
     const classes = useClassNames();
 
@@ -15,7 +15,7 @@ const ReadMoreButton = ({ textLable, link = "#", customClass, revealDelay = 0, r
             {...props}
         >
             <span className="text-label">
-                <span data-text={textLable}>{textLable}</span>
+                <span data-text={textLabel}>{textLabel}</span>
             </span>
             <span className="icon"></span>
         </TransitionLink>

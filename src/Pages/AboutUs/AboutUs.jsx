@@ -25,7 +25,7 @@ const AboutUs = () => {
             <AboutIntroSec />
             <AboutMarqueeSec />
             <MissionVisionSec />
-            {/* <FounderMessageSec /> */}
+            <FounderMessageSec />
             <ContactSec />
         </>
     );

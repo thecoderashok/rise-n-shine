@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { useToast } from "../context/Toast/ToastContext";
@@ -8,7 +7,7 @@ import EmailTable from "../components/Forms/EmailTable";
 export const useFormSubmit = ({
     initialData,
     handleValidation = () => ({}),
-    emailMethod = "php",
+    emailMethod = "api",
     mailerSetting,
 }) => {
     const { showToast } = useToast();
@@ -22,7 +21,8 @@ export const useFormSubmit = ({
     useEffect(() => {
         const handleBeforeUnload = (e) => {
             if (isSubmitting) {
-                e.returnValue = "Your message is still being sent. Are you sure you want to leave?";
+                e.returnValue =
+                    "Your message is still being sent. Are you sure you want to leave?";
                 return e.returnValue;
             }
         };
@@ -77,42 +77,30 @@ export const useFormSubmit = ({
                     body: JSON.stringify({
                         sender: {
                             name: mailerSetting.fromName,
-                            email: "cooperate.ashok@gmail.com",
+                            email: "verligte@gmail.com",
                         },
-                        to: mailerSetting.sendTo.map((email) => ({ email })),
+                        to: mailerSetting.sendTo,
+                        cc: mailerSetting.sendToCC,
                         subject: mailerSetting.subject || "New Enquiry from Website",
                         htmlContent,
                     }),
                 });
 
-                result = await response.json();
-                console.log(result)
+                const responseInText = await response.text();
+
+                try {
+                    result = JSON.parse(responseInText);
+                } catch {
+                    result = { success: false, error: "Invalid JSON response" };
+                }
+
+                console.log("Parsed Result:", result);
 
                 if (!response.ok || !result.success) {
                     throw new Error(result.error || "Failed to send message.");
                 }
-
             } else if (emailMethod === "php") {
-                response = await fetch(`https://verligte.com/api/contactMailer.php`, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Smtp-Host": "mail.modern-developers.comm",
-                        "Smtp-Port": 465,
-                        "Smtp-User": "mailer@modern-developers.comm",
-                        "Smtp-Password": "DpooZQ%vt,Ia"
-                    },
-                    body: JSON.stringify({
-                        fromName: mailerSetting.fromName,
-                        subject: "New Enquiry from Website",
-                        tableHeaderColor: "#09509F",
-                        to: mailerSetting.sendTo.map((email) => ({ email })),
-                        fields: formArray,
-                    }),
-                });
-
-                const result = await response.json();
-                console.log(result);
+                return;
             }
 
             const modal = form.closest(".modal");
@@ -125,17 +113,19 @@ export const useFormSubmit = ({
 
             resetForm();
             hideFormLoader();
-            // showToast({
-            //     message: "Thank you! Your message has been sent successfully.",
-            //     type: "success"
-            // });
+            // alert("Thank you! Your message has been sent successfully.")
+            showToast({
+                message: "Thank you! Your message has been sent successfully.",
+                type: "success",
+            });
         } catch (error) {
             console.error(error);
             hideFormLoader();
-            // showToast({
-            //     message: "Submission failed. Please try again.",
-            //     type: "error"
-            // });
+            // alert("Submission failed. Please try again.")
+            showToast({
+                message: "Submission failed. Please try again.",
+                type: "error",
+            });
         } finally {
             form.classList.remove("was-validated");
             const inputs = form.querySelectorAll(".is-valid, .is-invalid");
@@ -149,7 +139,9 @@ export const useFormSubmit = ({
 
     return {
         formData,
+        setFormData,
         errors,
+        setErrors,
         isSubmitting,
         handleChange,
         handleSubmit,

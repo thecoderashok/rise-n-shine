@@ -53,7 +53,7 @@ const AboutSec = () => {
                                 but innovators and industry leaders of tomorrow.
                             </p>
 
-                            <Button textLable={"Read more"} />
+                            <Button textLabel={"Read more"} iconClass="fa-solid fa-arrow-right" />
                         </div>
                     </div>
                 </div>

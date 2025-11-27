@@ -2,6 +2,8 @@ import React from 'react'
 import { useClassNames } from '../../hook/useClassNames';
 import { useFormSubmit } from '../../hook/useFormSubmit';
 import Button from '../Button/Button';
+import { getMailerSettings } from '../../mailerSettings';
+import IntlTelInputField from './IntlTelInputField';
 
 const ContactForm = () => {
     const classes = useClassNames();
@@ -11,33 +13,37 @@ const ContactForm = () => {
         errors,
         handleChange,
         handleSubmit,
+        setFormData,
+        setErrors,
+        itiRef,
     } = useFormSubmit({
         initialData: {
-            name: "",
+            firstName: "",
+            lastName: "",
             email: "",
             phone: "",
-            city: "",
-            company: "",
+            subject: "",
             message: "",
         },
-        handleValidation: (values) => {
+        handleValidation: (values, phoneItiRef) => {
             const errs = {};
-            if (!values.name.trim()) errs.name = "Full name is required.";
+            if (!values.firstName.trim()) errs.firstName = "First name is required.";
+            if (!values.lastName.trim()) errs.lastName = "Last name is required.";
             if (!/\S+@\S+\.\S+/.test(values.email)) errs.email = "Valid email address is required.";
-            if (!/^\+?[0-9]{10,15}$/.test(values.phone)) {
-                errs.phone = "Valid phone number is required!";
-            }
-            // if (!itiRef.current?.isValidNumber()) errs.phone = "Valid phone number is required.";
+            const itiInstance = phoneItiRef?.current;
+            const isPhoneValid = itiInstance ? itiInstance.isValidNumber() : /^\+?[0-9]{10,15}$/.test(values.phone);
+            if (!values.phone.trim() || !isPhoneValid) errs.phone = "Valid phone number is required!";
+            if (!values.subject.trim()) errs.subject = "Please add a subject.";
             return errs;
         },
-        emailMethod: "php",
-        mailerSetting: {
-            fromName: "Gilcon Projects Testing",
-            sendTo: ["thecoderashok@gmail.com"],
-            subject: "New Enquiry from Website"
-        },
+        emailMethod: "api",
+        mailerSetting: getMailerSettings(),
     });
 
+    const handlePhoneNumberChange = (formattedNumber) => {
+        setFormData((prev) => ({ ...prev, phone: formattedNumber || "" }));
+        setErrors((prev) => ({ ...prev, phone: "" }));
+    };
 
     return (
         <form
@@ -47,44 +53,61 @@ const ContactForm = () => {
             noValidate
         >
             <div className="row">
-                <div className="col-md-12 input-wrapper">
+                <div className="col-md-6 input-wrapper">
+                    <label className="form-label">First name*</label>
                     <input
-                        className={classes("form-control", errors.name && "is-invalid")}
+                        className={classes("form-control", errors.firstName && "is-invalid")}
                         id="firstName"
                         type="text"
-                        name="name"
-                        placeholder="Full name*"
+                        name="firstName"
+                        placeholder="Enter your first name*"
                         required
                         onChange={handleChange}
-                        value={formData.name}
+                        value={formData.firstName}
                     />
-                    <div className="invalid-feedback">{errors.name}</div>
+                    <div className="invalid-feedback">{errors.firstName}</div>
+                </div>
+                <div className="col-md-6 input-wrapper">
+                    <label className="form-label">Last name*</label>
+                    <input
+                        className={classes("form-control", errors.lastName && "is-invalid")}
+                        id="lastName"
+                        type="text"
+                        name="lastName"
+                        placeholder="Enter your last name*"
+                        required
+                        onChange={handleChange}
+                        value={formData.lastName}
+                    />
+                    <div className="invalid-feedback">{errors.lastName}</div>
                 </div>
 
                 <div className="col-md-6 input-wrapper">
-                    <input
+                    <label className="form-label">Phone number*</label>
+                    <IntlTelInputField
                         className={classes("form-control phone-input", errors.phone && "is-invalid")}
                         id="phone"
-                        type="tel"
                         name="phone"
-                        placeholder="Mobile Number*"
+                        placeholder="Enter phone number*"
                         minLength={10}
                         maxLength={12}
-                        onChange={handleChange}
-                        value={formData.phone}
                         required
-                    // ref={inputRef}
+                        value={formData.phone}
+                        itiRef={itiRef}
+                        onChange={handleChange}
+                        onNumberChange={handlePhoneNumberChange}
+                        error={errors.phone}
                     />
-                    <div className="invalid-feedback" style={errors.phone ? { display: "block" } : { display: "none" }}>{errors.phone}</div>
                 </div>
 
                 <div className="col-md-6 input-wrapper">
+                    <label className="form-label">Email address*</label>
                     <input
                         className={classes("form-control", errors.email && "is-invalid")}
                         id="email"
                         type="email"
                         name="email"
-                        placeholder="Email address*"
+                        placeholder="Enter email address*"
                         required
                         onChange={handleChange}
                         value={formData.email}
@@ -92,7 +115,22 @@ const ContactForm = () => {
                     <div className="invalid-feedback">{errors.email}</div>
                 </div>
 
+                <div className="col-md-12 input-wrapper">
+                    <label className="form-label">Subject</label>
+                    <input
+                        className={classes("form-control", errors.subject && "is-invalid")}
+                        id="subject"
+                        type="text"
+                        name="subject"
+                        placeholder="Enter subject"
+                        onChange={handleChange}
+                        value={formData.subject}
+                    />
+                    <div className="invalid-feedback">{errors.subject}</div>
+                </div>
+
                 <div className="col-12 input-wrapper">
+                    <label className="form-label">Message</label>
                     <textarea
                         className="form-control"
                         id="message"
@@ -105,7 +143,7 @@ const ContactForm = () => {
                 </div>
 
                 <div className="button-wrapper">
-                    <Button textLable={"Submit Enquiry"} type="submit" />
+                    <Button textLabel={"Send a Message"} type="submit" iconClass="fa-solid fa-paper-plane" />
                 </div>
             </div>
         </form>
