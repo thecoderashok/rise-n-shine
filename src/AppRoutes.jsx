@@ -5,6 +5,7 @@ import PageWrapper from './components/Route/PageWrapper';
 import Layout from './Layout';
 const Home = lazy(() => import('./Pages/Home/Home'));
 const AboutUs = lazy(() => import('./Pages/AboutUs/AboutUs'));
+const Academics = lazy(() => import('./Pages/Academics/Academics'));
 
 const AppRoutes = () => {
     // const { customPathname } = useCustomRouter();
@@ -18,6 +19,10 @@ const AppRoutes = () => {
         {
             path: "/about-us",
             component: <AboutUs />,
+        },
+        {
+            path: "/academics",
+            component: <Academics />,
         },
     ];
 

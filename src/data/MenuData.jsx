@@ -10,6 +10,10 @@ export const GetHeaderMenu = () => {
             path: "/about-us",
         },
         {
+            label: "Academics",
+            path: "/academics",
+        },
+        {
             label: "Programs",
             path: "#",
         },

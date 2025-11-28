@@ -12,6 +12,10 @@ export const pageTransitionConfig = [
         routeTitle: "About us",
     },
     {
+        path: "/academics",
+        routeTitle: "Academics",
+    },
+    {
         path: "*",
     },
 ];
