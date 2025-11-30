@@ -1,15 +1,15 @@
 import React, { Suspense, lazy } from 'react';
-import { Route, Routes, useLocation } from 'react-router';
-// import { useCustomRouter } from './context/CustomRouter/CustomRouterContext';
+import { Route, Routes } from 'react-router';
+import { useCustomRouter } from './context/CustomRouter/CustomRouterContext';
 import PageWrapper from './components/Route/PageWrapper';
 import Layout from './Layout';
 const Home = lazy(() => import('./Pages/Home/Home'));
 const AboutUs = lazy(() => import('./Pages/AboutUs/AboutUs'));
 const Academics = lazy(() => import('./Pages/Academics/Academics'));
+const Faculties = lazy(() => import('./Pages/Faculties/Faculties'));
 
 const AppRoutes = () => {
-    // const { customPathname } = useCustomRouter();
-    const { pathname } = useLocation();
+    const { customPathname } = useCustomRouter();
 
     const AllRoutes = [
         {
@@ -24,18 +24,22 @@ const AppRoutes = () => {
             path: "/academics",
             component: <Academics />,
         },
+        {
+            path: "/faculties",
+            component: <Faculties />,
+        },
     ];
 
     return (
         <div className="main-wrapper">
             <Suspense fallback={<div className="loader"></div>}>
-                <Routes location={{ pathname: pathname }}>
+                <Routes location={{ pathname: customPathname }}>
                     <Route element={<Layout />}>
                         {AllRoutes.map((page, index) => (
                             <Route
                                 path={page.path}
                                 element={
-                                    <PageWrapper key={pathname}>
+                                    <PageWrapper key={customPathname}>
                                         {page.component}
                                     </PageWrapper>
                                 }

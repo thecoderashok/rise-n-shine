@@ -14,6 +14,7 @@ const SwiperCarousel = ({
     children,
     navigationBtns,
     showPagination,
+    paginationType = "bullets",
     reverseDir = false,
     fadeEffect,
     loop = true,
@@ -150,8 +151,9 @@ const SwiperCarousel = ({
                 pagination={
                     showPagination
                         ? {
-                            clickable: true,
+                            clickable: paginationType === "bullets",
                             dynamicBullets: false,
+                            type: paginationType,
                         }
                         : false
                 }

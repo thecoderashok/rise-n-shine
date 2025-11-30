@@ -12,10 +12,15 @@
     background-color: #f5ecf98c;
     backdrop-filter: blur(20px);
     border-bottom: 1px solid #eeeeee;
+    transform: translateY(-100%) translateZ(0);
     transition:
         transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
         box-shadow 0.4s ease,
         background-color 0.2s ease;
+
+    &[data-header-revealed="true"]{
+            transform: translateY(0) translateZ(0);
+    }
 
     &::before {
         content: "";

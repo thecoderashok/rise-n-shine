@@ -14,11 +14,12 @@ import { useClassNames } from "../../hook/useClassNames";
 import { useLenis } from "lenis/react";
 import gsap from "gsap";
 import Button from "../Button/Button";
+import { useLoader } from "../../context/Loader/LoaderContext";
 
 const MainHeader = ({ isTransparent }) => {
     const menuData = useMemo(() => GetHeaderMenu(), []);
     const { HeaderMenu } = menuData;
-
+    const { isMounted } = useLoader();
     const location = useLocation();
 
     const [isSticky, setIsSticky] = useState(false);
@@ -243,6 +244,7 @@ const MainHeader = ({ isTransparent }) => {
             ref={headerRef}
             data-hidden={isHidden}
             data-sticky={isSticky}
+            data-header-revealed={isMounted}
         >
             <div className={`container-fluid ${styles.header_container}`}>
                 <div

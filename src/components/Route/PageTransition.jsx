@@ -13,6 +13,7 @@ import { gsap } from "../../gsapInit";
 import { useCustomRouter } from "../../context/CustomRouter/CustomRouterContext";
 import Image from "../Image";
 import { useLocation } from "react-router";
+import CustomEase from "gsap/CustomEase";
 
 const animateLogo = {
     initial: {
@@ -27,42 +28,45 @@ const animateLogo = {
     },
 };
 
-const animateLoaderTitle = {
-    initial: {
-        y: 50,
-        z: 0,
-        opacity: 0,
-    },
-    enter: {
-        y: 0,
-        z: 0,
-        opacity: 1,
-        ease: "power4.out",
-    },
-    exit: {
-        y: -150,
-        z: 0,
-        opacity: 0,
-        ease: "power4.in",
-    },
-};
+// const animateLoaderTitle = {
+//     initial: {
+//         y: 50,
+//         z: 0,
+//         opacity: 0,
+//     },
+//     enter: {
+//         y: 0,
+//         z: 0,
+//         opacity: 1,
+//         ease: "power4.out",
+//     },
+//     exit: {
+//         y: -150,
+//         z: 0,
+//         opacity: 0,
+//         ease: "power4.in",
+//     },
+// };
 
 const animatePanel = {
     initial: {
-        z: 0,
-        scaleY: 0,
-        transformOrigin: "bottom",
+        // z: 0,
+        // scaleY: 0,
+        // transformOrigin: "bottom",
+        opacity: 0,
     },
     enter: {
-        z: 0,
-        scaleY: 1,
-        transformOrigin: "bottom",
-        ease: "power4.inOut",
+        // z: 0,
+        // scaleY: 1,
+        // transformOrigin: "bottom",
+        opacity: 1,
+        ease: CustomEase.create("", ".33,.24,.11,.99"),
     },
     exit: {
-        z: 0,
-        scaleY: 0,
-        transformOrigin: "top",
+        // z: 0,
+        // scaleY: 0,
+        // transformOrigin: "top",
+        opacity: 0,
         ease: "power4.inOut",
     },
 };
@@ -81,7 +85,7 @@ const animateOverlay = {
     },
 };
 
-const PageTransition = ({ title }) => {
+const PageTransition = () => {
     const { isLoading, setMounted, pageComponentReady } = useLoader();
     const { linkClicked, routingPathname, resetLinkClick } = useLinkClick();
     const { setRoute } = useCustomRouter();
@@ -93,7 +97,7 @@ const PageTransition = ({ title }) => {
     const containerRef = useRef(null);
     const loaderLogoRef = useRef(null);
     const loaderPanelRef = useRef(null);
-    const titleRef = useRef(null);
+    // const titleRef = useRef(null);
     const overlayRef = useRef(null);
     const onLoadTimelineRef = useRef(null);
     const routeTimelineRef = useRef(null);
@@ -117,9 +121,9 @@ const PageTransition = ({ title }) => {
         gsap.set(loaderLogoRef.current, {
             ...animateLogo.initial,
         });
-        gsap.set(titleRef.current, {
-            ...animateLoaderTitle.initial,
-        });
+        // gsap.set(titleRef.current, {
+        //     ...animateLoaderTitle.initial,
+        // });
         gsap.set(overlayRef.current, {
             ...animateOverlay.initial,
         });
@@ -129,13 +133,13 @@ const PageTransition = ({ title }) => {
         const container = containerRef?.current;
         const overlay = overlayRef?.current;
         const logo = loaderLogoRef?.current;
-        const loaderTitle = titleRef?.current;
+        // const loaderTitle = titleRef?.current;
         const panel = loaderPanelRef?.current;
 
-        if (!container || !overlay || !logo || !loaderTitle || !panel) return;
+        if (!container || !overlay || !logo || !panel) return;
 
         const timeLine = gsap.timeline({
-            defaults: { duration: 1, ease: "power3.inOut" },
+            defaults: { duration: 0.9, ease: "power3.inOut" },
         });
         onLoadTimelineRef.current = timeLine;
 
@@ -166,12 +170,12 @@ const PageTransition = ({ title }) => {
                     .to(logo, {
                         ...animateLogo.exit,
                     })
-                    .to(loaderTitle, {
-                        ...animateLoaderTitle.enter,
-                    })
-                    .to(loaderTitle, {
-                        ...animateLoaderTitle.exit,
-                    })
+                    // .to(loaderTitle, {
+                    //     ...animateLoaderTitle.enter,
+                    // })
+                    // .to(loaderTitle, {
+                    //     ...animateLoaderTitle.exit,
+                    // })
                     .to(
                         panel,
                         {
@@ -207,18 +211,17 @@ const PageTransition = ({ title }) => {
         const container = containerRef?.current;
         const overlay = overlayRef?.current;
         const logo = loaderLogoRef?.current;
-        const loaderTitle = titleRef?.current;
+        // const loaderTitle = titleRef?.current;
         const panel = loaderPanelRef?.current;
 
-        if (!container || !overlay || !logo || !loaderTitle || !panel) return;
-
+        if (!container || !overlay || !logo || !panel) return;
         setInitialStyles();
 
         const timeLine = gsap.timeline({
-            defaults: { duration: 1, ease: "power3.inOut" },
-            onStart: () => {
-                lenis?.stop();
-            }
+            defaults: { duration: 0.9, ease: "power3.inOut" },
+            // onStart: () => {
+            //     lenis?.stop();
+            // },
         });
 
         routeTimelineRef.current = timeLine;
@@ -240,9 +243,16 @@ const PageTransition = ({ title }) => {
                         },
                         0
                     )
-                    .to(loaderTitle, {
-                        ...animateLoaderTitle.enter,
-                    }, "-=0.2")
+                    .to(logo, {
+                        ...animateLogo.enter,
+                    }, "-=0.5")
+                    // .to(
+                    //     loaderTitle,
+                    //     {
+                    //         ...animateLoaderTitle.enter,
+                    //     },
+                    //     "-=0.2"
+                    // )
                     .call(() => {
                         if (routingPathname) {
                             setRoute(routingPathname);
@@ -251,15 +261,18 @@ const PageTransition = ({ title }) => {
                     .addPause("wait")
                     .call(() => setRouteTimelinePaused(true))
                     .call(() => resetScroll())
-                    .to(loaderTitle, {
-                        ...animateLoaderTitle.exit,
+                    // .to(loaderTitle, {
+                    //     ...animateLoaderTitle.exit,
+                    // })
+                    .to(logo, {
+                        ...animateLogo.exit,
                     })
                     .to(
                         panel,
                         {
                             ...animatePanel.exit,
                         },
-                        "-=0.5"
+                        "-=0.25"
                     )
                     .to(
                         overlay,
@@ -268,10 +281,14 @@ const PageTransition = ({ title }) => {
                         },
                         "<"
                     )
-                    .call(() => {
-                        lenis?.start();
-                        setMounted(true);
-                    }, [], "-=0.5");
+                    .call(
+                        () => {
+                            lenis?.start();
+                            setMounted(true);
+                        },
+                        [],
+                        "-=0.5"
+                    );
             };
 
             transitionPathChange();
@@ -290,7 +307,6 @@ const PageTransition = ({ title }) => {
         routeTimelineRef?.current?.eventCallback("onComplete", () => {
             resetLinkClick();
         });
-
     }, [pageComponentReady, routeTimelinePaused, resetLinkClick]);
 
     useEffect(() => {
@@ -308,24 +324,14 @@ const PageTransition = ({ title }) => {
         const raf = requestAnimationFrame(() => {
             resetScroll();
             setMounted(true);
-        })
+        });
 
         return () => cancelAnimationFrame(raf);
     }, [pathname, setRoute, resetScroll, setMounted, linkClicked]);
 
-
-    useEffect(() => {
-        setRoute(pathname);
-        const raf = requestAnimationFrame(() => {
-            resetScroll();
-            setMounted(true);
-        })
-        return () => cancelAnimationFrame(raf);
-    }, [setMounted, pathname, setRoute, resetScroll])
-
     return (
         <>
-            {/* <div className="page-loader-overlay" ref={overlayRef}></div>
+            <div className="page-loader-overlay" ref={overlayRef}></div>
             <div className="page-loader-container" ref={containerRef}>
                 <div className="page-loader-panel" ref={loaderPanelRef}></div>
                 <div className="loader" ref={loaderLogoRef}>
@@ -338,21 +344,23 @@ const PageTransition = ({ title }) => {
                         height={200}
                     />
                 </div>
-                <div className="loader-title">
-                    <span ref={titleRef}>{title ||
-                        <div className="loader">
-                            <Image
-                                src={"/images/logo/logo.png"}
-                                alt=""
-                                title=""
-                                priority
-                                width={200}
-                                height={200}
-                            />
-                        </div>
-                    }</span>
-                </div>
-            </div> */}
+                {/* <div className="loader-title">
+                    <span ref={titleRef}>
+                        {title || (
+                            <div className="loader">
+                                <Image
+                                    src={"/images/logo/logo.png"}
+                                    alt=""
+                                    title=""
+                                    priority
+                                    width={200}
+                                    height={200}
+                                />
+                            </div>
+                        )}
+                    </span>
+                </div> */}
+            </div>
         </>
     );
 };

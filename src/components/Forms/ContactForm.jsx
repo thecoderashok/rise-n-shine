@@ -97,6 +97,7 @@ const ContactForm = () => {
                         onChange={handleChange}
                         onNumberChange={handlePhoneNumberChange}
                         error={errors.phone}
+                        
                     />
                 </div>
 

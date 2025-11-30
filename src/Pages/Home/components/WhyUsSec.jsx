@@ -43,7 +43,6 @@ const WhyUsSec = () => {
                                             success.
                                         </>
                                     }
-                                    revealLetters={true}
                                 />
                             </div>
                         </div>

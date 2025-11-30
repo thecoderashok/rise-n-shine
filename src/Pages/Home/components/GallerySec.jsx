@@ -19,7 +19,7 @@ const GallerySec = () => {
     const navNextRef = useRef(null);
 
     return (
-        <section className="gallery-sec">
+        <section className="gallery-sec sec-gray" id="gallery">
             <div className="gallery-header">
                 <div className="container-fluid">
                     <div className="row align-items-center">
@@ -27,7 +27,6 @@ const GallerySec = () => {
                             <SecTitle
                                 subTitle={"Campus Life"}
                                 mainTitle={<>Inside Rise N Shine</>}
-                                revealLetters={true}
                             />
                         </div>
                         <div className="col-md-6 text-md-end d-flex justify-content-md-end justify-content-start">

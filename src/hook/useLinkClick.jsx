@@ -52,9 +52,9 @@ export default function useLinkClick() {
 
 
     const resetLinkClick = useCallback(() => {
-        setRoutingPathname(pathname);
+        // setRoutingPathname(pathname);
         setLinkClicked(false);
-    }, [pathname]);
+    }, []);
 
     return { linkClicked, routingPathname, resetLinkClick };
 }

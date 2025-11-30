@@ -52,18 +52,17 @@ const data = [
 
 const OurProgramsSec = () => {
     return (
-        <section className="programs-sec sec-gray">
+        <section className="programs-sec">
             <div className="container-fluid">
                 <div className="row">
                     <div className="col-12 text-center">
                         <SecTitle
                             mainTitle="Programmes"
                             subTitle={"What we offer"}
-                            revealLetters={true}
                         />
                     </div>
                     <div className="col-12">
-                        <div className="programs-list">
+                        <div className="programmes-carousel">
                             <SwiperCarousel
                                 slidesPerView={1}
                                 spaceBetween={20}
@@ -77,7 +76,7 @@ const OurProgramsSec = () => {
                             >
                                 {data.map((item, index) => (
                                     <SwiperSlide key={index}>
-                                        <div className="program-card">
+                                        <div className="programme-card">
                                             <TransitionLink href={`#`} className="img-wrapper">
                                                 <Image src={`/images/programmes/${item.image}`} alt={item.title} width={519} height={389} />
                                             </TransitionLink>

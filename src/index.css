@@ -204,14 +204,6 @@ section {
    overflow: hidden;
 }
 
-section.sec-gray {
-   background-color: #F5F2EC;
-}
-
-section.sec-offwhite {
-   background-color: rgb(250, 249, 246);
-}
-
 .container-fluid {
    max-width: 1920px;
 }
@@ -475,10 +467,10 @@ section.sec-offwhite {
    width: 100%;
    height: 100%;
    display: inline-block;
-   background-color: #f5f5f5;
+   background: #F2E7F7;
    transform: scaleY(1);
    transform-origin: top;
-   will-change: transform;
+   will-change: opacity;
 }
 
 .page-loader-overlay {
@@ -570,7 +562,7 @@ section.sec-offwhite {
 
 .loader {
    position: relative;
-   width: 80px;
+   width: 250px;
    display: flex;
    justify-content: center;
    align-items: center;

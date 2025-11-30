@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
-import ContactForm from "../../../components/Forms/ContactForm";
-import ScrollReveal from "../../../components/ScrollReveal/ScrollReveal";
-import SecTitle from "../../../components/SecTitle";
+import ContactForm from "../../components/Forms/ContactForm";
+import ScrollReveal from "../../components/ScrollReveal/ScrollReveal";
+import SecTitle from "../../components/SecTitle";
 
 const ContactSec = () => {
     const contactDetails = useMemo(
@@ -32,13 +32,12 @@ const ContactSec = () => {
     );
 
     return (
-        <section className="contact-sec" id="contact">
+        <section className="contact-sec sec-gray" id="contact">
             <div className="container">
                 <div className="row justify-content-center">
                     <div className="col-12 ">
                         <SecTitle
                             mainTitle={"Contact Us"}
-                            revealLetters={true}
                         />
                     </div>
                     <div className="col-12">

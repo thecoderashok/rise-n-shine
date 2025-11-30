@@ -106,7 +106,6 @@ const FounderMessageSec = () => {
                     <div className="col-12 heading-wrapper">
                         <SecTitle
                             mainTitle={<>Founder&rsquo;s Message</>}
-                            revealLetters={true}
                         />
                     </div>
                 </div>

@@ -13,7 +13,7 @@ const actions = [
 const AdmissionSec = () => {
     return (
         <section className="admission-sec" id="admissions">
-            <div className="container-fluid">
+            <div className="container">
                 <div className="row align-items-center">
                     <div className="col-lg-5 left-side">
                         <div className="admission-copy">
@@ -23,7 +23,6 @@ const AdmissionSec = () => {
                                 desc={<>
                                     Tell us a little about you and we will guide you to the right programme. Our team responds within one business day.
                                 </>}
-                                revealLetters={true}
                             />
 
                             <ScrollReveal direction="fade-up" delay={0.4}>

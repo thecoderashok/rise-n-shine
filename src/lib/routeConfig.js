@@ -16,6 +16,10 @@ export const pageTransitionConfig = [
         routeTitle: "Academics",
     },
     {
+        path: "/faculties",
+        routeTitle: "Faculties",
+    },
+    {
         path: "*",
     },
 ];

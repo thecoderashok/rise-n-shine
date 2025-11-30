@@ -13,7 +13,7 @@
     gap: 8px;
     height: 55px;
     padding: 0 42px;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     letter-spacing: 0.05em;
     font-family: var(--primary-font);
     font-weight: 700;
@@ -88,6 +88,7 @@
         i {
             font-size: 1rem;
             line-height: 1;
+            transition: color 0.4s ease;
         }
     }
 
@@ -101,12 +102,22 @@
         --hover-bg-color: var(--color-primary);
     }
 
-    &:active{
-       transform: translateZ(0) scale(0.98);
+    &:active {
+        transform: translateZ(0) scale(0.98);
     }
 
     &:hover {
         border-color: var(--hover-border-color);
+
+        &::before {
+            right: auto;
+            left: -10px;
+            width: calc(100% + 20px);
+        }
+
+        .icon{
+            color: var(--hover-color);
+        }
 
         .text-label {
             span {

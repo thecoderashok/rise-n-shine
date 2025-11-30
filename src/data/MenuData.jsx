@@ -14,6 +14,10 @@ export const GetHeaderMenu = () => {
             path: "/academics",
         },
         {
+            label: "Faculties",
+            path: "/faculties",
+        },
+        {
             label: "Programs",
             path: "#",
         },
