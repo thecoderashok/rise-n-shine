@@ -52,7 +52,7 @@ const data = [
 
 const OurProgramsSec = () => {
     return (
-        <section className="programs-sec">
+        <section className="programmes-sec">
             <div className="container-fluid">
                 <div className="row">
                     <div className="col-12 text-center">

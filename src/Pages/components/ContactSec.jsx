@@ -32,7 +32,7 @@ const ContactSec = () => {
     );
 
     return (
-        <section className="contact-sec sec-gray" id="contact">
+        <section className="contact-sec sec-gray-2" id="contact">
             <div className="container">
                 <div className="row justify-content-center">
                     <div className="col-12 ">
@@ -42,46 +42,50 @@ const ContactSec = () => {
                     </div>
                     <div className="col-12">
                         <div className="row">
-                            <div className="col-lg-5">
-                                <aside className="contact-info-panel">
-                                    <div className="contact-info-header">
-                                        <h3>Let&apos;s start a conversation</h3>
-                                        <p>
-                                            Reach out to our team for admissions guidance,
-                                            program details, or collaboration ideas. We respond
-                                            within one business day.
-                                        </p>
-                                    </div>
-                                    <div className="contact-info-list">
-                                        {contactDetails.map((item) => (
-                                            <article className="contact-info-item" key={item.label}>
-                                                <div className="icon">
-                                                    <i className={item.iconClass} aria-hidden="true"></i>
-                                                </div>
-                                                <div className="details">
-                                                    <p className="label">{item.label}</p>
-                                                    <a
-                                                        href={item.action}
-                                                        className="value"
-                                                        target="_blank"
-                                                        rel="noreferrer"
-                                                    >
-                                                        {item.value}
-                                                    </a>
-                                                    {/* <span className="description">{item.description}</span> */}
-                                                </div>
-                                            </article>
-                                        ))}
-                                    </div>
-                                </aside>
-                            </div>
-                            <div className="col-lg-7">
-                                <div className="contact-form-panel">
-                                    <div className="contactForm-container">
-                                        <ContactForm />
+                            <ScrollReveal direction="fade-left" offset={30} delay={0.4}>
+                                <div className="col-lg-5">
+                                    <aside className="contact-info-panel">
+                                        <div className="contact-info-header">
+                                            <h3>Let&apos;s start a conversation</h3>
+                                            <p>
+                                                Reach out to our team for admissions guidance,
+                                                program details, or collaboration ideas. We respond
+                                                within one business day.
+                                            </p>
+                                        </div>
+                                        <div className="contact-info-list">
+                                            {contactDetails.map((item) => (
+                                                <article className="contact-info-item" key={item.label}>
+                                                    <div className="icon">
+                                                        <i className={item.iconClass} aria-hidden="true"></i>
+                                                    </div>
+                                                    <div className="details">
+                                                        <p className="label">{item.label}</p>
+                                                        <a
+                                                            href={item.action}
+                                                            className="value"
+                                                            target="_blank"
+                                                            rel="noreferrer"
+                                                        >
+                                                            {item.value}
+                                                        </a>
+                                                        {/* <span className="description">{item.description}</span> */}
+                                                    </div>
+                                                </article>
+                                            ))}
+                                        </div>
+                                    </aside>
+                                </div>
+                            </ScrollReveal>
+                            <ScrollReveal direction="fade-right" offset={30} delay={0.4}>
+                                <div className="col-lg-7">
+                                    <div className="contact-form-panel">
+                                        <div className="contactForm-container">
+                                            <ContactForm />
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </ScrollReveal>
                         </div>
                     </div>
                 </div>

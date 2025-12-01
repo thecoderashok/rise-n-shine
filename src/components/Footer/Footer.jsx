@@ -96,6 +96,7 @@ function Footer() {
                             <input
                                 id="footer-newsletter"
                                 type="email"
+                                className="form-control"
                                 placeholder="Enter your email"
                                 required
                             />

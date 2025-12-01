@@ -215,6 +215,39 @@ const Academics = () => {
                 </div>
             </section>
 
+            <section className="about-intro-sec programmes-intro sec-gray">
+                <div className="container">
+                    <div className="row page-text-content align-items-center">
+                        <div className="col-lg-6 left-side">
+                            <ScrollReveal direction="fade-left" delay={0.1}>
+                                <div className="image-wrapper">
+                                    <Image
+                                        src="/images/hero-2.jpg"
+                                        width={1920}
+                                        height={1080}
+                                        alt=""
+                                    />
+                                </div>
+                            </ScrollReveal>
+                        </div>
+                        <div className="col-lg-6">
+                            <div className="heading-wrapper">
+                                <h2 className="title-text">
+                                    Digital Storytelling Programmes
+                                </h2>
+                            </div>
+                            <div className="text-content py-0">
+                                <p>
+                                    The School of Digital Storytelling at Rise and Shine Institute of Learning is designed to cultivate creative thinkers who understand the power of narrative in a digital-first world. The curriculum introduces learners to the timeless art of storytelling and then extends it into modern contexts through platforms, tools, branding, and marketing. By blending creativity with ethical responsibility and practical industry readiness, the programme equips students to craft compelling narratives that inspire, engage, and influence. Learners graduate with the skills to navigate diverse media landscapes and the confidence to transform ideas into impactful digital stories that resonate across cultures and industries.
+                                </p>
+
+                                <Button textLabel="Learn More" link={`#`} />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <section className="faculty-leadership-sec sec-dark">
                 <div className="container">
                     <div className="row page-text-content align-items-center">
@@ -233,7 +266,7 @@ const Academics = () => {
                         <div className="col-lg-6">
                             <div className="heading-wrapper">
                                 <h2 className="title-text">
-                                   Faculty Profiles
+                                    Faculty Profiles
                                 </h2>
                             </div>
                             <div className="text-content py-0">

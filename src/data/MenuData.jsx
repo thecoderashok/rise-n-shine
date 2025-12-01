@@ -23,7 +23,7 @@ export const GetHeaderMenu = () => {
         },
         {
             label: "Admissions",
-            path: "#",
+            path: "/admissions",
         },
         {
             label: "News & Events",

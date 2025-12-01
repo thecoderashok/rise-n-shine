@@ -10,7 +10,7 @@ const AboutSec = () => {
             <div className="container">
                 <div className="row align-items-end page-text-content">
                     <div className="col-lg-7 left-side">
-                        <div className="title-wraper">
+                        <div className="title-wrapper">
                             <h2 className="main-title">
                                 Welcome to <br /> <b>Rise N Shine</b>
                             </h2>

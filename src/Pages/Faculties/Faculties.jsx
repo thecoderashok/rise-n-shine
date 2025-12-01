@@ -1,7 +1,9 @@
 import React from "react";
 import PageBannerSec from "../components/PageBannerSec";
 import ContactSec from "../components/ContactSec";
-import FacultyCarousel from "./components/FacultyCarousel";
+import SecTitle from "../../components/SecTitle";
+import ScrollReveal from "../../components/ScrollReveal/ScrollReveal";
+import FacultyCard from "./components/FacultyCard";
 
 const Faculties = () => {
     const facultiesData = [
@@ -64,7 +66,33 @@ const Faculties = () => {
                 breadcrumbs={[{ label: "Home", href: "/" }, { label: "Faculties" }]}
                 imageSrc="/images/faculty.jpg"
             />
-            <FacultyCarousel facultiesData={facultiesData} />
+            <section className="faculties-grid-sec">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-12 text-center">
+                            <ScrollReveal direction="fade-up" offset={30}>
+                                <SecTitle mainTitle="Faculty Profiles" />
+                            </ScrollReveal>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-12">
+                            <div className="faculties-grid-wrapper">
+                                {facultiesData.map((profile, index) => (
+                                    <ScrollReveal
+                                        key={index}
+                                        direction="fade-up"
+                                        offset={30}
+                                        delay={0.1 * (index + 1)}
+                                    >
+                                        <FacultyCard profile={profile} />
+                                    </ScrollReveal>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
             <ContactSec />
         </>
     );

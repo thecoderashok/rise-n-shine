@@ -1,18 +1,27 @@
 import React from "react";
 
-
 const AboutMarqueeSec = () => {
+    const marqueeWords = [
+        "Rise N Shine",
+        "Transformative",
+        "Experiential",
+        "Global",
+        "Insightful",
+        "Empowering",
+        "Resilient",
+    ];
+
     return (
         <>
             <section className="about-marquee-sec">
                 <div className="marquee-container" aria-hidden="true">
                     <div className="marquee-track">
-                        <span>Rise N Shine</span>
-                        <span>Rise N Shine</span>
-                        <span>Rise N Shine</span>
-                        <span>Rise N Shine</span>
-                        <span>Rise N Shine</span>
-                        <span>Rise N Shine</span>
+                        {marqueeWords.map((word, index) => (
+                            <span key={index}>{word}</span>
+                        ))}
+                        {marqueeWords.map((word, index) => (
+                            <span key={`duplicate-${index}`}>{word}</span>
+                        ))}
                     </div>
                 </div>
                 <div className="inner-sec">

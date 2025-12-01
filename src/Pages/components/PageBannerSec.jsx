@@ -12,6 +12,14 @@ const PageBannerSec = ({
     breadcrumbs = [],
 }) => {
     const classes = useClassNames();
+
+    const handleScrollDown = () => {
+        const windowHeight = window.innerHeight;
+        window.scrollTo({
+            top: windowHeight,
+            behavior: "smooth",
+        });
+    };
     const breadcrumbItems =
         breadcrumbs.length > 0
             ? breadcrumbs
@@ -67,10 +75,29 @@ const PageBannerSec = ({
                                 <h2 className="title-text">{title}</h2>
                             </TextSplit>
 
-                            <div className="banner-scroll-indicator">
-                                <span className="scroll-text">Scroll Down</span>
-                                <div className="mouse-indicator" aria-hidden="true">
-                                    <span className="wheel" />
+                            <div
+                                className="banner-scroll-indicator"
+                                onClick={handleScrollDown}
+                                role="button"
+                                tabIndex={0}
+                                onKeyDown={(e) => {
+                                    if (e.key === "Enter" || e.key === " ") {
+                                        e.preventDefault();
+                                        handleScrollDown();
+                                    }
+                                }}
+                            >
+                                <span className="scroll-text">Scroll</span>
+                                <div className="scroll-arrows-box">
+                                    <span>
+                                        <i className="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                                    </span>
+                                    <span>
+                                        <i className="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                                    </span>
+                                    <span>
+                                        <i className="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                                    </span>
                                 </div>
                             </div>
                         </div>

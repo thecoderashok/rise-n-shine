@@ -27,7 +27,7 @@ const OurProgramsSec = () => {
     const containerRef = useRef(null);
 
     return (
-        <section className="programs-sec sec-gray">
+        <section className="programmes-sec sec-gray">
             <div className="container-fluid">
                 <div className="row">
                     <div className="col-12 text-center">
@@ -38,7 +38,7 @@ const OurProgramsSec = () => {
                         />
                     </div>
                     <div className="col-12">
-                        <div className="programs-list" ref={containerRef}>
+                        <div className="programmes-list" ref={containerRef}>
                             {data.map((item, index) => (
                                 <ScrollReveal
                                     key={index}
@@ -46,7 +46,7 @@ const OurProgramsSec = () => {
                                     triggerRef={containerRef}
                                     delay={(index * 0.1) + 0.4}
                                 >
-                                    <div className="program-card">
+                                    <div className="programme-card">
                                         <TransitionLink href={`#`} className="img-wrapper">
                                             <Image src={`/images/programmes/${item.image}`} alt={item.title} width={519} height={389} />
                                         </TransitionLink>

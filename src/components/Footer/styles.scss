@@ -13,7 +13,7 @@
         display: flex;
         gap: var(--col-gap);
         --flexcol-count: 4;
-        --col-gap: 20px
+        --col-gap: 20px;
     }
 
     .footer-col {
@@ -132,8 +132,8 @@
         align-items: center;
         background: rgba(255, 255, 255, 0.08);
         border: 1px solid rgba(255, 255, 255, 0.2);
+        padding-right: 2px;
         border-radius: 10px;
-        padding: 6px 6px 6px 25px;
         margin-top: 8px;
         gap: 8px;
 
@@ -142,7 +142,6 @@
             border: none;
             background: transparent;
             color: #ffffff;
-            font-size: 0.95rem;
             min-width: 0;
 
             &::placeholder {
@@ -153,18 +152,19 @@
         button {
             width: 44px;
             height: 44px;
-            border-radius: 50%;
+            border-radius: 8px;
             border: none;
             background: var(--color-secondary);
             color: #2b1730;
-            font-size: 1rem;
+            font-size: 1.2rem;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            transition: transform 0.3s ease;
+            clip-path: inset(0 round 8px);
+            transition: clip-path 0.3s ease;
 
             &:hover {
-                transform: translateX(2px);
+                clip-path: inset(4% round 8px);
             }
         }
     }
