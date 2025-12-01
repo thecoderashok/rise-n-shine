@@ -112,8 +112,8 @@ const FounderMessageSec = () => {
 
                 <div className="founder-message-list">
                     {data.map((item, index) => (
-                        <div key={index} className={classes("founder-message-item", (index % 2 !== 0) && "reverse-order")}>
-                            <ScrollReveal direction="fade-up" offset={40} delay={index * 0.1}>
+                        <ScrollReveal key={index} direction="clip-scale-in-downward" delay={index * 0.1}>
+                            <div className={classes("founder-message-item", (index % 2 !== 0) && "reverse-order")}>
                                 <div className="founder-item-inner">
                                     <div className="row">
                                         <div className="col-lg-4 founder-media-col">
@@ -147,8 +147,8 @@ const FounderMessageSec = () => {
                                         </div>
                                     </div>
                                 </div>
-                            </ScrollReveal>
-                        </div>
+                            </div>
+                        </ScrollReveal>
                     ))}
                 </div>
             </div>

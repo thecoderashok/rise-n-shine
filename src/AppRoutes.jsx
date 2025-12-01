@@ -8,6 +8,7 @@ const AboutUs = lazy(() => import('./Pages/AboutUs/AboutUs'));
 const Academics = lazy(() => import('./Pages/Academics/Academics'));
 const Faculties = lazy(() => import('./Pages/Faculties/Faculties'));
 const Admissions = lazy(() => import('./Pages/Admissions/Admissions'));
+const Contact = lazy(() => import('./Pages/Contact/Contact'));
 
 const AppRoutes = () => {
     const { customPathname } = useCustomRouter();
@@ -32,6 +33,10 @@ const AppRoutes = () => {
         {
             path: "/admissions",
             component: <Admissions />,
+        },
+        {
+            path: "/contact-us",
+            component: <Contact />,
         },
     ];
 

@@ -9,7 +9,7 @@ const ProgrammeCard = ({ program, index = 0 }) => {
     const iconMask = program.icon ? `url(icons/${program.icon})` : undefined;
 
     return (
-        <ScrollReveal direction="fade-up" delay={0.1 * (index + 1)}>
+        <ScrollReveal direction="clip-scale-in-downward" delay={0.1 * (index + 1)}>
             <div className="programme-item-wrapper">
                 <div className="programme-item">
                     <div className="content-wrapper">

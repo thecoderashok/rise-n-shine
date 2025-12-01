@@ -4,7 +4,7 @@ export const useInView = (
     ref,
     {
         once = false,
-        rootMargin = "0px 0px -5% 0px",
+        rootMargin = "0px 0px -10% 0px",
         threshold = 0,
         root = null,
     } = {}

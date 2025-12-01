@@ -1,5 +1,5 @@
 export const headerConfig = {
-    nonTransparentRoutes: [ "/contact-us", "/404"],
+    nonTransparentRoutes: ["/404"],
 };
 
 export const pageTransitionConfig = [

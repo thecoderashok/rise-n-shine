@@ -42,7 +42,7 @@ const ContactSec = () => {
                     </div>
                     <div className="col-12">
                         <div className="row">
-                            <ScrollReveal direction="fade-left" offset={30} delay={0.4}>
+                            <ScrollReveal direction="clip-scale-in-downward" offset={30} delay={0.4}>
                                 <div className="col-lg-5">
                                     <aside className="contact-info-panel">
                                         <div className="contact-info-header">

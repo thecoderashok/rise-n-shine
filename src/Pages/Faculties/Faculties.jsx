@@ -2,10 +2,14 @@ import React from "react";
 import PageBannerSec from "../components/PageBannerSec";
 import ContactSec from "../components/ContactSec";
 import SecTitle from "../../components/SecTitle";
-import ScrollReveal from "../../components/ScrollReveal/ScrollReveal";
 import FacultyCard from "./components/FacultyCard";
+import { usePageSEO } from "../../hook/usePageSEO";
 
 const Faculties = () => {
+    usePageSEO({
+        title: "Faculties - Meet Our Expert Faculty | Rise N Shine",
+        canonical: `${window.location.origin}/faculties`,
+    });
     const facultiesData = [
         {
             name: "Dr. Somnath Prasad Patil",
@@ -70,23 +74,14 @@ const Faculties = () => {
                 <div className="container">
                     <div className="row">
                         <div className="col-12 text-center">
-                            <ScrollReveal direction="fade-up" offset={30}>
-                                <SecTitle mainTitle="Faculty Profiles" />
-                            </ScrollReveal>
+                            <SecTitle mainTitle="Faculty Profiles" reveal={true} />
                         </div>
                     </div>
                     <div className="row">
                         <div className="col-12">
                             <div className="faculties-grid-wrapper">
                                 {facultiesData.map((profile, index) => (
-                                    <ScrollReveal
-                                        key={index}
-                                        direction="fade-up"
-                                        offset={30}
-                                        delay={0.1 * (index + 1)}
-                                    >
-                                        <FacultyCard profile={profile} />
-                                    </ScrollReveal>
+                                    <FacultyCard key={index} index={index} profile={profile} />
                                 ))}
                             </div>
                         </div>

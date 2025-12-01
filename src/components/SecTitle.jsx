@@ -6,7 +6,6 @@ function SecTitle({
 	subTitle,
 	mainTitle,
 	desc,
-	additionalClass,
 	delaySubTitle = 0,
 	delayTitle = 200,
 	delayDesc = 0.3,
@@ -18,7 +17,7 @@ function SecTitle({
 	const Tag = headingTag;
 
 	return (
-		<div className={`sec--title-wrapper ${additionalClass ? additionalClass : ""}`}>
+		<div className="sec--title-wrapper">
 			{subTitle ?
 				<TextSplit revealDelay={delaySubTitle} revealLetters={revealLetters} reveal={reveal}>
 					<span className="sec--sub-title">{subTitle}</span>

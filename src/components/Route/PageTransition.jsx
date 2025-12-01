@@ -15,6 +15,8 @@ import Image from "../Image";
 import { useLocation } from "react-router";
 import CustomEase from "gsap/CustomEase";
 
+gsap.registerPlugin(CustomEase)
+
 const animateLogo = {
     initial: {
         opacity: 0,

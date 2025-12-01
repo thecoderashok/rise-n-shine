@@ -8,18 +8,30 @@ export const GetHeaderMenu = () => {
         {
             label: "About us",
             path: "/about-us",
+            sub_menu: [
+                {
+                    label: "Faculties",
+                    path: "/faculties",
+                },
+            ],
         },
         {
             label: "Academics",
             path: "/academics",
-        },
-        {
-            label: "Faculties",
-            path: "/faculties",
-        },
-        {
-            label: "Programs",
-            path: "#",
+            sub_menu: [
+                {
+                    label: "Programmes and Courses",
+                    path: "/programmes-and-courses",
+                },
+                {
+                    label: "Research",
+                    path: "/research",
+                },
+                {
+                    label: "Campus Life",
+                    path: "/campus-life",
+                },
+            ],
         },
         {
             label: "Admissions",
@@ -29,32 +41,6 @@ export const GetHeaderMenu = () => {
             label: "News & Events",
             path: "#",
         },
-        // {
-        //     label: "Contact Us",
-        //     path: "#",
-        //     sub_menu: [
-        //         {
-        //             label: "Home",
-        //             path: "/",
-        //         },
-        //         {
-        //             label: "About us",
-        //             path: "/about-us",
-        //         },
-        //         {
-        //             label: "Our Services",
-        //             path: "/our-services",
-        //         },
-        //         {
-        //             label: "Our Projects",
-        //             path: "/our-projects",
-        //         },
-        //         {
-        //             label: "Contact Us",
-        //             path: "/contact-us",
-        //         },
-        //     ]
-        // },
         {
             label: "Contact Us",
             path: "/contact-us",
@@ -83,7 +69,7 @@ export const GetHeaderMenu = () => {
             menu: [
                 { label: "Campus Life", path: "#" },
                 { label: "News & Events", path: "#" },
-                { label: "Contact Us", path: "#" },
+                { label: "Contact Us", path: "/contact-us" },
             ],
         },
     ];

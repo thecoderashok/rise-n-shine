@@ -65,7 +65,7 @@ const GallerySec = () => {
                                 >
                                     {galleryItems.map((item, index) => (
                                         <SwiperSlide key={index}>
-                                            <ScrollReveal direction="fade-up" delay={0.2 + index * 0.05}>
+                                            <ScrollReveal direction="fade-right" delay={0.2 + index * 0.05}>
                                                 <div className="gallery-card">
                                                     <div className="img-wrapper">
                                                         <Image src={item.src} alt={item.title} width={1200} height={900} loading="lazy" />

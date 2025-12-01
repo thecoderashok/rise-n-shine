@@ -4,6 +4,7 @@ import TransitionLink from '../../../components/TransitionLink';
 import Image from '../../../components/Image';
 import SwiperCarousel from '../../../components/Swiper/SwiperCarousel';
 import { SwiperSlide } from 'swiper/react';
+import ScrollReveal from '../../../components/ScrollReveal/ScrollReveal';
 
 const data = [
     {
@@ -76,30 +77,32 @@ const OurProgramsSec = () => {
                             >
                                 {data.map((item, index) => (
                                     <SwiperSlide key={index}>
-                                        <div className="programme-card">
-                                            <TransitionLink href={`#`} className="img-wrapper">
-                                                <Image src={`/images/programmes/${item.image}`} alt={item.title} width={519} height={389} />
-                                            </TransitionLink>
-                                            <div className="overlay-wrapper">
-                                                <ul className="modules">
-                                                    {item.modules.map((mItem, mIndex) => (
-                                                        <li key={mIndex} style={{ "--delay": `${mIndex * 40}ms` }}>{mItem}</li>
-                                                    ))}
-                                                </ul>
-                                            </div>
-                                            <div className="text-wrapper">
-                                                <TransitionLink href={`#`}>
-                                                    <h3 className="title-text">{item.title}</h3>
+                                        <ScrollReveal direction="clip-scale-in-downward" delay={0.1 * (index + 1)}>
+                                            <div className="programme-card">
+                                                <TransitionLink href={`#`} className="img-wrapper">
+                                                    <Image src={`/images/programmes/${item.image}`} alt={item.title} width={519} height={389} />
                                                 </TransitionLink>
+                                                <div className="overlay-wrapper">
+                                                    <ul className="modules">
+                                                        {item.modules.map((mItem, mIndex) => (
+                                                            <li key={mIndex} style={{ "--delay": `${mIndex * 40}ms` }}>{mItem}</li>
+                                                        ))}
+                                                    </ul>
+                                                </div>
+                                                <div className="text-wrapper">
+                                                    <TransitionLink href={`#`}>
+                                                        <h3 className="title-text">{item.title}</h3>
+                                                    </TransitionLink>
 
-                                                <TransitionLink href={`#`} className={"view-more-btn"}>
-                                                    <span className="text-label">
-                                                        View Details
-                                                    </span>
-                                                    <span className="icon"></span>
-                                                </TransitionLink>
+                                                    <TransitionLink href={`#`} className={"view-more-btn"}>
+                                                        <span className="text-label">
+                                                            View Details
+                                                        </span>
+                                                        <span className="icon"></span>
+                                                    </TransitionLink>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </ScrollReveal>
                                     </SwiperSlide>
                                 ))}
                             </SwiperCarousel>

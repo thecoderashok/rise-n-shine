@@ -8,14 +8,14 @@ const MissionVisionSec = () => {
             <div className="container">
                 <div className="row page-text-content align-items-center">
                     <div className="col-lg-6 left-side">
-                        <ScrollReveal direction="fade-left" delay={0.4}>
+                        <ScrollReveal direction="clip-scale-in-downward" delay={0.2}>
                             <div className="img-wrapper">
                                 <Image src={`/images/hero-banner.jpg`} alt={""} width={746} height={541} />
                             </div>
                         </ScrollReveal>
                     </div>
                     <div className="col-lg-6">
-                        <ScrollReveal direction="fade-right" delay={0.4}>
+                        <ScrollReveal direction="clip-fade-up" delay={0.4}>
                             <div className="content-wrapper">
                                 <div className="text-wrapper">
                                     <h2 className='title-text'>Our Vision</h2>

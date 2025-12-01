@@ -5,8 +5,14 @@ import MissionVisionSec from "./components/MissionVisionSec";
 import FounderMessageSec from "./components/FounderMessageSec";
 import AboutMarqueeSec from "./components/AboutMarqueeSec";
 import ContactSec from "../components/ContactSec";
+import { usePageSEO } from "../../hook/usePageSEO";
 
 const AboutUs = () => {
+    usePageSEO({
+        title: "About Us - Rise N Shine Institute of Learning",
+        canonical: `${window.location.origin}/about-us`,
+    });
+
     return (
         <>
             <PageBannerSec

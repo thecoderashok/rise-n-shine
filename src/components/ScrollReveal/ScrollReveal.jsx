@@ -26,7 +26,62 @@ const ScrollReveal = ({
         'fade-down': { from: { opacity: 0, y: -offset, z: 0 }, to: { opacity: 1, y: 0, z: 0 } },
         'fade-left': { from: { opacity: 0, x: -offset, z: 0 }, to: { opacity: 1, x: 0, z: 0 } },
         'fade-right': { from: { opacity: 0, x: offset, z: 0 }, to: { opacity: 1, x: 0, z: 0 } },
-        'zoom-in': { from: { opacity: 0, scale: 0.8, z: 0 }, to: { opacity: 1, scale: 1, z: 0 } },
+        'zoom-in': { from: { opacity: 0, scale: 0, z: 0 }, to: { opacity: 1, scale: 1, z: 0 } },
+        'zoom-out': { from: { opacity: 0, scale: 1.2, z: 0 }, to: { opacity: 1, scale: 1, z: 0 } },
+        'clip-fade-up': {
+            from: {
+                opacity: 0,
+                clipPath: 'inset(0 0 100% 0)',
+                y: offset,
+                z: 0
+            },
+            to: {
+                opacity: 1,
+                clipPath: 'inset(0 0 0% 0)',
+                y: 0,
+                z: 0
+            }
+        },
+        'clip-reveal-around': {
+            from: {
+                opacity: 0,
+                clipPath: 'inset(100%)',
+                z: 0
+            },
+            to: {
+                opacity: 1,
+                clipPath: 'inset(0%)',
+                z: 0
+            }
+        },
+        'clip-scale-out-downward': {
+            from: {
+                opacity: 0,
+                clipPath: 'inset(0 0 100% 0)',
+                scale: 1.2,
+                z: 0
+            },
+            to: {
+                opacity: 1,
+                clipPath: 'inset(0 0 0% 0)',
+                scale: 1,
+                z: 0
+            }
+        },
+        'clip-scale-in-downward': {
+            from: {
+                opacity: 0,
+                clipPath: 'inset(0 0 100% 0)',
+                scale: 0.8,
+                z: 0
+            },
+            to: {
+                opacity: 1,
+                clipPath: 'inset(0 0 0% 0)',
+                scale: 1,
+                z: 0
+            }
+        },
     }), [offset]);
 
     const variant = variants[direction] || variants['fade-in'];
@@ -49,7 +104,7 @@ const ScrollReveal = ({
         };
 
         gsap.killTweensOf(el);
-        el.style.willChange = "transform, opacity";
+        el.style.willChange = "transform, opacity, clip-path";
 
         requestAnimationFrame(() => {
             if (isInView) {

@@ -4,6 +4,7 @@ import ScrollReveal from "../../components/ScrollReveal/ScrollReveal";
 import ContactSec from "../components/ContactSec";
 import PageBannerSec from "../components/PageBannerSec";
 import ProgrammeCard from "./components/ProgrammeCard";
+import { usePageSEO } from "../../hook/usePageSEO";
 
 const programme_marketing = [
     {
@@ -101,6 +102,11 @@ const programme_finance = [
 
 
 const Academics = () => {
+    usePageSEO({
+        title: "Academics - Professional Development Programmes | Rise N Shine",
+        canonical: `${window.location.origin}/academics`,
+    });
+
     return (
         <>
             <PageBannerSec
@@ -117,7 +123,7 @@ const Academics = () => {
                 <div className="container">
                     <div className="row page-text-content align-items-center">
                         <div className="col-lg-6 left-side">
-                            <ScrollReveal direction="fade-left" delay={0.1}>
+                            <ScrollReveal direction="clip-scale-out-downward" delay={0.1}>
                                 <div className="image-wrapper">
                                     <Image
                                         src="/images/hero-2.jpg"
@@ -128,20 +134,23 @@ const Academics = () => {
                                 </div>
                             </ScrollReveal>
                         </div>
-                        <div className="col-lg-6">
-                            <div className="heading-wrapper">
-                                <h2 className="title-text">
-                                    Marketing Programmes
-                                </h2>
-                            </div>
-                            <div className="text-content py-0">
-                                <p>
-                                    The Professional Marketing Management Development Programmes at Rise and Shine Institute of Learning are designed to equip learners with a comprehensive foundation in modern marketing and sales. Each programme progresses from essential principles to advanced strategies, combining academic depth with real-world application. Students engage with diverse modules ranging from digital marketing, sales and distribution, and financial services marketing, to cutting-edge areas such as AI-driven strategies, marketing technology, and growth hacking. This structured approach ensures that every learner develops not only a strong theoretical understanding but also the practical skills and global perspective required to excel in today's competitive business environment.
-                                </p>
 
-                                <Button textLabel="Learn More" link={`#`} />
+                        <ScrollReveal direction="clip-fade-up" delay={0.25}>
+                            <div className="col-lg-6">
+                                <div className="heading-wrapper">
+                                    <h2 className="title-text">
+                                        Marketing Programmes
+                                    </h2>
+                                </div>
+                                <div className="text-content py-0">
+                                    <p>
+                                        The Professional Marketing Management Development Programmes at Rise and Shine Institute of Learning are designed to equip learners with a comprehensive foundation in modern marketing and sales. Each programme progresses from essential principles to advanced strategies, combining academic depth with real-world application. Students engage with diverse modules ranging from digital marketing, sales and distribution, and financial services marketing, to cutting-edge areas such as AI-driven strategies, marketing technology, and growth hacking. This structured approach ensures that every learner develops not only a strong theoretical understanding but also the practical skills and global perspective required to excel in today's competitive business environment.
+                                    </p>
+
+                                    <Button textLabel="Learn More" link={`#`} />
+                                </div>
                             </div>
-                        </div>
+                        </ScrollReveal>
                     </div>
                 </div>
             </section>
@@ -168,7 +177,7 @@ const Academics = () => {
                 <div className="container">
                     <div className="row page-text-content align-items-center">
                         <div className="col-lg-6 left-side">
-                            <ScrollReveal direction="fade-left" delay={0.1}>
+                            <ScrollReveal direction="clip-scale-out-downward" delay={0.1}>
                                 <div className="image-wrapper">
                                     <Image
                                         src="/images/hero-2.jpg"
@@ -179,20 +188,24 @@ const Academics = () => {
                                 </div>
                             </ScrollReveal>
                         </div>
-                        <div className="col-lg-6">
-                            <div className="heading-wrapper">
-                                <h2 className="title-text">
-                                    Finance Programmes
-                                </h2>
-                            </div>
-                            <div className="text-content py-0">
-                                <p>
-                                    The Finance Management Professional Development Programmes at Rise and Shine Institute of Learning are designed to build expertise in the principles and practices that drive global financial systems. Beginning with foundational concepts such as banking, budgeting, valuation, and forecasting, the programmes advance into specialised areas including portfolio management, financial derivatives, equity valuation, and international reporting standards. Each stage combines rigorous academic learning with practical application, enabling learners to understand financial markets, master analytical tools, and make informed strategic decisions. By engaging with real-world case studies, simulations, and industry exposure, students develop the agility, technical acumen, and ethical perspective required to excel in the fast-changing financial sector and lead with confidence across global markets.
-                                </p>
 
-                                <Button textLabel="Learn More" link={`#`} />
+                        <ScrollReveal direction="clip-fade-up" delay={0.25}>
+                            <div className="col-lg-6">
+                                <div className="heading-wrapper">
+                                    <h2 className="title-text">
+                                        Finance Programmes
+                                    </h2>
+                                </div>
+                                <div className="text-content py-0">
+                                    <p>
+                                        The Finance Management Professional Development Programmes at Rise and Shine Institute of Learning are designed to build expertise in the principles and practices that drive global financial systems. Beginning with foundational concepts such as banking, budgeting, valuation, and forecasting, the programmes advance into specialised areas including portfolio management, financial derivatives, equity valuation, and international reporting standards. Each stage combines rigorous academic learning with practical application, enabling learners to understand financial markets, master analytical tools, and make informed strategic decisions. By engaging with real-world case studies, simulations, and industry exposure, students develop the agility, technical acumen, and ethical perspective required to excel in the fast-changing financial sector and lead with confidence across global markets.
+                                    </p>
+
+                                    <Button textLabel="Learn More" link={`#`} />
+                                </div>
                             </div>
-                        </div>
+
+                        </ScrollReveal>
                     </div>
                 </div>
             </section>
@@ -219,7 +232,7 @@ const Academics = () => {
                 <div className="container">
                     <div className="row page-text-content align-items-center">
                         <div className="col-lg-6 left-side">
-                            <ScrollReveal direction="fade-left" delay={0.1}>
+                            <ScrollReveal direction="clip-scale-out-downward" delay={0.1}>
                                 <div className="image-wrapper">
                                     <Image
                                         src="/images/hero-2.jpg"
@@ -230,20 +243,22 @@ const Academics = () => {
                                 </div>
                             </ScrollReveal>
                         </div>
-                        <div className="col-lg-6">
-                            <div className="heading-wrapper">
-                                <h2 className="title-text">
-                                    Digital Storytelling Programmes
-                                </h2>
-                            </div>
-                            <div className="text-content py-0">
-                                <p>
-                                    The School of Digital Storytelling at Rise and Shine Institute of Learning is designed to cultivate creative thinkers who understand the power of narrative in a digital-first world. The curriculum introduces learners to the timeless art of storytelling and then extends it into modern contexts through platforms, tools, branding, and marketing. By blending creativity with ethical responsibility and practical industry readiness, the programme equips students to craft compelling narratives that inspire, engage, and influence. Learners graduate with the skills to navigate diverse media landscapes and the confidence to transform ideas into impactful digital stories that resonate across cultures and industries.
-                                </p>
+                        <ScrollReveal direction="clip-fade-up" delay={0.25}>
+                            <div className="col-lg-6">
+                                <div className="heading-wrapper">
+                                    <h2 className="title-text">
+                                        Digital Storytelling Programmes
+                                    </h2>
+                                </div>
+                                <div className="text-content py-0">
+                                    <p>
+                                        The School of Digital Storytelling at Rise and Shine Institute of Learning is designed to cultivate creative thinkers who understand the power of narrative in a digital-first world. The curriculum introduces learners to the timeless art of storytelling and then extends it into modern contexts through platforms, tools, branding, and marketing. By blending creativity with ethical responsibility and practical industry readiness, the programme equips students to craft compelling narratives that inspire, engage, and influence. Learners graduate with the skills to navigate diverse media landscapes and the confidence to transform ideas into impactful digital stories that resonate across cultures and industries.
+                                    </p>
 
-                                <Button textLabel="Learn More" link={`#`} />
+                                    <Button textLabel="Learn More" link={`#`} />
+                                </div>
                             </div>
-                        </div>
+                        </ScrollReveal>
                     </div>
                 </div>
             </section>
@@ -252,7 +267,7 @@ const Academics = () => {
                 <div className="container">
                     <div className="row page-text-content align-items-center">
                         <div className="col-lg-6 left-side">
-                            <ScrollReveal direction="fade-left" delay={0.1}>
+                            <ScrollReveal direction="clip-scale-out-downward" delay={0.1}>
                                 <div className="image-wrapper">
                                     <Image
                                         src="/images/faculty.jpg"
@@ -263,20 +278,23 @@ const Academics = () => {
                                 </div>
                             </ScrollReveal>
                         </div>
-                        <div className="col-lg-6">
-                            <div className="heading-wrapper">
-                                <h2 className="title-text">
-                                    Faculty Profiles
-                                </h2>
-                            </div>
-                            <div className="text-content py-0">
-                                <p>
-                                    At Rise and Shine Institute of Learning, our strength lies in the calibre of our leadership and faculty. The institute is guided by accomplished professionals who bring together academic excellence, industry expertise, and a global perspective. From visionary directors and senior academicians to dynamic officers shaping learning and operations, every member of the team contributes to creating an environment where knowledge meets real-world relevance. Their diverse qualifications in management, medicine, psychology, economics, and marketing reflect a multidisciplinary foundation that equips students with a truly holistic education. Collectively, they form a team committed to nurturing future-ready professionals who are prepared to excel in an increasingly competitive and interconnected world.
-                                </p>
 
-                                <Button textLabel="Meet our team" link={`/faculties`} />
+                        <ScrollReveal direction="clip-fade-up" delay={0.25}>
+                            <div className="col-lg-6">
+                                <div className="heading-wrapper">
+                                    <h2 className="title-text">
+                                        Faculty Profiles
+                                    </h2>
+                                </div>
+                                <div className="text-content py-0">
+                                    <p>
+                                        At Rise and Shine Institute of Learning, our strength lies in the calibre of our leadership and faculty. The institute is guided by accomplished professionals who bring together academic excellence, industry expertise, and a global perspective. From visionary directors and senior academicians to dynamic officers shaping learning and operations, every member of the team contributes to creating an environment where knowledge meets real-world relevance. Their diverse qualifications in management, medicine, psychology, economics, and marketing reflect a multidisciplinary foundation that equips students with a truly holistic education. Collectively, they form a team committed to nurturing future-ready professionals who are prepared to excel in an increasingly competitive and interconnected world.
+                                    </p>
+
+                                    <Button textLabel="Meet our team" link={`/faculties`} />
+                                </div>
                             </div>
-                        </div>
+                        </ScrollReveal>
                     </div>
                 </div>
             </section>
