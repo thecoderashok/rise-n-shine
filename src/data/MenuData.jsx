@@ -7,8 +7,12 @@ export const GetHeaderMenu = () => {
         },
         {
             label: "About us",
-            path: "/about-us",
+            path: "#",
             sub_menu: [
+                {
+                    label: "Who We Are",
+                    path: "/about-us",
+                },
                 {
                     label: "Faculties",
                     path: "/faculties",
@@ -24,12 +28,20 @@ export const GetHeaderMenu = () => {
                     path: "/programmes-and-courses",
                 },
                 {
-                    label: "Research",
-                    path: "/research",
+                    label: "Campus",
+                    path: "/campus",
                 },
                 {
-                    label: "Campus Life",
-                    path: "/campus-life",
+                    label: "Student's Life",
+                    path: "/students-life",
+                },
+                {
+                    label: "Placement",
+                    path: "/placement",
+                },
+                {
+                    label: "Research",
+                    path: "/research",
                 },
             ],
         },
@@ -39,7 +51,7 @@ export const GetHeaderMenu = () => {
         },
         {
             label: "News & Events",
-            path: "#",
+            path: "/news-events",
         },
         {
             label: "Contact Us",
@@ -67,8 +79,10 @@ export const GetHeaderMenu = () => {
         {
             heading: "Connect",
             menu: [
-                { label: "Campus Life", path: "#" },
-                { label: "News & Events", path: "#" },
+                { label: "Campus", path: "/campus" },
+                { label: "Students Life", path: "/students-life" },
+                { label: "Placement", path: "/placement" },
+                { label: "News & Events", path: "/news-events" },
                 { label: "Contact Us", path: "/contact-us" },
             ],
         },

@@ -4,7 +4,32 @@ import ScrollReveal from "../../components/ScrollReveal/ScrollReveal";
 import ContactSec from "../components/ContactSec";
 import PageBannerSec from "../components/PageBannerSec";
 import ProgrammeCard from "./components/ProgrammeCard";
+import ParallaxWrapper from "../../components/Parallax/ParallaxWrapper";
 import { usePageSEO } from "../../hook/usePageSEO";
+
+const faculty_images = [
+    {
+        src: "/images/team/Dr-Somnath-Patil.jpg",
+    },
+    {
+        src: "/images/team/Dr-Rohini-Patil.jpg",
+    },
+    {
+        src: "/images/team/Dr-Amol-Gawande.jpg",
+    },
+    {
+        src: "/images/team/Dr-Ahmad.jpg",
+    },
+    {
+        src: "/images/team/Dr-Sankalp-Dandawate.jpg",
+    },
+    {
+        src: "/images/team/Ms-Suman-Deokota.jpg",
+    },
+    {
+        src: "/images/team/Ms-Palak-Khanna.jpg",
+    }
+];
 
 const programme_marketing = [
     {
@@ -100,6 +125,21 @@ const programme_finance = [
     }
 ];
 
+const digital_storytelling_programmes = [
+    {
+        title: "School of Digital Storytelling",
+        icon: "vision.png",
+        modules: [
+            "Foundation of Storytelling",
+            "Crafting Digital Narratives",
+            "Platforms and Tools",
+            "Branding and Marketing through Stories",
+            "Ethics and Social Impact",
+            "Practical Application and Industry Readiness"
+        ]
+    }
+]
+
 
 const Academics = () => {
     usePageSEO({
@@ -119,38 +159,37 @@ const Academics = () => {
                 imageSrc="/images/hero-3.jpg"
             />
 
-            <section className="about-intro-sec programmes-intro sec-gray">
-                <div className="container">
-                    <div className="row page-text-content align-items-center">
-                        <div className="col-lg-6 left-side">
-                            <ScrollReveal direction="clip-scale-out-downward" delay={0.1}>
-                                <div className="image-wrapper">
-                                    <Image
-                                        src="/images/hero-2.jpg"
-                                        width={1920}
-                                        height={1080}
-                                        alt=""
-                                    />
+            <section className="programmes-intro">
+                <ParallaxWrapper offset={15}>
+                    <div className="image-wrapper">
+                        <Image
+                            src="/images/marketing-bg.jpg"
+                            width={1920}
+                            height={1080}
+                            alt="Marketing Programmes"
+                        />
+                    </div>
+                </ParallaxWrapper>
+                <div className="inner-sec">
+                    <div className="container">
+                        <div className="row justify-content-center">
+                            <ScrollReveal direction="clip-fade-up">
+                                <div className="col-lg-8 text-center">
+                                    <div className="heading-wrapper">
+                                        <h2 className="title-text">
+                                            Marketing Programmes
+                                        </h2>
+                                    </div>
+                                    <div className="text-content">
+                                        <p>
+                                            The Professional Marketing Management Development Programmes at Rise and Shine Institute of Learning are designed to equip learners with a comprehensive foundation in modern marketing and sales. Each programme progresses from essential principles to advanced strategies, combining academic depth with real-world application. Students engage with diverse modules ranging from digital marketing, sales and distribution, and financial services marketing, to cutting-edge areas such as AI-driven strategies, marketing technology, and growth hacking. This structured approach ensures that every learner develops not only a strong theoretical understanding but also the practical skills and global perspective required to excel in today's competitive business environment.
+                                        </p>
+
+                                        <Button textLabel="Learn More" customClass="style-2" link={`#`} />
+                                    </div>
                                 </div>
                             </ScrollReveal>
                         </div>
-
-                        <ScrollReveal direction="clip-fade-up" delay={0.25}>
-                            <div className="col-lg-6">
-                                <div className="heading-wrapper">
-                                    <h2 className="title-text">
-                                        Marketing Programmes
-                                    </h2>
-                                </div>
-                                <div className="text-content py-0">
-                                    <p>
-                                        The Professional Marketing Management Development Programmes at Rise and Shine Institute of Learning are designed to equip learners with a comprehensive foundation in modern marketing and sales. Each programme progresses from essential principles to advanced strategies, combining academic depth with real-world application. Students engage with diverse modules ranging from digital marketing, sales and distribution, and financial services marketing, to cutting-edge areas such as AI-driven strategies, marketing technology, and growth hacking. This structured approach ensures that every learner develops not only a strong theoretical understanding but also the practical skills and global perspective required to excel in today's competitive business environment.
-                                    </p>
-
-                                    <Button textLabel="Learn More" link={`#`} />
-                                </div>
-                            </div>
-                        </ScrollReveal>
                     </div>
                 </div>
             </section>
@@ -173,39 +212,37 @@ const Academics = () => {
                 </div>
             </section>
 
-            <section className="about-intro-sec programmes-intro sec-gray">
-                <div className="container">
-                    <div className="row page-text-content align-items-center">
-                        <div className="col-lg-6 left-side">
-                            <ScrollReveal direction="clip-scale-out-downward" delay={0.1}>
-                                <div className="image-wrapper">
-                                    <Image
-                                        src="/images/hero-2.jpg"
-                                        width={1920}
-                                        height={1080}
-                                        alt=""
-                                    />
+            <section className="programmes-intro">
+                <ParallaxWrapper offset={20}>
+                    <div className="image-wrapper">
+                        <Image
+                            src="/images/finance-bg.jpg"
+                            width={1920}
+                            height={1080}
+                            alt="Finance Programmes"
+                        />
+                    </div>
+                </ParallaxWrapper>
+                <div className="inner-sec">
+                    <div className="container">
+                        <div className="row justify-content-center">
+                            <ScrollReveal direction="clip-fade-up">
+                                <div className="col-lg-8 text-center">
+                                    <div className="heading-wrapper">
+                                        <h2 className="title-text">
+                                            Finance Programmes
+                                        </h2>
+                                    </div>
+                                    <div className="text-content">
+                                        <p>
+                                            The Finance Management Professional Development Programmes at Rise and Shine Institute of Learning are designed to build expertise in the principles and practices that drive global financial systems. Beginning with foundational concepts such as banking, budgeting, valuation, and forecasting, the programmes advance into specialised areas including portfolio management, financial derivatives, equity valuation, and international reporting standards. Each stage combines rigorous academic learning with practical application, enabling learners to understand financial markets, master analytical tools, and make informed strategic decisions. By engaging with real-world case studies, simulations, and industry exposure, students develop the agility, technical acumen, and ethical perspective required to excel in the fast-changing financial sector and lead with confidence across global markets.
+                                        </p>
+
+                                        <Button textLabel="Learn More" customClass="style-2" link={`#`} />
+                                    </div>
                                 </div>
                             </ScrollReveal>
                         </div>
-
-                        <ScrollReveal direction="clip-fade-up" delay={0.25}>
-                            <div className="col-lg-6">
-                                <div className="heading-wrapper">
-                                    <h2 className="title-text">
-                                        Finance Programmes
-                                    </h2>
-                                </div>
-                                <div className="text-content py-0">
-                                    <p>
-                                        The Finance Management Professional Development Programmes at Rise and Shine Institute of Learning are designed to build expertise in the principles and practices that drive global financial systems. Beginning with foundational concepts such as banking, budgeting, valuation, and forecasting, the programmes advance into specialised areas including portfolio management, financial derivatives, equity valuation, and international reporting standards. Each stage combines rigorous academic learning with practical application, enabling learners to understand financial markets, master analytical tools, and make informed strategic decisions. By engaging with real-world case studies, simulations, and industry exposure, students develop the agility, technical acumen, and ethical perspective required to excel in the fast-changing financial sector and lead with confidence across global markets.
-                                    </p>
-
-                                    <Button textLabel="Learn More" link={`#`} />
-                                </div>
-                            </div>
-
-                        </ScrollReveal>
                     </div>
                 </div>
             </section>
@@ -228,37 +265,55 @@ const Academics = () => {
                 </div>
             </section>
 
-            <section className="about-intro-sec programmes-intro sec-gray">
-                <div className="container">
-                    <div className="row page-text-content align-items-center">
-                        <div className="col-lg-6 left-side">
-                            <ScrollReveal direction="clip-scale-out-downward" delay={0.1}>
-                                <div className="image-wrapper">
-                                    <Image
-                                        src="/images/hero-2.jpg"
-                                        width={1920}
-                                        height={1080}
-                                        alt=""
-                                    />
+            <section className="programmes-intro">
+                <ParallaxWrapper offset={20}>
+                    <div className="image-wrapper">
+                        <Image
+                            src="/images/digital-storytelling-bg.jpg"
+                            width={1920}
+                            height={1080}
+                            alt="Digital Storytelling Programmes"
+                        />
+                    </div>
+                </ParallaxWrapper>
+                <div className="inner-sec">
+                    <div className="container">
+                        <div className="row justify-content-center">
+                            <ScrollReveal direction="clip-fade-up">
+                                <div className="col-lg-8 text-center">
+                                    <div className="heading-wrapper">
+                                        <h2 className="title-text">
+                                            Digital Storytelling Programmes
+                                        </h2>
+                                    </div>
+                                    <div className="text-content">
+                                        <p>
+                                            The School of Digital Storytelling at Rise and Shine Institute of Learning is designed to cultivate creative thinkers who understand the power of narrative in a digital-first world. The curriculum introduces learners to the timeless art of storytelling and then extends it into modern contexts through platforms, tools, branding, and marketing. By blending creativity with ethical responsibility and practical industry readiness, the programme equips students to craft compelling narratives that inspire, engage, and influence. Learners graduate with the skills to navigate diverse media landscapes and the confidence to transform ideas into impactful digital stories that resonate across cultures and industries.
+                                        </p>
+
+                                        <Button textLabel="Learn More" customClass="style-2" link={`#`} />
+                                    </div>
                                 </div>
                             </ScrollReveal>
                         </div>
-                        <ScrollReveal direction="clip-fade-up" delay={0.25}>
-                            <div className="col-lg-6">
-                                <div className="heading-wrapper">
-                                    <h2 className="title-text">
-                                        Digital Storytelling Programmes
-                                    </h2>
-                                </div>
-                                <div className="text-content py-0">
-                                    <p>
-                                        The School of Digital Storytelling at Rise and Shine Institute of Learning is designed to cultivate creative thinkers who understand the power of narrative in a digital-first world. The curriculum introduces learners to the timeless art of storytelling and then extends it into modern contexts through platforms, tools, branding, and marketing. By blending creativity with ethical responsibility and practical industry readiness, the programme equips students to craft compelling narratives that inspire, engage, and influence. Learners graduate with the skills to navigate diverse media landscapes and the confidence to transform ideas into impactful digital stories that resonate across cultures and industries.
-                                    </p>
+                    </div>
+                </div>
+            </section>
 
-                                    <Button textLabel="Learn More" link={`#`} />
-                                </div>
+            <section className="programmes-list-sec">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-12">
+                            <div className="programmes-list">
+                                {digital_storytelling_programmes.map((program, index) => (
+                                    <ProgrammeCard
+                                        key={program.title ?? index}
+                                        program={program}
+                                        index={index}
+                                    />
+                                ))}
                             </div>
-                        </ScrollReveal>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -267,16 +322,61 @@ const Academics = () => {
                 <div className="container">
                     <div className="row page-text-content align-items-center">
                         <div className="col-lg-6 left-side">
-                            <ScrollReveal direction="clip-scale-out-downward" delay={0.1}>
-                                <div className="image-wrapper">
-                                    <Image
-                                        src="/images/faculty.jpg"
-                                        width={1920}
-                                        height={1080}
-                                        alt=""
-                                    />
-                                </div>
-                            </ScrollReveal>
+                            <div className="images-pres">
+                                <ScrollReveal direction="fade-up" delay={0.25}>
+                                    <div className="images-col marquee-col">
+                                        <div className="marquee-track">
+                                            {faculty_images.map((img, index) => (
+                                                <div className={`img-wrapper`} key={index} aria-hidden="true">
+                                                    <Image
+                                                        src={img.src}
+                                                        width={500}
+                                                        height={500}
+                                                        alt="Faculty member"
+                                                    />
+                                                </div>
+                                            ))}
+                                            {[...faculty_images].map((img, index) => (
+                                                <div className={`img-wrapper`} key={`duplicate-${index}`} aria-hidden="true">
+                                                    <Image
+                                                        src={img.src}
+                                                        width={500}
+                                                        height={500}
+                                                        alt="Faculty member"
+                                                    />
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </ScrollReveal>
+
+                                <ScrollReveal direction="fade-down" delay={0.25}>
+                                    <div className="images-col marquee-col">
+                                        <div className="marquee-track marquee-reverse">
+                                            {[...faculty_images].reverse().map((img, index) => (
+                                                <div className={`img-wrapper`} key={index} aria-hidden="true">
+                                                    <Image
+                                                        src={img.src}
+                                                        width={500}
+                                                        height={500}
+                                                        alt="Faculty member"
+                                                    />
+                                                </div>
+                                            ))}
+                                            {[...faculty_images].reverse().map((img, index) => (
+                                                <div className={`img-wrapper`} key={`duplicate-${index}`} aria-hidden="true">
+                                                    <Image
+                                                        src={img.src}
+                                                        width={500}
+                                                        height={500}
+                                                        alt="Faculty member"
+                                                    />
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </ScrollReveal>
+                            </div>
                         </div>
 
                         <ScrollReveal direction="clip-fade-up" delay={0.25}>

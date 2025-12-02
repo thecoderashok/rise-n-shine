@@ -9,6 +9,11 @@ const Academics = lazy(() => import('./Pages/Academics/Academics'));
 const Faculties = lazy(() => import('./Pages/Faculties/Faculties'));
 const Admissions = lazy(() => import('./Pages/Admissions/Admissions'));
 const Contact = lazy(() => import('./Pages/Contact/Contact'));
+const Campus = lazy(() => import('./Pages/Campus/Campus'));
+const StudentsLife = lazy(() => import('./Pages/StudentsLife/StudentsLife'));
+const Placement = lazy(() => import('./Pages/Placement/Placement'));
+const Research = lazy(() => import('./Pages/Research/Research'));
+const NewsEvents = lazy(() => import('./Pages/NewsEvents/NewsEvents'));
 
 const AppRoutes = () => {
     const { customPathname } = useCustomRouter();
@@ -33,6 +38,26 @@ const AppRoutes = () => {
         {
             path: "/admissions",
             component: <Admissions />,
+        },
+        {
+            path: "/campus",
+            component: <Campus />,
+        },
+        {
+            path: "/students-life",
+            component: <StudentsLife />,
+        },
+        {
+            path: "/placement",
+            component: <Placement />,
+        },
+        {
+            path: "/research",
+            component: <Research />,
+        },
+        {
+            path: "/news-events",
+            component: <NewsEvents />,
         },
         {
             path: "/contact-us",

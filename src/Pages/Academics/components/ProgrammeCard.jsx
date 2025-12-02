@@ -32,7 +32,7 @@ const ProgrammeCard = ({ program, index = 0 }) => {
                         >
                             {program.title}
                         </h3>
-                        <p className="desc-text">{program.desc}</p>
+                        {program.desc && <p className="desc-text">{program.desc}</p>}
                     </div>
                     <ul className="modules-list">
                         <span className="heading">
