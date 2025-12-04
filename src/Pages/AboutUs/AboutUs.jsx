@@ -6,6 +6,7 @@ import FounderMessageSec from "./components/FounderMessageSec";
 import AboutMarqueeSec from "./components/AboutMarqueeSec";
 import ContactSec from "../components/ContactSec";
 import { usePageSEO } from "../../hook/usePageSEO";
+import FacultyLeadershipSec from "../Faculties/components/FacultyLeadershipSec";
 
 const AboutUs = () => {
     usePageSEO({
@@ -32,6 +33,7 @@ const AboutUs = () => {
             <AboutMarqueeSec />
             <MissionVisionSec />
             <FounderMessageSec />
+            <FacultyLeadershipSec />
             <ContactSec />
         </>
     );

@@ -1,6 +1,8 @@
 import React from "react";
 import PageBannerSec from "../components/PageBannerSec";
 import { usePageSEO } from "../../hook/usePageSEO";
+import CampusFacilitiesSec from "./components/CampusFacilitiesSec";
+import ClubsActivitiesSec from "./components/ClubsActivitiesSec";
 
 const StudentsLife = () => {
     usePageSEO({
@@ -14,15 +16,17 @@ const StudentsLife = () => {
                 pageTitle={"Students Life"}
                 title={
                     <>
-                        Student Life <br /> Beyond the Classroom
+                        Student Life that Inspires <br /> Balance and Belonging
                     </>
                 }
                 breadcrumbs={[
                     { label: "Home", href: "/" },
                     { label: "Students Life" },
                 ]}
-                imageSrc={`/images/hero-banner.jpg`}
+                imageSrc={`/images/students-life.jpg`}
             />
+            <CampusFacilitiesSec />
+            <ClubsActivitiesSec />
         </>
     );
 };

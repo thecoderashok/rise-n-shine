@@ -10,7 +10,7 @@ const MissionVisionSec = () => {
                     <div className="col-lg-6 left-side">
                         <ScrollReveal direction="clip-scale-in-downward" delay={0.2}>
                             <div className="img-wrapper">
-                                <Image src={`/images/hero-banner.jpg`} alt={""} width={746} height={541} />
+                                <Image src={`/images/mission-and-vision.jpg`} alt={""} width={746} height={541} />
                             </div>
                         </ScrollReveal>
                     </div>

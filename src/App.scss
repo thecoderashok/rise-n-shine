@@ -228,6 +228,7 @@ section {
         border-radius: 18px;
 
         img {
+            height: 100%;
             min-height: 420px;
             aspect-ratio: 3/2.25;
             object-fit: cover;
@@ -2083,7 +2084,7 @@ section {
 
         .content-text {
             p {
-                font-size: 1rem;
+                font-size: 0.9rem;
                 line-height: 1.8;
                 font-weight: 500;
                 color: #3d2d3d;
@@ -2124,6 +2125,137 @@ section {
     }
 }
 
+.clubs-activities-sec {
+    position: relative;
+    padding: var(--content-padding-y) 0;
+
+    .gallery-header {
+        padding: 0 var(--content-padding-x);
+        margin-bottom: 50px;
+
+        .row {
+            width: 100%;
+            align-items: flex-start;
+        }
+
+        .content-text {
+            p {
+                font-size: 0.9rem;
+                line-height: 1.8;
+                font-weight: 500;
+                color: #3d2d3d;
+                text-align: left;
+                margin: 0;
+                max-width: 100%;
+            }
+        }
+    }
+
+    .carousel-sec {
+        padding: 0 var(--content-padding-x);
+    }
+
+    .slide-buttons-wrapper {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 30px;
+    }
+
+    .slide-buttons {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .gallery-carousel {
+        width: 100%;
+        margin-top: 10px;
+
+        .swiper {
+            overflow: visible;
+        }
+
+        .swiper-slide {
+            height: auto;
+        }
+    }
+
+    .club-card {
+        position: relative;
+        height: 100%;
+        min-height: 450px;
+        transform: translateZ(0);
+        overflow: hidden;
+        border-radius: 18px;
+
+        .img-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+
+            img {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                aspect-ratio: 3/2.8;
+                object-position: center;
+                object-fit: cover;
+                transition: all 0.6s ease;
+                filter: grayscale(100%);
+            }
+
+            &::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                width: 100%;
+                height: 100%;
+                // background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(100, 33, 101, 0.8) 100%);
+                background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.753) 100%);
+                z-index: 1;
+            }
+        }
+
+        .content-wrapper {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            z-index: 2;
+            gap: 10px;
+
+            .title-text {
+                font-size: 1.4rem;
+                font-weight: 700;
+                color: #ffffff;
+                margin-bottom: 0;
+                line-height: 1.3;
+            }
+
+            .description {
+                font-size: 0.95rem;
+                font-weight: 500;
+                line-height: 1.5;
+                color: rgba(255, 255, 255, 0.9);
+                margin: 0;
+            }
+        }
+
+        &:hover {
+            .img-wrapper {
+                img {
+                    transform: scale(1.05);
+                    filter: grayscale(0%);
+                }
+            }
+        }
+    }
+}
+
 .faculty-gallery-sec {
     position: relative;
     padding: var(--content-padding-y) 0;
@@ -2139,7 +2271,7 @@ section {
 
         .content-text {
             p {
-                font-size: 1rem;
+                font-size: 0.9rem;
                 line-height: 1.8;
                 font-weight: 500;
                 color: #3d2d3d;
@@ -2778,7 +2910,7 @@ section {
             top: 0;
             width: 100%;
             height: 100%;
-            background: rgba(40, 14, 41, 0.849);
+            background-color: rgba(69, 21, 70, 0.8);
             z-index: 2;
         }
     }
@@ -2798,6 +2930,7 @@ section {
             object-fit: cover;
             object-position: center;
             aspect-ratio: auto;
+            filter: grayscale(100%);
         }
     }
 
@@ -4202,5 +4335,134 @@ form {
 
     100% {
         clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 0);
+    }
+}
+
+// Campus Facilities Section
+.campus-facilities-sec {
+    padding: 0 !important;
+    overflow: visible !important;
+    display: flex;
+    flex-wrap: wrap;
+
+    .sec--title-wrapper {
+        margin-bottom: 30px;
+    }
+
+    .inner-sec {
+        position: relative;
+        width: 50%;
+        padding: var(--content-padding-y) var(--content-padding-x);
+        padding-left: 0 !important;
+        display: flex;
+        align-items: center;
+    }
+
+    .sticky-sec {
+        position: sticky;
+        width: 50%;
+        height: 100dvh;
+        top: 0;
+        padding-right: 60px;
+
+        .img-wrapper {
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+            width: 100%;
+            display: flex;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
+                filter: grayscale(100%);
+            }
+
+            &::before {
+                content: "";
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(100, 34, 101, 0.8);
+                z-index: 1;
+            }
+        }
+
+        .inner-content {
+            position: absolute;
+            width: calc(100% - 60px);
+            bottom: 20px;
+            left: 0;
+            padding: 40px;
+            z-index: 2;
+
+            p {
+                margin-bottom: 0;
+                font-size: clamp(1.2rem, 1.25vw, 1.35rem);
+                line-height: 1.6;
+                color: #ffffff;
+            }
+        }
+    }
+
+    .facilities-list-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        --grid-view: 2;
+        --col-gap: 12px;
+        gap: var(--col-gap);
+    }
+
+    .facility-card {
+        position: relative;
+        width: calc(calc(100% - (var(--grid-view) - 1) * var(--col-gap)) / var(--grid-view));
+        height: 100%;
+        min-height: 220px;
+        display: flex;
+        flex-direction: column;
+        border-radius: 12px;
+        padding: 30px 20px;
+        background-color: #f2e8f7;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: var(--color-primary);
+            p {
+                color: #ffffff;
+            }
+
+            .icon {
+                i {
+                    color: #ffffff;
+                }
+            }
+        }
+
+        .icon {
+            position: relative;
+            border-radius: 50%;
+            margin-bottom: 20px;
+
+            i {
+                font-size: 2rem;
+                color: var(--color-primary);
+                transition: color 0.3s ease;
+            }
+        }
+
+        p {
+            margin-top: auto;
+            font-size: 1rem;
+            line-height: 1.4;
+            font-weight: 500;
+            color: rgba(0, 0, 0, 0.884);
+            margin-bottom: 0;
+            text-align: left !important;
+            transition: color 0.3s ease;
+        }
     }
 }
