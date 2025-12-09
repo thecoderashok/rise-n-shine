@@ -6,12 +6,12 @@ import { SwiperSlide } from "swiper/react";
 import GalleryCard from "../../components/GalleryCard";
 
 const galleryItems = [
-    { src: "/images/gallery/1.jpg", title: "Campus Life" },
-    { src: "/images/gallery/1.jpg", title: "Workshops" },
-    { src: "/images/gallery/1.jpg", title: "Events" },
-    { src: "/images/gallery/1.jpg", title: "Labs" },
-    { src: "/images/gallery/1.jpg", title: "Collaborations" },
-    { src: "/images/gallery/1.jpg", title: "Student Life" }
+    { src: "/images/gallery/1.jpg", title: "Class Room" },
+    { src: "/images/gallery/2.jpg", title: "Campus" },
+    { src: "/images/gallery/3.jpg", title: "Events" },
+    { src: "/images/gallery/4.jpg", title: "Labs" },
+    { src: "/images/gallery/5.jpg", title: "Parkings" },
+    { src: "/images/gallery/6.jpg", title: "Student Life" }
 ];
 
 const GallerySec = () => {

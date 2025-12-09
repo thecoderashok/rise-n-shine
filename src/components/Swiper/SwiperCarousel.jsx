@@ -1,7 +1,14 @@
 import React, { useEffect, useMemo, useRef } from "react";
 import { Swiper } from "swiper/react";
-import { Navigation, Autoplay, Pagination, EffectFade, Controller, Parallax } from "swiper/modules";
-import { SwiperSlide } from 'swiper/react';
+import {
+    Navigation,
+    Autoplay,
+    Pagination,
+    EffectFade,
+    Controller,
+    Parallax,
+} from "swiper/modules";
+import { SwiperSlide } from "swiper/react";
 
 const SwiperCarousel = ({
     slidesPerView = 1,
@@ -26,8 +33,8 @@ const SwiperCarousel = ({
     const nextRef = useRef(null);
 
     const slideCount = useMemo(() => {
-        return React.Children.toArray(children).filter(child =>
-            React.isValidElement(child) && child.type === SwiperSlide
+        return React.Children.toArray(children).filter(
+            (child) => React.isValidElement(child) && child.type === SwiperSlide
         ).length;
     }, [children]);
 
@@ -49,7 +56,8 @@ const SwiperCarousel = ({
         return transformed;
     }, [breakpoints, slideCount, loop]);
 
-    const effectiveSlidesPerView = slideCount < slidesPerView ? slideCount : slidesPerView;
+    const effectiveSlidesPerView =
+        slideCount < slidesPerView ? slideCount : slidesPerView;
 
     const shouldLoop = slideCount > effectiveSlidesPerView;
 
@@ -84,12 +92,12 @@ const SwiperCarousel = ({
 
         const swiper = swiperRef.current;
 
-        swiper.on('sliderMove', () => {
+        swiper.on("sliderMove", () => {
             if (swiper.el) {
                 swiper.el.setAttribute("data-lenis-prevent", "true");
             }
         });
-        swiper.on('touchEnd', () => {
+        swiper.on("touchEnd", () => {
             if (swiper.el) {
                 swiper.el.removeAttribute("data-lenis-prevent");
             }
@@ -101,7 +109,7 @@ const SwiperCarousel = ({
         };
     }, []);
 
-    // new feature 
+    // new feature
     const navBtnWrapperRef = useRef(null);
 
     useEffect(() => {
@@ -138,15 +146,26 @@ const SwiperCarousel = ({
     return (
         <div className="carousel-wrapper">
             <Swiper
-                modules={[Navigation, Autoplay, Pagination, EffectFade, Controller, Parallax]}
+                modules={[
+                    Navigation,
+                    Autoplay,
+                    Pagination,
+                    EffectFade,
+                    Controller,
+                    Parallax,
+                ]}
                 parallax={parallax}
                 spaceBetween={spaceBetween}
                 slidesPerView={slidesPerView}
                 speed={speed}
-                navigation={navigationBtns ? {
-                    prevEl: prevRef.current,
-                    nextEl: nextRef.current,
-                } : false}
+                navigation={
+                    navigationBtns
+                        ? {
+                            prevEl: prevRef.current,
+                            nextEl: nextRef.current,
+                        }
+                        : false
+                }
                 loop={loop ? shouldLoop : false}
                 pagination={
                     showPagination
@@ -157,7 +176,15 @@ const SwiperCarousel = ({
                         }
                         : false
                 }
-                autoplay={autoplay ? { delay: autoplayDelay, disableOnInteraction: false, reverseDirection: reverseDir } : false}
+                autoplay={
+                    autoplay
+                        ? {
+                            delay: autoplayDelay,
+                            disableOnInteraction: false,
+                            reverseDirection: reverseDir,
+                        }
+                        : false
+                }
                 onInit={(swiper) => {
                     swiperRef.current = swiper;
                     handleSlideChange(swiper);
@@ -170,15 +197,26 @@ const SwiperCarousel = ({
             >
                 {children}
             </Swiper>
-            {navigationBtns ?
+            {navigationBtns ? (
                 <div className="slider-nav-wrapper" ref={navBtnWrapperRef}>
-                    <span ref={prevRef} className="slide-btn swiper-button-prev" role="button" aria-label="Previous Slide"></span>
-                    <span ref={nextRef} className="slide-btn swiper-button-next" role="button" aria-label="Next Slide" ></span>
-                </div> : <></>
-            }
+                    <span
+                        ref={prevRef}
+                        className="slide-btn swiper-button-prev"
+                        role="button"
+                        aria-label="Previous Slide"
+                    ></span>
+                    <span
+                        ref={nextRef}
+                        className="slide-btn swiper-button-next"
+                        role="button"
+                        aria-label="Next Slide"
+                    ></span>
+                </div>
+            ) : (
+                <></>
+            )}
         </div>
     );
 };
 
 export default SwiperCarousel;
-

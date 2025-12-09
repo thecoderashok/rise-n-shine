@@ -703,12 +703,12 @@ section {
                 margin-bottom: 80px;
                 aspect-ratio: 1/1.3;
 
-                img {
-                    object-position: auto 50%;
-                }
             }
             &.small {
                 aspect-ratio: 1/1.5;
+                img {
+                    object-position: 60% center;
+                }
             }
         }
     }
@@ -2027,15 +2027,15 @@ section {
         inset: 0;
         display: flex;
         align-items: flex-end;
-        padding: 26px;
+        padding: 20px;
         background: linear-gradient(180deg, rgba(12, 6, 17, 0) 35%, rgba(12, 6, 17, 0.55) 100%);
 
         .label {
             display: inline-flex;
             align-items: center;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             gap: 10px;
-            padding: 8px 20px;
+            padding: 6px 16px;
             border-radius: 999px;
             background: rgba(0, 0, 0, 0.363);
             color: #ffffff;

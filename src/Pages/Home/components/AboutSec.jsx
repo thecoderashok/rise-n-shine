@@ -25,7 +25,7 @@ const AboutSec = () => {
                                 <div className="img-wrapper small">
                                     <ParallaxWrapper offset={10}>
                                         <Image
-                                            src={`/images/about-img.jpg`}
+                                            src={`/images/home-01.jpg`}
                                             width={1920}
                                             height={1080}
                                         />
@@ -36,7 +36,7 @@ const AboutSec = () => {
                                 <div className="img-wrapper large">
                                     <ParallaxWrapper offset={10}>
                                         <Image
-                                            src={`/images/hero-1.jpg`}
+                                            src={`/images/home-02.jpg`}
                                             width={1920}
                                             height={1080}
                                         />
