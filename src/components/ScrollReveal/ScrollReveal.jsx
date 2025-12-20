@@ -168,16 +168,32 @@ const ScrollReveal = ({
         once,
     ]);
 
+    const childRef = children.props?.ref || null;
+
+    const mergeRefs = (...refs) => {
+        return (instance) => {
+            refs.forEach(ref => {
+                if (typeof ref === 'function') {
+                    ref(instance);
+                } else if (ref != null) {
+                    ref.current = instance;
+                }
+            });
+        };
+    };
+
+    const mergedRef = mergeRefs(childRef, internalRef);
+
     if (!children || typeof children !== 'object' || !('type' in children)) {
         console.warn('ScrollReveal expects a valid React element as its child.');
         return null;
     }
 
     return cloneElement(children, {
-        ref: internalRef,
+        ref: mergedRef
     });
 };
 
-export default React.memo(ScrollReveal);
+export default ScrollReveal;
 
 

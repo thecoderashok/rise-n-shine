@@ -1,6 +1,5 @@
 import React from "react";
 import Image from "../../../components/Image";
-import TextSplit from "../../../components/TextSplit";
 import Button from "../../../components/Button/Button";
 import ParallaxWrapper from "../../../components/Parallax/ParallaxWrapper";
 import ScrollReveal from "../../../components/ScrollReveal/ScrollReveal";
@@ -61,9 +60,7 @@ const AboutSec = () => {
                                     but innovators and industry leaders of tomorrow.
                                 </p>
 
-                                <ScrollReveal direction="clip-scale-out-downward" delay={0.3}>
-                                    <Button textLabel={"Read more"} iconClass="fa-solid fa-arrow-right" />
-                                </ScrollReveal>
+                                <Button textLabel={"Read more"} iconClass="fa-solid fa-arrow-right" customClass={"style-1"} revealAnimation />
                             </div>
                         </ScrollReveal>
                     </div>

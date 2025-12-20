@@ -32,7 +32,7 @@ const ContactSec = () => {
     );
 
     return (
-        <section className="contact-sec sec-gray-2" id="contact">
+        <section className="contact-sec">
             <div className="container">
                 <div className="row justify-content-center">
                     <div className="col-12 ">
@@ -77,7 +77,7 @@ const ContactSec = () => {
                                     </aside>
                                 </div>
                             </ScrollReveal>
-                            <ScrollReveal direction="fade-right" offset={30} delay={0.4}>
+                            <ScrollReveal direction="fade-up" offset={40} delay={0.4}>
                                 <div className="col-lg-7">
                                     <div className="contact-form-panel">
                                         <div className="contactForm-container">

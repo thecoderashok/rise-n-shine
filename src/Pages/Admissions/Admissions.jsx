@@ -3,8 +3,8 @@ import PageBannerSec from "../components/PageBannerSec";
 import SecTitle from "../../components/SecTitle";
 import ScrollReveal from "../../components/ScrollReveal/ScrollReveal";
 import ContactSec from "../components/ContactSec";
-import Image from "../../components/Image";
 import ApplicationFormSec from "./components/ApplicationFormSec";
+import LeftRightImageTextSec from "../components/LeftRightImageTextSec"
 import { usePageSEO } from "../../hook/usePageSEO";
 
 const admissionSteps = [
@@ -107,50 +107,36 @@ const Admissions = () => {
                 imageSrc={`/images/hero-banner.jpg`}
             />
 
-            <section className="about-intro-sec admissions-intro sec-gray">
-                <div className="container">
-                    <div className="row page-text-content align-items-center">
-                        <div className="col-lg-6 left-side">
-                            <ScrollReveal direction="clip-scale-out-downward" delay={0.1}>
-                                <div className="image-wrapper">
-                                    <Image
-                                        src="/images/hero-2.jpg"
-                                        width={1920}
-                                        height={1080}
-                                        alt=""
-                                    />
-                                </div>
-                            </ScrollReveal>
-                        </div>
-
-                        <ScrollReveal direction="clip-fade-up" delay={0.25}>
-                            <div className="col-lg-6">
-                                <div className="heading-wrapper">
-                                    <h2 className="title-text">Admission Process</h2>
-                                </div>
-                                <div className="text-content py-0">
-                                    <p>
-                                        The admission process at Rise and Shine Institute of Learning
-                                        is designed to be transparent, structured, and
-                                        student-centric. From the initial notification and application
-                                        stage through to candidate assessment, shortlisting, and the
-                                        preparation of merit lists, every step is carried out with
-                                        fairness and clarity. Selected candidates receive formal
-                                        communication and selection letters, with additional
-                                        opportunities provided through wait-listed admissions. The
-                                        process concludes with admission confirmation, orientation,
-                                        and induction, ensuring that every aspirant begins the
-                                        academic journey with confidence and a clear understanding of
-                                        expectations. A dedicated policy on admission cancellation and
-                                        refunds further reflects the institute's commitment to
-                                        integrity and trust.
-                                    </p>
-                                </div>
-                            </div>
-                        </ScrollReveal>
-                    </div>
-                </div>
-            </section>
+            <LeftRightImageTextSec
+                imagePosition="left"
+                image={{
+                    src: "/images/image-placeholder.jpg",
+                    width: 1200,
+                    height: 800,
+                }}
+                mainTitle={<>Admission Process</>}
+                content={
+                    `<p>
+                        The admission process at Rise and Shine Institute of Learning
+                        is designed to be transparent, structured, and
+                        student-centric. From the initial notification and application
+                        stage through to candidate assessment, shortlisting, and the
+                        preparation of merit lists, every step is carried out with
+                        fairness and clarity. Selected candidates receive formal
+                        communication and selection letters, with additional
+                        opportunities provided through wait-listed admissions. The
+                        process concludes with admission confirmation, orientation,
+                        and induction, ensuring that every aspirant begins the
+                        academic journey with confidence and a clear understanding of
+                        expectations. A dedicated policy on admission cancellation and
+                        refunds further reflects the institute's commitment to
+                        integrity and trust.
+                    </p>`
+                }
+                imageColClass={"col-lg-6"}
+                contentColClass={"col-lg-6"}
+                sectionClass="sec-dark"
+            />
 
             <section className="admissions-timeline-sec">
                 <div className="container">
@@ -196,7 +182,7 @@ const Admissions = () => {
                 </div>
             </section>
 
-            <section className="eligibility-sec sec-gray">
+            <section className="eligibility-sec sec-dark">
                 <div className="container">
                     <div className="row align-items-center">
                         <div className="col-lg-6">

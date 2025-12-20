@@ -9,6 +9,8 @@ import TransitionWrapper from "./components/Route/TransitionWrapper";
 import ToastProvider from "./context/Toast/ToastProvider";
 import LenisProvider from "./context/Lenis/LenisProvider";
 import useHashScroll from "./hook/useHashScroll";
+import ModalProvider from "./context/Modal/ModalProvider"
+import OnlineAddmissionModal from "./components/Modal/OnlineAddmissionModal"
 import AppRoutes from "./AppRoutes";
 
 function App() {
@@ -22,12 +24,15 @@ function App() {
                     <LoaderProvider>
                         <ResizeProvider>
                             <ScrollProvider>
-                                <FormLoaderProvider>
-                                    <ToastProvider>
-                                        <TransitionWrapper />
-                                        <AppRoutes />
-                                    </ToastProvider>
-                                </FormLoaderProvider>
+                                <ModalProvider>
+                                    <FormLoaderProvider>
+                                        <ToastProvider>
+                                            <TransitionWrapper />
+                                            <AppRoutes />
+                                            <OnlineAddmissionModal />
+                                        </ToastProvider>
+                                    </FormLoaderProvider>
+                                </ModalProvider>
                             </ScrollProvider>
                         </ResizeProvider>
                     </LoaderProvider>

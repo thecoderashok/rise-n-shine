@@ -113,6 +113,8 @@
 }
 
 [data-scroll-reveal="clip-reveal-around"],
+[data-scroll-reveal="clip-scale-in-upward"],
+[data-scroll-reveal="clip-scale-out-upward"],
 [data-scroll-reveal="clip-scale-out-downward"],
 [data-scroll-reveal="clip-scale-in-downward"] {
     position: relative;
@@ -121,6 +123,8 @@
 }
 
 [data-scroll-reveal="clip-reveal-around"] p,
+[data-scroll-reveal="clip-scale-in-upward"] p,
+[data-scroll-reveal="clip-scale-out-upward"] p,
 [data-scroll-reveal="clip-scale-out-downward"] p,
 [data-scroll-reveal="clip-scale-in-downward"] p {
     transform: translateZ(0);
@@ -137,6 +141,12 @@
 
 [data-scroll-reveal="clip-scale-in-downward"].is-inview {
     animation: clip-scale-in-downward var(--scroll-reveal-duration, 1s) cubic-bezier(0.16, 1, 0.45, 1) var(--scroll-reveal-delay, 0s) both;
+}
+[data-scroll-reveal="clip-scale-in-upward"].is-inview {
+    animation: clip-scale-in-upward var(--scroll-reveal-duration, 1s) cubic-bezier(0.16, 1, 0.45, 1) var(--scroll-reveal-delay, 0s) both;
+}
+[data-scroll-reveal="clip-scale-out-upward"].is-inview {
+    animation: clip-scale-out-upward var(--scroll-reveal-duration, 1s) cubic-bezier(0.16, 1, 0.45, 1) var(--scroll-reveal-delay, 0s) both;
 }
 
 @keyframes clip-reveal-around {
@@ -177,6 +187,33 @@
     to {
         opacity: 1;
         clip-path: inset(0 0 0% 0);
+        transform: translateZ(0) scale(1);
+    }
+}
+
+@keyframes clip-scale-in-upward {
+    from {
+        opacity: 0;
+        clip-path: inset(100% 0 0 0);
+        transform: translateZ(0) scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        clip-path: inset(0% 0 0 0);
+        transform: translateZ(0) scale(1);
+    }
+}
+@keyframes clip-scale-out-upward {
+    from {
+        opacity: 0;
+        clip-path: inset(100% 0 0 0);
+        transform: translateZ(0) scale(1.2);
+    }
+
+    to {
+        opacity: 1;
+        clip-path: inset(0% 0 0 0);
         transform: translateZ(0) scale(1);
     }
 }

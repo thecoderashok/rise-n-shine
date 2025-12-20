@@ -9,15 +9,16 @@ import { Link, useLocation } from "react-router";
 import MenuItem from "./MenuItem";
 import styles from "./Header.module.scss";
 import Hamburger from "hamburger-react";
-import { GetHeaderMenu } from "../../data/MenuData";
 import { useClassNames } from "../../hook/useClassNames";
 import { useLenis } from "lenis/react";
 import gsap from "gsap";
 import Button from "../Button/Button";
 import { useLoader } from "../../context/Loader/LoaderContext";
+import { useModal } from "../../context/Modal/ModalContext";
+import { getMenu } from "../../lib/menu";
 
 const MainHeader = ({ isTransparent }) => {
-    const menuData = useMemo(() => GetHeaderMenu(), []);
+    const menuData = useMemo(() => getMenu(), []);
     const { HeaderMenu } = menuData;
     const { isMounted } = useLoader();
     const location = useLocation();
@@ -238,6 +239,8 @@ const MainHeader = ({ isTransparent }) => {
         );
     }, [isTransparent, isSticky, isHidden, classes]);
 
+    const {openModal} = useModal();
+
     return (
         <header
             className={computedClassName}
@@ -299,7 +302,7 @@ const MainHeader = ({ isTransparent }) => {
                     </div>
 
                     <div className="col-auto pe-0">
-                        <Button textLabel={"Apply Now"} iconClass="fa-solid fa-arrow-right-to-bracket" />
+                        <Button textLabel={"Apply Now"} iconClass="fa-solid fa-arrow-right-to-bracket" onClick={() => openModal({ modalName: "online_admission" })} />
                     </div>
 
                     <div className={classes("col-auto pe-0", styles.menu_btn_wrapper)} data-state={menuOpen ? "opened" : "closed"}>

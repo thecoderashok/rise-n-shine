@@ -1,4 +1,5 @@
-import { useState, useEffect, useRef } from "react";
+
+import { useState, useEffect, useRef, useCallback } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { useToast } from "../context/Toast/ToastContext";
 import { useFormLoader } from "../context/FormLoader/FormLoaderContext";
@@ -13,16 +14,15 @@ export const useFormSubmit = ({
     const { showToast } = useToast();
     const { showFormLoader, hideFormLoader } = useFormLoader();
     const [formData, setFormData] = useState(initialData);
-    const [errors, setErrors] = useState({});
+    const [formValidation, setFormValidation] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const itiRef = useRef(null);
+    const intlTelInputRef = useRef(null);
 
     useEffect(() => {
         const handleBeforeUnload = (e) => {
             if (isSubmitting) {
-                e.returnValue =
-                    "Your message is still being sent. Are you sure you want to leave?";
+                e.returnValue = "Your message is still being sent. Are you sure you want to leave?";
                 return e.returnValue;
             }
         };
@@ -30,25 +30,68 @@ export const useFormSubmit = ({
         return () => window.removeEventListener("beforeunload", handleBeforeUnload);
     }, [isSubmitting]);
 
-    const handleChange = (e) => {
+    const handleChange = useCallback((e) => {
         const { name, value } = e.target;
-        setFormData((prev) => ({ ...prev, [name]: value }));
-        setErrors((prev) => ({ ...prev, [name]: "" }));
-    };
+
+        setFormData((prev) => {
+            const updatedData = { ...prev, [name]: value };
+            const validationErrors = handleValidation(updatedData, intlTelInputRef);
+
+            setFormValidation((prevValidation) => ({
+                ...prevValidation,
+                [name]: {
+                    error: validationErrors[name]?.error || "",
+                    isInvalid: validationErrors[name]?.isInvalid || false,
+                },
+            }));
+
+            return updatedData;
+        });
+    }, [handleValidation, intlTelInputRef]);
 
     const resetForm = () => {
         setFormData(initialData);
-        setErrors({});
+        setFormValidation({});
     };
+
+    const addInvalidAnimation = useCallback((form) => {
+        if (!form) return;
+        const invalidInputs = form.querySelectorAll('input.is-invalid, .phone-input.is-invalid');
+
+        invalidInputs.forEach((input) => {
+            if (!input.classList.contains('shake-animation')) {
+                input.classList.add('shake-animation');
+                const handleAnimationEnd = () => {
+                    input.classList.remove('shake-animation');
+                    input.removeEventListener('animationend', handleAnimationEnd);
+                };
+                input.addEventListener('animationend', handleAnimationEnd);
+            }
+        });
+    }, [])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         const form = e.target;
         form.classList.add("was-validated");
 
-        const errs = handleValidation(formData, itiRef) || {};
-        if (Object.keys(errs).length > 0) {
-            setErrors(errs);
+        const validations = handleValidation(formData, intlTelInputRef);
+        const hasInvalidFields = Object.values(validations).some(
+            (fieldValidation) => fieldValidation?.isInvalid === true
+        );
+
+        if (hasInvalidFields) {
+            setFormValidation((prev) => {
+                const next = { ...prev };
+                Object.entries(validations).forEach(([name, fieldValidation]) => {
+                    next[name] = {
+                        error: fieldValidation?.error || "",
+                        isInvalid: fieldValidation?.isInvalid || false,
+                    };
+                });
+                return next;
+            });
+            addInvalidAnimation(form);
             return;
         }
 
@@ -71,13 +114,13 @@ export const useFormSubmit = ({
                     <EmailTable data={formArray} />
                 );
 
-                response = await fetch("/api/send-email", {
+                response = await fetch("https://verligte.com/api/send-email.php", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
                         sender: {
                             name: mailerSetting.fromName,
-                            email: "verligte@gmail.com",
+                            email: "niyaz@wisecowconsultants.com ",
                         },
                         to: mailerSetting.sendTo,
                         cc: mailerSetting.sendToCC,
@@ -86,10 +129,11 @@ export const useFormSubmit = ({
                     }),
                 });
 
-                const responseInText = await response.text();
+                const text = await response.text();
+                console.log("Raw Response:", text);
 
                 try {
-                    result = JSON.parse(responseInText);
+                    result = JSON.parse(text);
                 } catch {
                     result = { success: false, error: "Invalid JSON response" };
                 }
@@ -99,8 +143,6 @@ export const useFormSubmit = ({
                 if (!response.ok || !result.success) {
                     throw new Error(result.error || "Failed to send message.");
                 }
-            } else if (emailMethod === "php") {
-                return;
             }
 
             const modal = form.closest(".modal");
@@ -113,18 +155,16 @@ export const useFormSubmit = ({
 
             resetForm();
             hideFormLoader();
-            // alert("Thank you! Your message has been sent successfully.")
             showToast({
                 message: "Thank you! Your message has been sent successfully.",
-                type: "success",
+                type: "success"
             });
         } catch (error) {
             console.error(error);
             hideFormLoader();
-            // alert("Submission failed. Please try again.")
             showToast({
                 message: "Submission failed. Please try again.",
-                type: "error",
+                type: "error"
             });
         } finally {
             form.classList.remove("was-validated");
@@ -139,13 +179,13 @@ export const useFormSubmit = ({
 
     return {
         formData,
-        setFormData,
-        errors,
-        setErrors,
         isSubmitting,
         handleChange,
         handleSubmit,
         resetForm,
-        itiRef,
+        setFormData,
+        formValidation,
+        setFormValidation,
+        intlTelInputRef,
     };
 };

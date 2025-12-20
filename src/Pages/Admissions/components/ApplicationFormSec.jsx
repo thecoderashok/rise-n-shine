@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import SecTitle from "../../../components/SecTitle";
 import Button from "../../../components/Button/Button";
 import ScrollReveal from "../../../components/ScrollReveal/ScrollReveal";
-import AdmissionPageForm from "../../../components/Forms/AdmissionPageForm";
 import { useClassNames } from "../../../hook/useClassNames";
+import { useModal } from "../../../context/Modal/ModalContext";
 
 const ApplicationFormSec = () => {
     const classes = useClassNames();
@@ -12,7 +12,11 @@ const ApplicationFormSec = () => {
     const formTypes = [
         { id: "marketing", label: "Marketing", icon: "fa-solid fa-bullhorn" },
         { id: "finance", label: "Finance", icon: "fa-solid fa-chart-line" },
-        { id: "digital-storytelling", label: "Digital Storytelling", icon: "fa-solid fa-pen-nib" }
+        {
+            id: "digital-storytelling",
+            label: "Digital Storytelling",
+            icon: "fa-solid fa-pen-nib",
+        },
     ];
 
     const handleDownloadForm = (e) => {
@@ -20,13 +24,9 @@ const ApplicationFormSec = () => {
         alert("Download form coming soon");
     };
 
-    const handleOpenModal = (e) => {
-        e.preventDefault();
-        const modalElement = document.getElementById("applyOnlineModal");
-        if (modalElement && window.bootstrap) {
-            const modal = new window.bootstrap.Modal(modalElement);
-            modal.show();
-        }
+    const { openModal } = useModal();
+    const handleModalOpen = () => {
+        return openModal({ modalName: "online_admission" })
     };
 
     return (
@@ -36,8 +36,15 @@ const ApplicationFormSec = () => {
                     <div className="row">
                         <div className="col-12 text-center">
                             <SecTitle
-                                mainTitle={<><b className="colored">Application Form</b> <br /> Specialization Programmes</>}
-                                desc={"Download the application form for your preferred programme or apply online directly through our streamlined application process."}
+                                mainTitle={
+                                    <>
+                                        <b className="colored">Application Form</b> <br />{" "}
+                                        Specialization Programmes
+                                    </>
+                                }
+                                desc={
+                                    "Download the application form for your preferred programme or apply online directly through our streamlined application process."
+                                }
                             />
                         </div>
                     </div>
@@ -52,7 +59,11 @@ const ApplicationFormSec = () => {
                                             selectedFormType === formType.id && "active"
                                         );
                                         return (
-                                            <ScrollReveal key={index} direction="clip-scale-in-downward" delay={0.1 * (index + 1)}>
+                                            <ScrollReveal
+                                                key={index}
+                                                direction="clip-scale-in-downward"
+                                                delay={0.1 * (index + 1)}
+                                            >
                                                 <div className="form-type-item-wrapper">
                                                     <div
                                                         className={itemClasses}
@@ -81,7 +92,7 @@ const ApplicationFormSec = () => {
                                         <Button
                                             textLabel="Apply Online"
                                             iconClass="fa-solid fa-arrow-right-to-bracket"
-                                            onClick={handleOpenModal}
+                                            onClick={handleModalOpen}
                                             customClass="apply-online-btn style-2"
                                         />
                                     </div>
@@ -91,26 +102,8 @@ const ApplicationFormSec = () => {
                     </div>
                 </div>
             </section>
-
-            {/* Apply Online Modal */}
-            <div className="modal fade" id="applyOnlineModal" tabIndex="-1" aria-labelledby="applyOnlineModalLabel" aria-hidden="true">
-                <div className="modal-dialog modal-dialog-centered modal-lg">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h5 className="modal-title" id="applyOnlineModalLabel">Apply Online</h5>
-                            <button type="button" className="btn-close-custom" data-bs-dismiss="modal" aria-label="Close">
-                                <i className="fa-solid fa-xmark"></i>
-                            </button>
-                        </div>
-                        <div className="modal-body">
-                            <AdmissionPageForm />
-                        </div>
-                    </div>
-                </div>
-            </div>
         </>
     );
 };
 
 export default ApplicationFormSec;
-

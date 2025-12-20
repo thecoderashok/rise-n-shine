@@ -1,8 +1,5 @@
 import React from 'react';
 import Image from '../../../components/Image';
-import SwiperCarousel from '../../../components/Swiper/SwiperCarousel';
-import { SwiperSlide } from 'swiper/react';
-import ScrollReveal from '../../../components/ScrollReveal/ScrollReveal';
 import SecTitle from '../../../components/SecTitle';
 
 const facilitiesData = [

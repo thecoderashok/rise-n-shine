@@ -1,52 +1,59 @@
 import React from "react";
 import Image from "../../components/Image";
+import { Fancybox } from "@fancyapps/ui";
+import { useClassNames } from "../../hook/useClassNames";
 
 const GalleryCard = ({
-    data = {},
-    onClick,
-    className = "",
+    item,
+    gallery = [],
+    itemIndex = 0,
+    customClass,
     ...props
 }) => {
+    const classes = useClassNames();
     const {
-        src,
-        alt = "",
+        image = "",
         title = null,
         width = 1200,
         height = 900,
         loading = "lazy",
-    } = data;
+    } = item;
+
+    const handleViewImage = () => {
+        const allImages = gallery.map((g) => ({
+            src: g.image.src,
+            type: "image",
+            caption: g.title || null,
+        }));
+
+        Fancybox.show(allImages, {
+            startIndex: itemIndex,
+        });
+    };
 
     return (
         <div
-            className={`gallery-card ${className}`}
-            onClick={onClick}
-            role={onClick ? "button" : undefined}
-            tabIndex={onClick ? 0 : undefined}
-            onKeyDown={onClick ? (e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    onClick(e);
-                }
-            } : undefined}
+            className={classes("gallery-card", customClass)}
+            onClick={handleViewImage}
             {...props}
         >
             <div className="img-wrapper">
                 <Image
-                    src={src}
-                    alt={alt}
+                    src={image.src}
+                    alt={image.alt}
                     width={width}
                     height={height}
                     loading={loading}
                 />
             </div>
-            <div className="overlay">
-                {title && (
+
+            {title && (
+                <div className="overlay">
                     <span className="label">{title}</span>
-                )}
-            </div>
+                </div>
+            )}
         </div>
     );
 };
 
 export default GalleryCard;
-

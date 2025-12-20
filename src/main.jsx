@@ -8,6 +8,7 @@ import "swiper/css/pagination";
 import "swiper/css/effect-fade";
 import "intl-tel-input/build/css/intlTelInput.css";
 import 'lenis/dist/lenis.css'
+import "@fancyapps/ui/dist/fancybox/fancybox.css";
 import './index.css'
 import "./components/ScrollReveal/ScrollReveal.css"
 import App from './App.jsx'

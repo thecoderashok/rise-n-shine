@@ -1,18 +1,22 @@
-import React from "react";
+import React, { useRef } from "react";
 import Button from "../Button/Button";
 import IntlTelInputField from "./IntlTelInputField";
 import { useFormSubmit } from "../../hook/useFormSubmit";
 import { getMailerSettings } from "../../mailerSettings";
+import { useClassNames } from "../../hook/useClassNames";
 
 const AdmissionForm = () => {
+    const classes = useClassNames();
+    const formRef = useRef(null);
+
     const {
         formData,
-        errors,
         handleChange,
         handleSubmit,
+        intlTelInputRef,
+        formValidation,
         setFormData,
-        setErrors,
-        itiRef,
+        setFormValidation,
     } = useFormSubmit({
         initialData: {
             firstName: "",
@@ -25,22 +29,73 @@ const AdmissionForm = () => {
             curriculum: "",
             details: "",
         },
-        handleValidation: (values, phoneItiRef) => {
-            const errs = {};
-            if (!values.firstName.trim()) errs.firstName = "First name is required.";
-            if (!values.lastName.trim()) errs.lastName = "Last name is required.";
-            if (!/\S+@\S+\.\S+/.test(values.email)) errs.email = "Valid email address is required.";
 
-            const itiInstance = phoneItiRef?.current;
-            const isPhoneValid = itiInstance ? itiInstance.isValidNumber() : /^\+?[0-9]{10,15}$/.test(values.phone);
-            if (!values.phone.trim() || !isPhoneValid) errs.phone = "Valid phone number is required.";
+        handleValidation: (fields, intlTelInputRef) => {
+            const validation = {};
+            const isEmpty = (value) => !value || !String(value).trim();
 
-            if (!values.dob) errs.dob = "Date of birth is required.";
-            if (!values.country) errs.country = "Country of residence is required.";
-            if (!values.intake) errs.intake = "Select an intake of interest.";
-            if (!values.curriculum) errs.curriculum = "Select a curriculum.";
-            return errs;
+            const validate = ({ name, condition, error }) => {
+                if (condition) {
+                    validation[name] = {
+                        isInvalid: true,
+                        error,
+                    };
+                }
+            };
+
+            validate({
+                name: "firstName",
+                condition: isEmpty(fields.firstName),
+                error: "First name is required.",
+            });
+
+            validate({
+                name: "lastName",
+                condition: isEmpty(fields.lastName),
+                error: "Last name is required.",
+            });
+
+            validate({
+                name: "email",
+                condition: !/\S+@\S+\.\S+/.test(fields.email),
+                error: "Valid email address is required.",
+            });
+
+            validate({
+                name: "phone",
+                condition:
+                    !intlTelInputRef.current ||
+                    !intlTelInputRef.current.isValidNumber(),
+                error: "Valid phone number is required.",
+            });
+
+            validate({
+                name: "dob",
+                condition: !fields.dob,
+                error: "Date of birth is required.",
+            });
+
+            validate({
+                name: "country",
+                condition: isEmpty(fields.country),
+                error: "Country of residence is required.",
+            });
+
+            validate({
+                name: "intake",
+                condition: isEmpty(fields.intake),
+                error: "Select an intake of interest.",
+            });
+
+            validate({
+                name: "curriculum",
+                condition: isEmpty(fields.curriculum),
+                error: "Select a curriculum.",
+            });
+
+            return validation;
         },
+
         emailMethod: "api",
         mailerSetting: getMailerSettings({
             subject: "Admission Enquiry from Website",
@@ -48,67 +103,82 @@ const AdmissionForm = () => {
         }),
     });
 
-    const handlePhoneNumberChange = (formattedNumber) => {
-        setFormData((prev) => ({ ...prev, phone: formattedNumber || "" }));
-        setErrors((prev) => ({ ...prev, phone: "" }));
-    };
-
     return (
-        <form className="admission-form needs-validation" onSubmit={handleSubmit} noValidate>
+        <form
+            ref={formRef}
+            className="admission-form needs-validation"
+            onSubmit={handleSubmit}
+            noValidate
+        >
             <div className="row g-3">
                 <div className="col-md-6">
                     <label className="form-label">First name*</label>
                     <input
                         type="text"
-                        className={`form-control ${errors.firstName ? "is-invalid" : ""}`}
-                        placeholder="First name"
                         name="firstName"
+                        className={classes(
+                            "form-control",
+                            formValidation.firstName?.isInvalid && "is-invalid"
+                        )}
+                        placeholder="First name"
                         value={formData.firstName}
                         onChange={handleChange}
-                        required
                     />
-                    <div className="invalid-feedback">{errors.firstName}</div>
+                    <div className="invalid-feedback">
+                        {formValidation.firstName?.error}
+                    </div>
                 </div>
+
                 <div className="col-md-6">
                     <label className="form-label">Last name*</label>
                     <input
                         type="text"
-                        className={`form-control ${errors.lastName ? "is-invalid" : ""}`}
-                        placeholder="Last name"
                         name="lastName"
+                        className={classes(
+                            "form-control",
+                            formValidation.lastName?.isInvalid && "is-invalid"
+                        )}
+                        placeholder="Last name"
                         value={formData.lastName}
                         onChange={handleChange}
-                        required
                     />
-                    <div className="invalid-feedback">{errors.lastName}</div>
+                    <div className="invalid-feedback">
+                        {formValidation.lastName?.error}
+                    </div>
                 </div>
 
                 <div className="col-md-6">
                     <label className="form-label">Email*</label>
                     <input
                         type="email"
-                        className={`form-control ${errors.email ? "is-invalid" : ""}`}
-                        placeholder="Email"
                         name="email"
+                        className={classes(
+                            "form-control",
+                            formValidation.email?.isInvalid && "is-invalid"
+                        )}
+                        placeholder="Email"
                         value={formData.email}
                         onChange={handleChange}
-                        required
                     />
-                    <div className="invalid-feedback">{errors.email}</div>
+                    <div className="invalid-feedback">
+                        {formValidation.email?.error}
+                    </div>
                 </div>
+
                 <div className="col-md-6">
                     <label className="form-label">Phone number*</label>
                     <IntlTelInputField
-                        className={`form-control ${errors.phone ? "is-invalid" : ""}`}
+                        id="phone"
                         name="phone"
-                        placeholder="Mobile number"
-                        itiRef={itiRef}
-                        value={formData.phone}
-                        itiConfig={{ initialCountry: "ae", nationalMode: false }}
+                        className={classes(
+                            "form-control phone-input",
+                            formValidation.phone?.isInvalid && "is-invalid"
+                        )}
+                        intlTelInputRef={intlTelInputRef}
+                        error={formValidation.phone?.error}
+                        setFormData={setFormData}
+                        setFormValidation={setFormValidation}
                         required
-                        onChange={handleChange}
-                        onNumberChange={handlePhoneNumberChange}
-                        error={errors.phone}
                     />
                 </div>
 
@@ -116,76 +186,93 @@ const AdmissionForm = () => {
                     <label className="form-label">Date of birth*</label>
                     <input
                         type="date"
-                        className={`form-control ${errors.dob ? "is-invalid" : ""}`}
-                        placeholder="DD-MM-YYYY"
                         name="dob"
+                        className={classes(
+                            "form-control",
+                            formValidation.dob?.isInvalid && "is-invalid"
+                        )}
                         value={formData.dob}
                         onChange={handleChange}
-                        required
                     />
-                    <div className="invalid-feedback">{errors.dob}</div>
+                    <div className="invalid-feedback">
+                        {formValidation.dob?.error}
+                    </div>
                 </div>
+
                 <div className="col-md-6">
                     <label className="form-label">Country of Residence*</label>
                     <select
-                        className={`form-select ${errors.country ? "is-invalid" : ""}`}
                         name="country"
+                        className={classes(
+                            "form-select",
+                            formValidation.country?.isInvalid && "is-invalid"
+                        )}
                         value={formData.country}
                         onChange={handleChange}
-                        required
                     >
-                        <option value="" disabled>Select</option>
+                        <option value="">Select</option>
                         <option value="uae">United Arab Emirates</option>
                         <option value="in">India</option>
                         <option value="uk">United Kingdom</option>
                         <option value="us">United States</option>
                         <option value="sa">Saudi Arabia</option>
                     </select>
-                    <div className="invalid-feedback">{errors.country}</div>
+                    <div className="invalid-feedback">
+                        {formValidation.country?.error}
+                    </div>
                 </div>
 
                 <div className="col-md-6">
                     <label className="form-label">Intake of interest*</label>
                     <select
-                        className={`form-select ${errors.intake ? "is-invalid" : ""}`}
                         name="intake"
+                        className={classes(
+                            "form-select",
+                            formValidation.intake?.isInvalid && "is-invalid"
+                        )}
                         value={formData.intake}
                         onChange={handleChange}
-                        required
                     >
-                        <option value="" disabled>Select</option>
+                        <option value="">Select</option>
                         <option value="jan">January</option>
                         <option value="apr">April</option>
                         <option value="jul">July</option>
                         <option value="oct">October</option>
                     </select>
-                    <div className="invalid-feedback">{errors.intake}</div>
+                    <div className="invalid-feedback">
+                        {formValidation.intake?.error}
+                    </div>
                 </div>
+
                 <div className="col-md-6">
                     <label className="form-label">Curriculum*</label>
                     <select
-                        className={`form-select ${errors.curriculum ? "is-invalid" : ""}`}
                         name="curriculum"
+                        className={classes(
+                            "form-select",
+                            formValidation.curriculum?.isInvalid && "is-invalid"
+                        )}
                         value={formData.curriculum}
                         onChange={handleChange}
-                        required
                     >
-                        <option value="" disabled>Select</option>
-                        <option value="marketing">Marketing &amp; Sales</option>
-                        <option value="finance">Finance &amp; Analytics</option>
-                        <option value="tech">Technology &amp; AI</option>
+                        <option value="">Select</option>
+                        <option value="marketing">Marketing & Sales</option>
+                        <option value="finance">Finance & Analytics</option>
+                        <option value="tech">Technology & AI</option>
                         <option value="other">Other</option>
                     </select>
-                    <div className="invalid-feedback">{errors.curriculum}</div>
+                    <div className="invalid-feedback">
+                        {formValidation.curriculum?.error}
+                    </div>
                 </div>
 
                 <div className="col-12">
                     <label className="form-label">Additional details</label>
                     <textarea
+                        name="details"
                         className="form-control"
                         rows="3"
                         placeholder="Tell us anything else we should know."
-                        name="details"
                         value={formData.details}
                         onChange={handleChange}
                     />
@@ -193,7 +280,11 @@ const AdmissionForm = () => {
 
                 <div className="col-12">
                     <div className="button-wrapper justify-content-end">
-                        <Button textLabel={"Submit"} type="submit" iconClass="fa-solid fa-paper-plane" />
+                        <Button
+                            textLabel="Submit"
+                            type="submit"
+                            iconClass="fa-solid fa-paper-plane"
+                        />
                     </div>
                 </div>
             </div>

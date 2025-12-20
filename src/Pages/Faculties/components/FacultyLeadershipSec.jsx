@@ -11,9 +11,6 @@ const faculty_images = [
         src: "/images/team/Dr-Rohini-Patil.jpg",
     },
     {
-        src: "/images/team/Dr-Amol-Gawande.jpg",
-    },
-    {
         src: "/images/team/Dr-Ahmad.jpg",
     },
     {
@@ -90,7 +87,7 @@ const FacultyLeadershipSec = () => {
                         </div>
                     </div>
 
-                    <ScrollReveal direction="clip-fade-up" delay={0.25}>
+                    <ScrollReveal direction="fade-up" delay={0.25}>
                         <div className="col-lg-6">
                             <div className="heading-wrapper">
                                 <h2 className="title-text">
@@ -102,7 +99,7 @@ const FacultyLeadershipSec = () => {
                                     At Rise and Shine Institute of Learning, our strength lies in the calibre of our leadership and faculty. The institute is guided by accomplished professionals who bring together academic excellence, industry expertise, and a global perspective. From visionary directors and senior academicians to dynamic officers shaping learning and operations, every member of the team contributes to creating an environment where knowledge meets real-world relevance. Their diverse qualifications in management, medicine, psychology, economics, and marketing reflect a multidisciplinary foundation that equips students with a truly holistic education. Collectively, they form a team committed to nurturing future-ready professionals who are prepared to excel in an increasingly competitive and interconnected world.
                                 </p>
 
-                                <Button textLabel="Meet our team" link={`/faculties`} />
+                                <Button textLabel="Meet our team" link={`/faculties`} customClass={"style-1"} />
                             </div>
                         </div>
                     </ScrollReveal>

@@ -1,12 +1,12 @@
 import React, { useMemo } from "react";
 import "./styles.scss";
 import { Link } from "react-router";
-import { GetHeaderMenu } from "../../data/MenuData";
 import Image from "../Image";
 import TransitionLink from "../TransitionLink";
+import { getMenu } from "../../lib/menu";
 
 function Footer() {
-    const menuData = useMemo(() => GetHeaderMenu(), []);
+    const menuData = useMemo(() => getMenu(), []);
 
     const { FooterMenuGroup } = menuData;
 
@@ -34,7 +34,7 @@ function Footer() {
         { label: "Sitemap", path: "#" }
     ];
 
-    console.log(FooterMenuGroup)
+    // console.log(FooterMenuGroup)
 
     const handleNewsletterSubmit = (event) => {
         event.preventDefault();

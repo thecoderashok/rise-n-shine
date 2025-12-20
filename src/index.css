@@ -5,7 +5,7 @@
 }
 
 :root {
-   --primary-font: "Quicksand", sans-serif;
+   --primary-font: "Nunito", sans-serif;
    --alt-font: "Cream", sans-serif;
 
    --color-primary: #642165;
@@ -85,7 +85,7 @@ h6 {
    font-weight: 700;
    letter-spacing: -0.04em;
    font-family: var(--primary-font);
-   color: #3d2d3d;
+   color: #270F3A;
 }
 
 h1 {
@@ -134,7 +134,7 @@ p {
    position: relative;
    display: inline;
    display: inline-block;
-   line-height: 1.2;
+   line-height: 1.1;
    vertical-align: top;
    /* overflow: hidden; */
    max-width: -moz-fit-content;
@@ -149,7 +149,7 @@ p {
    will-change: transform, opacity;
    margin: 0;
    padding: 0;
-   margin-left: -0.01em !important;
+   /* margin-left: -0.02em !important; */
 }
 
 .char:first-child {

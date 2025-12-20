@@ -6,6 +6,7 @@ import Layout from './Layout';
 const Home = lazy(() => import('./Pages/Home/Home'));
 const AboutUs = lazy(() => import('./Pages/AboutUs/AboutUs'));
 const Academics = lazy(() => import('./Pages/Academics/Academics'));
+const Programmes = lazy(() => import('./Pages/Academics/Programmes'));
 const Faculties = lazy(() => import('./Pages/Faculties/Faculties'));
 const Admissions = lazy(() => import('./Pages/Admissions/Admissions'));
 const Contact = lazy(() => import('./Pages/Contact/Contact'));
@@ -28,8 +29,12 @@ const AppRoutes = () => {
             component: <AboutUs />,
         },
         {
-            path: "/academics",
+            path: "/programmes",
             component: <Academics />,
+        },
+        {
+            path: "/programmes/:programmeSlug",
+            component: <Programmes />,
         },
         {
             path: "/faculties",

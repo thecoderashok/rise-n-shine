@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useEffectEvent, useRef, useState } from "react";
 import { LoaderContext } from "./LoaderContext";
 import { useLenis } from "../Lenis/LenisContext";
 import imagesLoaded from "imagesloaded";
@@ -63,11 +63,15 @@ const LoaderProvider = ({ children }) => {
         }
     }, [lenis, pageComponentReady]);
 
+    const resetPageStates = useEffectEvent(() => {
+        setMounted(false);
+        setAssetsLoaded(false);
+        setPageComponentReady(false);
+    });
+
     useEffect(() => {
-        if (hasReloaded.current) {
-            setMounted(false);
-            setAssetsLoaded(false);
-            setPageComponentReady(false);
+        if (!hasReloaded.current) {
+            resetPageStates();
         }
     }, [pathname]);
 

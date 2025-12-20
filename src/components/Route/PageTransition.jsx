@@ -299,41 +299,50 @@ const PageTransition = () => {
         return () => ctx.revert();
     }, [linkClicked, setMounted, routingPathname, lenis, setRoute, resetScroll]);
 
-    useEffect(() => {
-        if (!routeTimelineRef.current) return;
-        if (routeTimelinePaused && pageComponentReady) {
-            imagesLoaded(document.body, () => {
-                routeTimelineRef.current.play("wait");
-            });
-        }
-        routeTimelineRef?.current?.eventCallback("onComplete", () => {
-            resetLinkClick();
-        });
-    }, [pageComponentReady, routeTimelinePaused, resetLinkClick]);
+    // useEffect(() => {
+    //     if (!routeTimelineRef.current) return;
+    //     if (routeTimelinePaused && pageComponentReady) {
+    //         imagesLoaded(document.body, () => {
+    //             routeTimelineRef.current.play("wait");
+    //         });
+    //     }
+    //     routeTimelineRef?.current?.eventCallback("onComplete", () => {
+    //         resetLinkClick();
+    //     });
+    // }, [pageComponentReady, routeTimelinePaused, resetLinkClick]);
+
+    // useEffect(() => {
+    //     if (!isLoading && tlPaused) {
+    //         imagesLoaded(document.body, () => {
+    //             onLoadTimelineRef.current.play("waitTillLoading");
+    //         });
+    //     }
+    // }, [isLoading, tlPaused]);
+
+    // useEffect(() => {
+    //     if (isFirstLoading.current || linkClicked) return;
+
+    //     setRoute(pathname);
+    //     const raf = requestAnimationFrame(() => {
+    //         resetScroll();
+    //         setMounted(true);
+    //     });
+
+    //     return () => cancelAnimationFrame(raf);
+    // }, [pathname, setRoute, resetScroll, setMounted, linkClicked]);
 
     useEffect(() => {
-        if (!isLoading && tlPaused) {
-            imagesLoaded(document.body, () => {
-                onLoadTimelineRef.current.play("waitTillLoading");
-            });
-        }
-    }, [isLoading, tlPaused]);
-
-    useEffect(() => {
-        if (isFirstLoading.current || linkClicked) return;
-
         setRoute(pathname);
         const raf = requestAnimationFrame(() => {
             resetScroll();
             setMounted(true);
-        });
-
+        })
         return () => cancelAnimationFrame(raf);
-    }, [pathname, setRoute, resetScroll, setMounted, linkClicked]);
+    }, [setMounted, pathname, setRoute, resetScroll])
 
     return (
         <>
-            <div className="page-loader-overlay" ref={overlayRef}></div>
+            {/* <div className="page-loader-overlay" ref={overlayRef}></div>
             <div className="page-loader-container" ref={containerRef}>
                 <div className="page-loader-panel" ref={loaderPanelRef}></div>
                 <div className="loader" ref={loaderLogoRef}>
@@ -346,7 +355,8 @@ const PageTransition = () => {
                         height={200}
                     />
                 </div>
-                {/* <div className="loader-title">
+            </div> */}
+            {/* <div className="loader-title">
                     <span ref={titleRef}>
                         {title || (
                             <div className="loader">
@@ -362,7 +372,6 @@ const PageTransition = () => {
                         )}
                     </span>
                 </div> */}
-            </div>
         </>
     );
 };

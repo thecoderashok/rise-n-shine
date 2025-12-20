@@ -1,21 +1,22 @@
-import React from 'react'
-import { useClassNames } from '../../hook/useClassNames';
-import { useFormSubmit } from '../../hook/useFormSubmit';
-import Button from '../Button/Button';
-import { getMailerSettings } from '../../mailerSettings';
-import IntlTelInputField from './IntlTelInputField';
+import React, { useRef } from "react";
+import { useClassNames } from "../../hook/useClassNames";
+import { useFormSubmit } from "../../hook/useFormSubmit";
+import Button from "../Button/Button";
+import IntlTelInputField from "./IntlTelInputField";
+import { getMailerSettings } from "../../mailerSettings";
 
 const ContactForm = () => {
     const classes = useClassNames();
+    const formRef = useRef(null);
 
     const {
         formData,
-        errors,
         handleChange,
         handleSubmit,
+        intlTelInputRef,
+        formValidation,
+        setFormValidation,
         setFormData,
-        setErrors,
-        itiRef,
     } = useFormSubmit({
         initialData: {
             firstName: "",
@@ -25,28 +26,65 @@ const ContactForm = () => {
             subject: "",
             message: "",
         },
-        handleValidation: (values, phoneItiRef) => {
-            const errs = {};
-            if (!values.firstName.trim()) errs.firstName = "First name is required.";
-            if (!values.lastName.trim()) errs.lastName = "Last name is required.";
-            if (!/\S+@\S+\.\S+/.test(values.email)) errs.email = "Valid email address is required.";
-            const itiInstance = phoneItiRef?.current;
-            const isPhoneValid = itiInstance ? itiInstance.isValidNumber() : /^\+?[0-9]{10,15}$/.test(values.phone);
-            if (!values.phone.trim() || !isPhoneValid) errs.phone = "Valid phone number is required!";
-            if (!values.subject.trim()) errs.subject = "Please add a subject.";
-            return errs;
-        },
-        emailMethod: "api",
-        mailerSetting: getMailerSettings(),
-    });
 
-    const handlePhoneNumberChange = (formattedNumber) => {
-        setFormData((prev) => ({ ...prev, phone: formattedNumber || "" }));
-        setErrors((prev) => ({ ...prev, phone: "" }));
-    };
+        handleValidation: (fields, intlTelInputRef) => {
+            const validation = {};
+            const isEmpty = (value) => !value || !String(value).trim();
+
+            const validate = ({ name, condition, error }) => {
+                if (condition) {
+                    validation[name] = {
+                        isInvalid: true,
+                        error,
+                    };
+                }
+            };
+
+            validate({
+                name: "firstName",
+                condition: isEmpty(fields.firstName),
+                error: "First name is required.",
+            });
+
+            validate({
+                name: "lastName",
+                condition: isEmpty(fields.lastName),
+                error: "Last name is required.",
+            });
+
+            validate({
+                name: "email",
+                condition: !/\S+@\S+\.\S+/.test(fields.email),
+                error: "Valid email address is required.",
+            });
+
+            validate({
+                name: "phone",
+                condition:
+                    !intlTelInputRef.current ||
+                    !intlTelInputRef.current.isValidNumber(),
+                error: "Valid phone number is required.",
+            });
+
+            validate({
+                name: "subject",
+                condition: isEmpty(fields.subject),
+                error: "Please add a subject.",
+            });
+
+            return validation;
+        },
+
+        emailMethod: "api",
+        mailerSetting: getMailerSettings({
+            fromName: "Website Enquiry",
+            subject: "New Contact Form Submission",
+        }),
+    });
 
     return (
         <form
+            ref={formRef}
             id="enquiry_form"
             className="contact-form needs-validation"
             onSubmit={handleSubmit}
@@ -56,99 +94,114 @@ const ContactForm = () => {
                 <div className="col-md-6 input-wrapper">
                     <label className="form-label">First name*</label>
                     <input
-                        className={classes("form-control", errors.firstName && "is-invalid")}
-                        id="firstName"
-                        type="text"
+                        className={classes(
+                            "form-control",
+                            formValidation.firstName?.isInvalid && "is-invalid"
+                        )}
                         name="firstName"
-                        placeholder="Enter your first name*"
-                        required
+                        type="text"
+                        placeholder="Enter your first name"
                         onChange={handleChange}
                         value={formData.firstName}
                     />
-                    <div className="invalid-feedback">{errors.firstName}</div>
+                    <div className="invalid-feedback">
+                        {formValidation.firstName?.error}
+                    </div>
                 </div>
+
                 <div className="col-md-6 input-wrapper">
                     <label className="form-label">Last name*</label>
                     <input
-                        className={classes("form-control", errors.lastName && "is-invalid")}
-                        id="lastName"
-                        type="text"
+                        className={classes(
+                            "form-control",
+                            formValidation.lastName?.isInvalid && "is-invalid"
+                        )}
                         name="lastName"
-                        placeholder="Enter your last name*"
-                        required
+                        type="text"
+                        placeholder="Enter your last name"
                         onChange={handleChange}
                         value={formData.lastName}
                     />
-                    <div className="invalid-feedback">{errors.lastName}</div>
+                    <div className="invalid-feedback">
+                        {formValidation.lastName?.error}
+                    </div>
                 </div>
 
                 <div className="col-md-6 input-wrapper">
                     <label className="form-label">Phone number*</label>
                     <IntlTelInputField
-                        className={classes("form-control phone-input", errors.phone && "is-invalid")}
                         id="phone"
                         name="phone"
-                        placeholder="Enter phone number*"
-                        minLength={10}
-                        maxLength={12}
+                        className={classes(
+                            "form-control phone-input",
+                            formValidation.phone?.isInvalid && "is-invalid"
+                        )}
+                        intlTelInputRef={intlTelInputRef}
+                        error={formValidation.phone?.error}
+                        setFormData={setFormData}
+                        setFormValidation={setFormValidation}
                         required
-                        value={formData.phone}
-                        itiRef={itiRef}
-                        onChange={handleChange}
-                        onNumberChange={handlePhoneNumberChange}
-                        error={errors.phone}
-                        
                     />
                 </div>
 
                 <div className="col-md-6 input-wrapper">
                     <label className="form-label">Email address*</label>
                     <input
-                        className={classes("form-control", errors.email && "is-invalid")}
-                        id="email"
-                        type="email"
+                        className={classes(
+                            "form-control",
+                            formValidation.email?.isInvalid && "is-invalid"
+                        )}
                         name="email"
-                        placeholder="Enter email address*"
-                        required
+                        type="email"
+                        placeholder="Enter email address"
                         onChange={handleChange}
                         value={formData.email}
                     />
-                    <div className="invalid-feedback">{errors.email}</div>
+                    <div className="invalid-feedback">
+                        {formValidation.email?.error}
+                    </div>
                 </div>
 
                 <div className="col-md-12 input-wrapper">
                     <label className="form-label">Subject</label>
                     <input
-                        className={classes("form-control", errors.subject && "is-invalid")}
-                        id="subject"
-                        type="text"
+                        className={classes(
+                            "form-control",
+                            formValidation.subject?.isInvalid && "is-invalid"
+                        )}
                         name="subject"
+                        type="text"
                         placeholder="Enter subject"
                         onChange={handleChange}
                         value={formData.subject}
                     />
-                    <div className="invalid-feedback">{errors.subject}</div>
+                    <div className="invalid-feedback">
+                        {formValidation.subject?.error}
+                    </div>
                 </div>
 
                 <div className="col-12 input-wrapper">
                     <label className="form-label">Message</label>
                     <textarea
                         className="form-control"
-                        id="message"
                         name="message"
-                        placeholder="Explain your requirement in detail"
                         rows="5"
+                        placeholder="Explain your requirement in detail"
                         onChange={handleChange}
                         value={formData.message}
-                    ></textarea>
+                    />
                 </div>
 
                 <div className="button-wrapper">
-                    <Button textLabel={"Send a Message"} type="submit" iconClass="fa-solid fa-paper-plane" />
+                    <Button
+                        textLabel="Send a Message"
+                        type="submit"
+                        iconClass="fa-solid fa-paper-plane"
+                    />
                 </div>
             </div>
         </form>
-    )
-}
+    );
+};
 
 export default ContactForm;

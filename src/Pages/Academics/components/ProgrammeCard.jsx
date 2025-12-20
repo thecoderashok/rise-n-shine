@@ -1,15 +1,22 @@
 import ScrollReveal from "../../../components/ScrollReveal/ScrollReveal";
 
-const ProgrammeCard = ({ program, index = 0 }) => {
-    if (!program) {
-        return null;
-    }
+const ProgrammeCard = ({ programme, itemIndex = 0 }) => {
+    const {
+        title,
+        desc,
+        label,
+        modules = [],
+        icon,
+        accentColor,
+    } = programme || {};
 
-    const modules = Array.isArray(program.modules) ? program.modules : [];
-    const iconMask = program.icon ? `url(icons/${program.icon})` : undefined;
+    const iconMask = icon ? `url(/icons/${icon})` : undefined;
 
     return (
-        <ScrollReveal direction="clip-scale-in-downward" delay={0.1 * (index + 1)}>
+        <ScrollReveal
+            direction="clip-scale-in-downward"
+            delay={0.1 * (itemIndex + 1)}
+        >
             <div className="programme-item-wrapper">
                 <div className="programme-item">
                     <div className="content-wrapper">
@@ -19,32 +26,36 @@ const ProgrammeCard = ({ program, index = 0 }) => {
                                     maskImage: iconMask,
                                     WebkitMaskImage: iconMask,
                                 }}
-                            ></span>
+                            />
                         </div>
-                        {program.label && (
+
+                        {label && (
                             <div className="labels">
-                                <span>{program.label}</span>
+                                <span>{label}</span>
                             </div>
                         )}
+
                         <h3
                             className="title-text"
-                            style={{ color: program.accentColor }}
+                            style={{ color: accentColor }}
                         >
-                            {program.title}
+                            {title}
                         </h3>
-                        {program.desc && <p className="desc-text">{program.desc}</p>}
+
+                        {desc && <p className="desc-text">{desc}</p>}
                     </div>
-                    <ul className="modules-list">
-                        <span className="heading">
-                            Modules
-                        </span>
-                        {modules.map((module, moduleIndex) => (
-                            <li className="module-item" key={moduleIndex}>
-                                <i className="fa-solid fa-book-open-reader"></i>
-                                <span>{module}</span>
-                            </li>
-                        ))}
-                    </ul>
+
+                    {modules.length > 0 && (
+                        <ul className="modules-list">
+                            <span className="heading">Modules</span>
+                            {modules.map((module, moduleIndex) => (
+                                <li className="module-item" key={moduleIndex}>
+                                    <i className="fa-solid fa-book-open-reader" />
+                                    <span>{module}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    )}
                 </div>
             </div>
         </ScrollReveal>

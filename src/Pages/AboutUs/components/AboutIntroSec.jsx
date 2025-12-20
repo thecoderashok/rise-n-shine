@@ -6,11 +6,10 @@ import TextSplit from "../../../components/TextSplit";
 const AboutIntroSec = () => {
     return (
         <>
-            <section className="about-intro-sec sec-gray">
+            <section className="about-intro-sec">
                 <div className="container">
-                    <div className="row page-text-content">
-                        <div className="col-lg-6 left-side">
-
+                    <div className="row page-text-content align-items-end">
+                        <div className="col-lg-7 left-side">
                             <div className="heading-wrapper">
                                 <h2 className="sub-title">Who we are</h2>
                                 <TextSplit reveal={true} revealDelay={200}>
@@ -23,15 +22,23 @@ const AboutIntroSec = () => {
                                 </TextSplit>
                             </div>
                         </div>
-                        <div className="col-lg-6">
-                            <ScrollReveal direction="clip-scale-out-downward" delay={0.2}>
-                                <div className="text-content">
-                                    <p>
+                        <div className="col-lg-5">
+                            <ScrollReveal direction="clip-scale-in-upward" delay={0.2}>
+                                <div className="text-content pt-0">
+                                    <p className="heading-para">
                                         Located in Dubai, one of the world's most vibrant business and
                                         cultural capitals, the institute provides students with a
                                         unique vantage point where academic excellence meets
                                         real-world opportunities.
                                     </p>
+                                </div>
+                            </ScrollReveal>
+                        </div>
+                    </div>
+                    <div className="row page-text-content align-items-end">
+                        <ScrollReveal direction="fade-up" delay={0.2}>
+                            <div className="col-lg-6 left-side">
+                                <div className="text-content">
                                     <p>
                                         The institute has been established to nurture thinkers,
                                         innovators, and leaders who are prepared to excel in dynamic,
@@ -41,24 +48,6 @@ const AboutIntroSec = () => {
                                         examinations but also equipped for the real-world challenges
                                         of the global workplace.
                                     </p>
-                                </div>
-                            </ScrollReveal>
-                            {/* <ScrollReveal direction="fade-left" delay={0.1}>
-                                <div className="image-wrapper vertical-large">
-                                    <Image
-                                        src="/images/hero-2.jpg"
-                                        width={1920}
-                                        height={1080}
-                                        alt=""
-                                    />
-                                </div>
-                            </ScrollReveal> */}
-                        </div>
-                    </div>
-                    <div className="row page-text-content align-items-end">
-                        <ScrollReveal direction="clip-scale-out-downward" delay={0.2}>
-                            <div className="col-lg-6 left-side">
-                                <div className="text-content">
                                     <p>
                                         At Rise N Shine, the programmes are thoughtfully crafted to
                                         meet industry demands, integrating foundational concepts with
@@ -79,16 +68,26 @@ const AboutIntroSec = () => {
                             </div>
                         </ScrollReveal>
                         <div className="col-lg-6">
-                            <ScrollReveal direction="clip-scale-out-downward" delay={0.4}>
-                                <div className="image-wrapper">
-                                    <Image
-                                        src="/images/hero-2.jpg"
-                                        width={1920}
-                                        height={1080}
-                                        alt=""
-                                    />
-                                </div>
-                            </ScrollReveal>
+                            <div className="images-pres">
+                                <ScrollReveal direction="clip-scale-in-downward" delay={0.2}>
+                                    <div className="img-wrapper small">
+                                        <Image
+                                            src={`/images/image-placeholder.jpg`}
+                                            width={1920}
+                                            height={1080}
+                                        />
+                                    </div>
+                                </ScrollReveal>
+                                <ScrollReveal direction="clip-scale-in-downward" delay={0.2}>
+                                    <div className="img-wrapper">
+                                        <Image
+                                            src={`/images/image-placeholder.jpg`}
+                                            width={1920}
+                                            height={1080}
+                                        />
+                                    </div>
+                                </ScrollReveal>
+                            </div>
                         </div>
                     </div>
                 </div>

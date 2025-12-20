@@ -10,6 +10,7 @@ const Faculties = () => {
         title: "Faculties - Meet Our Expert Faculty | Rise N Shine",
         canonical: `${window.location.origin}/faculties`,
     });
+    
     const facultiesData = [
         {
             name: "Dr. Somnath Prasad Patil",
@@ -24,12 +25,12 @@ const Faculties = () => {
             education: "MBBS | DDHN | DDSEN | Certified Anti-Aging Specialist | ODM",
             image: "Dr-Rohini-Patil.jpg",
         },
-        {
-            name: "Dr. Amol Gawande",
-            designation: "General Manager",
-            education: "MA - Psychology | Ph.D. in Financial Management",
-            image: "Dr-Amol-Gawande.jpg",
-        },
+        // {
+        //     name: "Dr. Amol Gawande",
+        //     designation: "General Manager",
+        //     education: "MA - Psychology | Ph.D. in Financial Management",
+        //     image: "Dr-Amol-Gawande.jpg",
+        // },
         {
             name: "Dr. Mohd Osama Ahmad",
             designation: "Chief Learning Officer",
@@ -70,6 +71,7 @@ const Faculties = () => {
                 breadcrumbs={[{ label: "Home", href: "/" }, { label: "Faculties" }]}
                 imageSrc="/images/faculty.jpg"
             />
+
             <section className="faculties-grid-sec">
                 <div className="container">
                     <div className="row">
@@ -88,6 +90,7 @@ const Faculties = () => {
                     </div>
                 </div>
             </section>
+
             <ContactSec />
         </>
     );

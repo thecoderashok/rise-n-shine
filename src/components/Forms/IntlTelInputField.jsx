@@ -1,84 +1,119 @@
-"use client";
-import React, { useEffect, useMemo, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import intlTelInput from "intl-tel-input";
 
 const DEFAULT_CONFIG = {
-    initialCountry: "in",
+    initialCountry: "ae",
     separateDialCode: true,
     strictMode: true,
     loadUtils: () => import("intl-tel-input/utils"),
 };
 
 const IntlTelInputField = ({
-    itiRef,
-    onNumberChange,
+    intlTelInputRef,
+    setFormData,
+    setFormValidation,
     className = "",
     error = "",
     showError = true,
     errorClassName = "invalid-feedback",
-    itiConfig: providedItiConfig,
-    ...inputProps
+    customConfig,
+    onChangeNumber,
+    ...props
 }) => {
     const inputRef = useRef(null);
-    const changeHandlerRef = useRef(onNumberChange);
-    const mergedConfig = useMemo(
-        () => ({ ...DEFAULT_CONFIG, ...(providedItiConfig || {}) }),
-        [providedItiConfig]
-    );
+    const instanceRef = useRef(null);
+    const onChangeNumberRef = useRef(onChangeNumber);
+
+    const name = props.name ?? "phone";
 
     useEffect(() => {
-        changeHandlerRef.current = onNumberChange;
-    }, [onNumberChange]);
+        onChangeNumberRef.current = onChangeNumber;
+    }, [onChangeNumber]);
+
+    // Build config ONCE
+    const configRef = useRef({
+        ...DEFAULT_CONFIG,
+        ...(customConfig ?? {}),
+    });
 
     useEffect(() => {
-        const inputElement = inputRef.current;
-        if (!inputElement) return undefined;
+        const phoneInput = inputRef.current;
+        if (!phoneInput) return;
 
-        const instance = intlTelInput(inputElement, mergedConfig);
+        instanceRef.current = intlTelInput(phoneInput, configRef.current);
 
-        if (typeof itiRef === "function") {
-            itiRef(instance);
-        } else if (itiRef) {
-            itiRef.current = instance;
+        // prevent Lenis scroll capture on country list
+        const listElement =
+            phoneInput.parentElement?.querySelector(".iti__country-list");
+        if (listElement) {
+            listElement.setAttribute("data-lenis-prevent", "true");
         }
 
-        const handlePhoneChange = () => {
-            const formattedNumber = instance.getNumber();
-            if (changeHandlerRef.current) {
-                changeHandlerRef.current(formattedNumber, instance);
+        if (intlTelInputRef) {
+            intlTelInputRef.current = instanceRef.current;
+        }
+
+        const handleChange = () => {
+            if (!instanceRef.current) return;
+            const number = instanceRef.current.getNumber();
+            const isValid = instanceRef.current.isValidNumber();
+
+            const rawValue = inputRef.current.value.trim();
+
+            if (setFormData) {
+                setFormData((prev) => ({ ...prev, [name]: number }));
+            }
+            if (setFormValidation) {
+
+                setFormValidation((prev) => {
+                    if (rawValue === "") {
+                        return { ...prev, [name]: { error: "", isInvalid: false } };
+                    }
+                    if (!isValid) {
+                        return {
+                            ...prev,
+                            [name]: { error: "Valid phone number is required!", isInvalid: true },
+                        };
+                    }
+
+                    return { ...prev, [name]: { error: "", isInvalid: false } };
+                });
+            }
+
+            if (onChangeNumberRef.current) {
+                onChangeNumberRef.current(number, instanceRef.current);
             }
         };
 
-        inputElement.addEventListener("input", handlePhoneChange);
-        inputElement.addEventListener("blur", handlePhoneChange);
-
-        const countryList = inputElement.parentElement?.querySelector(".iti__country-list");
-        if (countryList) {
-            countryList.setAttribute("data-lenis-prevent", "true");
-        }
+        phoneInput.addEventListener("input", handleChange);
+        phoneInput.addEventListener("blur", handleChange);
+        phoneInput.addEventListener("countrychange", handleChange);
 
         return () => {
-            inputElement.removeEventListener("input", handlePhoneChange);
-            inputElement.removeEventListener("blur", handlePhoneChange);
-            instance.destroy();
-            if (typeof itiRef === "function") {
-                itiRef(null);
-            } else if (itiRef) {
-                itiRef.current = null;
+            phoneInput.removeEventListener("input", handleChange);
+            phoneInput.removeEventListener("blur", handleChange);
+            phoneInput.removeEventListener("countrychange", handleChange);
+
+            if (instanceRef.current?.destroy) {
+                instanceRef.current.destroy();
+            }
+            instanceRef.current = null;
+
+            if (intlTelInputRef) {
+                intlTelInputRef.current = null;
             }
         };
-    }, [itiRef, mergedConfig]);
-
-    const { type = "tel", ...restInputProps } = inputProps;
+    }, [intlTelInputRef, name, setFormValidation, setFormData]);
 
     return (
         <>
             <input
                 ref={inputRef}
                 className={className}
-                type={type}
-                {...restInputProps}
+                type="tel"
+                {...props}
             />
+
             {showError && (
                 <div
                     className={errorClassName}
