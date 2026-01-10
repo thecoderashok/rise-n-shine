@@ -158,8 +158,8 @@ const AdmissionPageForm = () => {
             onSubmit={handleSubmit}
             noValidate
         >
-            <div className="row g-3">
-                <div className="col-12">
+            <div className="row">
+                <div className="col-12 input-wrapper">
                     <label className="form-label">Full Name*</label>
                     <input
                         type="text"
@@ -177,7 +177,7 @@ const AdmissionPageForm = () => {
                     </div>
                 </div>
 
-                <div className="col-md-6">
+                <div className="col-md-6 input-wrapper">
                     <label className="form-label">Date of Birth*</label>
                     <input
                         type="date"
@@ -194,7 +194,7 @@ const AdmissionPageForm = () => {
                     </div>
                 </div>
 
-                <div className="col-md-6">
+                <div className="col-md-6 input-wrapper">
                     <label className="form-label">Email Address*</label>
                     <input
                         type="email"
@@ -212,7 +212,7 @@ const AdmissionPageForm = () => {
                     </div>
                 </div>
 
-                <div className="col-md-6">
+                <div className="col-md-6 input-wrapper">
                     <label className="form-label">Phone Number*</label>
                     <IntlTelInputField
                         name="phone"
@@ -228,7 +228,7 @@ const AdmissionPageForm = () => {
                     />
                 </div>
 
-                <div className="col-md-6">
+                <div className="col-md-6 input-wrapper">
                     <label className="form-label">Nationality*</label>
                     <input
                         type="text"
@@ -245,7 +245,7 @@ const AdmissionPageForm = () => {
                     </div>
                 </div>
 
-                <div className="col-md-6">
+                <div className="col-md-6 input-wrapper">
                     <label className="form-label">
                         Current Education / Qualification*
                     </label>
@@ -265,7 +265,7 @@ const AdmissionPageForm = () => {
                     </div>
                 </div>
 
-                <div className="col-md-6">
+                <div className="col-md-6 input-wrapper">
                     <label className="form-label">Occupation</label>
                     <input
                         type="text"
@@ -276,7 +276,7 @@ const AdmissionPageForm = () => {
                     />
                 </div>
 
-                <div className="col-12">
+                <div className="col-12 input-wrapper">
                     <label className="form-label">
                         Which specialization are you applying for?*
                     </label>
@@ -306,7 +306,7 @@ const AdmissionPageForm = () => {
                     </div>
                 </div>
 
-                <div className="col-12">
+                <div className="col-12 input-wrapper">
                     <label className="form-label">
                         Reason for Choosing this Programme*
                     </label>
@@ -329,7 +329,7 @@ const AdmissionPageForm = () => {
                     </div>
                 </div>
 
-                <div className="col-md-6">
+                <div className="col-md-6 input-wrapper">
                     <label className="form-label">Preferred Mode of Study*</label>
                     <select
                         name="preferredMode"
@@ -351,7 +351,7 @@ const AdmissionPageForm = () => {
                     </div>
                 </div>
 
-                <div className="col-md-6">
+                <div className="col-md-6 input-wrapper">
                     <label className="form-label">
                         Do you have prior experience?*
                     </label>
@@ -374,7 +374,7 @@ const AdmissionPageForm = () => {
                     </div>
                 </div>
 
-                <div className="col-12">
+                <div className="col-12 input-wrapper">
                     <div
                         className={classes(
                             "form-check",

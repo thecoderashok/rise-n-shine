@@ -6,6 +6,9 @@ import ContactSec from "../components/ContactSec";
 import ApplicationFormSec from "./components/ApplicationFormSec";
 import LeftRightImageTextSec from "../components/LeftRightImageTextSec"
 import { usePageSEO } from "../../hook/usePageSEO";
+import SwiperCarousel from "../../components/Swiper/SwiperCarousel";
+import { SwiperSlide } from "swiper/react";
+import useMobile from "../../hook/useMobile";
 
 const admissionSteps = [
     {
@@ -88,11 +91,32 @@ const eligibilityItems = [
     }
 ];
 
+const ProcessItem = ({ step }) => (
+    <div className="process-item-wrapper">
+        <div className="process-item">
+            <div className="icon-wrapper">
+                <span
+                    className="icon"
+                    style={{
+                        maskImage: `url(${step.icon})`,
+                        WebkitMaskImage: `url(${step.icon})`,
+                    }}
+                ></span>
+            </div>
+            <div className="content-wrapper">
+                <h3 className="title">{step.title}</h3>
+                <p className="description">{step.description}</p>
+            </div>
+        </div>
+    </div>
+);
+
 const Admissions = () => {
     usePageSEO({
         title: "Admissions - Apply Now | Rise N Shine Institute of Learning",
         canonical: `${window.location.origin}/admissions`,
     });
+    const isMobile = useMobile(767);
 
     return (
         <>
@@ -104,13 +128,13 @@ const Admissions = () => {
                     </>
                 }
                 breadcrumbs={[{ label: "Home", href: "/" }, { label: "Admissions" }]}
-                imageSrc={`/images/hero-banner.jpg`}
+                imageSrc={`/images/admissions-banner.jpg`}
             />
 
             <LeftRightImageTextSec
                 imagePosition="left"
                 image={{
-                    src: "/images/image-placeholder.jpg",
+                    src: "/images/admission-process.jpg",
                     width: 1200,
                     height: 800,
                 }}
@@ -149,34 +173,39 @@ const Admissions = () => {
                     </div>
                     <div className="row">
                         <div className="col-12">
-                            <div className="admission-process-grid">
-                                {admissionSteps.map((step, index) => (
-                                    <ScrollReveal
-                                        key={index}
-                                        direction="fade-up"
-                                        offset={30}
-                                        delay={0.1 * (index + 1)}
+                            {isMobile ? (
+                                <div className="timeline-carousel-view">
+                                    <SwiperCarousel
+                                        slidesPerView={1.5}
+                                        spaceBetween={12}
+                                        showPagination={false}
+                                        loop={false}
+                                        breakpoints={{
+                                            0: { slidesPerView: 1.2, spaceBetween: 10 },
+                                            640: { slidesPerView: 2.5, spaceBetween: 16 },
+                                        }}
                                     >
-                                        <div className="process-item-wrapper">
-                                            <div className="process-item">
-                                                <div className="icon-wrapper">
-                                                    <span
-                                                        className="icon"
-                                                        style={{
-                                                            maskImage: `url(${step.icon})`,
-                                                            WebkitMaskImage: `url(${step.icon})`,
-                                                        }}
-                                                    ></span>
-                                                </div>
-                                                <div className="content-wrapper">
-                                                    <h3 className="title">{step.title}</h3>
-                                                    <p className="description">{step.description}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </ScrollReveal>
-                                ))}
-                            </div>
+                                        {admissionSteps.map((step, index) => (
+                                            <SwiperSlide key={`timeline-slide-${index}`}>
+                                                <ProcessItem step={step} />
+                                            </SwiperSlide>
+                                        ))}
+                                    </SwiperCarousel>
+                                </div>
+                            ) : (
+                                <div className="admission-process-grid">
+                                    {admissionSteps.map((step, index) => (
+                                        <ScrollReveal
+                                            key={index}
+                                            direction="fade-up"
+                                            offset={30}
+                                            delay={0.1 * (index + 1)}
+                                        >
+                                            <ProcessItem step={step} />
+                                        </ScrollReveal>
+                                    ))}
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -185,13 +214,13 @@ const Admissions = () => {
             <section className="eligibility-sec sec-dark">
                 <div className="container">
                     <div className="row align-items-center">
-                        <div className="col-lg-6">
+                        <div className="col-md-6">
                             <SecTitle
                                 mainTitle={<><b className="colored">Eligibility</b> at a Glance</>}
                                 desc={"The eligibility criteria at Rise and Shine Institute of Learning are designed to ensure that every applicant brings a strong academic foundation and the potential for professional growth."}
                             />
                         </div>
-                        <div className="col-lg-6">
+                        <div className="col-md-6">
                             <div className="eligibility-cards-grid">
                                 {eligibilityItems.map((item, index) => (
                                     <ScrollReveal

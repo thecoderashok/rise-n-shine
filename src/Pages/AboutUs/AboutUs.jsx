@@ -27,7 +27,7 @@ const AboutUs = () => {
                     { label: "Home", href: "/" },
                     { label: "About Us" },
                 ]}
-                imageSrc={`/images/hero-banner.jpg`}
+                imageSrc={`/images/about-banner.jpg`}
             />
             <AboutIntroSec />
             <AboutMarqueeSec />

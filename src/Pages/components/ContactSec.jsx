@@ -55,7 +55,7 @@ const ContactSec = () => {
                                         </div>
                                         <div className="contact-info-list">
                                             {contactDetails.map((item) => (
-                                                <article className="contact-info-item" key={item.label}>
+                                                <fiv className="contact-info-item" key={item.label}>
                                                     <div className="icon">
                                                         <i className={item.iconClass} aria-hidden="true"></i>
                                                     </div>
@@ -69,9 +69,8 @@ const ContactSec = () => {
                                                         >
                                                             {item.value}
                                                         </a>
-                                                        {/* <span className="description">{item.description}</span> */}
                                                     </div>
-                                                </article>
+                                                </fiv>
                                             ))}
                                         </div>
                                     </aside>

@@ -110,8 +110,8 @@ const AdmissionForm = () => {
             onSubmit={handleSubmit}
             noValidate
         >
-            <div className="row g-3">
-                <div className="col-md-6">
+            <div className="row">
+                <div className="col-md-6  input-wrapper">
                     <label className="form-label">First name*</label>
                     <input
                         type="text"
@@ -129,7 +129,7 @@ const AdmissionForm = () => {
                     </div>
                 </div>
 
-                <div className="col-md-6">
+                <div className="col-md-6  input-wrapper">
                     <label className="form-label">Last name*</label>
                     <input
                         type="text"
@@ -147,7 +147,7 @@ const AdmissionForm = () => {
                     </div>
                 </div>
 
-                <div className="col-md-6">
+                <div className="col-md-6 input-wrapper">
                     <label className="form-label">Email*</label>
                     <input
                         type="email"
@@ -165,7 +165,7 @@ const AdmissionForm = () => {
                     </div>
                 </div>
 
-                <div className="col-md-6">
+                <div className="col-md-6 input-wrapper">
                     <label className="form-label">Phone number*</label>
                     <IntlTelInputField
                         id="phone"
@@ -182,7 +182,7 @@ const AdmissionForm = () => {
                     />
                 </div>
 
-                <div className="col-md-6">
+                <div className="col-md-6 input-wrapper">
                     <label className="form-label">Date of birth*</label>
                     <input
                         type="date"
@@ -199,7 +199,7 @@ const AdmissionForm = () => {
                     </div>
                 </div>
 
-                <div className="col-md-6">
+                <div className="col-md-6 input-wrapper">
                     <label className="form-label">Country of Residence*</label>
                     <select
                         name="country"
@@ -222,7 +222,7 @@ const AdmissionForm = () => {
                     </div>
                 </div>
 
-                <div className="col-md-6">
+                <div className="col-md-6 input-wrapper">
                     <label className="form-label">Intake of interest*</label>
                     <select
                         name="intake"
@@ -244,7 +244,7 @@ const AdmissionForm = () => {
                     </div>
                 </div>
 
-                <div className="col-md-6">
+                <div className="col-md-6 input-wrapper">
                     <label className="form-label">Curriculum*</label>
                     <select
                         name="curriculum"

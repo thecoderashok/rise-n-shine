@@ -6,123 +6,27 @@ import ContactSec from "../components/ContactSec";
 import GallerySec from "../components/GallerySec";
 
 
-const campusGalleryData = [
-    {
+const campusGalleryData = Array.from({ length: 18 }, (_, index) => {
+    const imageNumber = index + 1;
+    return {
         image: {
-            src: "/images/hero-1.jpg",
-            alt: null,
+            src: `/images/campus-gallery/photo-${imageNumber}.jpg`,
+            alt: `Campus photo ${imageNumber}`,
         },
-        title: "Campus View",
-    },
-    {
-        image: {
-            src: "/images/hero-2.jpg",
-            alt: null,
-        },
-        title: "Modern Facilities",
-    },
-    {
-        image: {
-            src: "/images/hero-3.jpg",
-            alt: null,
-        },
-        title: "Learning Spaces",
-    },
-    {
-        image: {
-            src: "/images/why-us-1.jpg",
-            alt: null,
-        },
-        title: "Student Life",
-    },
-    {
-        image: {
-            src: "/images/why-us-2.jpg",
-            alt: null,
-        },
-        title: "Campus Events",
-    },
-    {
-        image: {
-            src: "/images/why-us-3.jpg",
-            alt: null,
-        },
-        title: "Academic Excellence",
-    },
-    {
-        image: {
-            src: "/images/why-us-4.jpg",
-            alt: null,
-        },
-        title: "Community",
-    },
-    {
-        image: {
-            src: "/images/marketing-bg.jpg",
-            alt: null,
-        },
-        title: "Programmes",
-    },
-    {
-        image: {
-            src: "/images/finance-bg.jpg",
-            alt: null,
-        },
-        title: "Resources",
-    },
-];
+        title: `Campus Photo ${imageNumber}`,
+    };
+});
 
-const facultyGalleryData = [
-    {
+const internalGalleryData = Array.from({ length: 26 }, (_, index) => {
+    const imageNumber = index + 1;
+    return {
         image: {
-            src: "/images/image-placeholder.jpg",
-            alt: null,
+            src: `/images/internal-gallery/photo-${imageNumber}.jpg`,
+            alt: `Internal gallery photo ${imageNumber}`,
         },
-        title: "Classroom Sessions",
-    },
-    {
-        image: {
-            src: "/images/image-placeholder.jpg",
-            alt: null,
-        },
-        title: "Workshops",
-    },
-    {
-        image: {
-            src: "/images/image-placeholder.jpg",
-            alt: null,
-        },
-        title: "Cultural Events",
-    },
-    {
-        image: {
-            src: "/images/image-placeholder.jpg",
-            alt: null,
-        },
-        title: "Student Initiatives",
-    },
-    {
-        image: {
-            src: "/images/image-placeholder.jpg",
-            alt: null,
-        },
-        title: "Academic Life",
-    },
-    {
-        image: {
-            src: "/images/image-placeholder.jpg",
-            alt: null,
-        },
-        title: "Learning Environment",
-    },
-    {
-        image: {
-            src: "/images/image-placeholder.jpg",
-            alt: null,
-        },
-        title: "Community",
-    },
-];
+        title: `Internal Gallery Photo ${imageNumber}`,
+    };
+});
 
 
 const Campus = () => {
@@ -141,15 +45,12 @@ const Campus = () => {
                     </>
                 }
                 breadcrumbs={[{ label: "Home", href: "/" }, { label: "Campus" }]}
-                imageSrc={`/images/hero-banner.jpg`}
+                imageSrc={`/images/campus-banner.jpg`}
             />
 
             <VideoTourSec
                 imageSrc="/images/video-tour-bg.jpg"
                 imageAlt="Campus Video Tour"
-                onPlayClick={() => {
-                    console.log("Play video clicked");
-                }}
             />
 
             <GallerySec
@@ -174,7 +75,7 @@ const Campus = () => {
                         The Internal Gallery offers a glimpse into the everyday rhythm of the Rise and Shine campus. It showcases the essence of academic life, from dynamic classroom sessions and collaborative workshops to cultural events and student-led initiatives. Each image reflects the institute's commitment to providing a nurturing environment where learning, creativity, and community flourish together.
                     </p>
                 )}
-                galleryData={facultyGalleryData}
+                galleryData={internalGalleryData}
             />
 
             <ContactSec />

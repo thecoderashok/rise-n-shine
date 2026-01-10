@@ -24,7 +24,7 @@ const Academics = () => {
                     { label: "Academics" },
                     { label: "Programmes" }
                 ]}
-                imageSrc="/images/hero-3.jpg"
+                imageSrc="/images/programmes-banner.jpg"
             />
 
             {programmeCatalog.map((programme) => {

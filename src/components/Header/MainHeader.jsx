@@ -8,7 +8,7 @@ import React, {
 import { Link, useLocation } from "react-router";
 import MenuItem from "./MenuItem";
 import styles from "./Header.module.scss";
-import Hamburger from "hamburger-react";
+import { Slant as Hamburger } from 'hamburger-react'
 import { useClassNames } from "../../hook/useClassNames";
 import { useLenis } from "lenis/react";
 import gsap from "gsap";
@@ -46,6 +46,7 @@ const MainHeader = ({ isTransparent }) => {
 
         ctx.add("(max-width: 991px)", () => {
             const header = document.querySelector("header");
+            header.setAttribute("data-lenis-prevent", "true");
             if (!menuPanelRef?.current || !overlayRef?.current) return;
 
             const menuItems = menuPanelRef.current.querySelectorAll("nav > ul > li");
@@ -57,7 +58,7 @@ const MainHeader = ({ isTransparent }) => {
                 visibility: "hidden",
                 pointerEvents: "none",
             });
-            gsap.set(menuPanelRef.current, { x: "100%", display: "none" });
+            gsap.set(menuPanelRef.current, { clipPath: "inset(0 0 100% 0)", display: "none" });
 
             if (menuBtnToggled) {
                 if (menuOpen) {
@@ -66,9 +67,9 @@ const MainHeader = ({ isTransparent }) => {
                     setIsAnimating(true);
 
                     gsap.set(menuPanelRef.current, {
-                        willChange: "transform",
+                        willChange: "clip-path",
                         display: "flex",
-                        x: "100%",
+                        clipPath: "inset(0 0 100% 0)",
                     });
                     gsap.set(menuItems, {
                         willChange: "opacity, transform",
@@ -89,21 +90,20 @@ const MainHeader = ({ isTransparent }) => {
                         },
                         {
                             opacity: 1,
-                            duration: 0.5,
+                            duration: 1,
                             ease: "power2.out",
                             onComplete: () => {
                                 gsap.set(overlayRef.current, { clearProps: "willChange" });
                             },
                         }
                     );
-
                     gsap.fromTo(
                         menuPanelRef.current,
                         {
-                            x: "100%",
+                            clipPath: "inset(0 0 100% 0)",
                         },
                         {
-                            x: 0,
+                            clipPath: "inset(0 0 0% 0)",
                             duration: 0.8,
                             ease: "power4.inOut",
                             onComplete: () => {
@@ -111,6 +111,7 @@ const MainHeader = ({ isTransparent }) => {
                             },
                         }
                     );
+
 
                     gsap.fromTo(
                         menuItems,
@@ -146,9 +147,9 @@ const MainHeader = ({ isTransparent }) => {
 
                     gsap.fromTo(
                         menuPanelRef.current,
-                        { x: 0 },
+                        { clipPath: "inset(0 0 0% 0)" },
                         {
-                            x: "100%",
+                            clipPath: "inset(0 0 100% 0)",
                             duration: 0.8,
                             ease: "power3.inOut",
                             onComplete: () => {
@@ -195,7 +196,7 @@ const MainHeader = ({ isTransparent }) => {
     const handleScroll = useCallback(() => {
         const scrollTop = window.scrollY;
 
-        if (scrollTop < 100) {
+        if (scrollTop < 200) {
             setIsSticky(false);
         } else if (scrollTop > headerHeight.current) {
             setIsSticky(true);
@@ -213,7 +214,10 @@ const MainHeader = ({ isTransparent }) => {
     }, [menuOpen]);
 
     useEffect(() => {
-        window.addEventListener("scroll", handleScroll);
+        if (headerRef.current) {
+            headerHeight.current = headerRef.current.offsetHeight;
+        }
+        window.addEventListener("scroll", handleScroll, { passive: true });
 
         return () => {
             window.removeEventListener("scroll", handleScroll);
@@ -235,11 +239,11 @@ const MainHeader = ({ isTransparent }) => {
             styles.main_header,
             isTransparent && styles.transparent,
             isSticky && styles.sticky_header,
-            isHidden && styles.header_hide
+            isHidden && styles.hide
         );
     }, [isTransparent, isSticky, isHidden, classes]);
 
-    const {openModal} = useModal();
+    const { openModal } = useModal();
 
     return (
         <header
@@ -249,11 +253,9 @@ const MainHeader = ({ isTransparent }) => {
             data-sticky={isSticky}
             data-header-revealed={isMounted}
         >
-            <div className={`container-fluid ${styles.header_container}`}>
-                <div
-                    className={`${styles.header_inner} row justify-content-between align-items-center`}
-                >
-                    <div className={`col-auto ${styles.header_logo_wrapper}`}>
+            <div className={`container-fluid ${styles.container}`}>
+                <div className={`${styles.inner} row`}>
+                    <div className={`col-auto ${styles.logo_wrapper}`}>
                         <Link
                             className={styles.header_logo}
                             to="/"
@@ -271,44 +273,43 @@ const MainHeader = ({ isTransparent }) => {
                         </Link>
                     </div>
 
+                    <div className={`${styles.right_side} col-auto`}>
+                        <nav
+                            className={styles.menu_nav}
+                            data-state={menuOpen ? "opened" : "closed"}
+                            ref={menuPanelRef}
+                            aria-label="Right navigation"
+                        >
+                            <ul className={styles.menu_list}>
+                                {HeaderMenu.map((item, index) => (
+                                    <MenuItem
+                                        menuItem={item}
+                                        menuItemIndex={index}
+                                        isMenuClosed={isMenuClosed}
+                                        key={index}
+                                    />
+                                ))}
+                            </ul>
+                        </nav>
+
+                        <div className={styles.actions}>
+                            <Button
+                                textLabel={"Apply Now"}
+                                customClass={styles.cta_btn}
+                                iconClass="fa-solid fa-arrow-right-to-bracket"
+                                onClick={() => openModal({ modalName: "online_admission" })}
+                            />
+                        </div>
+                    </div>
+
                     <div
-                        className={classes(styles.header_main_menu, "col-auto")}
+                        className={classes("col-auto pe-0", styles.menu_btn_wrapper)}
                         data-state={menuOpen ? "opened" : "closed"}
-                        ref={menuPanelRef}
                     >
-                        <div className={styles.header_top_wrapper}>
-                            <span
-                                className={classes(styles.menu_btn_close, "d-none")}
-                                onClick={() => setMenuOpen(false)}
-                            >
-                                <i className="fa-regular fa-xmark-large"></i>{" "}
-                                <small>Close menu</small>
-                            </span>
-                        </div>
-                        <div className={styles.header_menu_inner}>
-                            <nav>
-                                <ul className={styles.header_menu_list}>
-                                    {HeaderMenu.map((item, index) => (
-                                        <MenuItem
-                                            menuItem={item}
-                                            menuItemIndex={index}
-                                            isMenuClosed={isMenuClosed}
-                                            key={index}
-                                        />
-                                    ))}
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
-
-                    <div className="col-auto pe-0">
-                        <Button textLabel={"Apply Now"} iconClass="fa-solid fa-arrow-right-to-bracket" onClick={() => openModal({ modalName: "online_admission" })} />
-                    </div>
-
-                    <div className={classes("col-auto pe-0", styles.menu_btn_wrapper)} data-state={menuOpen ? "opened" : "closed"}>
-                        <div className={classes(styles.header_menu_btn)}>
+                        <div className={classes(styles.menu_btn)}>
                             <Hamburger
                                 size={26}
+                                direction="left"
                                 toggled={menuOpen}
                                 onToggle={handleMenuBtnClick}
                             />

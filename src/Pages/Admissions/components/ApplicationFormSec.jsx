@@ -93,7 +93,7 @@ const ApplicationFormSec = () => {
                                             textLabel="Apply Online"
                                             iconClass="fa-solid fa-arrow-right-to-bracket"
                                             onClick={handleModalOpen}
-                                            customClass="apply-online-btn style-2"
+                                            customClass="apply-online-btn style-4"
                                         />
                                     </div>
                                 </ScrollReveal>

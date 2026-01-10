@@ -13,7 +13,7 @@ const GalleryCard = ({
     const classes = useClassNames();
     const {
         image = "",
-        title = null,
+        // title = null,
         width = 1200,
         height = 900,
         loading = "lazy",
@@ -47,11 +47,11 @@ const GalleryCard = ({
                 />
             </div>
 
-            {title && (
+            {/* {title && (
                 <div className="overlay">
                     <span className="label">{title}</span>
                 </div>
-            )}
+            )} */}
         </div>
     );
 };

@@ -8,12 +8,17 @@ export default function useMobile(breakpoint = 991) {
 
         const mediaQuery = window.matchMedia(`(max-width: ${breakpoint}px)`);
 
-        setIsMobile(mediaQuery.matches);
+        const timeout = setTimeout(() => {
+            setIsMobile(mediaQuery.matches);
+        }, 0);
 
         const handler = (e) => setIsMobile(e.matches);
         mediaQuery.addEventListener("change", handler);
 
-        return () => mediaQuery.removeEventListener("change", handler);
+        return () => {
+            mediaQuery.removeEventListener("change", handler);
+            clearTimeout(timeout);
+        };
     }, [breakpoint]);
 
     return isMobile;

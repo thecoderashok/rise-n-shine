@@ -69,8 +69,8 @@ const OurProgramsSec = () => {
                                 spaceBetween={20}
                                 navigationBtns
                                 breakpoints={{
-                                    575: { slidesPerView: 1 },
-                                    768: { slidesPerView: 1.5 },
+                                    575: { slidesPerView: 1.2 },
+                                    768: { slidesPerView: 2 },
                                     991: { slidesPerView: 2 },
                                     1200: { slidesPerView: 3 },
                                 }}

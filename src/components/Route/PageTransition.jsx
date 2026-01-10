@@ -15,61 +15,54 @@ import Image from "../Image";
 import { useLocation } from "react-router";
 import CustomEase from "gsap/CustomEase";
 
-gsap.registerPlugin(CustomEase)
+gsap.registerPlugin(CustomEase);
+
+CustomEase.create("enter", "0.87, 0, 0.13, 1");
+CustomEase.create("exit", "0.87, 0.02, 0.13, 1");
 
 const animateLogo = {
+    initial: { opacity: 0 },
+    enter: { opacity: 1, duration: 2 },
+    exit: { opacity: 0 },
+};
+
+const animateLoaderTitle = {
     initial: {
+        y: 50,
+        z: 0,
         opacity: 0,
     },
     enter: {
+        y: 0,
+        z: 0,
         opacity: 1,
-        duration: 2,
+        ease: CustomEase.create("", "0.22, 1, 0.36, 1"),
     },
     exit: {
+        y: -150,
+        z: 0,
         opacity: 0,
+        ease: CustomEase.create("", "0.7, 0, 0.84, 0"),
     },
 };
 
-// const animateLoaderTitle = {
-//     initial: {
-//         y: 50,
-//         z: 0,
-//         opacity: 0,
-//     },
-//     enter: {
-//         y: 0,
-//         z: 0,
-//         opacity: 1,
-//         ease: "power4.out",
-//     },
-//     exit: {
-//         y: -150,
-//         z: 0,
-//         opacity: 0,
-//         ease: "power4.in",
-//     },
-// };
-
 const animatePanel = {
     initial: {
-        // z: 0,
-        // scaleY: 0,
-        // transformOrigin: "bottom",
-        opacity: 0,
+        z: 0,
+        scaleY: 0,
+        transformOrigin: "bottom",
     },
     enter: {
-        // z: 0,
-        // scaleY: 1,
-        // transformOrigin: "bottom",
-        opacity: 1,
-        ease: CustomEase.create("", ".33,.24,.11,.99"),
+        z: 0,
+        scaleY: 1,
+        transformOrigin: "bottom",
+        ease: "enter",
     },
     exit: {
-        // z: 0,
-        // scaleY: 0,
-        // transformOrigin: "top",
-        opacity: 0,
-        ease: "power4.inOut",
+        z: 0,
+        scaleY: 0,
+        transformOrigin: "top",
+        ease: "exit",
     },
 };
 
@@ -83,11 +76,12 @@ const animateOverlay = {
     },
     exit: {
         opacity: 0,
-        ease: "power4.inOut",
+        ease: "power3.inOut",
     },
 };
 
-const PageTransition = () => {
+
+const PageTransition = ({ title }) => {
     const { isLoading, setMounted, pageComponentReady } = useLoader();
     const { linkClicked, routingPathname, resetLinkClick } = useLinkClick();
     const { setRoute } = useCustomRouter();
@@ -99,7 +93,7 @@ const PageTransition = () => {
     const containerRef = useRef(null);
     const loaderLogoRef = useRef(null);
     const loaderPanelRef = useRef(null);
-    // const titleRef = useRef(null);
+    const titleRef = useRef(null);
     const overlayRef = useRef(null);
     const onLoadTimelineRef = useRef(null);
     const routeTimelineRef = useRef(null);
@@ -123,181 +117,176 @@ const PageTransition = () => {
         gsap.set(loaderLogoRef.current, {
             ...animateLogo.initial,
         });
-        // gsap.set(titleRef.current, {
-        //     ...animateLoaderTitle.initial,
-        // });
+        gsap.set(titleRef.current, {
+            ...animateLoaderTitle.initial,
+        });
         gsap.set(overlayRef.current, {
             ...animateOverlay.initial,
         });
     };
 
-    useEffect(() => {
-        const container = containerRef?.current;
-        const overlay = overlayRef?.current;
-        const logo = loaderLogoRef?.current;
-        // const loaderTitle = titleRef?.current;
-        const panel = loaderPanelRef?.current;
+    // useEffect(() => {
+    //     const container = containerRef?.current;
+    //     const overlay = overlayRef?.current;
+    //     const logo = loaderLogoRef?.current;
+    //     const loaderTitle = titleRef?.current;
+    //     const panel = loaderPanelRef?.current;
 
-        if (!container || !overlay || !logo || !panel) return;
+    //     if (!container || !overlay || !logo || !loaderTitle || !panel) return;
 
-        const timeLine = gsap.timeline({
-            defaults: { duration: 0.9, ease: "power3.inOut" },
-        });
-        onLoadTimelineRef.current = timeLine;
+    //     const timeLine = gsap.timeline({
+    //         defaults: { duration: 1, ease: "power3.inOut" },
+    //     });
+    //     onLoadTimelineRef.current = timeLine;
 
-        const ctx = gsap.context(() => {
-            const transitionOnLoad = () => {
-                setInitialStyles();
+    //     const ctx = gsap.context(() => {
+    //         const transitionOnLoad = () => {
+    //             setInitialStyles();
 
-                timeLine
-                    .set(
-                        overlay,
-                        {
-                            ...animateOverlay.enter,
-                        },
-                        0
-                    )
-                    .set(
-                        panel,
-                        {
-                            ...animatePanel.enter,
-                        },
-                        0
-                    )
-                    .to(logo, {
-                        ...animateLogo.enter,
-                    })
-                    .addPause("waitTillLoading")
-                    .call(() => setTlPaused(true))
-                    .to(logo, {
-                        ...animateLogo.exit,
-                    })
-                    // .to(loaderTitle, {
-                    //     ...animateLoaderTitle.enter,
-                    // })
-                    // .to(loaderTitle, {
-                    //     ...animateLoaderTitle.exit,
-                    // })
-                    .to(
-                        panel,
-                        {
-                            ...animatePanel.exit,
-                        },
-                        "-=0.5"
-                    )
-                    .to(
-                        overlay,
-                        {
-                            ...animateOverlay.exit,
-                        },
-                        "<"
-                    )
-                    .call(
-                        () => {
-                            setMounted(true);
-                            isFirstLoading.current = false;
-                        },
-                        [],
-                        "-=0.2"
-                    );
-            };
+    //             timeLine
+    //                 .set(
+    //                     overlay,
+    //                     {
+    //                         ...animateOverlay.enter,
+    //                     },
+    //                     0
+    //                 )
+    //                 .set(
+    //                     panel,
+    //                     {
+    //                         ...animatePanel.enter,
+    //                     },
+    //                     0
+    //                 )
+    //                 .to(logo, {
+    //                     ...animateLogo.enter,
+    //                 })
+    //                 .addPause("waitTillLoading")
+    //                 .call(() => setTlPaused(true))
+    //                 .to(logo, {
+    //                     ...animateLogo.exit,
+    //                 })
+    //                 .to(loaderTitle, {
+    //                     ...animateLoaderTitle.enter,
+    //                 })
+    //                 .to(loaderTitle, {
+    //                     ...animateLoaderTitle.exit,
+    //                 })
+    //                 .to(
+    //                     panel,
+    //                     {
+    //                         ...animatePanel.exit,
+    //                     },
+    //                     "-=0.5"
+    //                 )
+    //                 .to(
+    //                     overlay,
+    //                     {
+    //                         ...animateOverlay.exit,
+    //                     },
+    //                     "<"
+    //                 )
+    //                 .call(
+    //                     () => {
+    //                         setMounted(true);
+    //                         isFirstLoading.current = false;
+    //                     },
+    //                     [],
+    //                     "-=0.2"
+    //                 );
+    //         };
 
-            transitionOnLoad();
-        }, panel);
+    //         transitionOnLoad();
+    //     }, panel);
 
-        return () => ctx.revert();
-    }, [setMounted]);
+    //     return () => ctx.revert();
+    // }, [setMounted]);
 
-    useLayoutEffect(() => {
-        if (isFirstLoading.current || !linkClicked) return;
-        const container = containerRef?.current;
-        const overlay = overlayRef?.current;
-        const logo = loaderLogoRef?.current;
-        // const loaderTitle = titleRef?.current;
-        const panel = loaderPanelRef?.current;
+    // useLayoutEffect(() => {
+    //     if (isFirstLoading.current || !linkClicked) return;
+    //     const container = containerRef?.current;
+    //     const overlay = overlayRef?.current;
+    //     const logo = loaderLogoRef?.current;
+    //     const loaderTitle = titleRef?.current;
+    //     const panel = loaderPanelRef?.current;
 
-        if (!container || !overlay || !logo || !panel) return;
-        setInitialStyles();
+    //     if (!container || !overlay || !logo || !loaderTitle || !panel) return;
 
-        const timeLine = gsap.timeline({
-            defaults: { duration: 0.9, ease: "power3.inOut" },
-            // onStart: () => {
-            //     lenis?.stop();
-            // },
-        });
+    //     setInitialStyles();
 
-        routeTimelineRef.current = timeLine;
+    //     const timeLine = gsap.timeline({
+    //         defaults: { duration: 1, ease: "power3.inOut" },
+    //         // onStart: () => {
+    //         //     lenis?.stop();
+    //         // },
+    //     });
 
-        const ctx = gsap.context(() => {
-            const transitionPathChange = () => {
-                timeLine
-                    .to(
-                        overlay,
-                        {
-                            ...animateOverlay.enter,
-                        },
-                        0
-                    )
-                    .to(
-                        panel,
-                        {
-                            ...animatePanel.enter,
-                        },
-                        0
-                    )
-                    .to(logo, {
-                        ...animateLogo.enter,
-                    }, "-=0.5")
-                    // .to(
-                    //     loaderTitle,
-                    //     {
-                    //         ...animateLoaderTitle.enter,
-                    //     },
-                    //     "-=0.2"
-                    // )
-                    .call(() => {
-                        if (routingPathname) {
-                            setRoute(routingPathname);
-                        }
-                    })
-                    .addPause("wait")
-                    .call(() => setRouteTimelinePaused(true))
-                    .call(() => resetScroll())
-                    // .to(loaderTitle, {
-                    //     ...animateLoaderTitle.exit,
-                    // })
-                    .to(logo, {
-                        ...animateLogo.exit,
-                    })
-                    .to(
-                        panel,
-                        {
-                            ...animatePanel.exit,
-                        },
-                        "-=0.25"
-                    )
-                    .to(
-                        overlay,
-                        {
-                            ...animateOverlay.exit,
-                        },
-                        "<"
-                    )
-                    .call(
-                        () => {
-                            lenis?.start();
-                            setMounted(true);
-                        },
-                        [],
-                        "-=0.5"
-                    );
-            };
+    //     routeTimelineRef.current = timeLine;
 
-            transitionPathChange();
-        }, panel);
+    //     const ctx = gsap.context(() => {
+    //         const transitionPathChange = () => {
+    //             timeLine
+    //                 .to(
+    //                     overlay,
+    //                     {
+    //                         ...animateOverlay.enter,
+    //                     },
+    //                     0
+    //                 )
+    //                 .to(
+    //                     panel,
+    //                     {
+    //                         ...animatePanel.enter,
+    //                     },
+    //                     0
+    //                 )
+    //                 .to(
+    //                     loaderTitle,
+    //                     {
+    //                         ...animateLoaderTitle.enter,
+    //                     },
+    //                     "-=0.2"
+    //                 )
+    //                 .call(() => {
+    //                     if (routingPathname) {
+    //                         setRoute(routingPathname);
+    //                     }
+    //                 })
+    //                 .addPause("wait")
+    //                 .call(() => setRouteTimelinePaused(true))
+    //                 .call(() => resetScroll())
+    //                 .to(loaderTitle, {
+    //                     ...animateLoaderTitle.exit,
+    //                 })
+    //                 .to(
+    //                     panel,
+    //                     {
+    //                         ...animatePanel.exit,
+    //                     },
+    //                     "-=0.5"
+    //                 )
+    //                 .to(
+    //                     overlay,
+    //                     {
+    //                         ...animateOverlay.exit,
+    //                     },
+    //                     "<"
+    //                 )
+    //                 .call(
+    //                     () => {
+    //                         lenis?.start();
+    //                         setMounted(true);
+    //                     },
+    //                     [],
+    //                     "-=0.5"
+    //                 );
+    //         };
 
-        return () => ctx.revert();
-    }, [linkClicked, setMounted, routingPathname, lenis, setRoute, resetScroll]);
+    //         transitionPathChange();
+    //     }, panel);
+
+    //     return () => ctx.revert();
+    // }, [linkClicked, setMounted, routingPathname, lenis, setRoute, resetScroll]);
 
     // useEffect(() => {
     //     if (!routeTimelineRef.current) return;
@@ -355,23 +344,10 @@ const PageTransition = () => {
                         height={200}
                     />
                 </div>
+                <div className="loader-title">
+                    <span ref={titleRef}>{title || "Loading.."}</span>
+                </div>
             </div> */}
-            {/* <div className="loader-title">
-                    <span ref={titleRef}>
-                        {title || (
-                            <div className="loader">
-                                <Image
-                                    src={"/images/logo/logo.png"}
-                                    alt=""
-                                    title=""
-                                    priority
-                                    width={200}
-                                    height={200}
-                                />
-                            </div>
-                        )}
-                    </span>
-                </div> */}
         </>
     );
 };

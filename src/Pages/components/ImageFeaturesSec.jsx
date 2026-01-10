@@ -115,8 +115,9 @@ const ImageFeaturesSec = ({ data = [], title = {}, content, sectionClass }) => {
                                     navigationBtns={false}
                                     pagination={false}
                                     breakpoints={{
-                                        0: { slidesPerView: 3 },
-                                        1200: { slidesPerView: 3 },
+                                        0: { slidesPerView: 1 },
+                                        680: { slidesPerView: 1.25 },
+                                        991: { slidesPerView: 3 },
                                     }}
                                     onSwiper={(swiper) => {
                                         swiperRef.current = swiper;

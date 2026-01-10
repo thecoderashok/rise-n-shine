@@ -53,24 +53,26 @@ const CampusFacilitiesSec = () => {
                 </div>
             </div>
             <div className="inner-sec">
-                <div className="row">
-                    <div className="col-12">
-                        <SecTitle
-                            mainTitle={<>Campus Facilities</>}
-                        />
-                    </div>
+                <div className="container">
+                    <div className="row">
+                        <div className="col-12">
+                            <SecTitle
+                                mainTitle={<>Campus Facilities</>}
+                            />
+                        </div>
 
-                    <div className="col-12">
-                        <div className="facilities-list-wrapper">
+                        <div className="col-12">
+                            <div className="facilities-list-wrapper">
 
-                            {facilitiesData.map((facility, index) => (
-                                <div className="facility-card" key={index}>
-                                    <div className="icon">
-                                        <i className={facility.icon}></i>
+                                {facilitiesData.map((facility, index) => (
+                                    <div className="facility-card" key={index}>
+                                        <div className="icon">
+                                            <i className={facility.icon}></i>
+                                        </div>
+                                        <p>{facility.text}</p>
                                     </div>
-                                    <p>{facility.text}</p>
-                                </div>
-                            ))}
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </div>

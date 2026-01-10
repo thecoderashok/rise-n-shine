@@ -41,32 +41,34 @@ const GallerySec = ({ galleryData, title = {}, content, sectionClass }) => {
         <section className={classes("gallery-sec", sectionClass)}>
             <div className="gallery-header">
                 <div className="container">
-                    <div className="row align-items-start">
-                        {title && (
-                            <div className="col-lg-6">
-                                <SecTitle
-                                    subTitle={title.subTitle}
-                                    mainTitle={title.mainTitle}
-                                />
-                            </div>
-                        )}
-
-                        {content ? (
-                            <div className="col-lg-6">
-                                <ScrollReveal direction="fade-up" delay={0.2}>
-                                    <div className="content-text">
-                                        {content}
-                                    </div>
-                                </ScrollReveal>
-                            </div>
-                        ) : (
-                            <div className="col-md-6 text-md-end d-flex justify-content-md-end justify-content-start">
-                                <div className="slide-buttons">
-                                    <button type="button" ref={navPrevRef} className="slide-btn prev" aria-label="Previous slide" />
-                                    <button type="button" ref={navNextRef} className="slide-btn next" aria-label="Next slide" />
+                    <div className="row">
+                        <div className="col-12 heading-wrapper">
+                            {title && (
+                                <div className="col-lg-6">
+                                    <SecTitle
+                                        subTitle={title.subTitle}
+                                        mainTitle={title.mainTitle}
+                                    />
                                 </div>
-                            </div>
-                        )}
+                            )}
+
+                            {content ? (
+                                <div className="col-lg-6">
+                                    <ScrollReveal direction="fade-up" delay={0.2}>
+                                        <div className="content-text">
+                                            {content}
+                                        </div>
+                                    </ScrollReveal>
+                                </div>
+                            ) : (
+                                <div className="col-lg-6  slide-buttons-wrapper">
+                                    <div className="slide-buttons">
+                                        <button type="button" ref={navPrevRef} className="slide-btn prev" aria-label="Previous slide" />
+                                        <button type="button" ref={navNextRef} className="slide-btn next" aria-label="Next slide" />
+                                    </div>
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>

@@ -72,18 +72,18 @@ const AboutIntroSec = () => {
                                 <ScrollReveal direction="clip-scale-in-downward" delay={0.2}>
                                     <div className="img-wrapper small">
                                         <Image
-                                            src={`/images/image-placeholder.jpg`}
-                                            width={1920}
-                                            height={1080}
+                                            src={`/images/who-we-are-1.jpg`}
+                                            width={800}
+                                            height={1200}
                                         />
                                     </div>
                                 </ScrollReveal>
                                 <ScrollReveal direction="clip-scale-in-downward" delay={0.2}>
                                     <div className="img-wrapper">
                                         <Image
-                                            src={`/images/image-placeholder.jpg`}
-                                            width={1920}
-                                            height={1080}
+                                            src={`/images/who-we-are-2.jpg`}
+                                            width={800}
+                                            height={1200}
                                         />
                                     </div>
                                 </ScrollReveal>

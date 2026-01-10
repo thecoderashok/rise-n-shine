@@ -52,14 +52,21 @@ const MenuItem = ({ menuItem, menuItemIndex, isMenuClosed, ...props }) => {
     }, [isSubMenuOpen, isMobile])
 
     useEffect(() => {
+        let timeout;
         if (isMenuClosed) {
-            setIsSubMenuOpen(false);
+            timeout = setTimeout(() => {
+                setIsSubMenuOpen(false);
+            }, 0);
 
             const submenu = subMenuRef.current;
             if (!submenu || !isMobile) return;
 
             gsap.killTweensOf(submenu);
             gsap.set(submenu, { height: 0 });
+        }
+
+        return () => {
+            clearTimeout(timeout);
         }
     }, [isMenuClosed, isMobile]);
 
@@ -130,12 +137,14 @@ const MenuItem = ({ menuItem, menuItemIndex, isMenuClosed, ...props }) => {
             ref={menuItemRef}
             {...props}
         >
-            <TransitionLink
-                href={menuItem?.path || "#"}
-                className={classes(pathname === menuItem.path && styles.active)}
-            >
-                {menuItem?.label}
-            </TransitionLink>
+            <span>
+                <TransitionLink
+                    href={menuItem?.path || "#"}
+                    className={classes(pathname === menuItem.path && styles.active)}
+                >
+                    {menuItem?.label}
+                </TransitionLink>
+            </span>
 
             {menuItem?.sub_menu ? (
                 <SubMenu

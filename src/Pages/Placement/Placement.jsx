@@ -143,8 +143,6 @@ const internshipOpportunityData = [
     },
 ];
 
-
-
 const Placement = () => {
     usePageSEO({
         title: "Placement - Career Opportunities | Rise N Shine Institute of Learning",
@@ -164,7 +162,7 @@ const Placement = () => {
                     { label: "Home", href: "/" },
                     { label: "Placement" },
                 ]}
-                imageSrc={`/images/hero-banner.jpg`}
+                imageSrc={`/images/placement-banner.jpg`}
             />
 
             <ImageFeaturesSec

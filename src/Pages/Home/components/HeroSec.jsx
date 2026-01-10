@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ParallaxWrapper from '../../../components/Parallax/ParallaxWrapper';
 import Image from '../../../components/Image';
 import SwiperCarousel from '../../../components/Swiper/SwiperCarousel';
 import { SwiperSlide } from 'swiper/react';
 import { useClassNames } from '../../../hook/useClassNames';
 import TextSplit from '../../../components/TextSplit';
+import { AutoFitText } from '../../components/AutoFitText';
 
 const data = [
     {
@@ -29,6 +30,16 @@ const data = [
 
 const HeroSec = () => {
     const classes = useClassNames()
+
+    useEffect(() => {
+        const cleanup = AutoFitText({
+            wordSelector: ".title-text .word",
+            containerSelector: ".hero-sec .content-wrapper",
+        });
+
+        return cleanup;
+    }, []);
+
     return (
         <section className="hero-sec">
             <SwiperCarousel
