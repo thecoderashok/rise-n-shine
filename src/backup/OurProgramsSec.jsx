@@ -74,39 +74,3 @@ const OurProgramsSec = () => {
 }
 
 export default OurProgramsSec
-
-
-{/* <section className="programmes-intro">
-                <ParallaxWrapper offset={15}>
-                    <div className="image-wrapper">
-                        <Image
-                            src="/images/marketing-bg.jpg"
-                            width={1920}
-                            height={1080}
-                            alt="Marketing Programmes"
-                        />
-                    </div>
-                </ParallaxWrapper>
-                <div className="inner-sec">
-                    <div className="container">
-                        <div className="row justify-content-center">
-                            <ScrollReveal direction="clip-fade-up">
-                                <div className="col-lg-8 text-center">
-                                    <div className="heading-wrapper">
-                                        <h2 className="title-text">
-                                            Marketing Programmes
-                                        </h2>
-                                    </div>
-                                    <div className="text-content">
-                                        <p>
-                                            The Professional Marketing Management Development Programmes at Rise and Shine Institute of Learning are designed to equip learners with a comprehensive foundation in modern marketing and sales. Each programme progresses from essential principles to advanced strategies, combining academic depth with real-world application. Students engage with diverse modules ranging from digital marketing, sales and distribution, and financial services marketing, to cutting-edge areas such as AI-driven strategies, marketing technology, and growth hacking. This structured approach ensures that every learner develops not only a strong theoretical understanding but also the practical skills and global perspective required to excel in today's competitive business environment.
-                                        </p>
-
-                                        <Button textLabel="Learn More" customClass="style-2" link={`#`} />
-                                    </div>
-                                </div>
-                            </ScrollReveal>
-                        </div>
-                    </div>
-                </div>
-            </section> */}

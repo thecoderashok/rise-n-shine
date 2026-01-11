@@ -51,7 +51,7 @@ const WhyUsSec = () => {
                 <div className="cols-row">
                     {data.map((item, index) => (
                         <div className="col-item" key={index}>
-                            <Image src={item.image} alt={""} width={746} height={541} />
+                            <Image src={item.image} alt={item.title} width={800} height={1200} />
 
                             <div className="inner">
                                 <div className="icon-wrapper">
@@ -66,7 +66,6 @@ const WhyUsSec = () => {
 
                                 <div className="text-content">
                                     <h3 className="title-text">{item.title}</h3>
-                                    {item.desc}
                                 </div>
                             </div>
                         </div>

@@ -69,6 +69,18 @@ const Programmes = () => {
                 ]}
             />
 
+            <section className="programmes-page-sec pb-0">
+                <div className="container">
+                    <div className="row page-text-content">
+                        <div className="col-12 text-center">
+                            <div className="content-wrapper">
+                                <div className="para" dangerouslySetInnerHTML={{ __html: programmesData.description }}></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             {programmesList && (
                 <section className="programmes-list-sec">
                     <div className="container">
