@@ -627,7 +627,8 @@ section {
             .word {
                 transform: translate3d(0, 3.125vw, 0);
                 opacity: 0;
-                transition: all 0.8s cubic-bezier(0.32, 0, 0.67, 0) var(--delay);
+                transition-property: opacity, transform !important;
+                transition: 0.8s cubic-bezier(0.32, 0, 0.67, 0) var(--delay);
             }
         }
     }
