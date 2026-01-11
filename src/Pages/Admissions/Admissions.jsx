@@ -4,7 +4,7 @@ import SecTitle from "../../components/SecTitle";
 import ScrollReveal from "../../components/ScrollReveal/ScrollReveal";
 import ContactSec from "../components/ContactSec";
 import ApplicationFormSec from "./components/ApplicationFormSec";
-import LeftRightImageTextSec from "../components/LeftRightImageTextSec"
+import LeftRightImageTextSec from "../components/LeftRightImageTextSec";
 import { usePageSEO } from "../../hook/usePageSEO";
 import SwiperCarousel from "../../components/Swiper/SwiperCarousel";
 import { SwiperSlide } from "swiper/react";
@@ -71,24 +71,29 @@ const admissionSteps = [
 const eligibilityItems = [
     {
         iconClass: "fa-solid fa-graduation-cap",
-        description: "A recognised bachelor's degree of at least three years' duration"
+        description:
+            "A recognised bachelor's degree of at least three years' duration",
     },
     {
         iconClass: "fa-solid fa-briefcase",
-        description: "A work experience certificate from a registered company, if applicable"
+        description:
+            "A work experience certificate from a registered company, if applicable",
     },
     {
         iconClass: "fa-solid fa-id-card",
-        description: "Proof of nationality for both national and international applicants"
+        description:
+            "Proof of nationality for both national and international applicants",
     },
     {
         iconClass: "fa-solid fa-diploma",
-        description: "Graduation or post-graduation certificate, or final mark-sheet if available"
+        description:
+            "Graduation or post-graduation certificate, or final mark-sheet if available",
     },
     {
         iconClass: "fa-solid fa-trophy",
-        description: "Evidence of work experience, extracurricular achievements, or participation in sports and related activities"
-    }
+        description:
+            "Evidence of work experience, extracurricular achievements, or participation in sports and related activities",
+    },
 ];
 
 const ProcessItem = ({ step }) => (
@@ -122,11 +127,7 @@ const Admissions = () => {
         <>
             <PageBannerSec
                 pageTitle={"Admissions"}
-                title={
-                    <>
-                        Step Into a Future of Possibilities
-                    </>
-                }
+                title={<>Step Into a Future of Possibilities</>}
                 breadcrumbs={[{ label: "Home", href: "/" }, { label: "Admissions" }]}
                 imageSrc={`/images/admissions-banner.jpg`}
             />
@@ -139,8 +140,7 @@ const Admissions = () => {
                     height: 800,
                 }}
                 mainTitle={<>Admission Process</>}
-                content={
-                    `<p>
+                content={`<p>
                         The admission process at Rise and Shine Institute of Learning
                         is designed to be transparent, structured, and
                         student-centric. From the initial notification and application
@@ -155,8 +155,7 @@ const Admissions = () => {
                         expectations. A dedicated policy on admission cancellation and
                         refunds further reflects the institute's commitment to
                         integrity and trust.
-                    </p>`
-                }
+                    </p>`}
                 imageColClass={"col-lg-6"}
                 contentColClass={"col-lg-6"}
                 sectionClass="sec-dark"
@@ -167,7 +166,12 @@ const Admissions = () => {
                     <div className="row">
                         <div className="col-12 text-center">
                             <SecTitle
-                                mainTitle={<>Admission Process at <br /> <span className="colored">Rise and Shine</span></>}
+                                mainTitle={
+                                    <>
+                                        Admission Process at <br />{" "}
+                                        <span className="colored">Rise and Shine</span>
+                                    </>
+                                }
                             />
                         </div>
                     </div>
@@ -181,8 +185,8 @@ const Admissions = () => {
                                         showPagination={false}
                                         loop={false}
                                         breakpoints={{
-                                            0: { slidesPerView: 1.2, spaceBetween: 10 },
-                                            640: { slidesPerView: 2.5, spaceBetween: 16 },
+                                            0: { slidesPerView: 1.1, spaceBetween: 10 },
+                                            640: { slidesPerView: 2.2, spaceBetween: 16 },
                                         }}
                                     >
                                         {admissionSteps.map((step, index) => (
@@ -216,8 +220,14 @@ const Admissions = () => {
                     <div className="row align-items-center">
                         <div className="col-md-6">
                             <SecTitle
-                                mainTitle={<><b className="colored">Eligibility</b> at a Glance</>}
-                                desc={"The eligibility criteria at Rise and Shine Institute of Learning are designed to ensure that every applicant brings a strong academic foundation and the potential for professional growth."}
+                                mainTitle={
+                                    <>
+                                        <b className="colored">Eligibility</b> at a Glance
+                                    </>
+                                }
+                                desc={
+                                    "The eligibility criteria at Rise and Shine Institute of Learning are designed to ensure that every applicant brings a strong academic foundation and the potential for professional growth."
+                                }
                             />
                         </div>
                         <div className="col-md-6">

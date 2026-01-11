@@ -34,7 +34,6 @@ function Footer() {
         { label: "Sitemap", path: "#" }
     ];
 
-    // console.log(FooterMenuGroup)
 
     const handleNewsletterSubmit = (event) => {
         event.preventDefault();
@@ -110,7 +109,7 @@ function Footer() {
             <div className="footer-bottom">
                 <div className="container inner">
                     <p className="copyright-text">
-                        &copy; {new Date().getFullYear()} <b>Rise N Shine Institute</b>. All rights reserved.
+                        &copy; {new Date().getFullYear()} <b>Rise N Shine</b>. All rights reserved.
                     </p>
                     <ul className="bottom-menu">
                         {footerBottomLinks.map((item) => (

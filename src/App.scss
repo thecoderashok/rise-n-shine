@@ -11,13 +11,13 @@
 .swiper-pagination {
     display: flex;
     align-items: center;
-    padding: 10px 20px;
-    gap: 8px;
+    padding: 0.625rem 1.25rem;
+    gap: 0.5rem;
 
     .swiper-pagination-bullet {
         position: relative;
-        width: 12px;
-        height: 12px;
+        width: 0.75rem;
+        height: 0.75rem;
         border-radius: 0;
         background-color: var(--color-primary);
         opacity: 1;
@@ -30,7 +30,7 @@
 }
 
 .carousel-wrapper {
-    --wrapper-padding-bottom: 60px;
+    --wrapper-padding-bottom: 3.75rem;
 }
 
 .slider-nav-wrapper {
@@ -225,7 +225,7 @@ section {
         font-weight: 700;
         line-height: 1.1;
         letter-spacing: -0.05em;
-        margin-bottom: clamp(18px, 0.2em, 0.2em);
+        margin-bottom: clamp(1.125rem, 0.2em, 0.2em);
 
         .line {
             line-height: 0.9;
@@ -252,11 +252,11 @@ section {
 
 .page-text-content {
     .left-side {
-        padding-right: clamp(12px, 2.4vw, 40px);
+        padding-right: clamp(0.75rem, 2.4vw, 2.5rem);
     }
 
     .right-side {
-        padding-left: clamp(12px, 2.4vw, 40px);
+        padding-left: clamp(0.75rem, 2.4vw, 2.5rem);
     }
 
     /* ---------------- Titles ---------------- */
@@ -342,9 +342,9 @@ section {
     /* ---------------- Lists ---------------- */
 
     ul {
-        padding-left: clamp(16px, 1.8vw, 30px);
+        padding-left: clamp(1rem, 1.8vw, 1.875rem);
         list-style: inherit;
-        margin-bottom: clamp(12px, 1.2vw, 20px);
+        margin-bottom: clamp(0.75rem, 1.2vw, 1.25rem);
 
         &:last-child {
             margin-bottom: 0;
@@ -367,11 +367,11 @@ section {
         width: 100%;
         height: 100%;
         overflow: hidden;
-        border-radius: clamp(10px, 0.85vw, 14px);
+        border-radius: clamp(0.625rem, 0.85vw, 0.875rem);
 
         img {
             height: 100%;
-            min-height: clamp(240px, 25vw, 420px);
+            min-height: clamp(15rem, 25vw, 26.25rem);
             aspect-ratio: 3 / 2.25;
             object-fit: cover;
             object-position: center;
@@ -379,7 +379,7 @@ section {
     }
 
     @media (max-width: 991px) {
-        gap: 35px;
+        gap: 2.1875rem;
     }
 }
 
@@ -445,7 +445,7 @@ section {
     }
 
     @media screen and (max-width: 992px) {
-        margin-top: 30px;
+        margin-top: 1.875rem;
 
         .breadcrumb-item {
             font-size: 0.9rem;
@@ -453,7 +453,7 @@ section {
     }
 
     @media screen and (max-width: 575px) {
-        margin-bottom: 10px;
+        margin-bottom: 0.625rem;
 
         .breadcrumb-item {
             font-size: 0.8rem;
@@ -473,7 +473,7 @@ section {
             width: 100%;
             height: 100%;
             aspect-ratio: 3/2;
-            min-height: 280px;
+            min-height: 17.5rem;
             object-fit: cover;
             object-position: center;
             display: block;
@@ -484,8 +484,8 @@ section {
         display: flex;
         align-items: center;
         flex-wrap: wrap;
-        gap: 14px;
-        margin-top: 20px;
+        gap: 0.875rem;
+        margin-top: 1.25rem;
     }
 }
 
@@ -511,7 +511,7 @@ section {
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 0 calc(5vw + 12px);
+        padding: 0 calc(5vw + 0.75rem);
         overflow: hidden;
 
         &::after {
@@ -561,7 +561,7 @@ section {
         width: 34vw;
         transform: translateX(6.25vw) translateZ(0);
         opacity: 0;
-        filter: blur(30px);
+        filter: blur(1.875rem);
         transition-property: transform, filter, opacity !important;
         transition: 1s cubic-bezier(0.16, 1, 0.3, 1) 500ms;
 
@@ -717,7 +717,7 @@ section {
         }
 
         .inner-sec {
-            padding: 12px;
+            padding: 0.75rem;
             align-items: flex-start;
             padding-top: 8rem;
         }
@@ -736,27 +736,27 @@ section {
 }
 
 .home-about-sec {
-    padding-top: clamp(100px, 8.4vw, 140px);
+    padding-top: clamp(6.25rem, 8.4vw, 8.75rem);
     background-color: #270a27;
 
     .left-side {
         position: relative;
-        padding-right: clamp(12px, 0.75vw, 12px);
+        padding-right: clamp(0.75rem, 0.75vw, 0.75rem);
     }
 
     .title-wrapper {
         position: absolute;
         width: 100%;
         max-width: max-content;
-        top: clamp(-60px, -3.6vw, -48px);
+        top: clamp(-3.75rem, -3.6vw, -3rem);
         left: 50%;
         transform: translateX(-50%);
         z-index: 2;
 
         .inner {
-            padding: clamp(22px, 2.1vw, 35px);
+            padding: clamp(1.375rem, 2.1vw, 2.1875rem);
             background-color: var(--color-primary);
-            border-radius: clamp(8px, 0.6vw, 10px);
+            border-radius: clamp(0.5rem, 0.6vw, 0.625rem);
         }
 
         .main-title {
@@ -781,13 +781,13 @@ section {
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
-        gap: clamp(16px, 1.2vw, 18px);
+        gap: clamp(1rem, 1.2vw, 1.125rem);
 
         .img-wrapper {
             position: relative;
             width: 48.5%;
             overflow: hidden;
-            border-radius: clamp(6px, 0.5vw, 8px);
+            border-radius: clamp(0.375rem, 0.5vw, 0.5rem);
             margin: 0;
 
             img {
@@ -798,7 +798,7 @@ section {
             }
 
             &.large {
-                margin-bottom: clamp(0px, 4.8vw, 80px);
+                margin-bottom: clamp(0rem, 4.8vw, 5rem);
                 aspect-ratio: 1/1.3;
             }
 
@@ -813,7 +813,7 @@ section {
     }
 
     .right-side {
-        padding-left: clamp(12px, 2.4vw, 40px);
+        padding-left: clamp(0.75rem, 2.4vw, 2.5rem);
     }
 
     .title-text {
@@ -834,10 +834,10 @@ section {
     }
 
     .text-wrapper {
-        padding: clamp(12px, 2.4vw, 40px) 0;
+        padding: clamp(0.75rem, 2.4vw, 2.5rem) 0;
 
         p {
-            max-width: 500px;
+            max-width: 31.25rem;
             color: rgba(255, 255, 255, 0.8);
         }
     }
@@ -932,7 +932,7 @@ section {
 
     @media (max-width: 991px) {
         .left-side {
-            padding-right: 12px;
+            padding-right: 0.75rem;
         }
 
         .images-pres {
@@ -971,7 +971,7 @@ section {
         top: 50%;
         transform: translate(-50%, -50%);
         z-index: 9;
-        width: clamp(200px, 18vw, 300px);
+        width: clamp(12.5rem, 18vw, 18.75rem);
         pointer-events: none !important;
 
         img {
@@ -1120,7 +1120,7 @@ section {
                     }
 
                     &:first-child {
-                        margin-top: clamp(20px, 2.4vw, 40px);
+                        margin-top: clamp(1.25rem, 2.4vw, 2.5rem);
                     }
                 }
             }
@@ -1145,8 +1145,8 @@ section {
         height: auto;
 
         .center-logo {
-            width: clamp(160px, 20vw, 200px);
-            top: clamp(30px, 4vw, 40px);
+            width: clamp(10rem, 20vw, 12.5rem);
+            top: clamp(1.875rem, 4vw, 2.5rem);
             transform: translateX(-50%);
         }
 
@@ -1160,7 +1160,7 @@ section {
                 height: auto;
                 min-height: 40vh;
                 justify-content: center;
-                padding: 60px 24px;
+                padding: 3.75rem 1.5rem;
                 text-align: center;
 
                 &:first-child {
@@ -1273,7 +1273,7 @@ section {
 
             img {
                 width: 100%;
-                min-height: 420px;
+                min-height: 26.25rem;
                 aspect-ratio: 1 / 1;
                 object-fit: cover;
                 object-position: center;
@@ -1450,12 +1450,12 @@ section {
     }
 
     @media screen and (max-width: 991px) {
-        padding-bottom: 100px;
+        padding-bottom: 6.25rem;
 
         .programme-card {
             .img-wrapper {
                 img {
-                    min-height: 420px;
+                    min-height: 26.25rem;
                 }
             }
         }
@@ -1559,8 +1559,8 @@ section {
             .icon-wrapper {
                 position: relative;
                 flex-shrink: 0;
-                width: 90px;
-                height: 90px;
+                width: 5.625rem;
+                height: 5.625rem;
                 border-radius: 50%;
                 transition: background-color 0.3s ease;
                 z-index: 2;
@@ -1586,7 +1586,7 @@ section {
 
             .text-content {
                 position: relative;
-                padding: 0 30px;
+                padding: 0 1.875rem;
                 z-index: 2;
 
                 .title-text {
@@ -1611,7 +1611,7 @@ section {
     @media screen and (max-width: 1200px) {
         .top-sec {
             position: relative;
-            padding-bottom: 40px;
+            padding-bottom: 2.5rem;
         }
 
         .cols-row {
@@ -1622,7 +1622,7 @@ section {
                 height: 50vh;
 
                 .inner {
-                    padding: 20px !important;
+                    padding: 1.25rem !important;
                 }
             }
         }
@@ -1639,7 +1639,7 @@ section {
             height: auto;
 
             .text-content {
-                padding: 0 24px;
+                padding: 0 1.5rem;
             }
         }
     }
@@ -1658,7 +1658,7 @@ section {
     }
 
     .left-side {
-        padding-right: clamp(12px, 2.4vw, 2.5rem);
+        padding-right: clamp(0.75rem, 2.4vw, 2.5rem);
     }
 
     .admission-actions {
@@ -1669,7 +1669,7 @@ section {
     }
 
     .admission-action-btn {
-        border: 1px solid rgba(255, 255, 255, 0.18);
+        border: 0.0625rem solid rgba(255, 255, 255, 0.18);
         background: rgba(255, 255, 255, 0.08);
         color: #f9f2fb;
         border-radius: 999em;
@@ -1710,7 +1710,7 @@ section {
     .form-card {
         font-size: clamp(0.9rem, 1vw, 1rem);
         border-radius: 0.9em;
-        border: 1px solid rgba(255, 255, 255, 0.08);
+        border: 0.0625rem solid rgba(255, 255, 255, 0.08);
         overflow: hidden;
 
         .form-head {
@@ -1877,7 +1877,7 @@ section {
 
     .gallery-header {
         padding: 0 var(--content-padding-x);
-        margin-bottom: clamp(28px, 3.012vw, 50px);
+        margin-bottom: clamp(1.75rem, 3.012vw, 3.125rem);
 
         .row {
             align-items: flex-start;
@@ -1903,18 +1903,18 @@ section {
     .slide-buttons-wrapper {
         display: flex;
         justify-content: flex-end;
-        margin-top: clamp(18px, 1.807vw, 30px);
+        margin-top: clamp(1.125rem, 1.807vw, 1.875rem);
     }
 
     .slide-buttons {
         display: flex;
         align-items: center;
-        gap: clamp(7px, 0.723vw, 12px);
+        gap: clamp(0.4375rem, 0.723vw, 0.75rem);
     }
 
     .features-carousel {
         width: 100%;
-        margin-top: clamp(6px, 0.602vw, 10px);
+        margin-top: clamp(0.375rem, 0.602vw, 0.625rem);
 
         .swiper {
             overflow: visible;
@@ -1937,7 +1937,7 @@ section {
         height: 100%;
         transform: translateZ(0);
         overflow: hidden;
-        min-height: 280px;
+        min-height: 17.5rem;
         border-radius: 0.875em;
         font-size: clamp(0.8rem, 1vw, 1.05rem);
         --content-bg-hover: var(--color-secondary);
@@ -2510,7 +2510,7 @@ section {
                 display: block;
                 width: 100%;
                 object-fit: cover;
-                min-height: 360px;
+                min-height: 22.5rem;
                 aspect-ratio: 1 / 1.25;
                 object-position: center;
             }
@@ -2562,11 +2562,13 @@ section {
         font-size: 0.85rem;
 
         .images-pres {
+            flex-direction: column;
             .img-wrapper {
-                width: calc(50% - 0.45em);
+                width: 100%;
 
                 img {
-                    min-height: 280px;
+                    aspect-ratio: 3/2.5;
+                    min-height: 17.5rem;
                 }
             }
         }
@@ -2666,7 +2668,7 @@ section {
     .content-wrapper {
         display: flex;
         flex-direction: column;
-        gap: 20px;
+        gap: 1.25rem;
 
         .text-wrapper {
             .title-text {
@@ -2919,7 +2921,7 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 600px;
+    min-height: 37.5rem;
     height: 80vh;
     overflow: hidden;
 
@@ -3026,10 +3028,10 @@ section {
         //     top: 50%;
         //     left: 50%;
         //     transform: translate(-50%, -50%);
-        //     width: 100px;
-        //     height: 100px;
+        //     width: 6.25rem;
+        //     height: 6.25rem;
         //     border-radius: 50%;
-        //     border: 2px solid #d4a850d0;
+        //     border: 0.125rem solid #d4a850d0;
         //     animation: ripple 2s infinite;
         //     z-index: 1;
         // }
@@ -3046,7 +3048,7 @@ section {
     }
 
     @media (max-width: 991px) {
-        min-height: 450px;
+        min-height: 28.125rem;
         height: 60vh;
     }
 
@@ -3146,7 +3148,7 @@ section {
             right: 0.9em;
 
             span {
-                border-radius: 999px;
+                border-radius: 62.4375rem;
                 background-color: var(--color-secondary);
                 color: white;
                 font-size: 0.735em;
@@ -3194,10 +3196,10 @@ section {
 .faculties-carousel-sec {
     .faculties-carousel {
         position: relative;
-        margin-top: 50px;
+        margin-top: 3.125rem;
 
         .carousel-wrapper {
-            --wrapper-padding-bottom: 80px;
+            --wrapper-padding-bottom: 5rem;
         }
 
         .swiper {
@@ -3217,10 +3219,10 @@ section {
             top: auto !important;
             bottom: 0;
             width: 100%;
-            height: 6px !important;
+            height: 0.375rem !important;
             padding: 0 !important;
             background: #f0dfbc;
-            border-radius: 999px;
+            border-radius: 62.4375rem;
             overflow: hidden;
         }
 
@@ -3230,7 +3232,7 @@ section {
     }
 
     .slider-nav-wrapper {
-        padding: 0 0 30px;
+        padding: 0 0 1.875rem;
 
         .slide-btn {
             &.swiper-button-prev {
@@ -3256,10 +3258,10 @@ section {
         display: flex;
         flex-wrap: wrap;
         --grid-view: 3;
-        --col-gap: clamp(10px, 0.725vw, 12px);
-        row-gap: clamp(25px, 3.012vw, 50px) !important;
+        --col-gap: clamp(0.625rem, 0.725vw, 0.75rem);
+        row-gap: clamp(1.5625rem, 3.012vw, 3.125rem) !important;
         gap: var(--col-gap);
-        margin-top: clamp(28px, 3.012vw, 50px);
+        margin-top: clamp(1.75rem, 3.012vw, 3.125rem);
         justify-content: center;
 
         .faculty-card-wrapper {
@@ -3337,7 +3339,7 @@ section {
             padding: 1.2em;
             gap: 0.5em;
             background-color: rgba(26, 9, 26, 0.61);
-            backdrop-filter: blur(15px);
+            backdrop-filter: blur(0.9375rem);
         }
 
         .designation {
@@ -3358,7 +3360,7 @@ section {
             display: none;
             margin-top: 0.6em;
             padding-top: 1em;
-            border-top: 1px solid rgba(0, 0, 0, 0.15);
+            border-top: 0.0625rem solid rgba(0, 0, 0, 0.15);
         }
     }
 
@@ -3381,14 +3383,14 @@ section {
     flex-wrap: wrap;
 
     .sec--title-wrapper {
-        margin-bottom: clamp(15.5px, 1.563vw, 30px);
+        margin-bottom: clamp(0.969rem, 1.563vw, 1.875rem);
     }
 
     .inner-sec {
         position: relative;
         width: 53%;
         padding: var(--content-padding-y) var(--content-padding-x);
-        padding-left: clamp(31px, 3.125vw, 60px) !important;
+        padding-left: clamp(1.938rem, 3.125vw, 3.75rem) !important;
         display: flex;
         align-items: center;
     }
@@ -3431,7 +3433,7 @@ section {
         .inner-content {
             position: relative;
             left: 0;
-            padding: clamp(28px, 2.083vw, 40px);
+            padding: clamp(1.75rem, 2.083vw, 2.5rem);
             z-index: 2;
 
             p {
@@ -3447,18 +3449,18 @@ section {
         display: flex;
         flex-wrap: wrap;
         --grid-view: 2;
-        --col-gap: clamp(6.2px, 0.625vw, 12px);
+        --col-gap: clamp(0.388rem, 0.625vw, 0.75rem);
         gap: var(--col-gap);
     }
 
     .facility-card {
         position: relative;
         width: calc((100% - (var(--grid-view) - 1) * var(--col-gap)) / var(--grid-view));
-        min-height: clamp(160px, 11.458vw, 220px);
+        min-height: clamp(10rem, 11.458vw, 13.75rem);
         display: flex;
         flex-direction: column;
         font-size: clamp(0.8rem, 1vw, 1.1rem);
-        border-radius: clamp(8px, 0.7em, 0.7em);
+        border-radius: clamp(0.5rem, 0.7em, 0.7em);
         padding: 1.5em 1.2em;
         background-color: #f2e8f7;
         transition: background-color 0.3s ease;
@@ -3499,18 +3501,19 @@ section {
         }
     }
 
-    @media (max-width: 991px) {
+    @media (max-width: 991.008px) {
         .sticky-sec {
             position: relative;
             width: 100%;
             padding-right: 0;
             height: auto;
-            min-height: 400px;
+            min-height: 25rem;
 
             .inner-content {
-                padding: 40px 28px;
+                padding: 2.5rem 1.75rem;
             }
         }
+
         .inner-sec {
             width: 100%;
             padding-left: var(--content-padding-x) !important;
@@ -3518,10 +3521,11 @@ section {
 
         .facility-card {
             font-size: 0.9rem;
-            min-height: 180px;
+            min-height: 11.25rem;
         }
     }
-    @media (max-width: 575px) {
+
+    @media (max-width: 575.008px) {
         .facilities-list-wrapper {
             --grid-view: 1;
         }
@@ -3539,9 +3543,9 @@ section {
         flex-wrap: wrap;
         justify-content: center;
         --grid-view: 5;
-        --col-gap: clamp(10px, 1.084vw, 18px);
+        --col-gap: clamp(0.625rem, 1.084vw, 1.125rem);
         gap: var(--col-gap);
-        margin-top: clamp(30px, 3.614vw, 60px);
+        margin-top: clamp(1.875rem, 3.614vw, 3.75rem);
 
         .process-item-wrapper {
             width: calc((100% - (var(--grid-view) - 1) * var(--col-gap)) / var(--grid-view));
@@ -3554,7 +3558,7 @@ section {
         position: relative;
         width: 100%;
         height: 100%;
-        font-size: clamp(0.8rem, 1vw, 1.04rem);
+        font-size: clamp(0.9rem, 1vw, 1.04rem);
         padding: 1.3em 1em;
         overflow: hidden;
         display: flex;
@@ -3632,10 +3636,15 @@ section {
     }
 
     .timeline-carousel-view {
-        margin-top: clamp(30px, 3.614vw, 60px);
+        margin-top: clamp(1.875rem, 3.614vw, 3.75rem);
 
         .swiper {
             overflow: visible;
+            height: auto;
+
+            .process-item-wrapper {
+                height: 100%;
+            }
         }
     }
 
@@ -3655,7 +3664,6 @@ section {
         }
 
         .process-item {
-            padding: 0;
             align-items: flex-start;
 
             .content-wrapper {
@@ -3673,7 +3681,7 @@ section {
     .sec-desc {
         line-height: 1.6;
         font-weight: 500;
-        max-width: clamp(477.7px, 48.193vw, 800px);
+        max-width: clamp(29.85625rem, 48.193vw, 50rem);
     }
 
     .sec--main-title {
@@ -3686,8 +3694,8 @@ section {
         display: flex;
         flex-direction: column;
         align-items: center;
-        max-width: clamp(410px, 36.145vw, 600px);
-        gap: clamp(14.9px, 1.5vw, 24.9px);
+        max-width: clamp(25.625rem, 36.145vw, 37.5rem);
+        gap: clamp(0.93125rem, 1.5vw, 1.55625rem);
         margin-left: auto;
 
         .eligibility-card {
@@ -3696,13 +3704,12 @@ section {
             font-size: clamp(0.8rem, 1vw, 1.04rem);
             display: flex;
             gap: 1.2em;
-            transition: all 0.3s ease;
 
             .card-icon-wrapper {
                 width: 4em;
                 height: 4em;
                 flex-shrink: 0;
-                background: #ffffff;
+                background-color: white;
                 border-radius: 0.6em;
                 display: flex;
                 align-items: center;
@@ -3741,7 +3748,7 @@ section {
         }
 
         @media (max-width: 991px) {
-            margin-top: 20px;
+            margin-top: 1.25rem;
         }
 
         @media (max-width: 767px) {
@@ -3755,13 +3762,13 @@ section {
 .application-form-sec {
     .sec-desc {
         font-weight: 500;
-        max-width: clamp(477.7px, 48.193vw, 800px);
+        max-width: clamp(29.85625rem, 48.193vw, 50rem);
         margin: 0 auto;
     }
 
     .form-types-wrapper {
-        max-width: clamp(597.8px, 60.241vw, 1000px);
-        margin: clamp(35.8px, 3.614vw, 60px) auto 0;
+        max-width: clamp(37.3625rem, 60.241vw, 62.5rem);
+        margin: clamp(2.2375rem, 3.614vw, 3.75rem) auto 0;
         display: flex;
         flex-direction: column;
     }
@@ -3770,7 +3777,7 @@ section {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        --col-gap: clamp(10px, 0.964vw, 16px);
+        --col-gap: clamp(0.625rem, 0.964vw, 1rem);
         gap: var(--col-gap);
     }
 
@@ -3796,7 +3803,7 @@ section {
         gap: 1.15em;
         border-radius: 0.75em;
         background-color: #f4f0f6;
-        border: 1px solid #e6e1e9;
+        border: 0.0625rem solid #e6e1e9;
         cursor: pointer;
         transition: all 0.3s ease;
 
@@ -3828,7 +3835,7 @@ section {
             height: 5em;
             flex-shrink: 0;
             background: #ffffff;
-            border: 1px solid #e6e1e9;
+            border: 0.0625rem solid #e6e1e9;
             border-radius: 0.75em;
             display: flex;
             align-items: center;
@@ -3873,14 +3880,14 @@ section {
 .modal {
     .modal-content {
         border: none;
-        border-radius: 12px;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        border-radius: 0.75rem;
+        box-shadow: 0 0.625rem 2.5rem rgba(0, 0, 0, 0.15);
     }
 
     .modal-header {
-        padding: 14px 20px;
+        padding: 0.875rem 1.25rem;
         background: var(--color-primary);
-        border-radius: 12px 12px 0 0;
+        border-radius: 0.75rem 0.75rem 0 0;
 
         .modal-title {
             font-size: 1.2rem;
@@ -3894,14 +3901,14 @@ section {
 
         .btn-close-custom {
             position: absolute;
-            right: 10px;
-            top: 10px;
-            width: 38px;
-            height: 38px;
+            right: 0.625rem;
+            top: 0.625rem;
+            width: 2.375rem;
+            height: 2.375rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 8px;
+            border-radius: 0.5rem;
             padding: 0;
             opacity: 0.8;
             background: rgba(255, 255, 255, 0.2);
@@ -3929,12 +3936,12 @@ section {
     }
 
     .modal-body {
-        padding: 20px;
+        padding: 1.25rem;
         max-height: 70vh;
         overflow-y: auto;
         overflow-x: hidden;
         scrollbar-width: thin;
-        padding-bottom: 40px !important;
+        padding-bottom: 2.5rem !important;
 
         form {
             .word-count {
@@ -3979,7 +3986,7 @@ section {
 
             .button-wrapper {
                 .standard-btn {
-                    margin-top: 30px !important;
+                    margin-top: 1.875rem !important;
                 }
             }
         }
@@ -3993,14 +4000,14 @@ section {
 
     iframe {
         width: 100%;
-        height: 500px;
+        height: 31.25rem;
         border: none;
         display: block;
     }
 
     @media (max-width: 767px) {
         iframe {
-            height: 400px;
+            height: 25rem;
         }
     }
 }
@@ -4055,7 +4062,7 @@ section {
             padding: 0.6em;
             border-radius: 0.8em;
             background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 0.0625rem solid rgba(255, 255, 255, 0.08);
 
             .icon {
                 position: relative;
@@ -4101,14 +4108,14 @@ section {
         color: #2f1a33;
         display: flex;
         flex-direction: column;
-        gap: 20px;
+        gap: 1.25rem;
 
         .contactForm-container {
             background: transparent;
             padding: 0;
 
             form {
-                margin-top: 0px;
+                margin-top: 0rem;
             }
 
             .button-wrapper {
@@ -4150,7 +4157,7 @@ form {
         outline: none;
         font-weight: 500;
         min-height: 3em;
-        border: 1px solid #d4c4df;
+        border: 0.0625rem solid #d4c4df;
         background: transparent !important;
         padding: 0.95em 1.176em 0.882em;
         border-radius: 0.588em;
@@ -4171,7 +4178,7 @@ form {
     }
 
     textarea.form-control {
-        min-height: 120px;
+        min-height: 7.5rem;
     }
 
     .invalid-feedback {
@@ -4183,7 +4190,7 @@ form {
         justify-content: center;
 
         .standard-btn {
-            margin-top: 10px !important;
+            margin-top: 0.625rem !important;
             --bg-color: var(--color-red);
             --color: #ffffff;
             --hover-bg-color: var(--color-primary);
@@ -4202,25 +4209,25 @@ form {
     }
 
     .iti__dropdown-content {
-        border-radius: 8px;
+        border-radius: 0.5rem;
     }
 
     .iti__selected-country-primary {
-        padding-left: 14px;
+        padding-left: 0.875rem;
     }
 
     .iti__flag-container {
-        border-right: 1px solid #d4c4df;
+        border-right: 0.0625rem solid #d4c4df;
         background-color: #f3ecfa;
-        border-radius: 10px 0 0 10px;
+        border-radius: 0.625rem 0 0 0.625rem;
     }
 
     .iti__search-input {
-        border-radius: 6px;
+        border-radius: 0.375rem;
         font-size: clamp(0.4775rem, 0.771vw, 0.8rem);
         padding: 0.625em 0.78125em;
         padding-left: 1.953125em !important;
-        border: 1px solid rgb(218, 218, 218);
+        border: 0.0625rem solid rgb(218, 218, 218);
         margin: 0 !important;
     }
 
@@ -4251,7 +4258,7 @@ form {
     left: 50%;
     right: auto;
     transform: translateX(-50%);
-    bottom: 20px;
+    bottom: 1.25rem;
     display: flex;
     justify-content: center;
 }
@@ -4271,10 +4278,10 @@ form {
 }
 
 .toast-body {
-    padding: 16px;
+    padding: 1rem;
     line-height: 1.4;
     display: flex;
-    gap: 8px;
+    gap: 0.5rem;
 }
 
 .toast-body i {
@@ -4297,7 +4304,7 @@ form {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(0.25rem);
     left: 0;
     top: 0;
     z-index: 9999;
@@ -4307,8 +4314,8 @@ form {
     position: absolute;
     left: 50%;
     top: 50%;
-    width: 48px;
-    height: 48px;
+    width: 3rem;
+    height: 3rem;
     border-radius: 50%;
     transform: translate(-50%, -50%) rotate(45deg) !important;
     transform-origin: center;
@@ -4319,9 +4326,9 @@ form {
     content: "";
     box-sizing: border-box;
     position: absolute;
-    inset: 0px;
+    inset: 0rem;
     border-radius: 50%;
-    border: 24px solid var(--theme-color-one);
+    border: 1.5rem solid var(--theme-color-one);
     animation: prixClipFix 2s infinite linear;
 }
 
