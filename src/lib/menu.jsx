@@ -63,16 +63,15 @@ export const getMenu = () => {
         {
             heading: "About",
             menu: [
-                { label: "About Us", path: "#" },
-                { label: "Vision & Mission", path: "#" },
-                { label: "Founder’s Message", path: "#" },
+                { label: "Who We Are", path: "/about-us" },
+                { label: "Faculties", path: "/faculties" },
             ],
         },
         {
             heading: "Academics",
             menu: [
-                { label: "Programmes", path: "#" },
-                { label: "Admissions", path: "#" },
+                { label: "Programmes", path: "/programmes" },
+                { label: "Admissions", path: "/admissions" },
                 { label: "Campus", path: "/campus" },
                 { label: "Students Life", path: "/students-life" },
                 { label: "Placement", path: "/placement" },

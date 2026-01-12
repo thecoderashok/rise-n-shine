@@ -12,6 +12,7 @@ const Image = ({
     const fetchPriority = priority ? "high" : "auto";
 
     const optimizeImagePath = (imageUrl) => {
+        if (!imageUrl) return "";
         if (import.meta.env.MODE === "production") {
             return imageUrl.replace(/\.(jpg|jpeg)$/i, ".jpg");
         }

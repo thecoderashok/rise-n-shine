@@ -25,7 +25,7 @@ const Academics = () => {
         const measure = () => {
             const colItems = containerEl.querySelectorAll(".col-item");
 
-            colItems.forEach(col => {
+            colItems.forEach((col) => {
                 const title = col.querySelector(".title-text");
                 const details = col.querySelector(".details-wrapper");
                 if (!title || !details) return;
@@ -33,7 +33,7 @@ const Academics = () => {
                 // const titleHeight = title.offsetHeight;
                 const detailsHeight = details.offsetHeight;
 
-                const centerOffset = (detailsHeight) / 2;
+                const centerOffset = detailsHeight / 2;
                 col.style.setProperty("--title-center-offset", `${centerOffset}px`);
             });
         };
@@ -46,8 +46,9 @@ const Academics = () => {
         window.addEventListener("resize", handleResize);
 
         const ro = new ResizeObserver(handleResize);
-        containerEl.querySelectorAll(".col-item, .title-text, .details-wrapper")
-            .forEach(el => ro.observe(el));
+        containerEl
+            .querySelectorAll(".col-item, .title-text, .details-wrapper")
+            .forEach((el) => ro.observe(el));
 
         if (document.fonts?.ready) {
             document.fonts.ready.then(handleResize).catch(() => { });
@@ -59,19 +60,14 @@ const Academics = () => {
         };
     }, []);
 
-
     return (
         <>
             <PageBannerSec
                 pageTitle="Programmes"
                 title="From Classroom to Global Careers"
-                breadcrumbs={[
-                    { label: "Home", href: "/" },
-                    { label: "Programmes" }
-                ]}
+                breadcrumbs={[{ label: "Home", href: "/" }, { label: "Programmes" }]}
                 imageSrc="/images/programmes-banner.jpg"
             />
-
 
             <section className="programmes-cols-sec">
                 <div className="cols-row" ref={containerRef}>
@@ -80,14 +76,23 @@ const Academics = () => {
 
                         return (
                             <div className="col-item" key={index}>
-                                <Image src={programme.image.src} alt={programme.image.alt} width={800} height={1200} />
+                                <Image
+                                    src={programme.image.src}
+                                    alt={programme.image.alt}
+                                    width={800}
+                                    height={1200}
+                                />
 
                                 <div className="inner">
                                     <div className="content-wrapper">
                                         <h2 className="title-text">{programme.title}</h2>
 
                                         <div className="details-wrapper">
-                                            <Button textLabel={"Read More"} customClass={"style-1"} link={detailPath} />
+                                            <Button
+                                                textLabel={"Read More"}
+                                                customClass={"style-1"}
+                                                link={detailPath}
+                                            />
                                         </div>
                                     </div>
                                 </div>
@@ -97,7 +102,6 @@ const Academics = () => {
                 </div>
             </section>
 
-
             <FacultyLeadershipSec />
 
             <ContactSec />
@@ -106,19 +110,3 @@ const Academics = () => {
 };
 
 export default Academics;
-
-// <LeftRightImageTextSec
-//     key={programme.slug}
-//     imagePosition={programme.imagePosition}
-//     image={programme.image}
-//     mainTitle={programme.title}
-//     content={programme.description}
-//     imageColClass={"col-lg-6"}
-//     contentColClass={"col-lg-6"}
-//     buttons={[
-//         {
-//             textLabel: "Read More",
-//             link: detailPath,
-//         },
-//     ]}
-// />
