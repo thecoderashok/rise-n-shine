@@ -67,7 +67,7 @@ const OurProgramsSec = () => {
                             <SwiperCarousel
                                 slidesPerView={1}
                                 spaceBetween={20}
-                                navigationBtns
+                                navigationBtns={true}
                                 breakpoints={{
                                     575: { slidesPerView: 1.2 },
                                     768: { slidesPerView: 2 },

@@ -60,9 +60,9 @@ const Home = () => {
 
     return (
         <>
-            <HeroSec />
+            {/* <HeroSec />
             <AboutSec />
-            <MissionVisionSec />
+            <MissionVisionSec /> */}
             <OurProgramsSec />
             <WhyUsSec />
             <GallerySec

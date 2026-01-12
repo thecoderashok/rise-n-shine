@@ -45,6 +45,11 @@
     z-index: 9;
     pointer-events: none !important;
 
+    &[data-visibility="false"] {
+        display: none;
+        visibility: hidden;
+    }
+
     .slide-btn {
         position: relative !important;
         pointer-events: all !important;
