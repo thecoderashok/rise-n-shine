@@ -14,91 +14,78 @@ import { useCustomRouter } from "../../context/CustomRouter/CustomRouterContext"
 import Image from "../Image";
 import { useLocation } from "react-router";
 import CustomEase from "gsap/CustomEase";
+import useLenisScrollLock from "../../hook/useLenisScrollLock";
 
 gsap.registerPlugin(CustomEase);
 
 CustomEase.create("enter", "0.87, 0, 0.13, 1");
 CustomEase.create("exit", "0.87, 0.02, 0.13, 1");
 
-const animateLogo = {
-    initial: { opacity: 0 },
-    enter: { opacity: 1, duration: 2 },
-    exit: { opacity: 0 },
-};
-
-const animateLoaderTitle = {
-    initial: {
-        y: 50,
-        z: 0,
-        opacity: 0,
-    },
-    enter: {
-        y: 0,
-        z: 0,
-        opacity: 1,
-        ease: CustomEase.create("", "0.22, 1, 0.36, 1"),
-    },
-    exit: {
-        y: -150,
-        z: 0,
-        opacity: 0,
-        ease: CustomEase.create("", "0.7, 0, 0.84, 0"),
-    },
-};
-
-const animatePanel = {
-    initial: {
-        z: 0,
-        scaleY: 0,
-        transformOrigin: "bottom",
-    },
-    enter: {
-        z: 0,
-        scaleY: 1,
-        transformOrigin: "bottom",
-        ease: "enter",
-    },
-    exit: {
-        z: 0,
-        scaleY: 0,
-        transformOrigin: "top",
-        ease: "exit",
-    },
-};
-
-const animateOverlay = {
+const animeLogoWrapper = {
     initial: {
         opacity: 0,
-        display: "block",
+        scale: "1.2",
+        clipPath: "inset(0% 0% 100% 0%)",
     },
     enter: {
         opacity: 1,
+        scale: "1",
+        clipPath: "inset(0% 0% 0% 0%)",
     },
     exit: {
         opacity: 0,
-        ease: "power3.inOut",
     },
 };
 
+const animeLogo = {
+    initial: {
+        clipPath: "inset(0% 100% 0% 0%)",
+    },
+    enter: {
+        clipPath: "inset(0% 0% 0% 0%)",
+    },
+};
 
-const PageTransition = ({ title }) => {
+const animeMask = {
+    enter: {
+        scale: 0,
+        attr: {
+            rx: 120,
+            ry: 120,
+        },
+    },
+    exit: {
+        attr: {
+            rx: 10,
+            ry: 10,
+        },
+        scale: 1.02,
+        duration: 1.5,
+        ease: CustomEase.create("", ".41,.09,.1,.95"),
+    },
+};
+
+const PageTransition = () => {
     const { isLoading, setMounted, pageComponentReady } = useLoader();
     const { linkClicked, routingPathname, resetLinkClick } = useLinkClick();
     const { setRoute } = useCustomRouter();
     const { pathname } = useLocation();
     const lenis = useLenis();
+    const { setLocked } = useLenisScrollLock();
 
     const isFirstLoading = useRef(true);
 
     const containerRef = useRef(null);
-    const loaderLogoRef = useRef(null);
-    const loaderPanelRef = useRef(null);
-    const titleRef = useRef(null);
-    const overlayRef = useRef(null);
+    const logoRef = useRef(null);
+    const logoWrapperRef = useRef(null);
+    const maskRef = useRef(null);
+    const loaderProgressRef = useRef(null);
+
     const onLoadTimelineRef = useRef(null);
     const routeTimelineRef = useRef(null);
     const [tlPaused, setTlPaused] = useState(false);
     const [routeTimelinePaused, setRouteTimelinePaused] = useState(false);
+    const [loaderCount, setLoaderCount] = useState(0);
 
     const resetScroll = useCallback(() => {
         if (lenis?.scrollTo) lenis.scrollTo(0, { immediate: true });
@@ -109,247 +96,393 @@ const PageTransition = ({ title }) => {
         if (!containerRef.current) return;
 
         gsap.set(containerRef.current, {
-            display: "flex",
+            autoAlpha: 0,
         });
-        gsap.set(loaderPanelRef.current, {
-            ...animatePanel.initial,
+        gsap.set(maskRef.current, {
+            ...animeMask.enter,
         });
-        gsap.set(loaderLogoRef.current, {
-            ...animateLogo.initial,
+        gsap.set(logoRef.current, {
+            ...animeLogo.initial,
         });
-        gsap.set(titleRef.current, {
-            ...animateLoaderTitle.initial,
-        });
-        gsap.set(overlayRef.current, {
-            ...animateOverlay.initial,
+        gsap.set(logoWrapperRef.current, {
+            ...animeLogoWrapper.initial,
         });
     };
 
-    // useEffect(() => {
-    //     const container = containerRef?.current;
-    //     const overlay = overlayRef?.current;
-    //     const logo = loaderLogoRef?.current;
-    //     const loaderTitle = titleRef?.current;
-    //     const panel = loaderPanelRef?.current;
+    useEffect(() => {
+        const container = containerRef?.current;
+        const logo = logoRef?.current;
+        const logoWrapper = logoWrapperRef?.current;
+        const mask = maskRef?.current;
+        const loaderProgress = loaderProgressRef?.current;
 
-    //     if (!container || !overlay || !logo || !loaderTitle || !panel) return;
+        if (!container || !mask || !logoWrapper || !logo || !loaderProgress) return;
 
-    //     const timeLine = gsap.timeline({
-    //         defaults: { duration: 1, ease: "power3.inOut" },
-    //     });
-    //     onLoadTimelineRef.current = timeLine;
+        const timeLine = gsap.timeline({
+            defaults: { duration: 1, ease: "power2.inOut" },
+            onStart: () => {
+                setLocked(true);
+            },
+        });
 
-    //     const ctx = gsap.context(() => {
-    //         const transitionOnLoad = () => {
-    //             setInitialStyles();
+        onLoadTimelineRef.current = timeLine;
 
-    //             timeLine
-    //                 .set(
-    //                     overlay,
-    //                     {
-    //                         ...animateOverlay.enter,
-    //                     },
-    //                     0
-    //                 )
-    //                 .set(
-    //                     panel,
-    //                     {
-    //                         ...animatePanel.enter,
-    //                     },
-    //                     0
-    //                 )
-    //                 .to(logo, {
-    //                     ...animateLogo.enter,
-    //                 })
-    //                 .addPause("waitTillLoading")
-    //                 .call(() => setTlPaused(true))
-    //                 .to(logo, {
-    //                     ...animateLogo.exit,
-    //                 })
-    //                 .to(loaderTitle, {
-    //                     ...animateLoaderTitle.enter,
-    //                 })
-    //                 .to(loaderTitle, {
-    //                     ...animateLoaderTitle.exit,
-    //                 })
-    //                 .to(
-    //                     panel,
-    //                     {
-    //                         ...animatePanel.exit,
-    //                     },
-    //                     "-=0.5"
-    //                 )
-    //                 .to(
-    //                     overlay,
-    //                     {
-    //                         ...animateOverlay.exit,
-    //                     },
-    //                     "<"
-    //                 )
-    //                 .call(
-    //                     () => {
-    //                         setMounted(true);
-    //                         isFirstLoading.current = false;
-    //                     },
-    //                     [],
-    //                     "-=0.2"
-    //                 );
-    //         };
+        const ctx = gsap.context(() => {
+            const transitionOnLoad = () => {
+                setInitialStyles();
 
-    //         transitionOnLoad();
-    //     }, panel);
+                timeLine
+                    .set(
+                        mask,
+                        {
+                            ...animeMask.enter,
+                        },
+                        0
+                    )
+                    .set(container, {
+                        autoAlpha: 1,
+                    })
+                    .to(logoWrapper, {
+                        ...animeLogoWrapper.enter,
+                    })
+                    .addPause("waitTillLoading")
+                    .call(() => {
+                        setTlPaused(true);
+                        resetScroll();
+                    })
+                    .to(logoWrapper, {
+                        ...animeLogoWrapper.exit,
+                    })
+                    .to(
+                        mask,
+                        {
+                            ...animeMask.exit,
+                        },
+                        "-=0.4"
+                    )
+                    .call(
+                        () => {
+                            setMounted(true);
+                            isFirstLoading.current = false;
+                            setLocked(false);
+                        },
+                        [],
+                        "-=1.1"
+                    )
+                    .set(
+                        loaderProgress,
+                        {
+                            autoAlpha: 0,
+                        },
+                        "-=0.55"
+                    );
+            };
 
-    //     return () => ctx.revert();
-    // }, [setMounted]);
+            transitionOnLoad();
+        }, containerRef);
 
-    // useLayoutEffect(() => {
-    //     if (isFirstLoading.current || !linkClicked) return;
-    //     const container = containerRef?.current;
-    //     const overlay = overlayRef?.current;
-    //     const logo = loaderLogoRef?.current;
-    //     const loaderTitle = titleRef?.current;
-    //     const panel = loaderPanelRef?.current;
+        return () => ctx.revert();
+    }, [resetScroll, setMounted, setLocked]);
 
-    //     if (!container || !overlay || !logo || !loaderTitle || !panel) return;
+    useLayoutEffect(() => {
+        if (isFirstLoading.current || !linkClicked) return;
 
-    //     setInitialStyles();
+        const container = containerRef?.current;
+        const logo = logoRef?.current;
+        const logoWrapper = logoWrapperRef?.current;
+        const mask = maskRef?.current;
+        const loaderProgress = loaderProgressRef?.current;
 
-    //     const timeLine = gsap.timeline({
-    //         defaults: { duration: 1, ease: "power3.inOut" },
-    //         // onStart: () => {
-    //         //     lenis?.stop();
-    //         // },
-    //     });
+        if (!container || !mask || !logoWrapper || !logo || !loaderProgress) return;
 
-    //     routeTimelineRef.current = timeLine;
+        const timeLine = gsap.timeline({
+            defaults: { duration: 1, ease: "power2.inOut" },
+            onStart: () => {
+                setLocked(true);
+            },
+        });
+        routeTimelineRef.current = timeLine;
 
-    //     const ctx = gsap.context(() => {
-    //         const transitionPathChange = () => {
-    //             timeLine
-    //                 .to(
-    //                     overlay,
-    //                     {
-    //                         ...animateOverlay.enter,
-    //                     },
-    //                     0
-    //                 )
-    //                 .to(
-    //                     panel,
-    //                     {
-    //                         ...animatePanel.enter,
-    //                     },
-    //                     0
-    //                 )
-    //                 .to(
-    //                     loaderTitle,
-    //                     {
-    //                         ...animateLoaderTitle.enter,
-    //                     },
-    //                     "-=0.2"
-    //                 )
-    //                 .call(() => {
-    //                     if (routingPathname) {
-    //                         setRoute(routingPathname);
-    //                     }
-    //                 })
-    //                 .addPause("wait")
-    //                 .call(() => setRouteTimelinePaused(true))
-    //                 .call(() => resetScroll())
-    //                 .to(loaderTitle, {
-    //                     ...animateLoaderTitle.exit,
-    //                 })
-    //                 .to(
-    //                     panel,
-    //                     {
-    //                         ...animatePanel.exit,
-    //                     },
-    //                     "-=0.5"
-    //                 )
-    //                 .to(
-    //                     overlay,
-    //                     {
-    //                         ...animateOverlay.exit,
-    //                     },
-    //                     "<"
-    //                 )
-    //                 .call(
-    //                     () => {
-    //                         lenis?.start();
-    //                         setMounted(true);
-    //                     },
-    //                     [],
-    //                     "-=0.5"
-    //                 );
-    //         };
+        setInitialStyles();
 
-    //         transitionPathChange();
-    //     }, panel);
+        const ctx = gsap.context(() => {
+            const transitionPathChange = () => {
+                timeLine
+                    .set(
+                        mask,
+                        {
+                            ...animeMask.enter,
+                        },
+                        0
+                    )
+                    .to(container, {
+                        autoAlpha: 1,
+                    })
+                    .to(logoWrapper, {
+                        ...animeLogoWrapper.enter,
+                    })
+                    .call(() => {
+                        if (routingPathname) {
+                            setRoute(routingPathname);
+                        }
+                    })
+                    .addPause("waitTillLoading")
+                    .call(() => {
+                        setRouteTimelinePaused(true);
+                        resetScroll();
+                    })
+                    .to(logoWrapper, {
+                        ...animeLogoWrapper.exit,
+                    })
+                    .to(
+                        mask,
+                        {
+                            ...animeMask.exit,
+                        },
+                        "-=0.4"
+                    )
+                    .call(
+                        () => {
+                            lenis?.start();
+                            setMounted(true);
+                            setLocked(false);
+                        },
+                        [],
+                        "-=1.1"
+                    )
+                    .set(
+                        loaderProgress,
+                        {
+                            autoAlpha: 0,
+                        },
+                        "-=0.55"
+                    );
+            };
 
-    //     return () => ctx.revert();
-    // }, [linkClicked, setMounted, routingPathname, lenis, setRoute, resetScroll]);
+            transitionPathChange();
+        }, containerRef);
 
-    // useEffect(() => {
-    //     if (!routeTimelineRef.current) return;
-    //     if (routeTimelinePaused && pageComponentReady) {
-    //         imagesLoaded(document.body, () => {
-    //             routeTimelineRef.current.play("wait");
-    //         });
-    //     }
-    //     routeTimelineRef?.current?.eventCallback("onComplete", () => {
-    //         resetLinkClick();
-    //     });
-    // }, [pageComponentReady, routeTimelinePaused, resetLinkClick]);
-
-    // useEffect(() => {
-    //     if (!isLoading && tlPaused) {
-    //         imagesLoaded(document.body, () => {
-    //             onLoadTimelineRef.current.play("waitTillLoading");
-    //         });
-    //     }
-    // }, [isLoading, tlPaused]);
-
-    // useEffect(() => {
-    //     if (isFirstLoading.current || linkClicked) return;
-
-    //     setRoute(pathname);
-    //     const raf = requestAnimationFrame(() => {
-    //         resetScroll();
-    //         setMounted(true);
-    //     });
-
-    //     return () => cancelAnimationFrame(raf);
-    // }, [pathname, setRoute, resetScroll, setMounted, linkClicked]);
+        return () => ctx.revert();
+    }, [linkClicked, resetScroll, routingPathname, setMounted, setRoute, lenis, setLocked]);
 
     useEffect(() => {
+        const counterProgress = { value: 0 };
+
+        if (isLoading) {
+            gsap.to(counterProgress, {
+                value: 35,
+                duration: 2,
+                ease: "power2.out",
+                onUpdate: () => {
+                    setLoaderCount(Math.floor(counterProgress.value));
+                },
+            });
+        }
+    }, [isLoading]);
+
+    const animateLogoProgress = (onComplete) => {
+        const progress = { value: 100 };
+        const imgLoad = imagesLoaded(document.body);
+        const total = imgLoad.images.length;
+        let loaded = 0;
+
+        imgLoad.on("progress", () => {
+            loaded++;
+
+            const nextValue = 100 - (loaded / total) * 100;
+
+            gsap.to(progress, {
+                value: nextValue,
+                duration: 1,
+                ease: "power2.out",
+                overwrite: true,
+                onUpdate: () => {
+                    gsap.set(logoRef.current, {
+                        clipPath: `inset(0% ${progress.value}% 0% 0%)`,
+                    });
+
+                    const counterValue = 35 + ((100 - progress.value) / 100) * 65;
+                    setLoaderCount(Math.max(35, Math.floor(counterValue)));
+                },
+            });
+        });
+
+        imgLoad.on("always", () => {
+            gsap.to(logoRef.current, {
+                clipPath: "inset(0% 0% 0% 0%)",
+                duration: 2,
+                ease: "power2.out",
+                onComplete,
+            });
+
+            imgLoad.off("progress");
+            imgLoad.off("always");
+        });
+    };
+
+    useEffect(() => {
+        if (!routeTimelineRef.current) return;
+        if (routeTimelinePaused && pageComponentReady) {
+            animateLogoProgress(() => {
+                routeTimelineRef.current?.play("waitTillLoading");
+            });
+        }
+        routeTimelineRef?.current?.eventCallback("onComplete", () => {
+            resetLinkClick();
+            setRouteTimelinePaused(false);
+        });
+    }, [pageComponentReady, routeTimelinePaused, resetLinkClick]);
+
+    useEffect(() => {
+        if (!isLoading && tlPaused) {
+            animateLogoProgress(() => {
+                onLoadTimelineRef.current?.play("waitTillLoading");
+            });
+        }
+    }, [isLoading, tlPaused]);
+
+    useEffect(() => {
+        if (isFirstLoading.current || linkClicked) return;
+
         setRoute(pathname);
         const raf = requestAnimationFrame(() => {
             resetScroll();
             setMounted(true);
-        })
+        });
+
         return () => cancelAnimationFrame(raf);
-    }, [setMounted, pathname, setRoute, resetScroll])
+    }, [pathname, setRoute, resetScroll, setMounted, linkClicked]);
+
+    const formatCounter = (value) => {
+        return String(value).padStart(3, "0");
+    };
 
     return (
         <>
-            {/* <div className="page-loader-overlay" ref={overlayRef}></div>
-            <div className="page-loader-container" ref={containerRef}>
-                <div className="page-loader-panel" ref={loaderPanelRef}></div>
-                <div className="loader" ref={loaderLogoRef}>
-                    <Image
-                        src={"/images/logo/logo.png"}
-                        alt=""
-                        title=""
-                        priority
-                        width={200}
-                        height={200}
-                    />
+            <div className="page_loader_container" ref={containerRef}>
+                <ScreenMask holeRef={maskRef} />
+
+                <div className="preloader_logo_wrapper" ref={logoWrapperRef}>
+                    <div className="preloader_logo" ref={logoRef}>
+                        <Image
+                            src={"/images/logo/logo.png"}
+                            alt=""
+                            title=""
+                            priority
+                            width={200}
+                            height={200}
+                        />
+                    </div>
+                    <div className="preloader_logo inverted">
+                        <Image
+                            src={"/images/logo/logo.png"}
+                            alt=""
+                            title=""
+                            priority
+                            width={200}
+                            height={200}
+                        />
+                    </div>
                 </div>
-                <div className="loader-title">
-                    <span ref={titleRef}>{title || "Loading.."}</span>
+
+                <div className="loading_progress" ref={loaderProgressRef}>
+                    <span>{formatCounter(loaderCount)}</span>
+                    <span>/</span>
+                    <span>100</span>
                 </div>
-            </div> */}
+            </div>
         </>
     );
 };
 
 export default PageTransition;
+
+export function ScreenMask({ holeRef }) {
+    const svgRef = useRef(null);
+    const bgRef = useRef(null);
+    const overlayRef = useRef(null);
+
+    useLayoutEffect(() => {
+        const svg = svgRef.current;
+        const hole = holeRef.current;
+        const bg = bgRef.current;
+        const overlay = overlayRef.current;
+
+        const setup = () => {
+            const vw = window.innerWidth;
+            const vh = window.innerHeight;
+            const ratio = vw / vh;
+
+            svg.setAttribute("viewBox", `0 0 ${vw} ${vh}`);
+
+            bg.setAttribute("width", vw);
+            bg.setAttribute("height", vh);
+
+            overlay.setAttribute("width", vw);
+            overlay.setAttribute("height", vh);
+
+            let holeWidth, holeHeight;
+
+            if (ratio > 1) {
+                holeWidth = vw;
+                holeHeight = holeWidth / ratio;
+            } else {
+                holeHeight = vh;
+                holeWidth = holeHeight * ratio;
+            }
+
+            const x = (vw - holeWidth) / 2;
+            const y = (vh - holeHeight) / 2;
+
+            hole.setAttribute("x", x);
+            hole.setAttribute("y", y);
+            hole.setAttribute("width", holeWidth);
+            hole.setAttribute("height", holeHeight);
+
+            gsap.set(hole, {
+                transformOrigin: `${holeWidth / 2}px ${holeHeight / 2}px`,
+                scale: 0,
+            });
+        };
+
+        setup();
+        // window.addEventListener("resize", setup);
+
+        // return () => window.removeEventListener("resize", setup);
+    }, [holeRef]);
+
+    return (
+        <svg
+            ref={svgRef}
+            width="100%"
+            height="100%"
+            preserveAspectRatio="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="preloader_mask"
+            style={{
+                position: "fixed",
+                inset: 0,
+                pointerEvents: "none",
+            }}
+        >
+            <defs>
+                <mask id="center-hole" maskUnits="userSpaceOnUse">
+                    <rect ref={bgRef} fill="white" />
+                    <rect
+                        ref={holeRef}
+                        style={{ willChange: "transform" }}
+                        fill="black"
+                        rx="24"
+                        ry="24"
+                    />
+                </mask>
+            </defs>
+
+            <rect
+                ref={overlayRef}
+                fill="var(--preloader-bg)"
+                mask="url(#center-hole)"
+            />
+        </svg>
+    );
+}

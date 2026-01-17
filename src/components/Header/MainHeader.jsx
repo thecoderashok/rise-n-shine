@@ -16,6 +16,7 @@ import Button from "../Button/Button";
 import { useLoader } from "../../context/Loader/LoaderContext";
 import { useModal } from "../../context/Modal/ModalContext";
 import { getMenu } from "../../lib/menu";
+import TransitionLink from "../TransitionLink";
 
 const MainHeader = ({ isTransparent }) => {
     const menuData = useMemo(() => getMenu(), []);
@@ -256,9 +257,9 @@ const MainHeader = ({ isTransparent }) => {
             <div className={`container-fluid ${styles.container}`}>
                 <div className={`${styles.inner} row`}>
                     <div className={`col-auto ${styles.logo_wrapper}`}>
-                        <Link
+                        <TransitionLink
                             className={styles.header_logo}
-                            to="/"
+                            href="/"
                             aria-label="Header Logo"
                         >
                             <img
@@ -270,7 +271,7 @@ const MainHeader = ({ isTransparent }) => {
                                 loading="eager"
                                 decoding="async"
                             />
-                        </Link>
+                        </TransitionLink>
                     </div>
 
                     <div className={`${styles.right_side} col-auto`}>

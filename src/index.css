@@ -59,6 +59,7 @@ main {
    min-height: 100vh;
 }
 
+
 ul {
    list-style: none;
    padding: 0;
@@ -174,7 +175,7 @@ p {
    transition-duration: var(--duration);
    transition-timing-function: var(--ease-out-expo);
    transition-delay: 0s;
-   transform: translate3d(40px, 0, 0);
+   transform: translate3d(3.125vw, 0, 0);
    opacity: 0;
 }
 
@@ -261,75 +262,6 @@ section {
 }
 
 
-/* Preloader  */
-.page-loader-container {
-   position: fixed;
-   left: 0;
-   top: 0;
-   width: 100vw;
-   height: 100dvh;
-   display: flex;
-   align-items: center;
-   justify-content: center;
-   z-index: 9999;
-   pointer-events: none;
-   user-select: none;
-}
-
-.page-loader-panel {
-   position: absolute;
-   left: 0;
-   right: 0;
-   top: 0;
-   bottom: 0;
-   width: 100%;
-   height: 100%;
-   display: inline-block;
-   background: #F2E7F7;
-   transform: scaleY(1);
-   transform-origin: top;
-   will-change: opacity;
-}
-
-.page-loader-overlay {
-   position: fixed;
-   left: 0;
-   top: 0;
-   width: 100%;
-   height: 100dvh;
-   background: rgba(0, 0, 0, 0.5);
-   z-index: 9998;
-   pointer-events: none;
-   will-change: opacity;
-   /* visibility: hidden; */
-}
-
-.loader-title {
-   width: 100%;
-   padding: 0 14px;
-   position: absolute;
-   top: 50%;
-   left: 50%;
-   transform: translate(-50%, -50%);
-   color: var(--theme-color-two);
-   font-size: clamp(1.6rem, 3vw, 2.5rem);
-   font-weight: 600;
-   line-height: 1.2;
-   max-width: 1000px;
-   text-align: center;
-   text-transform: uppercase;
-   font-family: var(--alt-font);
-   z-index: 999;
-}
-
-.loader-title span {
-   position: relative;
-   display: inline-block;
-   opacity: 0;
-   transform: translateZ(0);
-   will-change: transform, opacity;
-}
-
 .loading-label {
    position: absolute;
    margin: 0;
@@ -375,48 +307,5 @@ section {
    40% {
       transform: scale(1.2);
       opacity: 1;
-   }
-}
-
-.loader {
-   position: relative;
-   width: 250px;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   background-position: center;
-   background-repeat: no-repeat;
-   background-size: contain;
-   overflow: hidden;
-   transform: translateZ(0);
-   opacity: 1;
-   will-change: transform, opacity;
-   z-index: 9;
-}
-
-.loader img {
-   width: 100%;
-   height: 100%;
-   object-fit: contain;
-   object-position: center;
-}
-
-
-@media screen and (max-width: 992px) {
-   .loading-label {
-      padding: 20px 25px;
-      font-size: 1rem;
-   }
-
-   .loading-label span {
-      width: 3px;
-      height: 3px;
-      margin-left: 3px;
-   }
-}
-
-@media screen and (max-width: 575px) {
-   .loader {
-      width: 60px;
    }
 }

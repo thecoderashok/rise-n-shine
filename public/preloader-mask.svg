@@ -1,0 +1,67 @@
+<svg
+    width="1920"
+    height="1080"
+    viewBox="0 0 1920 1080"
+    xmlns="http://www.w3.org/2000/svg"
+>
+    <defs>
+        <mask id="center-hole">
+            <rect width="1920" height="1080" fill="white" />
+            
+            <rect
+                id="hole"
+                x="50%"
+                y="50%"
+                width="50"
+                height="20"
+                rx="2"
+                ry="2"
+                fill="black"
+                transform="translate(-25 -10)"
+            />
+        </mask>
+    </defs>
+    
+    <rect
+        width="1920"
+        height="1080"
+        fill="black"
+        mask="url(#center-hole)"
+    />
+</svg>
+
+<!-- <svg
+    id="maskSvg"
+    width="1920"
+    height="1080"
+    viewBox="0 0 1920 1080"
+    xmlns="http://www.w3.org/2000/svg"
+>
+    <defs>
+        <mask id="center-hole">
+            <g id="maskGroup">
+                <rect width="1920" height="1080" fill="white" />
+
+                <rect
+                    id="hole"
+                    x="960"
+                    y="540"
+                    width="1000"
+                    height="1000"
+                    rx="2"
+                    ry="2"
+                    fill="black"
+                    transform="translate(-500 -500)"
+                />
+            </g>
+        </mask>
+    </defs>
+
+    <rect
+        width="1920"
+        height="1080"
+        fill="black"
+        mask="url(#center-hole)"
+    />
+</svg> -->
+
