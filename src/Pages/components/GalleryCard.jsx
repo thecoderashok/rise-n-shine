@@ -46,12 +46,6 @@ const GalleryCard = ({
                     loading={loading}
                 />
             </div>
-
-            {/* {title && (
-                <div className="overlay">
-                    <span className="label">{title}</span>
-                </div>
-            )} */}
         </div>
     );
 };

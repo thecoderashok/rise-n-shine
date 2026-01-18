@@ -95,7 +95,6 @@ const studentSupportData = [
     },
 ];
 
-
 const StudentsLife = () => {
     usePageSEO({
         title: "Students Life - Rise N Shine Institute of Learning",
@@ -112,7 +111,10 @@ const StudentsLife = () => {
                     </>
                 }
                 breadcrumbs={[{ label: "Home", href: "/" }, { label: "Students Life" }]}
-                imageSrc={`/images/students-life.jpg`}
+                banner={{
+                    src: "/images/students-life.jpg",
+                    alt: "Student Life that Inspires Balance and Belonging",
+                }}
             />
             <CampusFacilitiesSec />
 

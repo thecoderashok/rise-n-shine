@@ -1,6 +1,7 @@
 import React from "react";
 import PageBannerSec from "../components/PageBannerSec";
 import { usePageSEO } from "../../hook/usePageSEO";
+import SecTitle from "../../components/SecTitle";
 
 const NewsEvents = () => {
     usePageSEO({
@@ -21,8 +22,20 @@ const NewsEvents = () => {
                     { label: "Home", href: "/" },
                     { label: "News & Events" },
                 ]}
-                imageSrc={`/images/hero-banner.jpg`}
+                banner={{
+                    src: "/images/news-and-events-banner.jpg",
+                    alt: "News & Events Stay Connected"
+                }}
             />
+            <section>
+                <div className="container">
+                    <div className="row">
+                        <div className="col-12 text-center">
+                            <SecTitle mainTitle={"Coming Soon"}/>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </>
     );
 };

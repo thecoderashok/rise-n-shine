@@ -66,7 +66,10 @@ const Academics = () => {
                 pageTitle="Programmes"
                 title="From Classroom to Global Careers"
                 breadcrumbs={[{ label: "Home", href: "/" }, { label: "Programmes" }]}
-                imageSrc="/images/programmes-banner.jpg"
+                banner={{
+                    src: "/images/programmes-banner.jpg",
+                    alt: "From Classroom to Global Careers",
+                }}
             />
 
             <section className="programmes-cols-sec">

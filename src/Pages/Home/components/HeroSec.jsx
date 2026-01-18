@@ -10,23 +10,33 @@ import { AutoFitText } from '../../components/AutoFitText';
 const data = [
     {
         title: <>World-Class <b>Learning,</b> Limitless You.</>,
-        image: "hero-1-bg.jpg",
+        image: {
+            src: "hero-1-bg.jpg",
+            alt: "World-Class Learning, Limitless You"
+        },
         object: "hero-1-object.png",
         shape: "shape-pink.png"
     },
     {
         title: <><b>Skill Up.</b> Stand Out.</>,
-        image: "hero-2-bg.jpg",
+        image: {
+            src: "hero-2-bg.jpg",
+            alt: "Skill Up. Stand Out."
+        },
         object: "hero-2-object.png",
         shape: "shape-purple.png"
     },
     {
         title: <>Turn Your Drive Into <b>Direction.</b></>,
-        image: "hero-3-bg.jpg",
+        image: {
+            src: "hero-3-bg.jpg",
+            alt: "Turn Your Drive Into Direction"
+        },
         object: "hero-3-object.png",
         shape: "shape-yellow.png"
     },
 ];
+
 
 const HeroSec = () => {
     const classes = useClassNames()
@@ -58,9 +68,9 @@ const HeroSec = () => {
                         <ParallaxWrapper offset={20}>
                             <div className="image-wrapper">
                                 <Image
-                                    src={`/images/banner/${slide.image}`}
-                                    alt={""}
-                                    title={""}
+                                    src={`/images/banner/${slide.image.src}`}
+                                    alt={slide.image.alt}
+                                    title={slide.image.alt}
                                     width={1920}
                                     height={1080}
                                     priority={true}
@@ -81,10 +91,7 @@ const HeroSec = () => {
                                 <div className="object-wrapper">
                                     <Image
                                         src={`/images/banner/${slide.object}`}
-                                        alt={""}
-                                        title={""}
-                                        width={1920}
-                                        height={1080}
+                                        alt={slide.image.alt}
                                         priority={true}
                                     />
                                 </div>
@@ -92,10 +99,6 @@ const HeroSec = () => {
                                 <div className="shape-wrapper">
                                     <Image
                                         src={`/images/banner/${slide.shape}`}
-                                        alt={""}
-                                        title={""}
-                                        width={1920}
-                                        height={500}
                                         priority={true}
                                     />
                                 </div>

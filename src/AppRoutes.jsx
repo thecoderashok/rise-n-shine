@@ -3,13 +3,14 @@ import { Route, Routes } from 'react-router';
 import { useCustomRouter } from './context/CustomRouter/CustomRouterContext';
 import PageWrapper from './components/Route/PageWrapper';
 import Layout from './Layout';
+import { useLoader } from './context/Loader/LoaderContext';
 const Home = lazy(() => import('./Pages/Home/Home'));
 const AboutUs = lazy(() => import('./Pages/AboutUs/AboutUs'));
 const Academics = lazy(() => import('./Pages/Academics/Academics'));
 const Programmes = lazy(() => import('./Pages/Academics/Programmes'));
 const Faculties = lazy(() => import('./Pages/Faculties/Faculties'));
 const Admissions = lazy(() => import('./Pages/Admissions/Admissions'));
-const Contact = lazy(() => import('./Pages/Contact/Contact'));
+const ContactUs = lazy(() => import('./Pages/Contact/ContactUs'));
 const Campus = lazy(() => import('./Pages/Campus/Campus'));
 const StudentsLife = lazy(() => import('./Pages/StudentsLife/StudentsLife'));
 const Placement = lazy(() => import('./Pages/Placement/Placement'));
@@ -18,6 +19,7 @@ const NewsEvents = lazy(() => import('./Pages/NewsEvents/NewsEvents'));
 
 const AppRoutes = () => {
     const { customPathname } = useCustomRouter();
+    const {isPageTransitionEnd} = useLoader();
 
     const AllRoutes = [
         {
@@ -66,12 +68,12 @@ const AppRoutes = () => {
         },
         {
             path: "/contact-us",
-            component: <Contact />,
+            component: <ContactUs />,
         },
     ];
 
     return (
-        <div className="main-wrapper">
+        <div className="main-wrapper" data-transform={isPageTransitionEnd ? "none" : "auto"}>
             <Suspense fallback={<div className="loader"></div>}>
                 <Routes location={{ pathname: customPathname }}>
                     <Route element={<Layout />}>

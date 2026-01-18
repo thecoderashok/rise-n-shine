@@ -19,21 +19,27 @@ import useLenisScrollLock from "../../hook/useLenisScrollLock";
 gsap.registerPlugin(CustomEase);
 
 CustomEase.create("enter", "0.87, 0, 0.13, 1");
-CustomEase.create("exit", "0.87, 0.02, 0.13, 1");
+CustomEase.create("customEase1", "0.41, 0.1, 0.1, 1");
 
 const animeLogoWrapper = {
     initial: {
         opacity: 0,
-        scale: "1.2",
+        scale: 1.6,
+        z: 0,
         clipPath: "inset(0% 0% 100% 0%)",
     },
     enter: {
         opacity: 1,
-        scale: "1",
+        scale: 1,
+        z: 0,
         clipPath: "inset(0% 0% 0% 0%)",
+        duration: 1.2,
+        ease: "customEase1",
     },
     exit: {
+        z: 0,
         opacity: 0,
+        duration: 1,
     },
 };
 
@@ -46,35 +52,61 @@ const animeLogo = {
     },
 };
 
+const clamp = (min, val, max) => Math.max(max, Math.max(min, val));
+const vw = (v) => (window.innerWidth * v) / 100;
+
+const radius = clamp(60, vw(6), vw(6));
+
 const animeMask = {
     enter: {
         scale: 0,
+        z: 0,
         attr: {
-            rx: 120,
-            ry: 120,
+            rx: radius,
+            ry: radius,
         },
     },
     exit: {
         attr: {
-            rx: 10,
-            ry: 10,
+            rx: 6,
+            ry: 6,
         },
-        scale: 1.02,
+        scale: 1,
+        z: 0,
         duration: 1.5,
-        ease: CustomEase.create("", ".41,.09,.1,.95"),
+        ease: "customEase1",
+    },
+};
+
+const animeContent = {
+    initial: {
+        scale: 1.2,
+        z: 0,
+        willChange: "transform",
+        overflowX: "hidden",
+    },
+    end: {
+        scale: 1,
+        z: 0,
+        willChange: "transform",
+        overflowX: "hidden",
+        duration: 1,
+        ease: "power2.out",
     },
 };
 
 const PageTransition = () => {
-    const { isLoading, setMounted, pageComponentReady } = useLoader();
+    const { isLoading, setMounted, pageComponentReady, setIsPageTransitionEnd } =
+        useLoader();
     const { linkClicked, routingPathname, resetLinkClick } = useLinkClick();
     const { setRoute } = useCustomRouter();
     const { pathname } = useLocation();
-    const lenis = useLenis();
+    const { lenis, refreshLenis } = useLenis();
     const { setLocked } = useLenisScrollLock();
 
     const isFirstLoading = useRef(true);
 
+    const mainWrapperRef = useRef(null);
     const containerRef = useRef(null);
     const logoRef = useRef(null);
     const logoWrapperRef = useRef(null);
@@ -88,8 +120,9 @@ const PageTransition = () => {
     const [loaderCount, setLoaderCount] = useState(0);
 
     const resetScroll = useCallback(() => {
-        if (lenis?.scrollTo) lenis.scrollTo(0, { immediate: true });
-        else window.scrollTo(0, 0);
+        requestAnimationFrame(() => {
+            lenis?.scrollTo?.(0, { immediate: true }) ?? window.scrollTo(0, 0);
+        });
     }, [lenis]);
 
     const setInitialStyles = () => {
@@ -110,19 +143,39 @@ const PageTransition = () => {
     };
 
     useEffect(() => {
+        const mainWrapperEl = document.querySelector(".main-wrapper");
+        mainWrapperRef.current = mainWrapperEl;
+    }, [])
+
+    useEffect(() => {
+        const mainWrapper = mainWrapperRef?.current;
         const container = containerRef?.current;
         const logo = logoRef?.current;
         const logoWrapper = logoWrapperRef?.current;
         const mask = maskRef?.current;
         const loaderProgress = loaderProgressRef?.current;
 
-        if (!container || !mask || !logoWrapper || !logo || !loaderProgress) return;
+        if (
+            !container ||
+            !mask ||
+            !logoWrapper ||
+            !logo ||
+            !loaderProgress ||
+            !mainWrapper
+        )
+            return;
 
         const timeLine = gsap.timeline({
             defaults: { duration: 1, ease: "power2.inOut" },
             onStart: () => {
                 setLocked(true);
             },
+        });
+
+        const vh = window.innerHeight;
+
+        gsap.set(mainWrapper, {
+            transformOrigin: `50% ${vh / 2}px`,
         });
 
         onLoadTimelineRef.current = timeLine;
@@ -137,11 +190,15 @@ const PageTransition = () => {
                         {
                             ...animeMask.enter,
                         },
-                        0
+                        0,
                     )
-                    .set(container, {
-                        autoAlpha: 1,
-                    })
+                    .set(
+                        container,
+                        {
+                            autoAlpha: 1,
+                        },
+                        0,
+                    )
                     .to(logoWrapper, {
                         ...animeLogoWrapper.enter,
                     })
@@ -158,7 +215,17 @@ const PageTransition = () => {
                         {
                             ...animeMask.exit,
                         },
-                        "-=0.4"
+                        "-=0.4",
+                    )
+                    .fromTo(
+                        mainWrapper,
+                        {
+                            ...animeContent.initial,
+                        },
+                        {
+                            ...animeContent.end,
+                        },
+                        "-=1.1",
                     )
                     .call(
                         () => {
@@ -167,59 +234,99 @@ const PageTransition = () => {
                             setLocked(false);
                         },
                         [],
-                        "-=1.1"
+                        "-=1",
                     )
                     .set(
                         loaderProgress,
                         {
                             autoAlpha: 0,
                         },
-                        "-=0.55"
+                        "-=0.55",
+                    )
+                    .set([container, logoWrapper, logo, loaderProgress], {
+                        clearProps: "transform,clip-path,opacity,visibility",
+                    })
+                    .set(mainWrapper, {
+                        clearProps: "will-change,overflow-x,transform-origin,transform",
+                    })
+                    .call(
+                        () => {
+                            setIsPageTransitionEnd(true);
+                            refreshLenis();
+                        },
+                        [],
+                        "-=0.5",
                     );
             };
 
             transitionOnLoad();
-        }, containerRef);
+        });
 
         return () => ctx.revert();
-    }, [resetScroll, setMounted, setLocked]);
+    }, [
+        resetScroll,
+        setMounted,
+        setLocked,
+        setIsPageTransitionEnd,
+        refreshLenis
+    ]);
 
     useLayoutEffect(() => {
         if (isFirstLoading.current || !linkClicked) return;
-
+        const mainWrapper = mainWrapperRef?.current;
         const container = containerRef?.current;
         const logo = logoRef?.current;
         const logoWrapper = logoWrapperRef?.current;
         const mask = maskRef?.current;
         const loaderProgress = loaderProgressRef?.current;
 
-        if (!container || !mask || !logoWrapper || !logo || !loaderProgress) return;
+        if (
+            !container ||
+            !mask ||
+            !logoWrapper ||
+            !logo ||
+            !loaderProgress ||
+            !mainWrapper
+        )
+            return;
 
         const timeLine = gsap.timeline({
-            defaults: { duration: 1, ease: "power2.inOut" },
+            defaults: { duration: 0.6, ease: "power2.inOut" },
             onStart: () => {
                 setLocked(true);
             },
         });
+
+        const vh = window.innerHeight;
+
+        gsap.set(mainWrapper, {
+            transformOrigin: `50% ${vh / 2}px`,
+        });
+
         routeTimelineRef.current = timeLine;
 
-        setInitialStyles();
 
         const ctx = gsap.context(() => {
             const transitionPathChange = () => {
+                setInitialStyles();
+                setLoaderCount(0);
+
                 timeLine
                     .set(
                         mask,
                         {
                             ...animeMask.enter,
                         },
-                        0
+                        0,
                     )
                     .to(container, {
                         autoAlpha: 1,
                     })
                     .to(logoWrapper, {
                         ...animeLogoWrapper.enter,
+                    })
+                    .set(mainWrapper, {
+                        ...animeContent.initial,
                     })
                     .call(() => {
                         if (routingPathname) {
@@ -239,31 +346,60 @@ const PageTransition = () => {
                         {
                             ...animeMask.exit,
                         },
-                        "-=0.4"
+                        "-=0.4",
+                    )
+                    .to(
+                        mainWrapper,
+                        {
+                            ...animeContent.end,
+                        },
+                        "-=1.1",
                     )
                     .call(
                         () => {
-                            lenis?.start();
                             setMounted(true);
                             setLocked(false);
                         },
                         [],
-                        "-=1.1"
+                        "-=1",
                     )
                     .set(
                         loaderProgress,
                         {
                             autoAlpha: 0,
                         },
-                        "-=0.55"
+                        "-=0.55",
+                    )
+                    .set([container, logoWrapper, logo, loaderProgress], {
+                        clearProps: "transform,clip-path,opacity,visibility",
+                    })
+                    .set(mainWrapper, {
+                        clearProps: "transform,will-change,overflow-x,transform-origin",
+                    })
+                    .call(
+                        () => {
+                            setIsPageTransitionEnd(true);
+                            refreshLenis();
+                        },
+                        [],
+                        "-=0.5",
                     );
             };
 
             transitionPathChange();
-        }, containerRef);
+        });
 
         return () => ctx.revert();
-    }, [linkClicked, resetScroll, routingPathname, setMounted, setRoute, lenis, setLocked]);
+    }, [
+        linkClicked,
+        resetScroll,
+        routingPathname,
+        setMounted,
+        setRoute,
+        refreshLenis,
+        setLocked,
+        setIsPageTransitionEnd,
+    ]);
 
     useEffect(() => {
         const counterProgress = { value: 0 };

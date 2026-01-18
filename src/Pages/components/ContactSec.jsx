@@ -1,35 +1,34 @@
-import React, { useMemo } from "react";
+import React from "react";
 import ContactForm from "../../components/Forms/ContactForm";
 import ScrollReveal from "../../components/ScrollReveal/ScrollReveal";
 import SecTitle from "../../components/SecTitle";
 
 const ContactSec = () => {
-    const contactDetails = useMemo(
-        () => [
-            {
-                label: "Hotline",
-                description: "Speak with our admissions desk",
-                value: "+91 8654 230 120",
-                iconClass: "fa-solid fa-phone-volume",
-                action: "tel:+918654230120",
-            },
-            {
-                label: "SMS / WhatsApp",
-                description: "Chat with our counsellors",
-                value: "+91 8654 230 121",
-                iconClass: "fa-solid fa-comments",
-                action: "https://wa.me/918654230121",
-            },
-            {
-                label: "Email",
-                description: "Send us your detailed queries",
-                value: "admissions@risenshine.com",
-                iconClass: "fa-solid fa-envelope-open-text",
-                action: "mailto:admissions@risenshine.com",
-            },
-        ],
-        []
-    );
+
+    const contactDetails = [
+        {
+            label: "Call Us",
+            description: "Speak with our support team",
+            value: "+971 50 991 4947",
+            iconClass: "fa-solid fa-phone-volume",
+            action: "tel:+971509914947",
+        },
+        {
+            label: "SMS / WhatsApp",
+            description: "Chat with us on WhatsApp",
+            value: "+91 79878 21654",
+            iconClass: "fa-solid fa-comments",
+            action: "https://wa.me/917987821654",
+        },
+        {
+            label: "Email",
+            description: "Send us your detailed queries",
+            value: "info@risenshine.ae",
+            iconClass: "fa-solid fa-envelope-open-text",
+            action: "mailto:info@risenshine.ae",
+        },
+    ]
+
 
     return (
         <section className="contact-sec">

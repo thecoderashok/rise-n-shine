@@ -10,13 +10,13 @@ import MenuItem from "./MenuItem";
 import styles from "./Header.module.scss";
 import { Slant as Hamburger } from 'hamburger-react'
 import { useClassNames } from "../../hook/useClassNames";
-import { useLenis } from "lenis/react";
 import gsap from "gsap";
 import Button from "../Button/Button";
 import { useLoader } from "../../context/Loader/LoaderContext";
 import { useModal } from "../../context/Modal/ModalContext";
 import { getMenu } from "../../lib/menu";
 import TransitionLink from "../TransitionLink";
+import { useLenis } from "../../context/Lenis/LenisContext";
 
 const MainHeader = ({ isTransparent }) => {
     const menuData = useMemo(() => getMenu(), []);
@@ -40,7 +40,7 @@ const MainHeader = ({ isTransparent }) => {
 
     const classes = useClassNames();
 
-    const lenis = useLenis();
+    const { lenis } = useLenis();
 
     useEffect(() => {
         const ctx = gsap.matchMedia();

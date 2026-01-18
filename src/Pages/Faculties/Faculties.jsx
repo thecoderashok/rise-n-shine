@@ -69,7 +69,10 @@ const Faculties = () => {
                     </>
                 }
                 breadcrumbs={[{ label: "Home", href: "/" }, { label: "Faculties" }]}
-                imageSrc="/images/faculty.jpg"
+                banner={{
+                    src: "/images/faculty.jpg",
+                    alt: "The minds shaping future-ready leaders",
+                }}
             />
 
             <section className="faculties-grid-sec">

@@ -45,7 +45,10 @@ const Campus = () => {
                     </>
                 }
                 breadcrumbs={[{ label: "Home", href: "/" }, { label: "Campus" }]}
-                imageSrc={`/images/campus-banner.jpg`}
+                banner={{
+                    src: "/images/campus-banner.jpg",
+                    alt: "An Environment That Inspires Excellence",
+                }}
             />
 
             <VideoTourSec

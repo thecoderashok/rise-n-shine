@@ -129,7 +129,10 @@ const Admissions = () => {
                 pageTitle={"Admissions"}
                 title={<>Step Into a Future of Possibilities</>}
                 breadcrumbs={[{ label: "Home", href: "/" }, { label: "Admissions" }]}
-                imageSrc={`/images/admissions-banner.jpg`}
+                banner={{
+                    src: "/images/admissions-banner.jpg",
+                    alt: "Step Into a Future of Possibilities",
+                }}
             />
 
             <LeftRightImageTextSec

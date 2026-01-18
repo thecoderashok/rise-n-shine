@@ -27,7 +27,10 @@ const AboutUs = () => {
                     { label: "Home", href: "/" },
                     { label: "About Us" },
                 ]}
-                imageSrc={`/images/about-banner.jpg`}
+                banner={{
+                    src: "/images/about-banner.jpg",
+                    alt: "A Vision of Excellence, A Journey Towards Success",
+                }}
             />
             <AboutIntroSec />
             <AboutMarqueeSec />

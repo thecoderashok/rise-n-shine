@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { useLoader } from "../context/Loader/LoaderContext";
 
 export const useInView = (
     ref,
@@ -11,6 +12,7 @@ export const useInView = (
 ) => {
     const [inView, setInView] = useState(false);
     const hasBeenInView = useRef(false);
+    const {isPageTransitionEnd} = useLoader();
 
     useEffect(() => {
         const element = ref.current;
@@ -21,6 +23,7 @@ export const useInView = (
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
+                    if (!isPageTransitionEnd) return;
                     if (!entry.boundingClientRect) return;
                     const currentY = entry.boundingClientRect.top;
                     const currentX = entry.boundingClientRect.left;
@@ -57,7 +60,7 @@ export const useInView = (
             if (element) observer.unobserve(element);
             observer.disconnect();
         };
-    }, [ref, once, threshold, rootMargin, root]);
+    }, [ref, once, threshold, rootMargin, root, isPageTransitionEnd]);
 
     return inView;
 };

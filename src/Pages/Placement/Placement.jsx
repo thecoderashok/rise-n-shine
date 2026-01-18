@@ -162,7 +162,10 @@ const Placement = () => {
                     { label: "Home", href: "/" },
                     { label: "Placement" },
                 ]}
-                imageSrc={`/images/placement-banner.jpg`}
+                banner={{
+                    src: "/images/placement-banner.jpg",
+                    alt: "Your Career, Our Commitment",
+                }}
             />
 
             <ImageFeaturesSec

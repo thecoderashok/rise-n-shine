@@ -60,7 +60,10 @@ const Programmes = () => {
             <PageBannerSec
                 pageTitle={programmesData.title}
                 title={banner?.title}
-                imageSrc={banner?.image}
+                banner={{
+                    src: banner?.image,
+                    alt: banner?.title ?? programmesData.title,
+                }}
                 breadcrumbs={[
                     { label: "Home", href: "/" },
                     { label: "Academics" },

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import Image from '../../../components/Image';
 import SecTitle from '../../../components/SecTitle';
+import ScrollReveal from '../../../components/ScrollReveal/ScrollReveal';
 
 const facilitiesData = [
     {
@@ -34,6 +35,8 @@ const facilitiesData = [
 ];
 
 const CampusFacilitiesSec = () => {
+    const cardsListRef = useRef(null);
+
     return (
         <section className="campus-facilities-sec p-0">
             <div className="sticky-sec">
@@ -62,15 +65,16 @@ const CampusFacilitiesSec = () => {
                         </div>
 
                         <div className="col-12">
-                            <div className="facilities-list-wrapper">
-
+                            <div className="facilities-list-wrapper" ref={cardsListRef}>
                                 {facilitiesData.map((facility, index) => (
-                                    <div className="facility-card" key={index}>
-                                        <div className="icon">
-                                            <i className={facility.icon}></i>
+                                    <ScrollReveal direction='clip-scale-in-downward' delay={0.2 + index * 0.08} key={index} triggerRef={cardsListRef}>
+                                        <div className="facility-card">
+                                            <div className="icon">
+                                                <i className={facility.icon}></i>
+                                            </div>
+                                            <p>{facility.text}</p>
                                         </div>
-                                        <p>{facility.text}</p>
-                                    </div>
+                                    </ScrollReveal>
                                 ))}
                             </div>
                         </div>

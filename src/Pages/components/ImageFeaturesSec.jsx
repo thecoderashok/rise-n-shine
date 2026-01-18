@@ -106,50 +106,55 @@ const ImageFeaturesSec = ({ data = [], title = {}, content, sectionClass }) => {
                 <div className="container">
                     <div className="row">
                         <div className="col-12">
-                            <div className="features-carousel" ref={containerRef}>
-                                <SwiperCarousel
-                                    slidesPerView={3}
-                                    spaceBetween={10}
-                                    loop={false}
-                                    speed={800}
-                                    navigationBtns={false}
-                                    pagination={false}
-                                    breakpoints={{
-                                        0: { slidesPerView: 1 },
-                                        680: { slidesPerView: 1.25 },
-                                        991: { slidesPerView: 3 },
-                                    }}
-                                    onSwiper={(swiper) => {
-                                        swiperRef.current = swiper;
-                                    }}
-                                    showPagination={false}
-                                >
-                                    {data?.map((item, index) => (
-                                        <SwiperSlide key={index}>
-                                            <div className="feature-card">
-                                                <div className="image-wrapper">
-                                                    <Image
-                                                        src={item.image}
-                                                        alt={item.alt || item.title}
-                                                        width={1200}
-                                                        height={1800}
-                                                    />
+                            <ScrollReveal direction='fade-right' delay={0.6} offset={50}>
+                                <div className="features-carousel" ref={containerRef}>
+                                    <SwiperCarousel
+                                        slidesPerView={3}
+                                        spaceBetween={10}
+                                        loop={false}
+                                        speed={800}
+                                        navigationBtns={false}
+                                        pagination={false}
+                                        breakpoints={{
+                                            0: { slidesPerView: 1 },
+                                            680: { slidesPerView: 1.25 },
+                                            991: { slidesPerView: 3 },
+                                        }}
+                                        onSwiper={(swiper) => {
+                                            swiperRef.current = swiper;
+                                        }}
+                                        showPagination={false}
+                                    >
+                                        {data?.map((item, index) => (
+                                            <SwiperSlide key={index}>
+                                                <div className="feature-card">
+                                                    <div className="image-wrapper">
+                                                        <Image
+                                                            src={item.image}
+                                                            alt={item.alt || item.title}
+                                                            width={1200}
+                                                            height={1800}
+                                                        />
+                                                    </div>
+                                                    <div className="content-wrapper">
+                                                        <h3 className="title-text">{item.title}</h3>
+                                                        <p className="description">{item.description}</p>
+                                                    </div>
                                                 </div>
-                                                <div className="content-wrapper">
-                                                    <h3 className="title-text">{item.title}</h3>
-                                                    <p className="description">{item.description}</p>
-                                                </div>
-                                            </div>
-                                        </SwiperSlide>
-                                    ))}
-                                </SwiperCarousel>
-                            </div>
-                            <div className="slide-buttons-wrapper">
-                                <div className="slide-buttons">
-                                    <button type="button" ref={navPrevRef} className="slide-btn prev" aria-label="Previous slide" />
-                                    <button type="button" ref={navNextRef} className="slide-btn next" aria-label="Next slide" />
+                                            </SwiperSlide>
+                                        ))}
+                                    </SwiperCarousel>
                                 </div>
-                            </div>
+                            </ScrollReveal>
+
+                            <ScrollReveal direction="clip-fade-up" delay={0.3} offset={50}>
+                                <div className="slide-buttons-wrapper">
+                                    <div className="slide-buttons">
+                                        <button type="button" ref={navPrevRef} className="slide-btn prev" aria-label="Previous slide" />
+                                        <button type="button" ref={navNextRef} className="slide-btn next" aria-label="Next slide" />
+                                    </div>
+                                </div>
+                            </ScrollReveal>
                         </div>
                     </div>
                 </div>

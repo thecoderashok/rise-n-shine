@@ -6,11 +6,12 @@ import { useLocation } from "react-router";
 
 const LoaderProvider = ({ children }) => {
     const { pathname } = useLocation();
-    const lenis = useLenis();
+    const { lenis } = useLenis();
 
     const [pageComponentReady, setPageComponentReady] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const [isMounted, setMounted] = useState(false);
+    const [isPageTransitionEnd, setIsPageTransitionEnd] = useState(false);
     const isFirstLoad = useRef(true);
     const hasReloaded = useRef(false);
     const [assetsLoaded, setAssetsLoaded] = useState(false);
@@ -70,6 +71,7 @@ const LoaderProvider = ({ children }) => {
                 setMounted(false);
                 setAssetsLoaded(false);
                 setPageComponentReady(false);
+                setIsPageTransitionEnd(false);
             }, 10);
         }
 
@@ -104,6 +106,8 @@ const LoaderProvider = ({ children }) => {
                 isFirstLoad,
                 pageComponentReady,
                 setPageComponentReady,
+                isPageTransitionEnd,
+                setIsPageTransitionEnd
             }}
         >
             {children}

@@ -3,12 +3,13 @@ import { useClassNames } from "../../hook/useClassNames";
 import TextSplit from "../../components/TextSplit";
 import ParallaxWrapper from "../../components/Parallax/ParallaxWrapper";
 import Image from "../../components/Image";
+import ScrollReveal from "../../components/ScrollReveal/ScrollReveal";
 
 const PageBannerSec = ({
     customClasses,
     title,
     pageTitle,
-    imageSrc,
+    banner = {},
     breadcrumbs = [],
 }) => {
     const classes = useClassNames();
@@ -40,15 +41,16 @@ const PageBannerSec = ({
             <ParallaxWrapper offset={20}>
                 <div className="image-wrapper">
                     <Image
-                        src={imageSrc}
-                        alt={title}
-                        title={title}
+                        src={banner.src}
+                        alt={banner.alt}
+                        title={pageTitle}
                         width={1920}
                         height={1080}
                         priority={true}
                     />
                 </div>
             </ParallaxWrapper>
+
             <div className="inner-sec">
                 <div className="container">
                     <div className="row">
@@ -57,23 +59,27 @@ const PageBannerSec = ({
                                 <h1 className="main-title-text d-none">{pageTitle}</h1>
                             )}
 
-                            <nav className="banner-breadcrumbs" aria-label="Breadcrumb">
-                                <ol>
-                                    {breadcrumbItems.map((item, index) => (
-                                        <li key={`${item.label}-${index}`}>
-                                            {item.href ? (
-                                                <a href={item.href}>{item.label}</a>
-                                            ) : (
-                                                <span>{item.label}</span>
-                                            )}
-                                        </li>
-                                    ))}
-                                </ol>
-                            </nav>
+                            <ScrollReveal direction="fade-in" delay={0.6}>
+                                <nav className="banner-breadcrumbs" aria-label="Breadcrumb">
+                                    <ol>
+                                        {breadcrumbItems.map((item, index) => (
+                                            <li key={`${item.label}-${index}`}>
+                                                {item.href ? (
+                                                    <a href={item.href}>{item.label}</a>
+                                                ) : (
+                                                    <span>{item.label}</span>
+                                                )}
+                                            </li>
+                                        ))}
+                                    </ol>
+                                </nav>
+                            </ScrollReveal>
 
-                            <TextSplit reveal={true}>
+                            <TextSplit reveal={true} revealDelay={200}>
                                 <h2 className="title-text">{title}</h2>
                             </TextSplit>
+
+
 
                             <div
                                 className="banner-scroll-indicator"

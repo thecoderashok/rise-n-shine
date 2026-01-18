@@ -21,7 +21,10 @@ const Research = () => {
                     { label: "Home", href: "/" },
                     { label: "Research" },
                 ]}
-                imageSrc={`/images/hero-banner.jpg`}
+                banner={{
+                    src: "/images/hero-banner.jpg",
+                    alt: "Research & Innovation Advancing Knowledge",
+                }}
             />
         </>
     );
