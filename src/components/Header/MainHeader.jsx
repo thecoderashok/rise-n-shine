@@ -23,6 +23,7 @@ const MainHeader = ({ isTransparent }) => {
     const { HeaderMenu } = menuData;
     const { isMounted } = useLoader();
     const location = useLocation();
+    const { lenis, refreshLenis } = useLenis();
 
     const [isSticky, setIsSticky] = useState(false);
     const [isHidden, setIsHidden] = useState(false);
@@ -39,8 +40,6 @@ const MainHeader = ({ isTransparent }) => {
     const [isMenuClosed, setIsMenuClosed] = useState(true);
 
     const classes = useClassNames();
-
-    const { lenis } = useLenis();
 
     useEffect(() => {
         const ctx = gsap.matchMedia();
@@ -160,7 +159,7 @@ const MainHeader = ({ isTransparent }) => {
                                 });
                                 header.dataset.menuState = "closed";
                                 setIsMenuClosed(true);
-                                lenis?.start();
+                                refreshLenis();
                             },
                         }
                     );
@@ -186,7 +185,7 @@ const MainHeader = ({ isTransparent }) => {
         });
 
         return () => ctx.revert();
-    }, [menuOpen, lenis, menuBtnToggled]);
+    }, [menuOpen, menuBtnToggled, lenis, refreshLenis]);
 
     const handleMenuBtnClick = () => {
         if (isAnimating) return;
@@ -231,9 +230,9 @@ const MainHeader = ({ isTransparent }) => {
             setMenuBtnToggled(false);
             setIsMenuClosed(true);
             setIsAnimating(false);
-            lenis?.start();
+            refreshLenis();
         }, 500);
-    }, [location.pathname, lenis]);
+    }, [location.pathname, refreshLenis]);
 
     const computedClassName = useMemo(() => {
         return classes(

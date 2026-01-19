@@ -3,7 +3,6 @@ import { Route, Routes } from 'react-router';
 import { useCustomRouter } from './context/CustomRouter/CustomRouterContext';
 import PageWrapper from './components/Route/PageWrapper';
 import Layout from './Layout';
-import { useLoader } from './context/Loader/LoaderContext';
 const Home = lazy(() => import('./Pages/Home/Home'));
 const AboutUs = lazy(() => import('./Pages/AboutUs/AboutUs'));
 const Academics = lazy(() => import('./Pages/Academics/Academics'));
@@ -19,7 +18,6 @@ const NewsEvents = lazy(() => import('./Pages/NewsEvents/NewsEvents'));
 
 const AppRoutes = () => {
     const { customPathname } = useCustomRouter();
-    const {isPageTransitionEnd} = useLoader();
 
     const AllRoutes = [
         {
@@ -73,24 +71,26 @@ const AppRoutes = () => {
     ];
 
     return (
-        <div className="main-wrapper" data-transform={isPageTransitionEnd ? "none" : "auto"}>
-            <Suspense fallback={<div className="loader"></div>}>
-                <Routes location={{ pathname: customPathname }}>
-                    <Route element={<Layout />}>
-                        {AllRoutes.map((page, index) => (
-                            <Route
-                                path={page.path}
-                                element={
-                                    <PageWrapper key={customPathname}>
-                                        {page.component}
-                                    </PageWrapper>
-                                }
-                                key={index}
-                            />
-                        ))}
-                    </Route>
-                </Routes>
-            </Suspense>
+        <div className="main-wrapper">
+            <div className="page-content">
+                <Suspense fallback={<div className="loader"></div>}>
+                    <Routes location={{ pathname: customPathname }}>
+                        <Route element={<Layout />}>
+                            {AllRoutes.map((page, index) => (
+                                <Route
+                                    path={page.path}
+                                    element={
+                                        <PageWrapper key={customPathname}>
+                                            {page.component}
+                                        </PageWrapper>
+                                    }
+                                    key={index}
+                                />
+                            ))}
+                        </Route>
+                    </Routes>
+                </Suspense>
+            </div>
         </div>
     );
 };

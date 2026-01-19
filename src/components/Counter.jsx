@@ -16,14 +16,17 @@ const Counter = ({ count, delay = 0, duration = 2, format, customClass = "", ...
         if (format) return format;
 
         const countStr = count.toString();
-        const hasDecimal = countStr.includes('.');
-        const decimals = hasDecimal ? countStr.split('.')[1].length : 0;
+        const hasDecimal = countStr.includes(".");
+        const decimals = hasDecimal ? countStr.split(".")[1].length : 0;
+
+        const formatter = new Intl.NumberFormat("en-US", {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: decimals,
+        });
 
         return (val) => {
-            const rounded = Number(val).toFixed(decimals);
-            return hasDecimal
-                ? rounded.replace(/\.?0+$/, '')
-                : rounded;
+            const rounded = Number(val.toFixed(decimals));
+            return formatter.format(rounded);
         };
     }, [count, format]);
 

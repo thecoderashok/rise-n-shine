@@ -6,6 +6,7 @@ import { SwiperSlide } from 'swiper/react';
 import { useClassNames } from '../../../hook/useClassNames';
 import TextSplit from '../../../components/TextSplit';
 import { AutoFitText } from '../../components/AutoFitText';
+import ScrollReveal from '../../../components/ScrollReveal/ScrollReveal';
 
 const data = [
     {
@@ -39,7 +40,7 @@ const data = [
 
 
 const HeroSec = () => {
-    const classes = useClassNames()
+    const classes = useClassNames();
 
     useEffect(() => {
         const cleanup = AutoFitText({
@@ -78,32 +79,35 @@ const HeroSec = () => {
                             </div>
                         </ParallaxWrapper>
 
-                        <div className="inner-sec">
-                            <div className="container">
-                                <div className={classes("content-wrapper")}>
-                                    <TextSplit>
-                                        <h2 className="title-text">
-                                            {slide.title}
-                                        </h2>
-                                    </TextSplit>
-                                </div>
+                        <ScrollReveal direction='fade-in'>
+                            <div className="inner-sec">
+                                <div className="container">
+                                    <div className={classes("content-wrapper")}>
+                                        <TextSplit reveal={true} revealLetters={true} once={false} revealDelay={400} >
+                                            <h2 className="title-text">
+                                                {slide.title}
+                                            </h2>
+                                        </TextSplit>
+                                    </div>
 
-                                <div className="object-wrapper">
-                                    <Image
-                                        src={`/images/banner/${slide.object}`}
-                                        alt={slide.image.alt}
-                                        priority={true}
-                                    />
-                                </div>
+                                    <div className="object-wrapper">
+                                        <Image
+                                            src={`/images/banner/${slide.object}`}
+                                            alt={slide.image.alt}
+                                            priority={true}
+                                        />
+                                    </div>
 
-                                <div className="shape-wrapper">
-                                    <Image
-                                        src={`/images/banner/${slide.shape}`}
-                                        priority={true}
-                                    />
+                                    <div className="shape-wrapper">
+                                        <Image
+                                            src={`/images/banner/${slide.shape}`}
+                                            priority={true}
+                                        />
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </ScrollReveal>
+
                     </SwiperSlide>
                 ))}
 

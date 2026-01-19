@@ -40,14 +40,9 @@ const LenisProvider = ({ children }) => {
     const refreshLenis = useCallback(() => {
         if (!lenisInstance) return;
 
+        lenisInstance.start();
         lenisInstance.resize();
         ScrollTrigger.refresh(true);
-
-        requestAnimationFrame(() => {
-            lenisInstance.resize();
-        });
-
-        window.dispatchEvent(new Event("resize"));
     }, [lenisInstance]);
 
     return (

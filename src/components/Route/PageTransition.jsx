@@ -83,13 +83,11 @@ const animeContent = {
         scale: 1.2,
         z: 0,
         willChange: "transform",
-        overflowX: "hidden",
     },
     end: {
         scale: 1,
         z: 0,
         willChange: "transform",
-        overflowX: "hidden",
         duration: 1,
         ease: "power2.out",
     },
@@ -125,8 +123,13 @@ const PageTransition = () => {
         });
     }, [lenis]);
 
+    useEffect(() => {
+        const mainWrapperEl = document.querySelector(".page-content");
+        mainWrapperRef.current = mainWrapperEl;
+    }, [])
+
     const setInitialStyles = () => {
-        if (!containerRef.current) return;
+        if (!containerRef.current || !mainWrapperRef.current) return;
 
         gsap.set(containerRef.current, {
             autoAlpha: 0,
@@ -140,12 +143,9 @@ const PageTransition = () => {
         gsap.set(logoWrapperRef.current, {
             ...animeLogoWrapper.initial,
         });
-    };
 
-    useEffect(() => {
-        const mainWrapperEl = document.querySelector(".main-wrapper");
-        mainWrapperRef.current = mainWrapperEl;
-    }, [])
+        mainWrapperRef.current.setAttribute("data-transform", "auto");
+    };
 
     useEffect(() => {
         const mainWrapper = mainWrapperRef?.current;
@@ -169,7 +169,7 @@ const PageTransition = () => {
             defaults: { duration: 1, ease: "power2.inOut" },
             onStart: () => {
                 setLocked(true);
-            },
+            }
         });
 
         const vh = window.innerHeight;
@@ -247,7 +247,7 @@ const PageTransition = () => {
                         clearProps: "transform,clip-path,opacity,visibility",
                     })
                     .set(mainWrapper, {
-                        clearProps: "will-change,overflow-x,transform-origin,transform",
+                        clearProps: "transform,will-change,transform-origin",
                     })
                     .call(
                         () => {
@@ -255,7 +255,13 @@ const PageTransition = () => {
                             refreshLenis();
                         },
                         [],
-                        "-=0.5",
+                        "-=0.8",
+                    )
+                    .call(
+                        () => {
+                            mainWrapper.setAttribute("data-transform", "none");
+                        },
+                        [],
                     );
             };
 
@@ -291,7 +297,7 @@ const PageTransition = () => {
             return;
 
         const timeLine = gsap.timeline({
-            defaults: { duration: 0.6, ease: "power2.inOut" },
+            defaults: { duration: 0.4, ease: "power2.out" },
             onStart: () => {
                 setLocked(true);
             },
@@ -299,13 +305,9 @@ const PageTransition = () => {
 
         const vh = window.innerHeight;
 
-        gsap.set(mainWrapper, {
-            transformOrigin: `50% ${vh / 2}px`,
-        });
-
         routeTimelineRef.current = timeLine;
 
-
+        
         const ctx = gsap.context(() => {
             const transitionPathChange = () => {
                 setInitialStyles();
@@ -321,12 +323,14 @@ const PageTransition = () => {
                     )
                     .to(container, {
                         autoAlpha: 1,
+                        ease: "none"
                     })
                     .to(logoWrapper, {
                         ...animeLogoWrapper.enter,
                     })
                     .set(mainWrapper, {
                         ...animeContent.initial,
+                        transformOrigin: `50% ${vh / 2}px`,
                     })
                     .call(() => {
                         if (routingPathname) {
@@ -374,7 +378,7 @@ const PageTransition = () => {
                         clearProps: "transform,clip-path,opacity,visibility",
                     })
                     .set(mainWrapper, {
-                        clearProps: "transform,will-change,overflow-x,transform-origin",
+                        clearProps: "transform,will-change,transform-origin",
                     })
                     .call(
                         () => {
@@ -382,12 +386,18 @@ const PageTransition = () => {
                             refreshLenis();
                         },
                         [],
-                        "-=0.5",
+                        "-=0.8",
+                    )
+                    .call(
+                        () => {
+                            mainWrapper.setAttribute("data-transform", "none");
+                        },
+                        [],
                     );
             };
 
             transitionPathChange();
-        });
+        }, mainWrapper);
 
         return () => ctx.revert();
     }, [
@@ -484,10 +494,11 @@ const PageTransition = () => {
         const raf = requestAnimationFrame(() => {
             resetScroll();
             setMounted(true);
+            setIsPageTransitionEnd(true);
         });
 
         return () => cancelAnimationFrame(raf);
-    }, [pathname, setRoute, resetScroll, setMounted, linkClicked]);
+    }, [pathname, setRoute, resetScroll, setMounted, linkClicked, setIsPageTransitionEnd]);
 
     const formatCounter = (value) => {
         return String(value).padStart(3, "0");

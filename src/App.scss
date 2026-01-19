@@ -505,19 +505,6 @@ section {
         position: relative;
         height: 48vw;
         overflow: hidden;
-    }
-
-    .inner-sec {
-        position: relative;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 0 calc(5vw + 0.75rem);
-        overflow: hidden;
 
         &::after {
             content: "";
@@ -531,17 +518,31 @@ section {
         }
     }
 
+    .inner-sec {
+        position: relative;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 calc(5vw + 0.75rem);
+        overflow: hidden;
+        z-index: 5;
+
+        .container {
+            height: auto !important;
+            max-width: none !important;
+        }
+    }
+
     .parallax-container {
         position: absolute;
         left: 0;
         top: 0;
         width: 100%;
         height: 100%;
-    }
-
-    .container {
-        height: auto !important;
-        max-width: none !important;
     }
 
     .image-wrapper {
@@ -603,7 +604,7 @@ section {
 
         .title-text {
             font-size: 2.8vw;
-            // font-size: clamp(2rem, 2.8vw, 3.36rem);
+            display: none;
             font-weight: 600;
             line-height: 1;
             color: white;
@@ -627,13 +628,7 @@ section {
 
             .line {
                 line-height: 1;
-            }
-
-            .word {
-                transform: translate3d(0, 3.125vw, 0);
-                opacity: 0;
-                transition-property: opacity, transform !important;
-                transition: 0.8s cubic-bezier(0.32, 0, 0.67, 0) var(--delay);
+                overflow: hidden;
             }
         }
     }
@@ -696,23 +691,21 @@ section {
     }
 
     .swiper-slide-visible {
-        .object-wrapper {
-            transform: translateX(0) translateZ(0) !important;
-            opacity: 1 !important;
-            filter: blur(0) !important;
-        }
+        .is-inview {
+            .object-wrapper {
+                transform: translateX(0) translateZ(0) !important;
+                opacity: 1 !important;
+                filter: blur(0) !important;
+            }
 
-        .shape-wrapper {
-            transform: translateY(0) translateZ(0) !important;
+            .shape-wrapper {
+                transform: translateY(0) translateZ(0) !important;
+            }
         }
 
         .content-wrapper {
             .title-text {
-                .word {
-                    transform: translate3d(0, 0, 0);
-                    opacity: 1;
-                    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--delay) + 500ms);
-                }
+                display: inline-block;
             }
         }
     }
@@ -2248,7 +2241,7 @@ section {
     justify-content: center;
     padding: 0;
     height: 100dvh;
-    min-height: clamp(26rem, 32vw, 31.25rem);
+    min-height: 35rem;
     overflow: hidden;
 
     .parallax-container {
@@ -2284,7 +2277,6 @@ section {
         align-items: center;
         justify-content: center;
         z-index: 2;
-        padding: 0;
     }
 
     .text-wrapper {
@@ -2307,10 +2299,10 @@ section {
             font-size: clamp(2.8rem, 5.8vw, 4.5rem);
             font-weight: 600;
             letter-spacing: normal !important;
-            word-spacing: -0.1em;
+            word-spacing: -0.15em;
             color: #fff;
             line-height: 1;
-            text-transform: uppercase;
+            text-transform: capitalize;
             font-family: var(--alt-font);
 
             .line {
@@ -2319,6 +2311,12 @@ section {
 
             b {
                 font-weight: 700;
+            }
+
+            @media (max-width: 767px){
+                b{
+                    display: none;
+                }
             }
         }
 
@@ -2415,32 +2413,6 @@ section {
             }
         }
     }
-
-    // @media (max-width: 991px) {
-    //     min-height: 26rem;
-
-    //     .text-wrapper {
-    //         font-size: 0.9rem;
-
-    //         .main-title-text {
-    //             letter-spacing: 0.2em;
-    //         }
-
-    //         .title-text {
-    //             font-size: clamp(2.4rem, 8vw, 3.2rem);
-    //         }
-    //     }
-    // }
-
-    // @media (max-width: 575px) {
-    //     .text-wrapper {
-    //         padding: 1.25em 0 3.75em;
-
-    //         .main-title-text {
-    //             letter-spacing: 0.12em;
-    //         }
-    //     }
-    // }
 
     @keyframes scrollArrowAnimate {
         0% {
@@ -3952,6 +3924,11 @@ section {
 }
 
 // Bootstrap Modal Custom Styling
+body.modal-open {
+    overflow: auto !important;
+    padding-right: 0 !important;
+}
+
 .modal {
     .modal-content {
         border: none;
@@ -4578,6 +4555,7 @@ form {
     visibility: hidden;
     pointer-events: none;
     user-select: none;
+    will-change: opacity;
 
     .preloader_mask {
         position: fixed;

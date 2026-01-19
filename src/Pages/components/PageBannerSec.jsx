@@ -80,7 +80,6 @@ const PageBannerSec = ({
                             </TextSplit>
 
 
-
                             <div
                                 className="banner-scroll-indicator"
                                 onClick={handleScrollDown}

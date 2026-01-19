@@ -437,22 +437,22 @@
             right: 0;
             width: 100%;
             height: 100dvh;
-            padding: 40px 24px;
-            padding-top: 10rem !important;
+            padding: 7rem 0 0 0 !important;
             margin: 0;
             clip-path: inset(0 0 100% 0);
-            background-color: #f2e8f7;
+            background: #f2e8f7;
             z-index: 999;
             overflow: hidden;
-            overflow-y: auto !important;
-
+            
             .menu_list {
                 height: auto;
                 flex-direction: column;
                 justify-content: start;
-                padding: 0;
+                padding: 0 20px;
                 margin: 0;
                 gap: 0;
+                overflow-y: auto !important;
+                padding-bottom: 20px !important;
             }
 
             li {

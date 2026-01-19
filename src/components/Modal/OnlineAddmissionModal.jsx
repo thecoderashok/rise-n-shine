@@ -36,7 +36,7 @@ const OnlineAddmissionModal = ({
         const handleHidden = () => {
             stopLenisScroll(false);
             onClose();
-            closeModal()
+            closeModal();
         };
 
         element.addEventListener("shown.bs.modal", handleShown);
@@ -47,16 +47,6 @@ const OnlineAddmissionModal = ({
             element.removeEventListener("hidden.bs.modal", handleHidden);
         };
     }, [isMounted, onClose, closeModal]);
-
-    // useEffect(() => {
-    //     if (!modalInstanceRef.current) return;
-
-    //     if (isOpen) {
-    //         modalInstanceRef.current.show();
-    //     } else {
-    //         modalInstanceRef.current.hide();
-    //     }
-    // }, [isOpen]);
 
     useEffect(() => {
         if (!modalInstanceRef.current) return;
@@ -83,7 +73,7 @@ const OnlineAddmissionModal = ({
                             Apply Online
                         </h2>
                         <button type="button" className="btn-close-custom" data-bs-dismiss="modal" aria-label="Close" onClick={() => {
-                            document.activeElement?.blur();
+                            closeModal();
                             stopLenisScroll(false);
                         }}>
                             <i className="fa-solid fa-xmark"></i>

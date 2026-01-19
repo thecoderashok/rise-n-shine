@@ -127,12 +127,16 @@ p {
 .main-wrapper {
    position: relative;
    width: 100%;
-   display: flex;
-   flex-direction: column;
+   overflow: hidden;
 }
 
 [data-transform="none"]{
    transform: none !important;
+}
+
+.page-content {
+   position: relative;
+   backface-visibility: hidden;
 }
 
 .line {
@@ -178,7 +182,7 @@ p {
    transition-duration: var(--duration);
    transition-timing-function: var(--ease-out-expo);
    transition-delay: 0s;
-   transform: translate3d(3.125vw, 0, 0);
+   transform: translate3d(0, 100%, 0);
    opacity: 0;
 }
 
