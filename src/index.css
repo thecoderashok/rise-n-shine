@@ -130,6 +130,10 @@ p {
    overflow: hidden;
 }
 
+body.page-transition-end .main-wrapper{
+   overflow: visible;
+}
+
 [data-transform="none"]{
    transform: none !important;
 }

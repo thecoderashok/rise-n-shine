@@ -104,6 +104,7 @@ const PageTransition = () => {
 
     const isFirstLoading = useRef(true);
 
+    const bodyRef = useRef(null);
     const mainWrapperRef = useRef(null);
     const containerRef = useRef(null);
     const logoRef = useRef(null);
@@ -125,10 +126,29 @@ const PageTransition = () => {
 
     useEffect(() => {
         const mainWrapperEl = document.querySelector(".page-content");
+        const bodyEl = document.querySelector("body");
         mainWrapperRef.current = mainWrapperEl;
+        bodyRef.current = bodyEl;
     }, [])
 
-    const setInitialStyles = () => {
+    const updateTrasitionStateToDOM = (state) => {
+        if (!mainWrapperRef.current || !bodyRef.current) return;
+
+        if (!state) {
+            console.log("updateTrasitionStateToDOM: state missing!");
+            return;
+        }
+
+        if (state === "start") {
+            mainWrapperRef.current.setAttribute("data-transform", "auto");
+            bodyRef.current.classList.remove("page-transition-end");
+        } else if (state === "end") {
+            mainWrapperRef.current.setAttribute("data-transform", "none");
+            bodyRef.current.classList.add("page-transition-end");
+        }
+    }
+
+    const setInitialStyles = useCallback(() => {
         if (!containerRef.current || !mainWrapperRef.current) return;
 
         gsap.set(containerRef.current, {
@@ -144,8 +164,8 @@ const PageTransition = () => {
             ...animeLogoWrapper.initial,
         });
 
-        mainWrapperRef.current.setAttribute("data-transform", "auto");
-    };
+        updateTrasitionStateToDOM("start");
+    }, []);
 
     useEffect(() => {
         const mainWrapper = mainWrapperRef?.current;
@@ -259,7 +279,7 @@ const PageTransition = () => {
                     )
                     .call(
                         () => {
-                            mainWrapper.setAttribute("data-transform", "none");
+                            updateTrasitionStateToDOM("end");
                         },
                         [],
                     );
@@ -268,13 +288,17 @@ const PageTransition = () => {
             transitionOnLoad();
         });
 
-        return () => ctx.revert();
+        return () => {
+            ctx.revert();
+            timeLine.kill();
+        };
     }, [
         resetScroll,
         setMounted,
         setLocked,
         setIsPageTransitionEnd,
-        refreshLenis
+        refreshLenis,
+        setInitialStyles
     ]);
 
     useLayoutEffect(() => {
@@ -307,7 +331,7 @@ const PageTransition = () => {
 
         routeTimelineRef.current = timeLine;
 
-        
+
         const ctx = gsap.context(() => {
             const transitionPathChange = () => {
                 setInitialStyles();
@@ -390,7 +414,7 @@ const PageTransition = () => {
                     )
                     .call(
                         () => {
-                            mainWrapper.setAttribute("data-transform", "none");
+                            updateTrasitionStateToDOM("end");
                         },
                         [],
                     );
@@ -399,7 +423,10 @@ const PageTransition = () => {
             transitionPathChange();
         }, mainWrapper);
 
-        return () => ctx.revert();
+        return () => {
+            ctx.revert();
+            timeLine.kill();
+        };
     }, [
         linkClicked,
         resetScroll,
@@ -409,6 +436,7 @@ const PageTransition = () => {
         refreshLenis,
         setLocked,
         setIsPageTransitionEnd,
+        setInitialStyles
     ]);
 
     useEffect(() => {
@@ -488,16 +516,18 @@ const PageTransition = () => {
     }, [isLoading, tlPaused]);
 
     useEffect(() => {
-        if (isFirstLoading.current || linkClicked) return;
+        if (isFirstLoading.current) return;
+        if (linkClicked) return;
 
         setRoute(pathname);
-        const raf = requestAnimationFrame(() => {
+
+        const timeout = setTimeout(() => {
             resetScroll();
             setMounted(true);
             setIsPageTransitionEnd(true);
-        });
+        }, 100);
 
-        return () => cancelAnimationFrame(raf);
+        return () => clearTimeout(timeout);
     }, [pathname, setRoute, resetScroll, setMounted, linkClicked, setIsPageTransitionEnd]);
 
     const formatCounter = (value) => {

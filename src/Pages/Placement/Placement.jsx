@@ -1,49 +1,48 @@
 import React from "react";
 import PageBannerSec from "../components/PageBannerSec";
 import { usePageSEO } from "../../hook/usePageSEO";
-import ImageFeaturesSec from "../components/ImageFeaturesSec";
-import LeftRightImageTextGridSec from "../components/LeftRightImageTextGridSec";
 import ContactSec from "../components/ContactSec";
+import LogoFeaturesSec from "../components/LogoFeaturesSec";
 
 const industryVisitsData = [
     {
-        image: "/images/image-placeholder.jpg",
+        logo: "/images/industry-visits/crossdock_logistics.png",
         title: "Dubai Future Foundation",
         description:
             "Insights into innovation, technology, and future-driven projects",
     },
     {
-        image: "/images/image-placeholder.jpg",
+        logo: "/images/industry-visits/crossdock_logistics.png",
         title: "Expo City Dubai",
         description:
             "Exposure to large-scale event management, sustainability, and cultural exchange",
     },
     {
-        image: "/images/image-placeholder.jpg",
+        logo: "/images/industry-visits/crossdock_logistics.png",
         title: "Emirates Aviation",
         description:
             "Understanding operations, management, and excellence in global aviation",
     },
     {
-        image: "/images/image-placeholder.jpg",
+        logo: "/images/industry-visits/crossdock_logistics.png",
         title: "Dubai International Financial Centre (DIFC)",
         description:
             "Access to the heart of international finance and regulation",
     },
     {
-        image: "/images/image-placeholder.jpg",
+        logo: "/images/industry-visits/crossdock_logistics.png",
         title: "Emaar",
         description:
             "Learning from one of the most influential real estate and lifestyle developers in the region",
     },
     {
-        image: "/images/image-placeholder.jpg",
+        logo: "/images/industry-visits/crossdock_logistics.png",
         title: "Dubai Media City",
         description:
             "Exploring the creative economy and digital media landscape",
     },
     {
-        image: "/images/image-placeholder.jpg",
+        logo: "/images/industry-visits/crossdock_logistics.png",
         title: "Dubai Properties World (Jebel Ali)",
         description:
             "Understanding large-scale property development and trade infrastructure",
@@ -53,90 +52,71 @@ const industryVisitsData = [
 const recruitersData = [
     {
         title: "Leedswell Dubai and Keystone Real Estate",
-        content: `
-            <p>
-                Leading players in property and lifestyle development.
-            </p>
-        `,
-        image: "/images/hero-1.jpg",
+        description: "Leading players in property and lifestyle development.",
+        logo: "/images/industry-visits/crossdock_logistics.png",
     },
     {
         title: "Cross Doc Trading",
-        content: `
-            <p>
-                Global innovators in logistics and supply chain solutions.
-            </p>
-        `,
-        image: "/images/image-placeholder.jpg",
+        description: "Global innovators in logistics and supply chain solutions.",
+        logo: "/images/industry-visits/crossdock_logistics.png",
     },
     {
         title: "Expo City Dubai",
-        content: `
-            <p>
-                A hub for enterprise, culture, and sustainability-driven initiatives.
-            </p>
-        `,
-        image: "/images/image-placeholder.jpg",
+        description: "A hub for enterprise, culture, and sustainability-driven initiatives.",
+        logo: "/images/industry-visits/crossdock_logistics.png",
     },
     {
         title: "DOCSTA",
-        content: `
-            <p>
-                Healthcare leaders shaping excellence in medical services and innovation.
-            </p>
-        `,
-        image: "/images/image-placeholder.jpg",
+        description: "Healthcare leaders shaping excellence in medical services and innovation.",
+        logo: "/images/industry-visits/crossdock_logistics.png",
     },
     {
         title: "Esaal",
-        content: `
-            <p>
-                A forward-thinking platform driving technology and well-being solutions.
-            </p>
-        `,
-        image: "/images/image-placeholder.jpg",
+        description: "A forward-thinking platform driving technology and well-being solutions.",
+        logo: "/images/industry-visits/crossdock_logistics.png",
     },
 ];
 
+
 const internshipOpportunityData = [
     {
-        image: "/images/image-placeholder.jpg",
+        logo: "/images/industry-visits/crossdock_logistics.png",
         title: "Leedwells Real Estate",
         description:
             "Opportunities in property management and development",
     },
     {
-        image: "/images/image-placeholder.jpg",
+        logo: "/images/industry-visits/crossdock_logistics.png",
         title: "101 Premium Properties",
         description:
             "Exposure to high-value real estate projects and client engagement",
     },
     {
-        image: "/images/image-placeholder.jpg",
+        logo: "/images/industry-visits/crossdock_logistics.png",
         title: "Glen Cove Property",
         description:
             "Hands-on learning in property consultancy and investment services",
     },
     {
-        image: "/images/image-placeholder.jpg",
+        logo: "/images/industry-visits/crossdock_logistics.png",
         title: "Codex Software",
         description:
             "Practical experience in software solutions and technology innovation",
     },
     {
-        image: "/images/image-placeholder.jpg",
+        logo: "/images/industry-visits/crossdock_logistics.png",
         title: "Glencove",
         description:
             "Professional exposure in real estate advisory and project management",
     },
     {
-        image: "/images/image-placeholder.jpg",
+        logo: "/images/industry-visits/crossdock_logistics.png",
         title: "Seeding Brains",
         description:
             "Internships in education, training, and knowledge-driven initiatives",
     },
     {
-        image: "/images/image-placeholder.jpg",
+        logo: "/images/industry-visits/crossdock_logistics.png",
         title: "Crossdocks Logistics",
         description:
             "Learning opportunities in supply chain, logistics, and global trade",
@@ -168,7 +148,7 @@ const Placement = () => {
                 }}
             />
 
-            <ImageFeaturesSec
+            <LogoFeaturesSec
                 data={industryVisitsData}
                 title={{
                     mainTitle: <>Industry Visits</>,
@@ -181,7 +161,7 @@ const Placement = () => {
                 sectionClass="industry-visits-sec"
             />
 
-            <LeftRightImageTextGridSec
+            <LogoFeaturesSec
                 data={recruitersData}
                 title={{
                     mainTitle: <>Recruiters</>,
@@ -191,10 +171,10 @@ const Placement = () => {
                         Recruiters at Rise and Shine Institute of Learning represent some of the most influential names across industries. These partnerships open pathways for students to enter careers with confidence, clarity, and global exposure.
                     </p>
                 }
-                sectionClass="recruiters-sec sec-dark"
+                sectionClass="recruiters-sec"
             />
 
-            <ImageFeaturesSec
+            <LogoFeaturesSec
                 data={internshipOpportunityData}
                 title={{
                     mainTitle: <>Internship Opportunities</>,
